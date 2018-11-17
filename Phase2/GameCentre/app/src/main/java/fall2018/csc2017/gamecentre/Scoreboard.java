@@ -20,7 +20,7 @@ public class Scoreboard {
      *
      * @param listOfScores the list of scores
      */
-    Scoreboard(List<Score> listOfScores) {
+    public Scoreboard(List<Score> listOfScores) {
         this.scoreBoardArray = (ArrayList<Score>) listOfScores;
     }
 

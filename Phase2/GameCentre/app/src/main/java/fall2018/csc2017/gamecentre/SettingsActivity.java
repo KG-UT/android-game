@@ -15,18 +15,18 @@ abstract public class SettingsActivity extends AppCompatActivity {
     /**
      * Stores user selected settings
      */
-    HashMap<String, Object> settings = new HashMap<>();
+    private HashMap<String, Object> settings = new HashMap<>();
 
     /**
      * Switch to the GameActivity linked to the settings
      */
-    abstract void switchToGame();
+    abstract public void switchToGame();
 
     /**
      * Return the id of the setting view to be displayed
      * @return id of the setting view to be displayed
      */
-    abstract int getSettingsActivityId();
+    abstract public int getSettingsActivityId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,4 +70,13 @@ abstract public class SettingsActivity extends AppCompatActivity {
     protected void addSetting(String key, Object val) {
         this.settings.put(key, val);
     }
+
+    /**
+     * Return the stored settings values
+     * @return the stored settings values
+     */
+    public HashMap<String, Object> getSettings() {
+        return this.settings;
+    }
+
 }

@@ -1,15 +1,13 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.TicTacToe;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.view.View;
 import android.widget.TextView;
 
 import java.io.FileNotFoundException;
@@ -20,12 +18,18 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
+
+import fall2018.csc2017.gamecentre.CustomAdapter;
+import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.GestureDetectGridView;
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileEndActivity;
+import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileStartingActivity;
 
 /**
  * The game activity.
  */
-public class SlidingTileActivity extends GameActivity {
+public class TicTacToeActivity extends GameActivity {
     /**
      * The autosave .ser file.
      */
@@ -34,7 +38,7 @@ public class SlidingTileActivity extends GameActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private TicTacToeBoardManager boardManager;
 
     /**
      * The buttons to display.
@@ -74,11 +78,11 @@ public class SlidingTileActivity extends GameActivity {
         super.onCreate(savedInstanceState);
 
         HashMap<String, Object> settings = getSettings();
-        boardManager = (BoardManager) settings.get("PRELOADED_BOARD_MANAGER");
+        boardManager = (TicTacToeBoardManager) settings.get("PRELOADED_BOARD_MANAGER");
         if(boardManager == null) {
             int numRows = (int) settings.get("NUM_ROWS");
             int numCols = (int) settings.get("NUM_COLS");
-            boardManager = new BoardManager(numRows, numCols);
+            boardManager = new TicTacToeBoardManager(numRows, numCols);
         }
 
         createTileButtons(this);
@@ -86,7 +90,7 @@ public class SlidingTileActivity extends GameActivity {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(Board.NUM_COLS);
+        gridView.setNumColumns(TicTacToeBoard.getNumCols());
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
@@ -99,8 +103,8 @@ public class SlidingTileActivity extends GameActivity {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / Board.NUM_COLS;
-                        columnHeight = displayHeight / Board.NUM_ROWS;
+                        columnWidth = displayWidth / TicTacToeBoard.getNumCols();
+                        columnHeight = displayHeight / TicTacToeBoard.getNumRows();
 
                         display();
                     }
@@ -116,10 +120,10 @@ public class SlidingTileActivity extends GameActivity {
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        TicTacToeBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
-        for (int row = 0; row != Board.NUM_ROWS; row++) {
-            for (int col = 0; col != Board.NUM_COLS; col++) {
+        for (int row = 0; row != TicTacToeBoard.getNumRows(); row++) {
+            for (int col = 0; col != TicTacToeBoard.getNumCols(); col++) {
                 Button tmp = new Button(context);
                 tmp.setText(board.getTile(row, col).getDisplayNumber());
                 tmp.setTextSize(64);
@@ -133,11 +137,11 @@ public class SlidingTileActivity extends GameActivity {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        TicTacToeBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / Board.NUM_ROWS;
-            int col = nextPos % Board.NUM_COLS;
+            int row = nextPos / TicTacToeBoard.getNumRows();
+            int col = nextPos % TicTacToeBoard.getNumCols();
             b.setText(board.getTile(row, col).getDisplayNumber());
             nextPos++;
         }
@@ -201,7 +205,7 @@ public class SlidingTileActivity extends GameActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                boardManager = (TicTacToeBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -245,7 +249,7 @@ public class SlidingTileActivity extends GameActivity {
         display();
         if (boardManager.puzzleSolved()){
             int score = boardManager.getScore();
-            Intent tmp = new Intent(SlidingTileActivity.this, SlidingTileEndActivity.class);
+            Intent tmp = new Intent(TicTacToeActivity.this, SlidingTileEndActivity.class);
             tmp.putExtra("SCORE", score);
             startActivity(tmp);
         }

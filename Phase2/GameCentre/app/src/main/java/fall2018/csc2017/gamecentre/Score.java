@@ -27,7 +27,7 @@ public class Score implements Comparable<Score>, Serializable {
     /**
      * Creates a score where username comes from user
      */
-    Score(long _id, int userScore, User user) {
+    public Score(long _id, int userScore, User user) {
         this._id = _id;
         this.userName = user.getUsername();
         this.userScore = userScore;
@@ -36,7 +36,7 @@ public class Score implements Comparable<Score>, Serializable {
     /**
      * Creates a score where username comes from a string
      */
-    Score(long _id, int userScore, String userName) {
+    public Score(long _id, int userScore, String userName) {
         this._id = _id;
         this.userName = userName;
         this.userScore = userScore;

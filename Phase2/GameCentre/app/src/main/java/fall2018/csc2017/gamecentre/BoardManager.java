@@ -14,7 +14,7 @@ import android.media.Image;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class BoardManager implements Serializable {
+public class BoardManager implements Serializable {
 
     /**
      * The board being managed.
@@ -44,21 +44,21 @@ class BoardManager implements Serializable {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    BoardManager() {
+    public BoardManager() {
         this(4, 4);
     }
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    BoardManager(Board board) {
+    public BoardManager(Board board) {
         this.board = board;
     }
 
     /**
      * Manage a new shuffled board.
      */
-    BoardManager(int numRows, int numCols) {
+    public BoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -73,7 +73,7 @@ class BoardManager implements Serializable {
     /**
      * Return the current board.
      */
-    Board getBoard() {
+    public Board getBoard() {
         return board;
     }
 
@@ -82,7 +82,7 @@ class BoardManager implements Serializable {
      *
      * @return whether the tiles are in row-major order
      */
-    boolean puzzleSolved() {
+    public boolean puzzleSolved() {
         boolean solved = true;
         int previousTileId = 0;
 
@@ -137,7 +137,7 @@ class BoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
-    boolean isValidTap(int position) {
+    public boolean isValidTap(int position) {
         int row = position / Board.NUM_COLS;
         int col = position % Board.NUM_COLS;
         return nearestBlank(row, col) != null;
@@ -148,7 +148,7 @@ class BoardManager implements Serializable {
      *
      * @param position the position
      */
-    void touchMove(int position) {
+    public void touchMove(int position) {
 
         int row = position / Board.NUM_ROWS;
         int col = position % Board.NUM_COLS;
@@ -168,7 +168,7 @@ class BoardManager implements Serializable {
      *
      * @return a boolean showing if there are moves in the stack of moves.
      */
-    boolean canUndo(){
+    public boolean canUndo(){
         return !stackOfMoves.isEmpty();
     }
 
@@ -177,7 +177,7 @@ class BoardManager implements Serializable {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-    void undoMove() {
+    public void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
@@ -195,13 +195,13 @@ class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-   int getScore() { return score;}
+   public int getScore() { return score;}
 
    /**
     * Getter function for the Undos left.
     * @return the number of undos the player has left.
     */
-   int getUndosLeft() {
+   public int getUndosLeft() {
        if (undosLeft >= 0){
            return undosLeft;
        } else{
@@ -213,14 +213,14 @@ class BoardManager implements Serializable {
     * Set undos as as some value.
     * PRECONDITION: i >= 0
     */
-   void setUndos(int i){
+   public void setUndos(int i){
        undosLeft = i;
    }
 
    /**
     * Give player unlimited Undos.
     */
-   void setUnlimitedUndos(){
+   public void setUnlimitedUndos(){
        undosLeft = -1;
    };
 }

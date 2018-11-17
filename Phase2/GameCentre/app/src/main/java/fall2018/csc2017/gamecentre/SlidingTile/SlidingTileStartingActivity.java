@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.SlidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+
+import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.GameStartingActivity;
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.SavedGamesView;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -44,7 +49,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         boardManager = new BoardManager();
         saveToFile(TEMP_SAVE_FILENAME);
 
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_sliding_tile_starting_);
         addScoreboardButtonListener();
         addNewGameButtonListener();
         addSavedGamesButtonListener();

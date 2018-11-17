@@ -1,10 +1,14 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.SlidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.ToggleButton;
+
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.SettingsActivity;
+import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileActivity;
 
 /**
  * The settings activity for Sliding Tiles (view)
@@ -23,17 +27,17 @@ public class SlidingTilesSettingsActivity extends SettingsActivity {
     }
 
     @Override
-    protected int getSettingsActivityId() {
+    public int getSettingsActivityId() {
         return R.layout.activity_sliding_tile_settings;
     }
 
     @Override
-    protected void switchToGame() {
+    public void switchToGame() {
         this.addSetting("NUM_ROWS", NUM_ROWS);
         this.addSetting("NUM_COLS", NUM_COLS);
 
         Intent tmp = new Intent(this, SlidingTileActivity.class);
-        tmp.putExtra("SETTINGS", settings);
+        tmp.putExtra("SETTINGS", this.getSettings());
         startActivity(tmp);
     }
 

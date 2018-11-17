@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.SlidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
+
+import fall2018.csc2017.gamecentre.DBTools;
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.Score;
+import fall2018.csc2017.gamecentre.Scoreboard;
+import fall2018.csc2017.gamecentre.ScoreboardActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -36,7 +42,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
     /**
      * Add a listener to the gameScoreboardButton button
      */
-    void addOtherScoreboardButtonListener() {
+    public void addOtherScoreboardButtonListener() {
         Button gameScoreboardButton = findViewById(R.id.toGeneralButton);
         gameScoreboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +55,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
     /**
      * Add a listener to the startingActivityButton button
      */
-    void addStartingActivityButtonListener() {
+    public void addStartingActivityButtonListener() {
         Button startingActivityButton1 = findViewById(R.id.startingActivityButton1);
         startingActivityButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +68,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
     /**
      * Switch to the SlidingTileUserScoreboardActivity
      */
-    void switchToOtherScoreboard() {
+    public void switchToOtherScoreboard() {
         Intent tmp = new Intent(this, SlidingTileGameScoreboardActivity.class);
         startActivity(tmp);
     }
@@ -70,7 +76,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
     /**
      * Displays and passes data into the scoreboard
      */
-    void scoreBoardView() {
+    public void scoreBoardView() {
         ListView ScoreboardListView;
         ArrayAdapter arrayAdapter;
         List<String> scoreBoardListData = setupScoreboard().getScoreBoardDataStringForm();
@@ -84,7 +90,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
     /**
      * Returns a new sorted scoreboard that is filled with every user's scores
      */
-    Scoreboard setupScoreboard() {
+    public Scoreboard setupScoreboard() {
         List<Score> listOfScores = databaseTools.getUserSlidingTileScores(myUser.getUsername());
         Scoreboard newScoreboard = new Scoreboard(listOfScores);
         newScoreboard.organizeScoreBoard();

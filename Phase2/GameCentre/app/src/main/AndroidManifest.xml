@@ -25,13 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SlidingTileGameScoreboardActivity" />
-        <activity android:name=".SlidingTilesSettingsActivity" />
-        <activity android:name=".SlidingTileStartingActivity" />
-        <activity android:name=".SlidingTileActivity" />
+        <activity android:name=".App.GameChoiceActivity"/>
+        <activity android:name=".SlidingTile.SlidingTileGameScoreboardActivity" />
+        <activity android:name=".SlidingTile.SlidingTilesSettingsActivity" />
+        <activity android:name=".SlidingTile.SlidingTileStartingActivity" />
+        <activity android:name=".SlidingTile.SlidingTileActivity" />
         <activity android:name=".SavedGamesView"/>
-        <activity android:name=".SlidingTileEndActivity"/>
-        <activity android:name=".SlidingTileUserScoreboardActivity"></activity>
+        <activity android:name=".SlidingTile.SlidingTileEndActivity"/>
+        <activity android:name=".SlidingTile.SlidingTileUserScoreboardActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileSavedGame;
+
 /**
  * This class handles all database matters from reading to updating information.
  *

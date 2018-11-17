@@ -32,11 +32,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fall2018.csc2017.gamecentre.App.GameChoiceActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -345,7 +346,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 if (myUser.getUserId()>0){
                     finish();
-                    Intent myIntent = new Intent(LoginActivity.this, SlidingTileStartingActivity.class);
+                    Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
                     LoginActivity.this.startActivity(myIntent);
                 } else {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -359,7 +360,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                         dbTools = new DBTools(mContext);
                                         myUser=dbTools.insertUser(myUser);
 
-                                        Intent myIntent = new Intent(LoginActivity.this, SlidingTileStartingActivity.class);
+                                        Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
                                         LoginActivity.this.startActivity(myIntent);
                                     } finally{
                                         if (dbTools!=null)
