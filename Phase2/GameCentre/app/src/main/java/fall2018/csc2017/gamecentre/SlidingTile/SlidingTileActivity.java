@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.SlidingTile;
+package fall2018.csc2017.gamecentre.slidingTile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
-import fall2018.csc2017.gamecentre.Board;
-import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
@@ -38,7 +37,7 @@ public class SlidingTileActivity extends GameActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingTileBoardManager boardManager;
 
     /**
      * The buttons to display.
@@ -78,11 +77,11 @@ public class SlidingTileActivity extends GameActivity {
         super.onCreate(savedInstanceState);
 
         HashMap<String, Object> settings = getSettings();
-        boardManager = (BoardManager) settings.get("PRELOADED_BOARD_MANAGER");
+        boardManager = (SlidingTileBoardManager) settings.get("PRELOADED_BOARD_MANAGER");
         if(boardManager == null) {
             int numRows = (int) settings.get("NUM_ROWS");
             int numCols = (int) settings.get("NUM_COLS");
-            boardManager = new BoardManager(numRows, numCols);
+            boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
 
         createTileButtons(this);
@@ -120,7 +119,7 @@ public class SlidingTileActivity extends GameActivity {
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        SlidingTileBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
         for (int row = 0; row != Board.getNumRows(); row++) {
             for (int col = 0; col != Board.getNumCols(); col++) {
@@ -137,7 +136,7 @@ public class SlidingTileActivity extends GameActivity {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        SlidingTileBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();
@@ -205,7 +204,7 @@ public class SlidingTileActivity extends GameActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                boardManager = (SlidingTileBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {

@@ -1,25 +1,23 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.slidingTile;
 
 import android.util.Log;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
-import java.io.File;
+
 import android.media.Image;
+
+import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.Tile;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class BoardManager implements Serializable {
-
-    /**
-     * The board being managed.
-     */
-    private Board board;
+public class SlidingTileBoardManager extends BoardManager {
 
     /**
      * A stack of moves made, for move reversals.
@@ -36,7 +34,7 @@ public class BoardManager implements Serializable {
      */
     private int score = 0;
 
-    /*
+    /**
      * The number of undos left.
      */
     private int undosLeft = 3;
@@ -44,21 +42,22 @@ public class BoardManager implements Serializable {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    public BoardManager() {
+    public SlidingTileBoardManager() {
         this(4, 4);
     }
+
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    public BoardManager(Board board) {
-        this.board = board;
+    public SlidingTileBoardManager(SlidingTileBoard board) {
+        super(board);
     }
 
     /**
      * Manage a new shuffled board.
      */
-    public BoardManager(int numRows, int numCols) {
+    public SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -67,14 +66,14 @@ public class BoardManager implements Serializable {
         tiles.add(new Tile(Tile.BLANK_ID));
 
         Collections.shuffle(tiles);
-        this.board = new Board(numRows, numCols, tiles);
+        setBoard(new SlidingTileBoard(numRows, numCols, tiles));
     }
 
     /**
      * Return the current board.
      */
-    public Board getBoard() {
-        return board;
+    public SlidingTileBoard getBoard() {
+        return (SlidingTileBoard) super.getBoard();
     }
 
     /**
@@ -86,18 +85,17 @@ public class BoardManager implements Serializable {
         boolean solved = true;
         int previousTileId = 0;
 
+        SlidingTileBoard board = getBoard();
 
-        Iterator<Tile> boardIterator = board.iterator();
+        Iterator<Object> boardIterator = board.iterator();
         for(int i = 0; i < board.numTiles() - 1; i++) {
-            Tile currentTile = boardIterator.next();
+            Tile currentTile = (Tile) boardIterator.next();
             int currentTileId = currentTile.getId();
             if(currentTileId - previousTileId != 1) {
                 solved = false;
             }
             previousTileId = currentTileId;
-            Log.d("TAG", "" + currentTileId);
         }
-        Log.d("TAG", "" + solved);
 
         return solved;
     }
@@ -112,10 +110,12 @@ public class BoardManager implements Serializable {
      */
     private int[] nearestBlank(int row, int col) {
         int blankId = Tile.BLANK_ID;
+        SlidingTileBoard board = getBoard();
+
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
-        Tile below = row == Board.NUM_ROWS - 1 ? null : board.getTile(row + 1, col);
+        Tile below = row == Board.getNumRows() - 1 ? null : board.getTile(row + 1, col);
         Tile left = col == 0 ? null : board.getTile(row, col - 1);
-        Tile right = col == Board.NUM_COLS - 1 ? null : board.getTile(row, col + 1);
+        Tile right = col == Board.getNumCols() - 1 ? null : board.getTile(row, col + 1);
 
         if (below != null && below.getId() == blankId) {
             return new int[] {row + 1, col};
@@ -130,7 +130,6 @@ public class BoardManager implements Serializable {
         }
     }
 
-
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
      *
@@ -138,8 +137,8 @@ public class BoardManager implements Serializable {
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-        int row = position / Board.NUM_COLS;
-        int col = position % Board.NUM_COLS;
+        int row = position / Board.getNumCols();
+        int col = position % Board.getNumRows();
         return nearestBlank(row, col) != null;
     }
 
@@ -149,16 +148,15 @@ public class BoardManager implements Serializable {
      * @param position the position
      */
     public void touchMove(int position) {
-
-        int row = position / Board.NUM_ROWS;
-        int col = position % Board.NUM_COLS;
+        int row = position / Board.getNumRows();
+        int col = position % Board.getNumCols();
 
         int[] blankLocation = nearestBlank(row, col);
         if(blankLocation != null) {
             int blankRow = blankLocation[0];
             int blankCol = blankLocation[1];
             stackOfMoves.add(blankLocation);
-            board.swapTiles(blankRow, blankCol, row, col);
+            getBoard().swapTiles(blankRow, blankCol, row, col);
             score += 1;
         }
     }
@@ -185,7 +183,7 @@ public class BoardManager implements Serializable {
         if (blankLocation != null && undosLeft != 0) {
             int blankRow = blankLocation[0];
             int blankCol = blankLocation[1];
-            board.swapTiles(blankRow, blankCol, row, col);
+            getBoard().swapTiles(blankRow, blankCol, row, col);
             undosLeft -= 1;
         }
     }

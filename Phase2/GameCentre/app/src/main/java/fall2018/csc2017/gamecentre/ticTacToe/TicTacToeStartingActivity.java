@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.ticTacToe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import fall2018.csc2017.gamecentre.SavedGamesView;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class SlidingTileStartingActivity extends GameStartingActivity {
+public class TicTacToeStartingActivity extends GameStartingActivity {
     /**
      * The autosave .ser file.
      */
@@ -40,19 +40,16 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
     /**
      * The board manager.
      */
-    private SlidingTileBoardManager boardManager;
+    private TicTacToeBoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new SlidingTileBoardManager();
+        boardManager = new TicTacToeBoardManager(4, 4);
         saveToFile(TEMP_SAVE_FILENAME);
 
-        setContentView(R.layout.activity_sliding_tile_starting_);
-        addScoreboardButtonListener();
+        setContentView(R.layout.activity_tic_tac_toe_starting);
         addNewGameButtonListener();
-        addSavedGamesButtonListener();
-        addAutoSaveButtonListener();
     }
 
     /**
@@ -72,13 +69,13 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * Add a listener to the new game button
      */
     private void addNewGameButtonListener() {
-        Button loadButton = findViewById(R.id.NewGameButton);
+        Button loadButton = findViewById(R.id.ticTacToeNewGameButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
-                makeToastLoadedText();
+//                loadFromFile(SAVE_FILENAME);
+//                saveToFile(TEMP_SAVE_FILENAME);
+//                makeToastLoadedText();
                 switchToSettings();
             }
         });
@@ -102,11 +99,11 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
 //                saveToFile(SAVE_FILENAME);
 //                saveToFile(TEMP_SAVE_FILENAME);
 //                makeToastSavedText();
-                startActivity(new Intent(SlidingTileStartingActivity.this, SavedGamesView.class));
+                startActivity(new Intent(TicTacToeStartingActivity.this, SavedGamesView.class));
 
 
             }
-            });
+        });
     }
 
     /**
@@ -130,7 +127,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * Switch to the SettingsActivity to set the settings of the game.
      */
     private void switchToSettings() {
-        Intent tmp = new Intent(this, SlidingTilesSettingsActivity.class);
+        Intent tmp = new Intent(this, TicTacToeSettingsActivity.class);
         startActivity(tmp);
     }
 
@@ -138,7 +135,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * Switch to the SlidingTileGameScoreboardActivity
      */
     private void switchToScoreboard() {
-        Intent tmp = new Intent(this, SlidingTileGameScoreboardActivity.class);
+        Intent tmp = new Intent(this, TicTacToeStartingActivity.class);
         startActivity(tmp);
     }
 
@@ -152,7 +149,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (SlidingTileBoardManager) input.readObject();
+                boardManager = (TicTacToeBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -186,7 +183,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
             @Override
             public void onClick(View v) {
                 loadFromFile(SAVE_FILENAME);
-                Intent tmp = new Intent(SlidingTileStartingActivity.this, SlidingTileActivity.class);
+                Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
 
                 HashMap<String, Object> settings = new HashMap<>();
                 settings.put("PRELOADED_BOARD_MANAGER", boardManager);

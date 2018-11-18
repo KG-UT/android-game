@@ -16,7 +16,7 @@ public class GoSettingsActivity extends SettingsActivity {
     }
 
     @Override
-    void switchToGame() {
+    public void switchToGame() {
         int temp =0;
     }
 

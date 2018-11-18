@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.SlidingTile;
+package fall2018.csc2017.gamecentre.slidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.ToggleButton;
 
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SettingsActivity;
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileActivity;
 
 /**
  * The settings activity for Sliding Tiles (view)

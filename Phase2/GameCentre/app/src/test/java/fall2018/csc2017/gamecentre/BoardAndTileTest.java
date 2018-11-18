@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,7 +18,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    SlidingTileBoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -37,7 +40,7 @@ public class BoardAndTileTest {
     private void setUpCorrect() {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
-        boardManager = new BoardManager(board);
+        boardManager = new SlidingTileBoardManager(board);
     }
 
     /**

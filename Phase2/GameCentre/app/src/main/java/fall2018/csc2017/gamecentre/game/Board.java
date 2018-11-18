@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.game;
 
 import android.support.annotation.NonNull;
 
@@ -9,45 +9,45 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.Tile;
+
 /**
- * The sliding tiles board.
+ * The items board.
  */
-public class Board extends Observable implements Serializable, Iterable<Tile> {
+abstract public class Board extends Observable implements Serializable, Iterable<Object> {
+    /**
+     * The number of rows.
+     */
+    static protected int NUM_ROWS = 4;
 
     /**
      * The number of rows.
      */
-    static int NUM_ROWS = 4;
+    static protected int NUM_COLS = 4;
 
     /**
-     * The number of rows.
+     * The items on the board in row-major order.
      */
-    static int NUM_COLS = 4;
+    private Object[][] items;
 
     /**
-     * The tiles on the board in row-major order.
-     */
-    private Tile[][] tiles;
-
-    /**
-     * A new board of tiles in row-major order.
-     * Precondition: len(tiles) == NUM_ROWS * NUM_COLS
+     * A new board of items in row-major order.
+     * Precondition: len(items) == NUM_ROWS * NUM_COLS
      *
      * @param rows the number of rows
      * @param cols the number of columns
-     * @param tiles the tiles for the board
+     * @param items the items for the board
      */
-
-    public Board(int rows, int cols, List<Tile> tiles){
+    public Board(int rows, int cols, List<? extends Object> items){
         NUM_ROWS = rows;
         NUM_COLS = cols;
-        this.tiles = new Tile[NUM_ROWS][NUM_COLS];
+        this.items = new Object[NUM_ROWS][NUM_COLS];
 
-        Iterator<Tile> iter = tiles.iterator();
+        Iterator<? extends Object> iter = items.iterator();
 
         for (int row = 0; row != Board.NUM_ROWS; row++) {
             for (int col = 0; col != Board.NUM_COLS; col++) {
-                this.tiles[row][col] = iter.next();
+                this.items[row][col] = iter.next();
             }
         }
 
@@ -55,11 +55,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     @NonNull
     @Override
-    public Iterator<Tile> iterator() {
-        return new TileIterator();
+    public Iterator<Object> iterator() {
+        return new ItemsIterator();
     }
 
-    private class TileIterator implements Iterator<Tile> {
+    private class ItemsIterator implements Iterator<Object> {
         /**
          * The current row on the board the iterator is on
          */
@@ -71,8 +71,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         int currentCol = 0;
 
         /**
-         * Return whether there is a next tile for the iterator to go to
-         * @return whether there is a next tile for the iterator to go to
+         * Return whether there is a next item for the iterator to go to
+         * @return whether there is a next item for the iterator to go to
          */
         @Override
         public boolean hasNext() {
@@ -80,23 +80,23 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
 
         /**
-         * Return the next tile on the board
-         * @return the next tile on the board
+         * Return the next item on the board
+         * @return the next item on the board
          */
         @Override
-        public Tile next() {
+        public Object next() {
             /*
             Increment the row.
             If the row is greater than the number of rows increment the column
              */
             if(currentRow <= NUM_ROWS - 1 && currentCol <= NUM_COLS - 1) {
-                Tile tile = getTile(currentRow, currentCol);
+                Object item = getItem(currentRow, currentCol);
                 currentCol += 1;
                 if(currentCol >= NUM_COLS) {
                     currentRow += 1;
                     currentCol = 0;
                 }
-                return tile;
+                return item;
             } else {
                 return null;
             }
@@ -104,10 +104,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Return the number of tiles on the board.
-     * @return the number of tiles on the board
+     * Return the number of items on the board.
+     * @return the number of items on the board
      */
-    int numTiles() {
+    public int numObjects() {
         return NUM_COLS * NUM_ROWS;
     }
 
@@ -128,37 +128,40 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Return the tile at (row, col)
+     * Return the item at (row, col)
      *
-     * @param row the tile row
-     * @param col the tile column
-     * @return the tile at (row, col)
+     * @param row the item row
+     * @param col the item column
+     * @return the item at (row, col)
      */
-    public Tile getTile(int row, int col) {
-        return tiles[row][col];
+    public Object getItem(int row, int col) {
+        return this.items[row][col];
     }
 
     /**
-     * Swap the tiles at (row1, col1) and (row2, col2)
+     * Set the item at (row, col)
      *
-     * @param row1 the first tile row
-     * @param col1 the first tile col
-     * @param row2 the second tile row
-     * @param col2 the second tile col
+     * @param row the item row
+     * @param col the item column
+     * @param item the item to set at (row, col)
      */
-    public void swapTiles(int row1, int col1, int row2, int col2) {
-        Tile tmp = tiles[row1][col1];
-        tiles[row1][col1] = tiles[row2][col2];
-        tiles[row2][col2] = tmp;
+    public void setItem(int row, int col, Object item) {
+        this.items[row][col] = item;
+    }
 
-        setChanged();
-        notifyObservers();
+    /**
+     * Get the items
+     *
+     * @return the items of the board
+     */
+    public Object[][] getItems() {
+        return items;
     }
 
     @Override
     public String toString() {
         return "Board{" +
-                "tiles=" + Arrays.toString(tiles) +
+                "items=" + Arrays.toString(items) +
                 '}';
     }
 }

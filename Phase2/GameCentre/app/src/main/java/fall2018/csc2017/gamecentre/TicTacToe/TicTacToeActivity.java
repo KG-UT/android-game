@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.TicTacToe;
+package fall2018.csc2017.gamecentre.ticTacToe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +23,8 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileEndActivity;
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileEndActivity;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
 
 /**
  * The game activity.
@@ -109,8 +109,8 @@ public class TicTacToeActivity extends GameActivity {
                         display();
                     }
                 });
-        updateUndosLeftText();
-        addUndoMoveButtonListener();
+//        updateUndosLeftText();
+//        addUndoMoveButtonListener();
         addSave1ButtonListener();
     }
 
@@ -125,7 +125,7 @@ public class TicTacToeActivity extends GameActivity {
         for (int row = 0; row != TicTacToeBoard.getNumRows(); row++) {
             for (int col = 0; col != TicTacToeBoard.getNumCols(); col++) {
                 Button tmp = new Button(context);
-                tmp.setText(board.getTile(row, col).getDisplayNumber());
+                tmp.setText(board.getTile(row, col).getState());
                 tmp.setTextSize(64);
                 tmp.setBackgroundColor(Color.parseColor("#ffffff"));
                 this.tileButtons.add(tmp);
@@ -142,7 +142,7 @@ public class TicTacToeActivity extends GameActivity {
         for (Button b : tileButtons) {
             int row = nextPos / TicTacToeBoard.getNumRows();
             int col = nextPos % TicTacToeBoard.getNumCols();
-            b.setText(board.getTile(row, col).getDisplayNumber());
+            b.setText(board.getTile(row, col).getState());
             nextPos++;
         }
         saveToFile(SlidingTileStartingActivity.SAVE_FILENAME);
@@ -165,14 +165,14 @@ public class TicTacToeActivity extends GameActivity {
         score.setText(textToSetTo);
     }
 
-    /*
+    /**
      * Updates the text to display the number of undos left.
      */
-    private void updateUndosLeftText(){
-        TextView undosLeft = findViewById(R.id.UndosLeft);
-        String textToSetTo = "Undos Left: " + Integer.toString(boardManager.getUndosLeft());
-        undosLeft.setText(textToSetTo);
-    }
+//    private void updateUndosLeftText(){
+//        TextView undosLeft = findViewById(R.id.UndosLeft);
+//        String textToSetTo = "Undos Left: " + Integer.toString(boardManager.getUndosLeft());
+//        undosLeft.setText(textToSetTo);
+//    }
 
     /**
      * Dispatch onPause() to fragments.
@@ -183,17 +183,17 @@ public class TicTacToeActivity extends GameActivity {
         saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
     }
 
-    private void addUndoMoveButtonListener(){
-        Button loadButton = findViewById(R.id.UndoButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (boardManager.canUndo()){
-                    boardManager.undoMove();
-                    updateUndosLeftText();
-                }
-            }
-        });
-    }
+//    private void addUndoMoveButtonListener(){
+//        Button loadButton = findViewById(R.id.UndoButton);
+//        loadButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (boardManager.canUndo()){
+//                    boardManager.undoMove();
+//                    updateUndosLeftText();
+//                }
+//            }
+//        });
+//    }
 
     /**
      * Load the board manager from fileName.

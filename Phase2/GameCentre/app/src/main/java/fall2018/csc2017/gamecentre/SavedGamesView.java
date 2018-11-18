@@ -15,7 +15,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileActivity;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -24,7 +25,7 @@ import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
  */
 public class SavedGamesView extends AppCompatActivity {
     DBTools database= new DBTools(this);
-    private BoardManager boardManager;
+    private SlidingTileBoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class SavedGamesView extends AppCompatActivity {
             FileInputStream obj = new FileInputStream("/data/data/fall2018.csc2017.slidingtiles/files/save_1.ser");
             BufferedInputStream var = new BufferedInputStream(obj);
             ObjectInputStream obj2 = new ObjectInputStream(var);
-            boardManager = (BoardManager)obj2.readObject();
+            boardManager = (SlidingTileBoardManager)obj2.readObject();
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {

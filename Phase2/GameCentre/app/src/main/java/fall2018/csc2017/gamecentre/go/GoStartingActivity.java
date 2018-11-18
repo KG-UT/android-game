@@ -6,6 +6,7 @@ public class GoStartingActivity extends GameStartingActivity {
 
     @Override
     public void saveToFile(String fileName) {
+
     }
 
 }
