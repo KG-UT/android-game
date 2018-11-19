@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.go;
+package fall2018.csc2017.gamecentre.Go;
 
 public class GoBoard {
 }

@@ -1,36 +1,47 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.Entity;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 
 /**
  * This is the object representation of a user stored in the database.
+ *
+ * Code adapted from: https://medium.com/@ajaysaini.official/building-database-with-room-persistence-library-ecf7d0b8f3e9
  */
+@Entity(tableName = "user")
 public class User {
     /**
-     *  The User's userId. Type must be <tt>long</tt> for use in SQLite.
+     *  The User's _id. Type must be <tt>long</tt> for use in SQLite.
      */
-    private long userId;
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
 
     /**
      * The username (email) for a given user.
      */
+    @ColumnInfo(name = "username")
     private String username;
 
     /**
      * The user's password.
      */
+    @ColumnInfo(name = "password")
     private String password;
 
     /**
      * Instantiates a new User.
      *
-     * @param userId   the user id  (primary key in the login table)
+     * @param uid      the user id  (primary key in the login table)
      * @param username the username (email)
      * @param password the password
      */
-    public User(long userId, String username, String password){
-        this.userId=userId;
+    public User(int uid, String username, String password){
+        this.uid=uid;
         this.username=username;
         this.password=password;
     }
@@ -40,8 +51,8 @@ public class User {
      *
      * @return the user id
      */
-    public long getUserId() {
-        return userId;
+    public int getUid() {
+        return uid;
     }
 
     /**
@@ -49,8 +60,8 @@ public class User {
      *
      * @param userId the user id
      */
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUid(int userId) {
+        this.uid = userId;
     }
 
     /**

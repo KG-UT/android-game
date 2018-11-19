@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,18 +8,24 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import fall2018.csc2017.gamecentre.Entity.User;
+import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileSavedGame;
 
 /**
  * This class handles all database matters from reading to updating information.
  *
- *    <p>Code in part adapted from the follow resources on Nov 3, Nov 4, Nov 5 2018:</p>
- *    http://www.vogella.com/tutorials/AndroidSQLite/article.html#database-and-data-model
- *    https://stackoverflow.com/questions/22209046/example-and-explanation-android-studio-login-activity-template-generated-ac
- *    https://stackoverflow.com/questions/7510219/deleting-row-in-sqlite-in-android
+ * <p>Code in part adapted from the follow resources on Nov 3, Nov 4, Nov 5, Nov 18:</p>
+ * http://www.vogella.com/tutorials/AndroidSQLite/article.html#database-and-data-model
+ * https://stackoverflow.com/questions/22209046/example-and-explanation-android-studio-login-activity-template-generated-ac
+ * https://stackoverflow.com/questions/7510219/deleting-row-in-sqlite-in-android
+ * https://www.androiddesignpatterns.com/2012/05/correctly-managing-your-sqlite-database.html
  */
-
 public class DBTools extends SQLiteOpenHelper {
+    /**
+     * The static instance variable. Uses the Singleton pattern to guarantee singleton property.
+     */
+    private static DBTools sInstance;
 
     /**
      * The version of the database.
@@ -37,11 +43,15 @@ public class DBTools extends SQLiteOpenHelper {
     private static final String TABLE_LOGINS = "logins";
     private static final String TABLE_SLIDING_TILE_SAVED = "slidingTileSavedGames";
     private static final String TABLE_SLIDING_TILE_SCORES = "slidingTileScores";
+    private static final String TABLE_TIC_TAC_TOE_SAVED = "ticTacToeSavedGames";
+    private static final String TABLE_TIC_TAC_TOE_SCORES = "ticTacToeScores";
+    private static final String TABLE_GO_SAVED = "goSavedGames";
+    private static final String TABLE_GO_SCORES = "goScores";
 
     /**
      * The column names for the login table.
      */
-    private static final String COLUMN_USER_ID = "userId";
+    private static final String COLUMN_USER_ID = "_id";
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
 
@@ -64,6 +74,38 @@ public class DBTools extends SQLiteOpenHelper {
     private static final String COLUMN_ST_SCORE_ID = "_id";
     private static final String COLUMN_ST_SCORE_OWNER = "owner";
     private static final String COLUMN_ST_SCORE_VALUE = "score";
+
+    /**
+     * The column names for the Tic Tac Toe saved games table.
+     *
+     * Sliding Tile is abbreviated to TTT for brevity.
+     */
+    private static final String COLUMN_TTT_ID = "_id";
+    private static final String COLUMN_TTT_OWNER = "owner";
+    private static final String COLUMN_TTT_PATH = "filePath";
+
+    /**
+     * The column names for the Tic Tac Toe Scores table.
+     *
+     * Tic Tac Toe is abbreviated to TTT for brevity.
+     */
+    private static final String COLUMN_TTT_SCORE_ID = "_id";
+    private static final String COLUMN_TTT_SCORE_OWNER = "owner";
+    private static final String COLUMN_TTT_SCORE_VALUE = "score";
+
+    /**
+     * The column names for the Go saved games table.
+     */
+    private static final String COLUMN_GO_ID = "_id";
+    private static final String COLUMN_GO_OWNER = "owner";
+    private static final String COLUMN_GO_PATH = "filePath";
+
+    /**
+     * The column names for the Go Scores table.
+     */
+    private static final String COLUMN_GO_SCORE_ID = "_id";
+    private static final String COLUMN_GO_SCORE_OWNER = "owner";
+    private static final String COLUMN_GO_SCORE_VALUE = "score";
 
     /**
      * The login table construction query.
@@ -93,11 +135,61 @@ public class DBTools extends SQLiteOpenHelper {
             + COLUMN_ST_SCORE_VALUE + " INTEGER);";
 
     /**
+     * The Tic Tac Toe saved games table construction query.
+     */
+    private static final String TIC_TAC_TOE_GAMES_CREATE = "CREATE TABLE IF NOT EXISTS "
+            + TABLE_TIC_TAC_TOE_SAVED + "(" + COLUMN_TTT_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_TTT_OWNER + " TEXT, "
+            + COLUMN_TTT_PATH + " TEXT);";
+
+    /**
+     * The Tic Tac Toe scores table construction query.
+     */
+    private static final String TIC_TAC_TOE_SCORES_CREATE = "CREATE TABLE IF NOT EXISTS "
+            + TABLE_TIC_TAC_TOE_SCORES + "(" + COLUMN_TTT_SCORE_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_TTT_SCORE_OWNER + " TEXT, "
+            + COLUMN_TTT_SCORE_VALUE + " INTEGER);";
+
+    /**
+     * The Tic Tac Toe saved games table construction query.
+     */
+    private static final String GO_GAMES_CREATE = "CREATE TABLE IF NOT EXISTS "
+            + TABLE_GO_SAVED + "(" + COLUMN_GO_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_GO_OWNER + " TEXT, "
+            + COLUMN_GO_PATH + " TEXT);";
+
+    /**
+     * The Tic Tac Toe scores table construction query.
+     */
+    private static final String GO_SCORES_CREATE = "CREATE TABLE IF NOT EXISTS "
+            + TABLE_GO_SCORES + "(" + COLUMN_GO_SCORE_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_GO_SCORE_OWNER + " TEXT, "
+            + COLUMN_GO_SCORE_VALUE + " INTEGER);";
+
+    /**
+     * Returns the instance of DBTools if already initialized. If it doesn't exist, create one.
+     *
+     * @param context the application's context.
+     * @return the singleton DBTools.
+     */
+    public static synchronized DBTools getsInstance(Context context) {
+        // Uses the application's context which protects against leaks.
+        if (sInstance == null) {
+            sInstance = new DBTools(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
+    /**
      * Instantiates a new Db tools.
      *
      * @param context the context.
      */
-    public DBTools(Context context) {
+    private DBTools(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
@@ -106,6 +198,10 @@ public class DBTools extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(LOGINS_CREATE);
         sqLiteDatabase.execSQL(SLIDING_TILE_SAVED_GAMES_CREATE);
         sqLiteDatabase.execSQL(SLIDING_TILE_SCORES_CREATE);
+        sqLiteDatabase.execSQL(TIC_TAC_TOE_GAMES_CREATE);
+        sqLiteDatabase.execSQL(TIC_TAC_TOE_SCORES_CREATE);
+        sqLiteDatabase.execSQL(GO_GAMES_CREATE);
+        sqLiteDatabase.execSQL(GO_SCORES_CREATE);
     }
 
     @Override

@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.App.GameChoiceActivity;
+import fall2018.csc2017.gamecentre.Database.DBTools;
+import fall2018.csc2017.gamecentre.Entity.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

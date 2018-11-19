@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
-import fall2018.csc2017.gamecentre.DBTools;
+import fall2018.csc2017.gamecentre.Database.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
