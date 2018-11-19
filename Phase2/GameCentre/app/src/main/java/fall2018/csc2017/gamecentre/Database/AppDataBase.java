@@ -13,7 +13,6 @@ import fall2018.csc2017.gamecentre.Database.Dao.TTTBoardManagerDao;
 import fall2018.csc2017.gamecentre.Database.Dao.UserDao;
 import fall2018.csc2017.gamecentre.Database.Entity.GoBoardManager;
 import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.Database.Entity.TicTacToeBoardManager;
 import fall2018.csc2017.gamecentre.Database.Entity.User;
 
 /**

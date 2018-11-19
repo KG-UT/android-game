@@ -22,7 +22,7 @@ import static fall2018.csc2017.gamecentre.App.LoginActivity.myUser;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 @Entity(tableName = "SlidingTileBoards")
-public class SlidingTileBoardManager implements Serializable {
+public class TicTacToeBoardManager implements Serializable {
     /**
      * The owner of this specific game of Sliding Tiles.
      */

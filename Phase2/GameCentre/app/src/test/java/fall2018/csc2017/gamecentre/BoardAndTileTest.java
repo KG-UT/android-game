@@ -7,8 +7,6 @@ import java.util.List;
 
 import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
 
-import static org.junit.Assert.*;
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

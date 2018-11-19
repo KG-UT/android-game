@@ -33,25 +33,24 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE username = :username")
     User findByName(String username);
 
-    /**
+    /** TODO: Do we need this?
      * Updates a user's password.
      *
      * @param uid           the user's id.
      * @param newPassword   the new password.
      */
     @Query("UPDATE user SET username = :newPassword WHERE uid = :uid")
-    User updatePassword(int uid, String newPassword);
+    void updatePassword(int uid, String newPassword);
 
     /**
      * Inserts any amount of Users into the database.
      *
      * @param user  The User to be inserted.
      */
-
     @Insert
     void insert(User user);
 
-    /**
+    /** TODO: may not need this.
      * Deletes a User from the database.
      *
      * @param user  The User to be deleted
