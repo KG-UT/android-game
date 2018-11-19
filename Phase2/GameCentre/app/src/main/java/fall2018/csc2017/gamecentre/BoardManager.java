@@ -195,32 +195,32 @@ public class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-   public int getScore() { return score;}
+    public int getScore() { return score;}
 
-   /**
-    * Getter function for the Undos left.
-    * @return the number of undos the player has left.
-    */
-   public int getUndosLeft() {
-       if (undosLeft >= 0){
-           return undosLeft;
-       } else{
-           return 99999999;
-       }
-   }
+    /**
+     * Getter function for the Undos left.
+     * @return the number of undos the player has left.
+     */
+    public int getUndosLeft() {
+        if (undosLeft >= 0){
+            return undosLeft;
+        } else{
+            return 99999999;
+        }
+    }
 
-   /**
-    * Set undos as as some value.
-    * PRECONDITION: i >= 0
-    */
-   public void setUndos(int i){
-       undosLeft = i;
-   }
+    /**
+     * Set undos as as some value.
+     * PRECONDITION: i >= 0
+     */
+    public void setUndos(int i){
+        undosLeft = i;
+    }
 
-   /**
-    * Give player unlimited Undos.
-    */
-   public void setUnlimitedUndos(){
-       undosLeft = -1;
-   };
+    /**
+     * Give player unlimited Undos.
+     */
+    public void setUnlimitedUndos(){
+        undosLeft = -1;
+    };
 }

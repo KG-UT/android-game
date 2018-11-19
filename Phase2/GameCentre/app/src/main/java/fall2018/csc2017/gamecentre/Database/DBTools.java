@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import fall2018.csc2017.gamecentre.Entity.User;
+import fall2018.csc2017.gamecentre.Database.Entity.User;
 import fall2018.csc2017.gamecentre.Score;
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileSavedGame;
+import fall2018.csc2017.gamecentre.Games.SlidingTile.SlidingTileSavedGame;
 
 /**
  * This class handles all database matters from reading to updating information.
@@ -235,7 +235,7 @@ public class DBTools extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, queryValues.getUsername());
         values.put(COLUMN_PASSWORD, queryValues.getPassword());
-        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
+//        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
         database.close();
 
         return queryValues;
@@ -262,7 +262,7 @@ public class DBTools extends SQLiteOpenHelper {
             int userPasswordColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_PASSWORD);
 
             do {
-                myUser.setUserId(cursor.getLong(userIdColumnIdx));
+//                myUser.setUserId(cursor.getLong(userIdColumnIdx));
                 myUser.setPassword(cursor.getString(userPasswordColumnIdx));
             } while (cursor.moveToNext());
         }
@@ -293,8 +293,8 @@ public class DBTools extends SQLiteOpenHelper {
                 String currentUsername = cursor.getString(usernameColumnIdx);
                 String currentPassword = cursor.getString(passwordColumnIdx);
 
-                User currentUser = new User(currentUserId, currentUsername, currentPassword);
-                allUsers.add(currentUser);
+//                User currentUser = new User(currentUserId, currentUsername, currentPassword);
+//                allUsers.add(currentUser);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -332,11 +332,12 @@ public class DBTools extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, queryValues.getUsername());
         values.put(COLUMN_PASSWORD, queryValues.getPassword());
-        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
+//        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
         database.close();
 
-        return database.update(TABLE_LOGINS, values, COLUMN_USER_ID + " = ?",
-                                new String[] {String.valueOf(queryValues.getUserId())});
+//        return database.update(TABLE_LOGINS, values, COLUMN_USER_ID + " = ?",
+//                                new String[] {String.valueOf(queryValues.getUserId())});
+        return 0;
     }
 
     /**

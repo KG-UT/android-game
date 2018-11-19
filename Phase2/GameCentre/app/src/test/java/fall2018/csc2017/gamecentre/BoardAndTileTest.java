@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    SlidingTileBoardManager slidingTileBoardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -37,14 +39,14 @@ public class BoardAndTileTest {
     private void setUpCorrect() {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
-        boardManager = new BoardManager(board);
+        slidingTileBoardManager = new SlidingTileBoardManager(board);
     }
 
     /**
      * Shuffle a few tiles.
      */
     private void swapFirstTwoTiles() {
-        boardManager.getBoard().swapTiles(0, 0, 0, 1);
+        slidingTileBoardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
     /**
@@ -53,9 +55,9 @@ public class BoardAndTileTest {
     @Test
     public void testIsSolved() {
         setUpCorrect();
-        assertEquals(true, boardManager.puzzleSolved());
+        assertEquals(true, slidingTileBoardManager.puzzleSolved());
         swapFirstTwoTiles();
-        assertEquals(false, boardManager.puzzleSolved());
+        assertEquals(false, slidingTileBoardManager.puzzleSolved());
     }
 
     /**
@@ -64,11 +66,11 @@ public class BoardAndTileTest {
     @Test
     public void testSwapFirstTwo() {
         setUpCorrect();
-        assertEquals(1, boardManager.getBoard().getTile(0, 0).getId());
-        assertEquals(2, boardManager.getBoard().getTile(0, 1).getId());
-        boardManager.getBoard().swapTiles(0, 0, 0, 1);
-        assertEquals(2, boardManager.getBoard().getTile(0, 0).getId());
-        assertEquals(1, boardManager.getBoard().getTile(0, 1).getId());
+        assertEquals(1, slidingTileBoardManager.getBoard().getTile(0, 0).getId());
+        assertEquals(2, slidingTileBoardManager.getBoard().getTile(0, 1).getId());
+        slidingTileBoardManager.getBoard().swapTiles(0, 0, 0, 1);
+        assertEquals(2, slidingTileBoardManager.getBoard().getTile(0, 0).getId());
+        assertEquals(1, slidingTileBoardManager.getBoard().getTile(0, 1).getId());
     }
 
     /**
@@ -77,11 +79,11 @@ public class BoardAndTileTest {
     @Test
     public void testSwapLastTwo() {
         setUpCorrect();
-        assertEquals(15, boardManager.getBoard().getTile(3, 2).getId());
-        assertEquals(16, boardManager.getBoard().getTile(3, 3).getId());
-        boardManager.getBoard().swapTiles(3, 3, 3, 2);
-        assertEquals(16, boardManager.getBoard().getTile(3, 2).getId());
-        assertEquals(15, boardManager.getBoard().getTile(3, 3).getId());
+        assertEquals(15, slidingTileBoardManager.getBoard().getTile(3, 2).getId());
+        assertEquals(16, slidingTileBoardManager.getBoard().getTile(3, 3).getId());
+        slidingTileBoardManager.getBoard().swapTiles(3, 3, 3, 2);
+        assertEquals(16, slidingTileBoardManager.getBoard().getTile(3, 2).getId());
+        assertEquals(15, slidingTileBoardManager.getBoard().getTile(3, 3).getId());
     }
 
     /**
@@ -90,9 +92,9 @@ public class BoardAndTileTest {
     @Test
     public void testIsValidTap() {
         setUpCorrect();
-        assertEquals(true, boardManager.isValidTap(11));
-        assertEquals(true, boardManager.isValidTap(15));
-        assertEquals(false, boardManager.isValidTap(10));
+        assertEquals(true, slidingTileBoardManager.isValidTap(11));
+        assertEquals(true, slidingTileBoardManager.isValidTap(15));
+        assertEquals(false, slidingTileBoardManager.isValidTap(10));
     }
 }
 

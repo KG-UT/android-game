@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-import fall2018.csc2017.gamecentre.Entity.User;
+import fall2018.csc2017.gamecentre.Database.Entity.User;
 
 /**
  * The Score class which is used in the score board.

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.Games.SlidingTile.SlidingTileStartingActivity;
 
 /**
  * The game activity.

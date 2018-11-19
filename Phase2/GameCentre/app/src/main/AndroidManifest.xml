@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".LoginActivity"
+            android:name=".App.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".App.GameChoiceActivity"/>
-        <activity android:name=".SlidingTile.SlidingTileGameScoreboardActivity" />
-        <activity android:name=".SlidingTile.SlidingTilesSettingsActivity" />
-        <activity android:name=".SlidingTile.SlidingTileStartingActivity" />
-        <activity android:name=".SlidingTile.SlidingTileActivity" />
+        <activity android:name=".Games.SlidingTile.SlidingTileGameScoreboardActivity" />
+        <activity android:name=".Games.SlidingTile.SlidingTilesSettingsActivity" />
+        <activity android:name=".Games.SlidingTile.SlidingTileStartingActivity" />
+        <activity android:name=".Games.SlidingTile.SlidingTileActivity" />
         <activity android:name=".SavedGamesView"/>
-        <activity android:name=".SlidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".SlidingTile.SlidingTileUserScoreboardActivity"></activity>
+        <activity android:name=".Games.SlidingTile.SlidingTileEndActivity"/>
+        <activity android:name=".Games.SlidingTile.SlidingTileUserScoreboardActivity"></activity>
     </application>
 
 </manifest>
