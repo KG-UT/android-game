@@ -24,9 +24,9 @@ import fall2018.csc2017.gamecentre.Database.Entity.User;
                       TicTacToeBoardManager.class,
                       SlidingTileBoardManager.class},
                       version = 1)
-public abstract class AppDataBase extends RoomDatabase {
+public abstract class AppDatabase extends RoomDatabase {
 
-    private static AppDataBase INSTANCE;
+    private static AppDatabase INSTANCE;
 
     /**
      * Used to access the UserDao queries.
@@ -60,12 +60,12 @@ public abstract class AppDataBase extends RoomDatabase {
      * Gets app database.
      *
      * @param context the context
-     * @return the app database
+     * @return the application database
      */
-    public static AppDataBase getAppDatabase(Context context) {
+    public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDataBase.class, "GameCentre").build();
+                    AppDatabase.class, "GameCentre").build();
         }
         return INSTANCE;
     }
@@ -84,7 +84,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param user  The user to be inserted
      * @return      The user that was just inserted.
      */
-    private static User addUser(final AppDataBase db, User user) {
+    private static User insertUser(final AppDatabase db, User user) {
         db.userDao().insert(user);
         return user;
     }
@@ -96,7 +96,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param username  The username for the user we want to return.
      * @return      The specified user.
      */
-    private static User getUser(final AppDataBase db, String username) {
+    private static User getUser(final AppDatabase db, String username) {
         return db.userDao().findByName(username);
     }
 
@@ -107,7 +107,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param user  The user to be deleted.
      * @return      The user that was deleted.
      */
-    private static User deleteUser(final AppDataBase db, User user) {
+    private static User deleteUser(final AppDatabase db, User user) {
         db.userDao().delete(user);
         return user;
     }
@@ -119,7 +119,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param user  The user whose password will be updated in the database.
      * @return      The user whose password we updated.
      */
-    private static User updatePassword(final AppDataBase db, User user) {
+    private static User updatePassword(final AppDatabase db, User user) {
         return db.userDao().updatePassword(user.getUid(), user.getPassword());
     }
 
@@ -130,7 +130,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param STBM  The ST Board Manager to be inserted.
      * @return      The inserted ST Board Manager.
      */
-    private static SlidingTileBoardManager addSTBoardManager(final AppDataBase db,
+    private static SlidingTileBoardManager addSTBoardManager(final AppDatabase db,
                                                              SlidingTileBoardManager STBM) {
         db.stBoardManagerDao().insert(STBM);
         return STBM;
@@ -143,7 +143,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param owner The user's username
      * @return      A list of all Sliding Tile Board Managers associated with a user.
      */
-    private static List<SlidingTileBoardManager> getUsersSlidingTIleGames(final AppDataBase db,
+    private static List<SlidingTileBoardManager> getUsersSlidingTIleGames(final AppDatabase db,
                                                                           String owner) {
         return db.stBoardManagerDao().getUserSavedGames(owner);
     }
@@ -155,7 +155,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param TTTBM  The TTT Board Manager to be inserted.
      * @return      The inserted TTT Board Manager.
      */
-    private static TicTacToeBoardManager addTTTBoardManager(final AppDataBase db,
+    private static TicTacToeBoardManager addTTTBoardManager(final AppDatabase db,
                                                              TicTacToeBoardManager TTTBM) {
         db.tttBoardManagerDao().insert(TTTBM);
         return TTTBM;
@@ -168,7 +168,7 @@ public abstract class AppDataBase extends RoomDatabase {
      * @param owner The user's username
      * @return      A list of all Sliding Tile Board Managers associated with a user.
      */
-    private static List<TicTacToeBoardManager> getUsersTicTacToeGames(final AppDataBase db,
+    private static List<TicTacToeBoardManager> getUsersTicTacToeGames(final AppDatabase db,
                                                                           String owner) {
         return db.tttBoardManagerDao().getUserSavedGames(owner);
     }

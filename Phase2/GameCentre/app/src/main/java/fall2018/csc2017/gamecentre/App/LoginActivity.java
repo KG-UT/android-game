@@ -37,7 +37,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.Database.AppDataBase;
+import fall2018.csc2017.gamecentre.Database.AppDatabase;
 import fall2018.csc2017.gamecentre.Database.Entity.User;
 import fall2018.csc2017.gamecentre.R;
 
@@ -318,9 +318,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            AppDataBase db = null;
+            AppDatabase db = null;
             try {
-                db = AppDataBase.getAppDatabase(mContext);
+                db = AppDatabase.getAppDatabase(mContext);
                 myUser = db.getUser(db, mEmail);
 
                 if (myUser.getUserId() > 0) {
