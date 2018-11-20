@@ -32,7 +32,7 @@ public class SlidingTileActivity extends GameActivity {
     /**
      * The autosave .ser file.
      */
-    public static final String SAVE_FILE_1 = "save_1.ser";
+    public static final String SAVE_FILE_1 = "sliding_tile_save_file.ser";
 
     /**
      * The board manager.

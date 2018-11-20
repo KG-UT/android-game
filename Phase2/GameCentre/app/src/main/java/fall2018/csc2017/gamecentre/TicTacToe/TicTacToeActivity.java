@@ -33,7 +33,7 @@ public class TicTacToeActivity extends GameActivity {
     /**
      * The autosave .ser file.
      */
-    public static final String SAVE_FILE_1 = "save_1.ser";
+    public static final String SAVE_FILE_1 = "tic_tac_toe_save.ser";
 
     /**
      * The board manager.
