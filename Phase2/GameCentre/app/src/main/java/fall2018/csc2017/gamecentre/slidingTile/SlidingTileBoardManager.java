@@ -1,14 +1,11 @@
 package fall2018.csc2017.gamecentre.slidingTile;
 
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
-
-import android.media.Image;
+import java.util.Random;
 
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
@@ -24,10 +21,6 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     private Stack<int[]> stackOfMoves = new Stack<>();
 
-    /**
-     * An arraylist of backgrounds
-     */
-    private ArrayList<Image> backgrounds = new ArrayList<>();
 
     /**
      * The score.
@@ -42,7 +35,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    public SlidingTileBoardManager() {
+    SlidingTileBoardManager() {
         this(4, 4);
     }
 
@@ -57,7 +50,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * Manage a new shuffled board.
      */
-    public SlidingTileBoardManager(int numRows, int numCols) {
+    SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -65,7 +58,7 @@ public class SlidingTileBoardManager extends BoardManager {
         }
         tiles.add(new Tile(Tile.BLANK_ID));
 
-        Collections.shuffle(tiles);
+        shuffle(tiles);
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
     }
 
@@ -129,6 +122,40 @@ public class SlidingTileBoardManager extends BoardManager {
             return null;
         }
     }
+    /* A shuffling algorithm to scramble the board.
+     *
+     * @param tiles The tiles to be shuffled.
+     */
+    private void shuffle(List tiles){
+        int NUM_RANDOM_MOVES = 30;
+        for (int i=0; i < NUM_RANDOM_MOVES; i++){
+            makeRandomMove(tiles);
+        }
+    }
+
+    /* From the valid moves available, makes a random move.
+     *
+     */
+    private void makeRandomMove(List tiles){
+        ArrayList<Integer> validMoves = getValidMoves(tiles);
+        Random randomNumGenerator = new Random();
+        int moveIndex = randomNumGenerator.nextInt(validMoves.size());
+        hiddenMove(validMoves.get(moveIndex));
+    }
+
+    /* Get an ArrayList of valid moves.
+     *
+     */
+    private ArrayList<Integer> getValidMoves(List tiles){
+        int numTiles = tiles.size();
+        ArrayList<Integer> validMoves = new ArrayList<>();
+        for (int position=0; position<numTiles; position++){
+            if (isValidTap(position)){
+                validMoves.add(position);
+            }
+        }
+        return validMoves;
+    }
 
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
@@ -153,11 +180,26 @@ public class SlidingTileBoardManager extends BoardManager {
 
         int[] blankLocation = nearestBlank(row, col);
         if(blankLocation != null) {
+            hiddenMove(position);
+            stackOfMoves.add(blankLocation);
+            score += 1;
+        }
+    }
+    /*
+     * The computer performs a move, so it doesnt not affect player score, nor get recorded
+     * for undos.
+     *
+     * @param position the position
+     */
+    private void hiddenMove(int position) {
+        int row = position / Board.getNumRows();
+        int col = position % Board.getNumCols();
+
+        int[] blankLocation = nearestBlank(row, col);
+        if (blankLocation != null) {
             int blankRow = blankLocation[0];
             int blankCol = blankLocation[1];
-            stackOfMoves.add(blankLocation);
             getBoard().swapTiles(blankRow, blankCol, row, col);
-            score += 1;
         }
     }
 
@@ -166,7 +208,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @return a boolean showing if there are moves in the stack of moves.
      */
-    public boolean canUndo(){
+    boolean canUndo(){
         return !stackOfMoves.isEmpty();
     }
 
@@ -175,7 +217,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-    public void undoMove() {
+    void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
@@ -199,7 +241,7 @@ public class SlidingTileBoardManager extends BoardManager {
     * Getter function for the Undos left.
     * @return the number of undos the player has left.
     */
-   public int getUndosLeft() {
+   int getUndosLeft() {
        if (undosLeft >= 0){
            return undosLeft;
        } else{
@@ -207,18 +249,18 @@ public class SlidingTileBoardManager extends BoardManager {
        }
    }
 
-   /**
-    * Set undos as as some value.
-    * PRECONDITION: i >= 0
-    */
-   public void setUndos(int i){
-       undosLeft = i;
-   }
-
-   /**
-    * Give player unlimited Undos.
-    */
-   public void setUnlimitedUndos(){
-       undosLeft = -1;
-   };
+//   /**
+//    * Set undos as as some value.
+//    * PRECONDITION: i >= 0
+//    */
+//   public void setUndos(int i){
+//       undosLeft = i;
+//   }
+//
+//   /**
+//    * Give player unlimited Undos.
+//    */
+//   public void setUnlimitedUndos(){
+//       undosLeft = -1;
+//   };
 }
