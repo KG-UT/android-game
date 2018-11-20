@@ -9,7 +9,7 @@ import fall2018.csc2017.gamecentre.Tile;
  * The Tic Tac Toe board.
  */
 public class TicTacToeBoard extends Board {
-    TicTacToeBoard(int rows, int cols, List<Tile> tiles){
+    public TicTacToeBoard(int rows, int cols, List<Tile> tiles){
         super(rows, cols, tiles);
     }
 }

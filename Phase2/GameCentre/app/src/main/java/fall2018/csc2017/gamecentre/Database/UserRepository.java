@@ -1,19 +1,12 @@
 package fall2018.csc2017.gamecentre.Database;
 
-import android.app.Application;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
-import java.net.UnknownServiceException;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Database.AsyncInterfaces.AsyncUserResult;
-import fall2018.csc2017.gamecentre.Database.Dao.GoBoardManagerDao;
-import fall2018.csc2017.gamecentre.Database.Dao.STBoardManagerDao;
-import fall2018.csc2017.gamecentre.Database.Dao.TTTBoardManagerDao;
 import fall2018.csc2017.gamecentre.Database.Dao.UserDao;
-import fall2018.csc2017.gamecentre.Database.Entity.GoBoardManager;
 import fall2018.csc2017.gamecentre.Database.Entity.User;
 
 /**

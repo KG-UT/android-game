@@ -74,7 +74,7 @@ public class SlidingTileActivity extends GameActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         HashMap<String, Object> settings = getSettings();
@@ -90,7 +90,7 @@ public class SlidingTileActivity extends GameActivity {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(SlidingTileBoardManager.getBoard().);
+        gridView.setNumColumns(SlidingTileBoard.getNumCols());
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function

@@ -14,6 +14,8 @@ import java.util.Stack;
 import android.media.Image;
 
 import fall2018.csc2017.gamecentre.Board;
+import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.Games.SlidingTile.SlidingTileBoard;
 import fall2018.csc2017.gamecentre.Tile;
 
 import static fall2018.csc2017.gamecentre.App.LoginActivity.myUser;
@@ -22,7 +24,7 @@ import static fall2018.csc2017.gamecentre.App.LoginActivity.myUser;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 @Entity(tableName = "SlidingTileBoards")
-public class TicTacToeBoardManager implements Serializable {
+public class SlidingTileBoardManager extends BoardManager implements Serializable {
     /**
      * The owner of this specific game of Sliding Tiles.
      */
@@ -31,7 +33,7 @@ public class TicTacToeBoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    private static SlidingTileBoard board;
+    private SlidingTileBoard board;
 
     /**
      * A stack of moves made, for move reversals.
@@ -57,20 +59,22 @@ public class TicTacToeBoardManager implements Serializable {
      * Manage a new 4 by 4 shuffled board
      */
     public SlidingTileBoardManager() {
-        this(4, 4);
+        super(4, 4);
     }
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    public SlidingTileBoardManager(Board board) {
-        this.board = board;
+    public SlidingTileBoardManager(SlidingTileBoard board) {
+        super(board);
     }
 
     /**
      * Manage a new shuffled board.
      */
+
     public SlidingTileBoardManager(int numRows, int numCols) {
+        super(numRows, numCols);
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -79,13 +83,13 @@ public class TicTacToeBoardManager implements Serializable {
         tiles.add(new Tile(Tile.BLANK_ID));
 
         Collections.shuffle(tiles);
-        this.board = new Board(numRows, numCols, tiles);
+        this.board = new SlidingTileBoard(numRows, numCols, tiles);
     }
 
     /**
      * Return the current board.
      */
-    public static Board getBoard() {
+    public SlidingTileBoard getBoard() {
         return board;
     }
 
