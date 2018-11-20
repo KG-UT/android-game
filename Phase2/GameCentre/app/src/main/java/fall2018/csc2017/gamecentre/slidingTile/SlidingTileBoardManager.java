@@ -1,15 +1,11 @@
 package fall2018.csc2017.gamecentre.slidingTile;
 
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import android.media.Image;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoard;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
@@ -24,10 +20,6 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     private Stack<int[]> stackOfMoves = new Stack<>();
 
-    /**
-     * An arraylist of backgrounds
-     */
-    private ArrayList<Image> backgrounds = new ArrayList<>();
 
     /**
      * The score.
