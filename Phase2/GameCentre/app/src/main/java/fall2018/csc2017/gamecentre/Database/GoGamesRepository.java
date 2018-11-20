@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.Database.Entity;
+package fall2018.csc2017.gamecentre.Database;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;

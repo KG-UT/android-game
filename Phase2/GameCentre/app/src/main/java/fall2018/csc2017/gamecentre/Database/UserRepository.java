@@ -1,5 +1,6 @@
 package fall2018.csc2017.gamecentre.Database;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
@@ -26,6 +27,21 @@ public class UserRepository implements AsyncUserResult {
      * The live data for all users in the database.
      */
     private MutableLiveData<List<User>> allUsers = new MutableLiveData<>();
+
+    /**
+     * The User DAO
+     */
+    private UserDao userDao;
+
+    public UserRepository(Application application) {
+        AppDatabase db;
+        db = AppDatabase.getAppDatabase(application);
+        userDao = db.userDao();
+    }
+
+    public void insertUser(User user) {
+//        new queryInsertAsyncTask.
+    }
 
     @Override
     public void asyncFinished(User user) {
@@ -102,24 +118,24 @@ public class UserRepository implements AsyncUserResult {
     /**
      * The async task for inserting users.
      */
-    private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
+    private static class queryInsertAsyncTask extends AsyncTask<User, Void, Void> {
         /**
          * The User DAO.
          */
-        private UserDao asynTaskDao;
+        private UserDao asyncTaskDao;
 
         /**
          * Initializes the insert async task.
          *
          * @param dao   the user dao.
          */
-        insertAsyncTask(UserDao dao) {
-            asynTaskDao = dao;
+        queryInsertAsyncTask(UserDao dao) {
+            asyncTaskDao = dao;
         }
 
         @Override
         protected Void doInBackground(final User... params) {
-            asynTaskDao.insert(params[0]);
+            asyncTaskDao.insert(params[0]);
             return null;
         }
     }
