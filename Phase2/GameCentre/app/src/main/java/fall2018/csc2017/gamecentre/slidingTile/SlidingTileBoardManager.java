@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.Random;
 
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
@@ -136,7 +137,12 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      */
     private void makeRandomMove(List tiles){
+        ArrayList<Integer> validMoves = getValidMoves(tiles);
+        Random randomNumGenerator = new Random();
+        int moveIndex = randomNumGenerator.nextInt(validMoves.size());
+        hiddenMove(validMoves.get(moveIndex));
     }
+
     /* Get an ArrayList of valid moves.
      *
      */
