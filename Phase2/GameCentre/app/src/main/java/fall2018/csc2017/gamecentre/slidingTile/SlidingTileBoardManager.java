@@ -133,7 +133,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @param tiles The tiles to be shuffled.
      */
-    private void shuffle(ArrayList<Tile> tiles){
+    private void shuffle(List<Tile> tiles){
 
     }
 
