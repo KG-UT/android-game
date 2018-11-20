@@ -34,7 +34,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    public SlidingTileBoardManager() {
+    SlidingTileBoardManager() {
         this(4, 4);
     }
 
@@ -49,7 +49,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * Manage a new shuffled board.
      */
-    public SlidingTileBoardManager(int numRows, int numCols) {
+    SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -180,7 +180,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @return a boolean showing if there are moves in the stack of moves.
      */
-    public boolean canUndo(){
+    boolean canUndo(){
         return !stackOfMoves.isEmpty();
     }
 
@@ -189,7 +189,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-    public void undoMove() {
+    void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
@@ -213,7 +213,7 @@ public class SlidingTileBoardManager extends BoardManager {
     * Getter function for the Undos left.
     * @return the number of undos the player has left.
     */
-   public int getUndosLeft() {
+   int getUndosLeft() {
        if (undosLeft >= 0){
            return undosLeft;
        } else{
@@ -221,18 +221,18 @@ public class SlidingTileBoardManager extends BoardManager {
        }
    }
 
-   /**
-    * Set undos as as some value.
-    * PRECONDITION: i >= 0
-    */
-   public void setUndos(int i){
-       undosLeft = i;
-   }
-
-   /**
-    * Give player unlimited Undos.
-    */
-   public void setUnlimitedUndos(){
-       undosLeft = -1;
-   };
+//   /**
+//    * Set undos as as some value.
+//    * PRECONDITION: i >= 0
+//    */
+//   public void setUndos(int i){
+//       undosLeft = i;
+//   }
+//
+//   /**
+//    * Give player unlimited Undos.
+//    */
+//   public void setUnlimitedUndos(){
+//       undosLeft = -1;
+//   };
 }
