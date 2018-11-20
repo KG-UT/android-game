@@ -126,7 +126,10 @@ public class SlidingTileBoardManager extends BoardManager {
      * @param tiles The tiles to be shuffled.
      */
     private void shuffle(List<Tile> tiles){
-
+        int NUM_RANDOM_MOVES = 30;
+        for (int i=0; i < NUM_RANDOM_MOVES; i++){
+            makeRandomMove();
+        }
     }
 
     /**
