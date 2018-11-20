@@ -65,7 +65,22 @@ abstract public class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-   public int getScore() { return score;}
+    public int getScore() { return score;}
+
+    /**
+     * Setter function for the score
+     *
+     */
+
+    /**
+     * Increment the score
+     *
+     * @param amount amount to increment score by
+     */
+    public void incrementScore(int amount) {
+        this.score += amount;
+    }
+
 
     /**
      * Return whether or not the puzzle is solved or game is over

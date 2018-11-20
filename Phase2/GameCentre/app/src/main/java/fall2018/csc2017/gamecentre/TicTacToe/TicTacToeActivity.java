@@ -249,7 +249,7 @@ public class TicTacToeActivity extends GameActivity {
         display();
         if (boardManager.puzzleSolved()){
             int score = boardManager.getScore();
-            Intent tmp = new Intent(TicTacToeActivity.this, SlidingTileEndActivity.class);
+            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
             tmp.putExtra("SCORE", score);
             startActivity(tmp);
         }

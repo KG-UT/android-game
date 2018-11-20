@@ -31,6 +31,7 @@
         <activity android:name=".ticTacToe.TicTacToeSettingsActivity" />
         <activity android:name=".ticTacToe.TicTacToeActivity"/>
         <activity android:name=".ticTacToe.TicTacToeGameScoreboardActivity"/>
+        <activity android:name=".ticTacToe.TicTacToeEndActivity"/>
 
         <activity android:name=".slidingTile.SlidingTileGameScoreboardActivity" />
         <activity android:name=".slidingTile.SlidingTilesSettingsActivity" />

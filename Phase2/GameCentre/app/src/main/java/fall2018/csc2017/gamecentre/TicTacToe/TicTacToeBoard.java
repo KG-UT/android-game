@@ -45,4 +45,19 @@ public class TicTacToeBoard extends Board {
         notifyObservers();
     }
 
+    /**
+     * Reset the board
+     */
+    public void reset() {
+        for(int i = 0; i < getNumRows(); i++) {
+            for(int j = 0; j < getNumCols(); j++) {
+                setTile(i, j, new TicTacToeTile());
+            }
+        }
+
+        setChanged();
+        notifyObservers();
+    }
+
+
 }
