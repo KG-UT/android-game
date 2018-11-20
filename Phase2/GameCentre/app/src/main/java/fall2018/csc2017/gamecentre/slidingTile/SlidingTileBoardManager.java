@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Stack;
 
 import android.media.Image;
-
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoard;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
@@ -65,7 +65,7 @@ public class SlidingTileBoardManager extends BoardManager {
         }
         tiles.add(new Tile(Tile.BLANK_ID));
 
-        Collections.shuffle(tiles);
+        shuffle(tiles);
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
     }
 
@@ -129,6 +129,13 @@ public class SlidingTileBoardManager extends BoardManager {
             return null;
         }
     }
+    /* A shuffling algorithm to scramble the board.
+     *
+     * @param tiles The tiles to be shuffled.
+     */
+    private void shuffle(ArrayList<Tile> tiles){
+
+    }
 
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
@@ -153,11 +160,26 @@ public class SlidingTileBoardManager extends BoardManager {
 
         int[] blankLocation = nearestBlank(row, col);
         if(blankLocation != null) {
+            hiddenMove(position);
+            stackOfMoves.add(blankLocation);
+            score += 1;
+        }
+    }
+    /*
+     * The computer performs a move, so it doesnt not affect player score, nor get recorded
+     * for undos.
+     *
+     * @param position the position
+     */
+    private void hiddenMove(int position) {
+        int row = position / Board.getNumRows();
+        int col = position % Board.getNumCols();
+
+        int[] blankLocation = nearestBlank(row, col);
+        if (blankLocation != null) {
             int blankRow = blankLocation[0];
             int blankCol = blankLocation[1];
-            stackOfMoves.add(blankLocation);
             getBoard().swapTiles(blankRow, blankCol, row, col);
-            score += 1;
         }
     }
 
