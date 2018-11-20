@@ -33,6 +33,11 @@ public class UserRepository implements AsyncUserResult {
      */
     private UserDao userDao;
 
+    /**
+     * Instantiates the User Repository.
+     *
+     * @param application   the application context for the db.
+     */
     public UserRepository(Application application) {
         AppDatabase db;
         db = AppDatabase.getAppDatabase(application);
