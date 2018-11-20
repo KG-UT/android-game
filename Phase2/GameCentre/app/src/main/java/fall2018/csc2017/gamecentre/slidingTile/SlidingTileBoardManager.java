@@ -125,11 +125,30 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @param tiles The tiles to be shuffled.
      */
-    private void shuffle(List<Tile> tiles){
+    private void shuffle(List tiles){
         int NUM_RANDOM_MOVES = 30;
         for (int i=0; i < NUM_RANDOM_MOVES; i++){
-            makeRandomMove();
+            makeRandomMove(tiles);
         }
+    }
+
+    /* From the valid moves available, makes a random move.
+     *
+     */
+    private void makeRandomMove(List tiles){
+    }
+    /* Get an ArrayList of valid moves.
+     *
+     */
+    private ArrayList<Integer> getValidMoves(List tiles){
+        int numTiles = tiles.size();
+        ArrayList<Integer> validMoves = new ArrayList<>();
+        for (int position=0; position<numTiles; position++){
+            if (isValidTap(position)){
+                validMoves.add(position);
+            }
+        }
+        return validMoves;
     }
 
     /**
