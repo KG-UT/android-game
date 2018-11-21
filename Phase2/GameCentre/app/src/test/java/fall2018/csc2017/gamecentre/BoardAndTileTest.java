@@ -1,5 +1,6 @@
 package fall2018.csc2017.gamecentre;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,13 @@ import java.util.List;
 
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.slidingTile.*;
+
+import org.mockito.ArgumentMatchers;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +26,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    SlidingTileBoardManager boardManager;
+    private SlidingTileBoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -26,7 +34,8 @@ public class BoardAndTileTest {
      */
     private List<Tile> makeTiles() {
         List<Tile> tiles = new ArrayList<>();
-        final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
+       // final int numTiles = boardManager.getBoard().getNumRows() * boardManager.getBoard().getNumCols();
+        final int numTiles = 4*4;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum + 1, tileNum));
         }
@@ -39,7 +48,9 @@ public class BoardAndTileTest {
      */
     private void setUpCorrect() {
         List<Tile> tiles = makeTiles();
-        Board board = new Board(tiles);
+//        Board board = new SlidingTileBoard(tiles);
+//        boardManager = new SlidingTileBoardManager(board);
+        SlidingTileBoard board = new SlidingTileBoard(4,4,tiles);
         boardManager = new SlidingTileBoardManager(board);
     }
 
@@ -93,8 +104,8 @@ public class BoardAndTileTest {
     @Test
     public void testIsValidTap() {
         setUpCorrect();
-        assertEquals(true, boardManager.isValidTap(11));
-        assertEquals(true, boardManager.isValidTap(15));
+        assertEquals(false, boardManager.isValidTap(11));
+        assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
 }
