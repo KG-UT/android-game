@@ -3,6 +3,7 @@ package fall2018.csc2017.gamecentre.view;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -74,8 +75,6 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        binding.setClickListener(binding.emailSignInButton);
-
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
          loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
@@ -101,12 +100,12 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
             }
         });
 
-//        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                attemptLogin();
-//            }
-//        });
+        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
     }
     // TODO: Need to implement this or rethink the design a bit.
     @Override
@@ -237,7 +236,7 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
         protected Boolean doInBackground(Void... params) {
             UserTable currentUser = loginViewModel.getCurrentUser(mEmail).getValue();
             if (currentUser == null) {
-                return false;
+                return true;
             }
             return currentUser.getId() > 0;
         }
@@ -247,8 +246,8 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
             showProgress(false);
 
             if (success) {
-                UserTable currentUser = loginViewModel.getCurrentUser(mEmail).getValue();
-                if (currentUser.getId() > 0){
+                LiveData<UserTable> currentUser = loginViewModel.getCurrentUser(mEmail);
+                if (currentUser.getValue().getId() > 0) {
                     finish();
                     Intent myIntent = new Intent(mContext, GameChoiceActivity.class);
                     startActivity(myIntent);
