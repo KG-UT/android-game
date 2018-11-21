@@ -1,22 +1,39 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import fall2018.csc2017.gamecentre.games.TicTacToe.TicTacToeBoard;
-import fall2018.csc2017.gamecentre.games.TicTacToe.TicTacToeTile;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoard;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
+
+import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class TicTacToeBoardManager extends BoardManager {
-    /**
+@Entity(tableName = "ticTacToeBoards")
+public class TicTacToeBoardManager extends BoardManager {
+    // TODO: come back later
+    @NonNull
+    @PrimaryKey
+    public String owner = myUser.getUsername();
+
+    // TODO: TEMP
+    public TicTacToeBoardManager() {}
+
+    /** TODO: Room has issue with Entities and Pojos having unusable public constructors.
      * Manage a new 3 by 3 tic tac toe board
      */
+    @Ignore
     public TicTacToeBoardManager(int numRows, int numCols) {
         List<TicTacToeTile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;

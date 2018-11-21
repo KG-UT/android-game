@@ -1,13 +1,15 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-import fall2018.csc2017.gamecentre.games.Go.GoBoard;
+import fall2018.csc2017.gamecentre.games.go.GoBoard;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 
-import static fall2018.csc2017.gamecentre.app.LoginActivity.myUser;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 /**
  * Manages a Go Board by placing stones, checking for end-of-game conditions,
@@ -15,16 +17,39 @@ import static fall2018.csc2017.gamecentre.app.LoginActivity.myUser;
  */
 @Entity(tableName = "goBoards")
 public class GoBoardManager extends BoardManager {
+    // TODO: make this less garbage in formatting. Temporary.
+    public String getOwner() {
+        return owner;
+    }
+
+    public int getWhitePlayerAreaScore() {
+        return whitePlayerAreaScore;
+    }
+
+    public int getBlackPlayerAreaScore() {
+        return blackPlayerAreaScore;
+    }
+
     /**
      * The owner of this specific game of Go.
      */
+    @NonNull
     @PrimaryKey
-    private final String owner = myUser.getUsername();
+    public String owner = myUser.getUsername();
 
-    /**
+    /** TODO: Type converter?
      * The Go board being managed.
      */
+    @Ignore
     private GoBoard board;
+    // TODO: make better formatting
+    public void setWhitePlayerAreaScore(int whitePlayerAreaScore) {
+        this.whitePlayerAreaScore = whitePlayerAreaScore;
+    }
+
+    public void setBlackPlayerAreaScore(int blackPlayerAreaScore) {
+        this.blackPlayerAreaScore = blackPlayerAreaScore;
+    }
 
     /**
      * The area score for the white player.

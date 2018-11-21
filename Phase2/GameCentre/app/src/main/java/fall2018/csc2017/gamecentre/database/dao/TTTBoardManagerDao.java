@@ -20,7 +20,7 @@ public interface TTTBoardManagerDao {
      * @param owner The user's username.
      * @return  A list of all the Tic Tac Toe Board Managers associated with this user.
      */
-    @Query("SELECT * FROM TTTBoards WHERE owner=:owner")
+    @Query("SELECT * FROM ticTacToeBoards WHERE owner=:owner")
     List<TicTacToeBoardManager> getUserSavedGames(String owner);
 
     /**

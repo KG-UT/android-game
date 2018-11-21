@@ -9,30 +9,26 @@ import android.arch.persistence.room.PrimaryKey;
  *
  * Code adapted from: https://medium.com/@ajaysaini.official/building-database-with-room-persistence-library-ecf7d0b8f3e9
  */
-@Entity(tableName = "user")
 public class User {
     /**
      *  The User's uid.
      */
-    @PrimaryKey(autoGenerate = true)
     private int uid;
 
     /**
      * The username (email) for a given user.
      */
-    @ColumnInfo(name = "username")
     private String username;
 
     /**
      * The user's password.
      */
-    @ColumnInfo(name = "password")
     private String password;
 
     /**
      * Instantiates a new User.
      *
-     * @param uid      the user id  (primary key in the login table)
+     * @param uid      the user id  (primary key in the LoginInfo table)
      * @param username the username (email)
      * @param password the password
      */

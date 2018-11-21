@@ -1,25 +1,37 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import java.util.Random;
 
-import fall2018.csc2017.gamecentre.games.SlidingTile.SlidingTileBoard;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoard;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
 
+import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
+
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
+@Entity(tableName = "slidingTileBoards")
 public class SlidingTileBoardManager extends BoardManager {
-
+    @NonNull
+    @PrimaryKey
+    public String owner = myUser.getUsername();
     /**
      * A stack of moves made, for move reversals.
      */
-    private Stack<int[]> stackOfMoves = new Stack<>();
+    @Ignore
+    private Stack<int[]> stStackOfMoves = new Stack<>();
 
     /**
      * The score.
@@ -29,6 +41,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * The number of undos left.
      */
+    @Ignore
     private int undosLeft = 3;
 
     /**
@@ -180,7 +193,7 @@ public class SlidingTileBoardManager extends BoardManager {
         int[] blankLocation = nearestBlank(row, col);
         if(blankLocation != null) {
             hiddenMove(position);
-            stackOfMoves.add(blankLocation);
+            stStackOfMoves.add(blankLocation);
             score += 1;
         }
     }
@@ -208,7 +221,7 @@ public class SlidingTileBoardManager extends BoardManager {
      * @return a boolean showing if there are moves in the stack of moves.
      */
     public boolean canUndo(){
-        return !stackOfMoves.isEmpty();
+        return !stStackOfMoves.isEmpty();
     }
 
     /**
@@ -217,7 +230,7 @@ public class SlidingTileBoardManager extends BoardManager {
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
     public void undoMove() {
-        int[] backPosition = stackOfMoves.pop();
+        int[] backPosition = stStackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
         int[] blankLocation = nearestBlank(row, col);

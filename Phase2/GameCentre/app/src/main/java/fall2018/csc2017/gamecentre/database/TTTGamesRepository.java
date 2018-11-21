@@ -40,17 +40,17 @@ public class TTTGamesRepository implements AsyncTTTGamesResult {
     public void getUserGames(String username) {
         new queryAsyncTask(tttBoardManagerDao).execute(username);
     }
-
-    /** TODO: COPY CODE FOR TTT BOARD MANAGER INTO THIS BRANCH
-     * Insert game.
-     *
-     * @param tttBoardManager the st board manager
-     */
-    public void insertGame(TTTBoardManager tttBoardManager) {
-        queryAsyncTask.insertAsyncTask task = new queryAsyncTask.insertAsyncTask(tttBoardManagerDao);
-        task.delegate = this;
-        task.execute(tttBoardManager);
-    }
+//
+//    /** TODO: COPY CODE FOR TTT BOARD MANAGER INTO THIS BRANCH
+//     * Insert game.
+//     *
+//     * @param tttBoardManager the st board manager
+//     */
+//    public void insertGame(TTTBoardManager tttBoardManager) {
+//        queryAsyncTask.insertAsyncTask task = new queryAsyncTask.insertAsyncTask(tttBoardManagerDao);
+//        task.delegate = this;
+//        task.execute(tttBoardManager);
+//    }
 
     @Override
     public void asyncFinished(List<TicTacToeBoardManager> tttBoardManagers) {
