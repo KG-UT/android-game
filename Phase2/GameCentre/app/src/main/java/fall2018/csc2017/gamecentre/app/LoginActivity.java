@@ -3,6 +3,7 @@ package fall2018.csc2017.gamecentre.app;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,17 +34,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD:Phase2/GameCentre/app/src/main/java/fall2018/csc2017/gamecentre/App/LoginActivity.java
 import fall2018.csc2017.gamecentre.database.AppDatabase;
+import fall2018.csc2017.gamecentre.database.UserRepository;
 import fall2018.csc2017.gamecentre.database.entity.User;
 import fall2018.csc2017.gamecentre.R;
-||||||| merged common ancestors
-=======
->>>>>>> master:Phase2/GameCentre/app/src/main/java/fall2018/csc2017/gamecentre/LoginActivity.java
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -198,8 +195,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            // TODO: Potentially change the getApplication call.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, this);
+            mAuthTask = new UserLoginTask(email, password, this, getApplication());
             mAuthTask.execute((Void) null);
         }
     }
@@ -313,35 +311,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
         private final Context mContext;
+        private final Application mApplication;
 
-        UserLoginTask(String email, String password, Context context) {
+        UserLoginTask(String email, String password, Context context, Application application) {
             mEmail = email;
             mPassword = password;
             mContext = context;
+            mApplication = application;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            AppDatabase db = null;
+            UserRepository userRepository = new UserRepository(mApplication);
             try {
-                db = AppDatabase.getAppDatabase(mContext);
-                myUser = db.getUser(db, mEmail);
-
-                if (myUser.getUserId() > 0) {
-                    if (myUser.getPassword().equals(mPassword)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                userRepository.getUserByUsername(mEmail);
+                myUser = userRepository.getCurrentUser().getValue();
+                // TODO: check for the null bs here
+                if (myUser.getUid() > 0) {
+                    return myUser.getPassword().equals(mPassword);
                 } else {
                     myUser.setPassword(mPassword);
                     return true;
                 }
-            } finally {
-                if (dbTools != null) {
-                    dbTools.close();
-                }
+            } catch(Error e) {
+                // TODO: Do something here lol. CAN'T LEAVE IT LIKE THIS
+                System.out.println(e);
             }
+            return false;
         }
 
         @Override
@@ -350,7 +346,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                if (myUser.getUserId()>0){
+                if (myUser.getUid()>0){
                     finish();
                     Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
                     LoginActivity.this.startActivity(myIntent);
@@ -360,17 +356,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    DBTools dbTools=null;
                                     try{
                                         finish();
-                                        dbTools = new DBTools(mContext);
-                                        myUser=dbTools.insertUser(myUser);
+                                        // Insert the user into the database.
+                                        new UserRepository(mApplication).insertUser(myUser);
 
                                         Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
                                         LoginActivity.this.startActivity(myIntent);
-                                    } finally{
-                                        if (dbTools!=null)
-                                            dbTools.close();
+                                        // TODO: Need to have something proper here.
+                                    } catch (Error e){
+                                        System.out.println();
                                     }
                                     break;
 

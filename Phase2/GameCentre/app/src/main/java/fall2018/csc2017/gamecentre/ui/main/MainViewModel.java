@@ -21,6 +21,11 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<List<User>> allUsers;
     private MutableLiveData<User> currentUser;
 
+    /**
+     * Instantiates the Main view model.
+     *
+     * @param application the application context for the db and AndroidViewModel super class.
+     */
     public MainViewModel(Application application) {
         super(application);
         // The user repository
@@ -28,6 +33,6 @@ public class MainViewModel extends AndroidViewModel {
         // Get all users and the current user.
         allUsers = userRepository.getAllUsers();
         currentUser = userRepository.getCurrentUser();
-
+        
     }
 }

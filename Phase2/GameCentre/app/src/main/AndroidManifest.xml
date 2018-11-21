@@ -25,42 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".app.GameChoiceActivity"/>
         <activity android:name=".games.SlidingTile.SlidingTileGameScoreboardActivity" />
         <activity android:name=".games.SlidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".games.SlidingTile.SlidingTileStartingActivity" />
         <activity android:name=".games.SlidingTile.SlidingTileActivity" />
-||||||| merged common ancestors
         <activity android:name=".app.GameChoiceActivity"/>
-        <activity android:name=".SlidingTile.SlidingTileGameScoreboardActivity" />
-        <activity android:name=".SlidingTile.SlidingTilesSettingsActivity" />
-        <activity android:name=".SlidingTile.SlidingTileStartingActivity" />
-        <activity android:name=".SlidingTile.SlidingTileActivity" />
-=======
-        <activity android:name=".app.GameChoiceActivity"/>
-
         <activity android:name=".games.TicTacToe.TicTacToeStartingActivity"/>
         <activity android:name=".games.TicTacToe.TicTacToeSettingsActivity" />
         <activity android:name=".games.TicTacToe.TicTacToeActivity"/>
         <activity android:name=".games.TicTacToe.TicTacToeGameScoreboardActivity"/>
 
-        <activity android:name=".slidingTile.SlidingTileGameScoreboardActivity" />
-        <activity android:name=".slidingTile.SlidingTilesSettingsActivity" />
-        <activity android:name=".slidingTile.SlidingTileStartingActivity" />
-        <activity android:name=".slidingTile.SlidingTileActivity" />
->>>>>>> master
         <activity android:name=".SavedGamesView"/>
-<<<<<<< HEAD
         <activity android:name=".games.SlidingTile.SlidingTileEndActivity"/>
         <activity android:name=".games.SlidingTile.SlidingTileUserScoreboardActivity"></activity>
-||||||| merged common ancestors
-        <activity android:name=".SlidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".SlidingTile.SlidingTileUserScoreboardActivity"></activity>
-=======
-        <activity android:name=".slidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".slidingTile.SlidingTileUserScoreboardActivity"></activity>
->>>>>>> master
     </application>
 
 </manifest>
