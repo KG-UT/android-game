@@ -3,9 +3,9 @@ package fall2018.csc2017.gamecentre.Database.Entity;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import fall2018.csc2017.gamecentre.Board;
-import fall2018.csc2017.gamecentre.BoardManager;
 import fall2018.csc2017.gamecentre.Games.Go.GoBoard;
+import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.game.BoardManager;
 
 import static fall2018.csc2017.gamecentre.App.LoginActivity.myUser;
 
@@ -46,7 +46,7 @@ public class GoBoardManager extends BoardManager {
     /**
      * Manage a new 9 x 9 Go Board
      */
-    public GoBoardManager() { super(9, 9); }
+    public GoBoardManager() { this(9, 9); }
 
     /**
      * Manage either a 13x13 or 19x19 Go board.
@@ -54,7 +54,9 @@ public class GoBoardManager extends BoardManager {
      * @param numRows   The number of rows.
      * @param numCols   The number of columns.
      */
-    public GoBoardManager(int numRows, int numCols) { super(numRows, numCols); }
+    public GoBoardManager(int numRows, int numCols) {
+
+    }
 
     /**
      * Sets the board for this Go Board Manager.
@@ -66,6 +68,33 @@ public class GoBoardManager extends BoardManager {
     @Override
     public GoBoard getBoard() { return board; }
 
+    @Override
+    public void touchMove(int position) {
 
+    }
+
+    @Override
+    public void setBoard(Board board) {
+        super.setBoard(board);
+    }
+
+    @Override
+    public int getScore() {
+        return super.getScore();
+    }
+
+    @Override
+    public boolean isValidTap(int position) {
+        return false;
+    }
+
+    /**
+     * TODO: IMPLEMENT THIS
+     * @return if game is over
+     */
+    @Override
+    public boolean puzzleSolved() {
+        return false;
+    }
 
 }

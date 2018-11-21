@@ -5,7 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
+||||||| merged common ancestors
+import static org.junit.Assert.*;
+=======
+import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
+
+import static org.junit.Assert.*;
+>>>>>>> master
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,7 +24,13 @@ import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
+<<<<<<< HEAD
     SlidingTileBoardManager slidingTileBoardManager;
+||||||| merged common ancestors
+    BoardManager boardManager;
+=======
+    SlidingTileBoardManager boardManager;
+>>>>>>> master
 
     /**
      * Make a set of tiles that are in order.
@@ -37,7 +52,13 @@ public class BoardAndTileTest {
     private void setUpCorrect() {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
+<<<<<<< HEAD
         slidingTileBoardManager = new SlidingTileBoardManager(board);
+||||||| merged common ancestors
+        boardManager = new BoardManager(board);
+=======
+        boardManager = new SlidingTileBoardManager(board);
+>>>>>>> master
     }
 
     /**

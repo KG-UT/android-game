@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
-import fall2018.csc2017.gamecentre.Board;
 import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
@@ -33,7 +33,7 @@ public class SlidingTileActivity extends GameActivity {
     /**
      * The autosave .ser file.
      */
-    public static final String SAVE_FILE_1 = "save_1.ser";
+    public static final String SAVE_FILE_1 = "sliding_tile_save_file.ser";
 
     /**
      * The board manager.
@@ -74,7 +74,7 @@ public class SlidingTileActivity extends GameActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         HashMap<String, Object> settings = getSettings();
@@ -90,7 +90,7 @@ public class SlidingTileActivity extends GameActivity {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(SlidingTileBoard.getNumCols());
+        gridView.setNumColumns(Board.getNumCols());
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
@@ -120,7 +120,7 @@ public class SlidingTileActivity extends GameActivity {
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        SlidingTileBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
         for (int row = 0; row != Board.getNumRows(); row++) {
             for (int col = 0; col != Board.getNumCols(); col++) {
@@ -137,7 +137,7 @@ public class SlidingTileActivity extends GameActivity {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        SlidingTileBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();

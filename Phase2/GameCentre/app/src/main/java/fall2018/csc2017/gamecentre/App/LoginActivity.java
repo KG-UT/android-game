@@ -37,9 +37,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD:Phase2/GameCentre/app/src/main/java/fall2018/csc2017/gamecentre/App/LoginActivity.java
 import fall2018.csc2017.gamecentre.Database.AppDatabase;
 import fall2018.csc2017.gamecentre.Database.Entity.User;
 import fall2018.csc2017.gamecentre.R;
+||||||| merged common ancestors
+import fall2018.csc2017.gamecentre.App.GameChoiceActivity;
+=======
+import fall2018.csc2017.gamecentre.app.GameChoiceActivity;
+>>>>>>> master:Phase2/GameCentre/app/src/main/java/fall2018/csc2017/gamecentre/LoginActivity.java
 
 import static android.Manifest.permission.READ_CONTACTS;
 

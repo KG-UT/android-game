@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.Database.DBTools;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.Scoreboard;
