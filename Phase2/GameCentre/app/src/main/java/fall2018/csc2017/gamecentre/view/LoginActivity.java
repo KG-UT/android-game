@@ -1,95 +1,308 @@
 package fall2018.csc2017.gamecentre.view;
 
-import android.arch.lifecycle.LiveData;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.databinding.DataBindingUtil;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fall2018.csc2017.gamecentre.R;
+// import fall2018.csc2017.gamecentre.dataBinding.Listener;    // TODO: Impliment this most likely
 import fall2018.csc2017.gamecentre.dataBinding.Listener;
 import fall2018.csc2017.gamecentre.database.entity.UserTable;
 import fall2018.csc2017.gamecentre.database.entity.User;
 import fall2018.csc2017.gamecentre.databinding.ActivityLoginBinding;
 import fall2018.csc2017.gamecentre.viewModel.LoginViewModel;
 
-public class LoginActivity extends AppCompatActivity implements Listener {
+import static android.Manifest.permission.READ_CONTACTS;
 
+public class LoginActivity extends AppCompatActivity implements Listener {  // TODO: make this implement listener?
+
+    /**
+     * Assigned to the correct user upon successful sign up / login.
+     */
     public static User myUser;
 
+    /**
+     * The login view model.
+     */
     private LoginViewModel loginViewModel;
 
+    // Adapted from: https://stackoverflow.com/questions/8204680/java-regex-email
+    /**
+     * The email validation regex.
+     */
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * The data binder for this activity and view.
+     */
     private ActivityLoginBinding binding;
 
     /**
-     * Makes use of data binding, and uses the Observer pattern to make note of changes
-     * to the list of all user tables in the login details table.
-     *
-     * @param savedInstanceState    the instance state that was saved.
+     * Keep track of the login task to ensure we can cancel it if requested.
      */
+    private UserLoginTask mAuthTask = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        binding.setClickListener(this);
+        binding.setClickListener(binding.emailSignInButton);
 
-        loginViewModel = ViewModelProviders.of(LoginActivity.this).get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
-        loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
+         loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
             @Override
             public void onChanged(@Nullable List<UserTable> data) {
                 try {
-                    binding.email.setText((Objects.requireNonNull(data).get(0).getEmail()));
+                    binding.email.setText((Objects.requireNonNull((data).get(0).getEmail())));
                     binding.password.setText((Objects.requireNonNull(data.get(0).getPassword())));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
+        binding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+//        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
+//            }
+//        });
+    }
+    // TODO: Need to implement this or rethink the design a bit.
+    @Override
+    public void onClick(Button button) {
+        attemptLogin();
     }
 
-    /** TODO: Auth process. Hashing as well, I suppose.
-     * Attempts to log the user in.
-     *
-     * @param view  The view
+    /**
+     * Attempts to sign in or register the account specified by the login form.
+     * If there are form errors (invalid email, missing fields, etc.), the
+     * errors are presented and no actual login attempt is made.
      */
-    @Override
-    public void onClick(View view) {
-
-        String strEmail = binding.email.getText().toString().trim();
-        String strPassword = binding.password.getText().toString().trim();
-
-        UserTable data = new UserTable();
-        // TODO: Use the go-to email regex online as verification.
-        if (TextUtils.isEmpty(strEmail)) {
-            binding.email.setError("Please Enter Your E-mail Address");
+    private void attemptLogin() {
+        if (mAuthTask != null) {
+            return;
         }
-        // TODO: make some kind of minimum password requirements.
-        else if (TextUtils.isEmpty(strPassword)) {
-            binding.email.setError("Please Enter Your Password");
-        }
-        else {
-            data.setEmail(strEmail);
-            data.setPassword(strPassword);
-            loginViewModel.insert(data);
-            // Here we start making the currently logged in User available globally.
-            UserTable loggedInUser = loginViewModel.getCurrentUser(strEmail).getValue();
-            // TODO: Handle null pointer case.
-            int userId = loggedInUser.getId();
-            String userEmail = loggedInUser.getEmail();
-            String userPassword = loggedInUser.getPassword();
-            // Set the value for the myUser globally available variable.
-            myUser = new User(userId, userEmail, userPassword);
+        // Reset errors.
+        binding.email.setError(null);
+        binding.password.setError(null);
+
+        // Store values at the time of the login attempt.
+        String email = binding.email.getText().toString();
+        String password = binding.password.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            binding.password.setError(getString(R.string.error_invalid_password));
+            focusView = binding.password;
+            cancel = true;
         }
 
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            binding.email.setError(getString(R.string.error_field_required));
+            focusView = binding.email;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            binding.email.setError(getString(R.string.error_invalid_email));
+            focusView = binding.email;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            showProgress(true);
+            mAuthTask = new UserLoginTask(email, password, this);
+            mAuthTask.execute();
+        }
+    }
+
+    /**
+     * Validates an inputted email.
+     *
+     * @param emailStr the email str
+     * @return the boolean
+     */
+    public static boolean isEmailValid(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
+            binding.loginProgress.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
+            binding.loginForm.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
+            binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    /** TODO: figure out this leakage bullshit
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mEmail;
+        private final String mPassword;
+        private final Context mContext;
+
+        UserLoginTask(String email, String password, Context context) {
+            mEmail = email;
+            mPassword = password;
+            mContext = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            UserTable currentUser = loginViewModel.getCurrentUser(mEmail).getValue();
+            if (currentUser == null) {
+                return false;
+            }
+            return currentUser.getId() > 0;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            showProgress(false);
+
+            if (success) {
+                UserTable currentUser = loginViewModel.getCurrentUser(mEmail).getValue();
+                if (currentUser.getId() > 0){
+                    finish();
+                    Intent myIntent = new Intent(mContext, GameChoiceActivity.class);
+                    startActivity(myIntent);
+                } else {
+                    DialogInterface.OnClickListener dialogClickListener =
+                            new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    try{
+                                        finish();
+                                        // Setting up the arguments for
+                                        // creating myUser and the User Table.
+                                        UserTable newUser = new UserTable();
+                                        newUser.setEmail(mEmail);
+                                        newUser.setPassword(mPassword);
+
+                                        loginViewModel.insert(newUser);
+                                        // Retrieve the user we just added.
+                                        // This lets us get the user's id.
+                                        int myUserId = loginViewModel.getCurrentUser(mEmail)
+                                                .getValue().getId();
+                                        myUser = new User(myUserId, mEmail, mPassword);
+
+                                        Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
+                                        startActivity(myIntent);
+                                    } finally {
+                                        System.out.println("temp");     // TODO: something here
+                                    }
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    binding.password.setError(getString(R.string.error_incorrect_password));
+                                    binding.password.requestFocus();
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
+                    builder.setMessage(R.string.confirm_registry).setPositiveButton(R.string.yes, dialogClickListener)
+                            .setNegativeButton(R.string.no, dialogClickListener).show();
+                }
+            } else {
+                binding.password.setError(getString(R.string.error_incorrect_password));
+                binding.password.requestFocus();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            showProgress(false);
+        }
     }
 }
