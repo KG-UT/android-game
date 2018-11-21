@@ -46,7 +46,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boardManager = new SlidingTileBoardManager();
-        saveToFile(TEMP_SAVE_FILENAME);
+        //saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_sliding_tile_starting_);
         addScoreboardButtonListener();
@@ -76,9 +76,9 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
-                makeToastLoadedText();
+//                loadFromFile(SAVE_FILENAME);
+//                saveToFile(TEMP_SAVE_FILENAME);
+//                makeToastLoadedText();
                 switchToSettings();
             }
         });
@@ -185,7 +185,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
+                //loadFromFile(SAVE_FILENAME);
                 Intent tmp = new Intent(SlidingTileStartingActivity.this, SlidingTileActivity.class);
 
                 HashMap<String, Object> settings = new HashMap<>();

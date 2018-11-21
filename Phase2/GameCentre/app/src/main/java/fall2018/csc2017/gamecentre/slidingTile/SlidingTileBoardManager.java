@@ -15,12 +15,10 @@ import fall2018.csc2017.gamecentre.Tile;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class SlidingTileBoardManager extends BoardManager {
-
     /**
      * A stack of moves made, for move reversals.
      */
     private Stack<int[]> stackOfMoves = new Stack<>();
-
 
     /**
      * The score.
@@ -58,8 +56,8 @@ public class SlidingTileBoardManager extends BoardManager {
         }
         tiles.add(new Tile(Tile.BLANK_ID));
 
-        shuffle(tiles);
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
+        shuffle();
     }
 
     /**
@@ -126,18 +124,18 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @param tiles The tiles to be shuffled.
      */
-    private void shuffle(List tiles){
+    private void shuffle(){
         int NUM_RANDOM_MOVES = 30;
         for (int i=0; i < NUM_RANDOM_MOVES; i++){
-            makeRandomMove(tiles);
+            makeRandomMove();
         }
     }
 
     /* From the valid moves available, makes a random move.
      *
      */
-    private void makeRandomMove(List tiles){
-        ArrayList<Integer> validMoves = getValidMoves(tiles);
+    private void makeRandomMove(){
+        ArrayList<Integer> validMoves = getValidMoves();
         Random randomNumGenerator = new Random();
         int moveIndex = randomNumGenerator.nextInt(validMoves.size());
         hiddenMove(validMoves.get(moveIndex));
@@ -146,10 +144,9 @@ public class SlidingTileBoardManager extends BoardManager {
     /* Get an ArrayList of valid moves.
      *
      */
-    private ArrayList<Integer> getValidMoves(List tiles){
-        int numTiles = tiles.size();
+    private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
-        for (int position=0; position<numTiles; position++){
+        for (int position=0; position<getBoard().numTiles(); position++){
             if (isValidTap(position)){
                 validMoves.add(position);
             }
