@@ -23,7 +23,6 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileEndActivity;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
 
 /**
