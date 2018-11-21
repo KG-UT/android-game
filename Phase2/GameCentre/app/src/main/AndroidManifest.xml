@@ -30,7 +30,6 @@
         <activity android:name=".games.SlidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".games.SlidingTile.SlidingTileStartingActivity" />
         <activity android:name=".games.SlidingTile.SlidingTileActivity" />
-        <activity android:name=".app.GameChoiceActivity"/>
         <activity android:name=".games.TicTacToe.TicTacToeStartingActivity"/>
         <activity android:name=".games.TicTacToe.TicTacToeSettingsActivity" />
         <activity android:name=".games.TicTacToe.TicTacToeActivity"/>
