@@ -56,7 +56,12 @@ class TicTacToeBoardManager extends BoardManager {
     public TicTacToeBoardManager(int numRows, int numCols) {
         NUM_COLS = numCols;
         NUM_ROWS = numRows;
-        resetBoard();
+        List<TicTacToeTile> tiles = new ArrayList<>();
+        final int numTiles = NUM_COLS * NUM_ROWS;
+        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+            tiles.add(new TicTacToeTile());
+        }
+        setBoard(new TicTacToeBoard(NUM_ROWS, NUM_COLS, tiles));
     }
 
     /**
@@ -66,20 +71,6 @@ class TicTacToeBoardManager extends BoardManager {
     public TicTacToeBoardManager(Board board) {
         super(board);
     }
-
-    /**
-     * Reset the tic tac toe board as blank
-     */
-    public void resetBoard() {
-        List<TicTacToeTile> tiles = new ArrayList<>();
-        final int numTiles = NUM_COLS * NUM_ROWS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new TicTacToeTile());
-        }
-
-        setBoard(new TicTacToeBoard(NUM_ROWS, NUM_COLS, tiles));
-    }
-
 
     /**
      * Return all blank locations on the tic tac toe board
