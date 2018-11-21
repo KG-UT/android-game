@@ -77,7 +77,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "GameCentre")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
+                            .addMigrations(MIGRATION_1_2).build();
                 }
             }
         }
@@ -87,21 +87,12 @@ public abstract class AppDatabase extends RoomDatabase {
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("DELETE TABLE `user` (`id` INTEGER, "
-                    + "`name` TEXT, PRIMARY KEY(`uid`))");
+            database.execSQL("DROP TABLE `user`");
+            database.execSQL("CREATE TABLE IF NOT EXISTS" +
+                    " `LoginDetails` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                    + "`Email` TEXT, `Password` TEXT)");
         }
     };
-
-    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE Book "
-                    + " ADD COLUMN pub_year INTEGER");
-        }
-    };
-
-Room.databaseBuilder(getApplicationContext(), MyDb.class, "database-name")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
 
 
 
