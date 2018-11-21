@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 <<<<<<< HEAD
-import fall2018.csc2017.gamecentre.Games.SlidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.games.SlidingTile.SlidingTileStartingActivity;
 ||||||| merged common ancestors
 import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileStartingActivity;
 =======

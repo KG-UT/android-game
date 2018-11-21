@@ -14,8 +14,8 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 
 <<<<<<< HEAD
-import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.Games.SlidingTile.SlidingTileActivity;
+import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.games.SlidingTile.SlidingTileActivity;
 ||||||| merged common ancestors
 import fall2018.csc2017.gamecentre.SlidingTile.SlidingTileActivity;
 
@@ -24,7 +24,6 @@ import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileActivity;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 >>>>>>> master
 
 /**

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".App.LoginActivity"
+            android:name=".app.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
 <<<<<<< HEAD
-        <activity android:name=".App.GameChoiceActivity"/>
-        <activity android:name=".Games.SlidingTile.SlidingTileGameScoreboardActivity" />
-        <activity android:name=".Games.SlidingTile.SlidingTilesSettingsActivity" />
-        <activity android:name=".Games.SlidingTile.SlidingTileStartingActivity" />
-        <activity android:name=".Games.SlidingTile.SlidingTileActivity" />
+        <activity android:name=".app.GameChoiceActivity"/>
+        <activity android:name=".games.SlidingTile.SlidingTileGameScoreboardActivity" />
+        <activity android:name=".games.SlidingTile.SlidingTilesSettingsActivity" />
+        <activity android:name=".games.SlidingTile.SlidingTileStartingActivity" />
+        <activity android:name=".games.SlidingTile.SlidingTileActivity" />
 ||||||| merged common ancestors
-        <activity android:name=".App.GameChoiceActivity"/>
+        <activity android:name=".app.GameChoiceActivity"/>
         <activity android:name=".SlidingTile.SlidingTileGameScoreboardActivity" />
         <activity android:name=".SlidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".SlidingTile.SlidingTileStartingActivity" />
@@ -40,10 +40,10 @@
 =======
         <activity android:name=".app.GameChoiceActivity"/>
 
-        <activity android:name=".Games.TicTacToe.TicTacToeStartingActivity"/>
-        <activity android:name=".Games.TicTacToe.TicTacToeSettingsActivity" />
-        <activity android:name=".Games.TicTacToe.TicTacToeActivity"/>
-        <activity android:name=".Games.TicTacToe.TicTacToeGameScoreboardActivity"/>
+        <activity android:name=".games.TicTacToe.TicTacToeStartingActivity"/>
+        <activity android:name=".games.TicTacToe.TicTacToeSettingsActivity" />
+        <activity android:name=".games.TicTacToe.TicTacToeActivity"/>
+        <activity android:name=".games.TicTacToe.TicTacToeGameScoreboardActivity"/>
 
         <activity android:name=".slidingTile.SlidingTileGameScoreboardActivity" />
         <activity android:name=".slidingTile.SlidingTilesSettingsActivity" />
@@ -52,8 +52,8 @@
 >>>>>>> master
         <activity android:name=".SavedGamesView"/>
 <<<<<<< HEAD
-        <activity android:name=".Games.SlidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".Games.SlidingTile.SlidingTileUserScoreboardActivity"></activity>
+        <activity android:name=".games.SlidingTile.SlidingTileEndActivity"/>
+        <activity android:name=".games.SlidingTile.SlidingTileUserScoreboardActivity"></activity>
 ||||||| merged common ancestors
         <activity android:name=".SlidingTile.SlidingTileEndActivity"/>
         <activity android:name=".SlidingTile.SlidingTileUserScoreboardActivity"></activity>

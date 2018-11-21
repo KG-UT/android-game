@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD
-import fall2018.csc2017.gamecentre.Database.Entity.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
 ||||||| merged common ancestors
 import static org.junit.Assert.*;
 =======
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
 
-import static org.junit.Assert.*;
 >>>>>>> master
 
 /**
