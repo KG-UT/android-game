@@ -45,6 +45,24 @@ public class UserRepository implements AsyncUserResult {
     }
 
     /**
+     * Gets the user currently logged in for the view models.
+     *
+     * @return the current user
+     */
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * Gets all the users in the database for the view models.
+     *
+     * @return the all users
+     */
+    public MutableLiveData<List<User>> getAllUsers() {
+        return allUsers;
+    }
+
+    /**
      * Insert a user into the database.
      *
      * @param user the user
@@ -67,7 +85,7 @@ public class UserRepository implements AsyncUserResult {
    /**
     * Stores all users in the database into allUsers.
     */
-   public void getAllUsers() {
+   public void getUsers() {
         queryAsyncTask task = new queryAsyncTask(userDao);
         task.delegate = this;
         task.execute();
@@ -77,6 +95,9 @@ public class UserRepository implements AsyncUserResult {
     public void asyncFinished(User user) {
         currentUser.setValue(user);
     }
+
+    @Override
+    public void asyncFinished(List<User> users) {allUsers.setValue(users);}
 
     /**
      * The async task for getting all user operations.
@@ -110,7 +131,7 @@ public class UserRepository implements AsyncUserResult {
 
         @Override
         protected void onPostExecute(List<User> users) {
-            delegate.allUsers.setValue(users);
+            delegate.asyncFinished(users);
         }
 
         /**

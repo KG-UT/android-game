@@ -23,8 +23,11 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(Application application) {
         super(application);
+        // The user repository
         userRepository = new UserRepository(application);
+        // Get all users and the current user.
         allUsers = userRepository.getAllUsers();
+        currentUser = userRepository.getCurrentUser();
 
     }
 }
