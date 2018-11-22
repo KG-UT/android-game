@@ -37,6 +37,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * The score.
      */
+    @Ignore
     private int boardScore = 0;
 
     /**

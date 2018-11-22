@@ -42,6 +42,7 @@ abstract public class BoardManager implements Serializable {
     /**
      * The score.
      */
+    @Ignore
     private int boardScore = 0;
     // TODO: temp
     public int getUndosLeft() {
