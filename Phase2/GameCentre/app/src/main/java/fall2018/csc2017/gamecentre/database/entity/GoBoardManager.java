@@ -104,8 +104,8 @@ public class GoBoardManager extends BoardManager {
     }
 
     @Override
-    public int getScore() {
-        return super.getScore();
+    public int getBoardScore() {
+        return super.getBoardScore();
     }
 
     @Override

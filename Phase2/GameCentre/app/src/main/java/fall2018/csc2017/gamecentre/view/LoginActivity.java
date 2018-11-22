@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
-         loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
+        loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
             @Override
             public void onChanged(@Nullable List<UserTable> data) {
                 try {

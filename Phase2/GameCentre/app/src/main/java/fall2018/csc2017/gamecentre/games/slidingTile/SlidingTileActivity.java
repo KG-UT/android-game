@@ -153,7 +153,7 @@ public class SlidingTileActivity extends GameActivity {
      * @Returns the score.
      */
     public int getScore(){
-        return boardManager.getScore();
+        return boardManager.getBoardScore();
     }
 
     /*
@@ -161,7 +161,7 @@ public class SlidingTileActivity extends GameActivity {
      */
     private void updateScoreText(){
         TextView score = findViewById(R.id.Score);
-        String textToSetTo = "Score: " + Integer.toString(boardManager.getScore());
+        String textToSetTo = "Score: " + Integer.toString(boardManager.getBoardScore());
         score.setText(textToSetTo);
     }
 
@@ -248,7 +248,7 @@ public class SlidingTileActivity extends GameActivity {
     public void update(Observable o, Object arg) {
         display();
         if (boardManager.puzzleSolved()){
-            int score = boardManager.getScore();
+            int score = boardManager.getBoardScore();
             Intent tmp = new Intent(SlidingTileActivity.this, SlidingTileEndActivity.class);
             tmp.putExtra("SCORE", score);
             startActivity(tmp);
