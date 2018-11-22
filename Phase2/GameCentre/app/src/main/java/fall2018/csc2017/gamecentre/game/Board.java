@@ -50,7 +50,6 @@ abstract public class Board extends Observable implements Serializable, Iterable
                 this.items[row][col] = iter.next();
             }
         }
-
     }
 
     @NonNull
@@ -107,6 +106,7 @@ abstract public class Board extends Observable implements Serializable, Iterable
      * Return the number of items on the board.
      * @return the number of items on the board
      */
+
     public int numObjects() {
         return NUM_COLS * NUM_ROWS;
     }

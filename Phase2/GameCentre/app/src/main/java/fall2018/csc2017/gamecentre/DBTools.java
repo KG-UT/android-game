@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileSavedGame;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileSavedGame;
 
 /**
  * This class handles all database matters from reading to updating information.
@@ -134,16 +134,16 @@ public class DBTools extends SQLiteOpenHelper {
      * @param queryValues User is passed in by LoginActivity.
      * @return The User just inserted into the database.
      */
-    public User insertUser(User queryValues) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, queryValues.getUsername());
-        values.put(COLUMN_PASSWORD, queryValues.getPassword());
-        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
-        database.close();
-
-        return queryValues;
-    }
+//    public User insertUser(User queryValues) {
+//        SQLiteDatabase database = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(COLUMN_USERNAME, queryValues.getUsername());
+//        values.put(COLUMN_PASSWORD, queryValues.getPassword());
+//        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
+//        database.close();
+//
+//        return queryValues;
+//    }
 
     /**
      * Retrieves the specified User from the database.
@@ -151,59 +151,59 @@ public class DBTools extends SQLiteOpenHelper {
      * @param username the username of the user we want.
      * @return the specified user.
      */
-    public User getUser(String username) {
-        String query = "SELECT " + COLUMN_USER_ID + ", "
-                + COLUMN_PASSWORD + " FROM "
-                + TABLE_LOGINS + " WHERE "
-                + COLUMN_USERNAME + " = '" + username + "'";
-        User myUser = new User(0, username, "");
-        SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            // Column int id's.
-            int userIdColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USER_ID);
-            int userPasswordColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_PASSWORD);
-
-            do {
-                myUser.setUserId(cursor.getLong(userIdColumnIdx));
-                myUser.setPassword(cursor.getString(userPasswordColumnIdx));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return myUser;
-    }
+//    public User getUser(String username) {
+//        String query = "SELECT " + COLUMN_USER_ID + ", "
+//                + COLUMN_PASSWORD + " FROM "
+//                + TABLE_LOGINS + " WHERE "
+//                + COLUMN_USERNAME + " = '" + username + "'";
+//        User myUser = new User(0, username, "");
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        Cursor cursor = database.rawQuery(query, null);
+//
+//        if (cursor.moveToFirst()) {
+//            // Column int id's.
+//            int userIdColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USER_ID);
+//            int userPasswordColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_PASSWORD);
+//
+//            do {
+//                myUser.setUserId(cursor.getLong(userIdColumnIdx));
+//                myUser.setPassword(cursor.getString(userPasswordColumnIdx));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        return myUser;
+//    }
 
     /**
      * Retrieves an ArrayList of all Users in the database.
      *
      * @return ArrayList<User> of Users.
      */
-    public ArrayList<User> getAllUsers() {
-        String query = "SELECT * FROM " + TABLE_LOGINS;
-        ArrayList<User> allUsers = new ArrayList<>();
-        SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            // Assign the correct column index for each query part.
-            int userIdColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USER_ID);
-            int usernameColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USERNAME);
-            int passwordColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_PASSWORD);
-
-            do {
-                // Access the current row's user info and store it.
-                long currentUserId = cursor.getLong(userIdColumnIdx);
-                String currentUsername = cursor.getString(usernameColumnIdx);
-                String currentPassword = cursor.getString(passwordColumnIdx);
-
-                User currentUser = new User(currentUserId, currentUsername, currentPassword);
-                allUsers.add(currentUser);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return allUsers;
-    }
+//    public ArrayList<User> getAllUsers() {
+//        String query = "SELECT * FROM " + TABLE_LOGINS;
+//        ArrayList<User> allUsers = new ArrayList<>();
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        Cursor cursor = database.rawQuery(query, null);
+//
+//        if (cursor.moveToFirst()) {
+//            // Assign the correct column index for each query part.
+//            int userIdColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USER_ID);
+//            int usernameColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_USERNAME);
+//            int passwordColumnIdx = cursor.getColumnIndexOrThrow(COLUMN_PASSWORD);
+//
+//            do {
+//                // Access the current row's user info and store it.
+//                long currentUserId = cursor.getLong(userIdColumnIdx);
+//                String currentUsername = cursor.getString(usernameColumnIdx);
+//                String currentPassword = cursor.getString(passwordColumnIdx);
+//
+//                User currentUser = new User(currentUserId, currentUsername, currentPassword);
+//                allUsers.add(currentUser);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        return allUsers;
+//    }
 
     /**
      * Deletes the User from the database.
@@ -231,17 +231,17 @@ public class DBTools extends SQLiteOpenHelper {
      * @param queryValues the query values from the User object representing the current user.
      * @return the numbeer of updated rows.
      */
-    public int updateUserPassword (User queryValues) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, queryValues.getUsername());
-        values.put(COLUMN_PASSWORD, queryValues.getPassword());
-        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
-        database.close();
-
-        return database.update(TABLE_LOGINS, values, COLUMN_USER_ID + " = ?",
-                                new String[] {String.valueOf(queryValues.getUserId())});
-    }
+//    public int updateUserPassword (User queryValues) {
+//        SQLiteDatabase database = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(COLUMN_USERNAME, queryValues.getUsername());
+//        values.put(COLUMN_PASSWORD, queryValues.getPassword());
+//        queryValues.setUserId(database.insert(TABLE_LOGINS, null, values));
+//        database.close();
+//
+//        return database.update(TABLE_LOGINS, values, COLUMN_USER_ID + " = ?",
+//                new String[] {String.valueOf(queryValues.getUserId())});
+//    }
 
     /**
      * Inserts the filepath into the database for the current game being played and associates it
@@ -297,17 +297,17 @@ public class DBTools extends SQLiteOpenHelper {
      * @return the number of updated rows.
      */
     public int updateSlidingTileSavedGamePath (SlidingTileSavedGame queryValues) {
-       SQLiteDatabase database = this.getWritableDatabase();
-       ContentValues values = new ContentValues();
-       values.put(COLUMN_ST_OWNER, queryValues.getOwner());
-       values.put(COLUMN_ST_PATH, queryValues.getSlidingTileSavedGamePath());
-       queryValues.set_id(database.insert(TABLE_SLIDING_TILE_SAVED, null, values));
-       database.close();
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ST_OWNER, queryValues.getOwner());
+        values.put(COLUMN_ST_PATH, queryValues.getSlidingTileSavedGamePath());
+        queryValues.set_id(database.insert(TABLE_SLIDING_TILE_SAVED, null, values));
+        database.close();
 
-       String whereClause = COLUMN_ST_ID + "=?";
-       String[] whereArgs = new String[] { String.valueOf(queryValues.get_id()) };
+        String whereClause = COLUMN_ST_ID + "=?";
+        String[] whereArgs = new String[] { String.valueOf(queryValues.get_id()) };
 
-       return database.update(TABLE_SLIDING_TILE_SAVED, values,whereClause, whereArgs);
+        return database.update(TABLE_SLIDING_TILE_SAVED, values,whereClause, whereArgs);
     }
 
     /**
@@ -383,5 +383,4 @@ public class DBTools extends SQLiteOpenHelper {
 
     }
 }
-
 

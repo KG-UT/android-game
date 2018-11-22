@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import fall2018.csc2017.gamecentre.game.BoardManager;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
 
 
 public class MovementController {
