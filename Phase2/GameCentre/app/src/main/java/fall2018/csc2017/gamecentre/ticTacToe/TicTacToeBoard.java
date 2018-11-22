@@ -3,13 +3,12 @@ package fall2018.csc2017.gamecentre.ticTacToe;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.Tile;
 
 /**
  * The tic tac toe board.
  */
 public class TicTacToeBoard extends Board {
-    TicTacToeBoard(int rows, int cols, List<TicTacToeTile> tiles){
+    public TicTacToeBoard(int rows, int cols, List<TicTacToeTile> tiles){
         super(rows, cols, tiles);
     }
 
