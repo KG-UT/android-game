@@ -22,8 +22,8 @@ public class LoginViewModel extends AndroidViewModel {
         getAllData = loginRepository.getAllData();
     }
 
-    public void insert(UserTable data) {
-        loginRepository.insertData(data);
+    public int insert(UserTable data) {
+        return loginRepository.insertData(data);
     }
 
     public LiveData<List<UserTable>> getAllUsers() {

@@ -5,8 +5,11 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import fall2018.csc2017.gamecentre.database.dao.LoginDao;
+import fall2018.csc2017.gamecentre.database.entity.User;
 import fall2018.csc2017.gamecentre.database.entity.UserTable;
 
 /**
@@ -19,6 +22,8 @@ import fall2018.csc2017.gamecentre.database.entity.UserTable;
 public class LoginRepository {
     private LoginDao loginDao;
     private LiveData<List<UserTable>> allData;
+    private static LiveData<UserTable> currentUser;
+    private static int insertedUserId;
 
     public LoginRepository(Application application) {
         AppDatabase db = AppDatabase.getAppDatabase(application);
@@ -35,11 +40,14 @@ public class LoginRepository {
     }
 
     public LiveData<UserTable> getCurrentUser(String email) {
-        return loginDao.getUserTableByEmail(email);
+       new LoginGetUser(loginDao).execute(email);
+       return currentUser;
     }
 
-    public void insertData(UserTable data) {
+    public int insertData(UserTable data) {
         new LoginInsertion(loginDao).execute(data);
+        // Cast to int for creation of User.
+        return insertedUserId;
     }
 
     private static class LoginInsertion extends AsyncTask<UserTable, Void, Void> {
@@ -54,9 +62,22 @@ public class LoginRepository {
 
         @Override
         protected Void doInBackground(UserTable... data) {
-
-            loginDao.insertDetails(data[0]);
+            insertedUserId = (int) loginDao.insertDetails(data[0]);
             return null;
+        }
+    }
+
+    private static class LoginGetUser extends AsyncTask<String, Void, Void> {
+        private LoginDao loginDao;
+
+        private LoginGetUser(LoginDao loginDao) {
+            this.loginDao = loginDao;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+             currentUser = loginDao.getUserTableByEmail(strings[0]);
+             return null;
         }
     }
 }

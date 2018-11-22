@@ -9,6 +9,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.databinding.DataBindingUtil;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -27,6 +29,8 @@ import android.widget.TextView;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -160,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password, this);
-            mAuthTask.execute();
+            mAuthTask.execute((Void) null);
         }
     }
 
@@ -234,23 +238,30 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            UserTable currentUser = loginViewModel.getCurrentUser(mEmail).getValue();
-            if (currentUser == null) {
+            LiveData<UserTable> currentUserTable = loginViewModel.getCurrentUser(mEmail);
+            if (currentUserTable == null) {
                 return true;
             }
-            return currentUser.getId() > 0;
+            return currentUserTable.getValue().getId() > 0;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
             showProgress(false);
 
             if (success) {
                 LiveData<UserTable> currentUser = loginViewModel.getCurrentUser(mEmail);
-                if (currentUser.getValue().getId() > 0) {
-                    finish();
+                if (currentUser.getValue() != null) {
+                    // Retrieve the user since they're already in the database.
+                    // This lets us get the user's id without worry of null pointer exceptions.
+                    int myUserId = currentUser.getValue().getId();
+                    myUser = new User(myUserId, mEmail, mPassword);
+
                     Intent myIntent = new Intent(mContext, GameChoiceActivity.class);
-                    startActivity(myIntent);
+                    LoginActivity.this.startActivity(myIntent);
+                    finish();
+
                 } else {
                     DialogInterface.OnClickListener dialogClickListener =
                             new DialogInterface.OnClickListener() {
@@ -258,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    try{
+                                    try {
                                         finish();
                                         // Setting up the arguments for
                                         // creating myUser and the User Table.
@@ -266,15 +277,12 @@ public class LoginActivity extends AppCompatActivity implements Listener {  // T
                                         newUser.setEmail(mEmail);
                                         newUser.setPassword(mPassword);
 
-                                        loginViewModel.insert(newUser);
-                                        // Retrieve the user we just added.
-                                        // This lets us get the user's id.
-                                        int myUserId = loginViewModel.getCurrentUser(mEmail)
-                                                .getValue().getId();
+                                        int myUserId = loginViewModel.insert(newUser);
+
                                         myUser = new User(myUserId, mEmail, mPassword);
 
                                         Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
-                                        startActivity(myIntent);
+                                        LoginActivity.this.startActivity(myIntent);
                                     } finally {
                                         System.out.println("temp");     // TODO: something here
                                     }

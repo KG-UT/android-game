@@ -68,7 +68,7 @@ public abstract class AppDatabase extends RoomDatabase {
      * @param context the context
      * @return the application database
      */
-    public static AppDatabase getAppDatabase(Context context) {
+    static AppDatabase getAppDatabase(Context context) {
 
         if (INSTANCE == null) {
             // Synchronize the database.
@@ -84,12 +84,12 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("DROP TABLE `user`");
             database.execSQL("CREATE TABLE IF NOT EXISTS" +
-                    " `LoginDetails` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                    " `LoginDetails` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "`Email` TEXT, `Password` TEXT)");
         }
     };
