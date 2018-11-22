@@ -70,8 +70,9 @@ public class SlidingTileBoardManager extends BoardManager {
         }
         tiles.add(new Tile(Tile.BLANK_ID));
 
-        shuffle(tiles);
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
+        shuffle(tiles);
+
     }
 
     /**
