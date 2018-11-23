@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+import fall2018.csc2017.gamecentre.Tile;
 import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.CustomAdapter;
@@ -127,7 +128,12 @@ public class SlidingTileActivity extends GameActivity {
                 Button tmp = new Button(context);
                 tmp.setText(board.getTile(row, col).getDisplayNumber());
                 tmp.setTextSize(64);
-                tmp.setBackgroundColor(Color.parseColor("#ffffff"));
+                if (board.getTile(row, col).getId() == Tile.PEPE_ID) {
+                    tmp.setBackgroundResource(R.drawable.feels_good_pepe);
+                } else {
+                    tmp.setBackgroundResource(R.drawable.tile_16);
+                    tmp.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
                 this.tileButtons.add(tmp);
             }
         }
@@ -142,7 +148,13 @@ public class SlidingTileActivity extends GameActivity {
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();
             int col = nextPos % Board.getNumCols();
-            b.setText(board.getTile(row, col).getDisplayNumber());
+            if (board.getTile(row, col).getId() == Tile.PEPE_ID) {
+                b.setBackgroundResource(R.drawable.feels_good_pepe);
+                b.setText("");
+            } else {
+                b.setBackgroundResource(R.drawable.tile_16);
+                b.setText(board.getTile(row, col).getDisplayNumber());
+            }
             nextPos++;
         }
         saveToFile(SlidingTileStartingActivity.SAVE_FILENAME);

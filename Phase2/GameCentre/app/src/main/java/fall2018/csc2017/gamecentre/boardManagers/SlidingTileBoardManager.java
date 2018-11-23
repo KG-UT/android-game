@@ -57,7 +57,7 @@ public class SlidingTileBoardManager extends BoardManager {
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
-        tiles.add(new Tile(Tile.BLANK_ID));
+        tiles.add(new Tile(Tile.PEPE_ID));
 
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
         shuffle();
@@ -103,7 +103,7 @@ public class SlidingTileBoardManager extends BoardManager {
      * @return An array representing the row and col of the nearest blank space
      */
     private int[] nearestBlank(int row, int col) {
-        int blankId = Tile.BLANK_ID;
+        int pepeId = Tile.PEPE_ID;
         SlidingTileBoard board = getBoard();
 
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
@@ -111,13 +111,13 @@ public class SlidingTileBoardManager extends BoardManager {
         Tile left = col == 0 ? null : board.getTile(row, col - 1);
         Tile right = col == Board.getNumCols() - 1 ? null : board.getTile(row, col + 1);
 
-        if (below != null && below.getId() == blankId) {
+        if (below != null && below.getId() == pepeId) {
             return new int[] {row + 1, col};
-        } else if (above != null && above.getId() == blankId) {
+        } else if (above != null && above.getId() == pepeId) {
             return new int[] {row - 1, col};
-        }  else if (left != null && left.getId() == blankId) {
+        }  else if (left != null && left.getId() == pepeId) {
             return new int[] {row, col - 1};
-        } else if (right != null && right.getId() == blankId) {
+        } else if (right != null && right.getId() == pepeId) {
             return new int[] {row, col + 1};
         } else {
             return null;
