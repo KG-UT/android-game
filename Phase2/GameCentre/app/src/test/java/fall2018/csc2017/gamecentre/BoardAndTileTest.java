@@ -36,10 +36,10 @@ public class BoardAndTileTest {
         List<Tile> tiles = new ArrayList<>();
        // final int numTiles = boardManager.getBoard().getNumRows() * boardManager.getBoard().getNumCols();
         final int numTiles = 4*4;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+        for (int tileNum = 0; tileNum < numTiles - 1; tileNum++) {
             tiles.add(new Tile(tileNum + 1, tileNum));
         }
-
+        tiles.add(new Tile(Tile.BLANK_ID, 15));
         return tiles;
     }
 
@@ -92,9 +92,10 @@ public class BoardAndTileTest {
     public void testSwapLastTwo() {
         setUpCorrect();
         assertEquals(15, boardManager.getBoard().getTile(3, 2).getId());
-        assertEquals(16, boardManager.getBoard().getTile(3, 3).getId());
+        //we are always setting blankId to be 9999, since we cant
+        assertEquals(9999, boardManager.getBoard().getTile(3, 3).getId());
         boardManager.getBoard().swapTiles(3, 3, 3, 2);
-        assertEquals(16, boardManager.getBoard().getTile(3, 2).getId());
+        assertEquals(9999, boardManager.getBoard().getTile(3, 2).getId());
         assertEquals(15, boardManager.getBoard().getTile(3, 3).getId());
     }
 
@@ -104,9 +105,10 @@ public class BoardAndTileTest {
     @Test
     public void testIsValidTap() {
         setUpCorrect();
-        assertEquals(false, boardManager.isValidTap(11));
+        assertEquals(true, boardManager.isValidTap(11));
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
+
 }
 
