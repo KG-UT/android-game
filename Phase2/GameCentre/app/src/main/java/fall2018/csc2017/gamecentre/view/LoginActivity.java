@@ -213,7 +213,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         LoginActivity.this.startActivity(goToGamesIntent);
     }
 
-    /**
+    /** TODO: figure out what android studio is complaining about here. Not essential.
      * Validates the login / sign up form.
      *
      * @return the status of the form validation as a boolean.
@@ -246,7 +246,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         // User data change listener
         mDatabase.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
                 // Check for null
@@ -259,7 +259,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Log.e(TAG, "Failed to read user", error.toException());
             }
