@@ -1,8 +1,6 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
 
 /**
  * This is the object representation of a user stored in the database.

@@ -1,315 +1,208 @@
 package fall2018.csc2017.gamecentre.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.nfc.Tag;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.databinding.DataBindingUtil;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import fall2018.csc2017.gamecentre.R;
-// import fall2018.csc2017.gamecentre.dataBinding.Listener;    // TODO: Impliment this most likely
-import fall2018.csc2017.gamecentre.dataBinding.Listener;
-import fall2018.csc2017.gamecentre.database.entity.UserTable;
-import fall2018.csc2017.gamecentre.database.entity.User;
-import fall2018.csc2017.gamecentre.databinding.ActivityLoginBinding;
-import fall2018.csc2017.gamecentre.viewModel.LoginViewModel;
 
-import static android.Manifest.permission.READ_CONTACTS;
+// Code adapted from: https://github.com/firebase/quickstart-android/tree/master/auth/app/src/main/java/com/google/firebase/quickstart
 
-public class LoginActivity extends AppCompatActivity implements Listener {  // TODO: make this implement listener?
+/**
+ * The login activity.
+ */
+public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
 
-    /**
-     * Assigned to the correct user upon successful sign up / login.
-     */
-    public static User myUser;
+    private static final String TAG = "EmailPassword";
 
-    /**
-     * The login view model.
-     */
-    private LoginViewModel loginViewModel;
+    // Views
+    private EditText mEmailField;
+    private EditText mPasswordField;
 
-    // Adapted from: https://stackoverflow.com/questions/8204680/java-regex-email
-    /**
-     * The email validation regex.
-     */
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    // Auth
+    private FirebaseAuth mAuth;
 
-    /**
-     * The data binder for this activity and view.
-     */
-    private ActivityLoginBinding binding;
+    public FirebaseUser currentUser;
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login_firebase);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        // Views
+        mEmailField = findViewById(R.id.fieldEmail);
+        mPasswordField = findViewById(R.id.fieldPassword);
 
-        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        // Buttons
+        findViewById(R.id.emailSignInButton).setOnClickListener(this);
+        findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
+        findViewById(R.id.signOutButton).setOnClickListener(this);
+        findViewById(R.id.goToGamesButton).setOnClickListener(this);
 
-        loginViewModel.getAllUsers().observe(this, new Observer<List<UserTable>>() {
-            @Override
-            public void onChanged(@Nullable List<UserTable> data) {
-                try {
-                    binding.email.setText((Objects.requireNonNull((data).get(0).getEmail())));
-                    binding.password.setText((Objects.requireNonNull(data.get(0).getPassword())));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        // [START initialize_auth]
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
 
-        binding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
     }
-    // TODO: Need to implement this or rethink the design a bit.
+
+    private void updateUI(FirebaseUser user) {
+        hideProgressDialog();
+        if (user != null) {
+            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
+            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
+            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.goToGamesButton).setEnabled(!user.isEmailVerified());
+        } else {
+            findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
+            findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
+            findViewById(R.id.signedInButtons).setVisibility(View.GONE);
+        }
+    }
+
+    // [START on_start_check_user]
     @Override
-    public void onClick(Button button) {
-        attemptLogin();
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
+    // [END on_start_check_user]
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        if (mAuthTask != null) {
+    private void createAccount(String email, String password) {
+        Log.d(TAG, "createAccount:" + email);
+        if (!validateForm()) {
             return;
         }
-        // Reset errors.
-        binding.email.setError(null);
-        binding.password.setError(null);
 
-        // Store values at the time of the login attempt.
-        String email = binding.email.getText().toString();
-        String password = binding.password.getText().toString();
+        showProgressDialog();
 
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            binding.password.setError(getString(R.string.error_invalid_password));
-            focusView = binding.password;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            binding.email.setError(getString(R.string.error_field_required));
-            focusView = binding.email;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            binding.email.setError(getString(R.string.error_invalid_email));
-            focusView = binding.email;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, this);
-            mAuthTask.execute((Void) null);
-        }
-    }
-
-    /**
-     * Validates an inputted email.
-     *
-     * @param emailStr the email str
-     * @return the boolean
-     */
-    public static boolean isEmailValid(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return matcher.find();
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
-            binding.loginProgress.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
-            binding.loginForm.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            binding.loginForm.setVisibility(show ? View.VISIBLE : View.GONE);
-            binding.loginProgress.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
-    /** TODO: figure out this leakage bullshit
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-        private final Context mContext;
-
-        UserLoginTask(String email, String password, Context context) {
-            mEmail = email;
-            mPassword = password;
-            mContext = context;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            LiveData<UserTable> currentUserTable = loginViewModel.getCurrentUser(mEmail);
-            if (currentUserTable == null) {
-                return true;
-            }
-            return currentUserTable.getValue().getId() > 0;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                LiveData<UserTable> currentUser = loginViewModel.getCurrentUser(mEmail);
-                if (currentUser.getValue() != null) {
-                    // Retrieve the user since they're already in the database.
-                    // This lets us get the user's id without worry of null pointer exceptions.
-                    int myUserId = currentUser.getValue().getId();
-                    myUser = new User(myUserId, mEmail, mPassword);
-
-                    Intent myIntent = new Intent(mContext, GameChoiceActivity.class);
-                    LoginActivity.this.startActivity(myIntent);
-                    finish();
-
-                } else {
-                    DialogInterface.OnClickListener dialogClickListener =
-                            new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    try {
-                                        finish();
-                                        // Setting up the arguments for
-                                        // creating myUser and the User Table.
-                                        UserTable newUser = new UserTable();
-                                        newUser.setEmail(mEmail);
-                                        newUser.setPassword(mPassword);
-
-                                        int myUserId = loginViewModel.insert(newUser);
-
-                                        myUser = new User(myUserId, mEmail, mPassword);
-
-                                        Intent myIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
-                                        LoginActivity.this.startActivity(myIntent);
-                                    } finally {
-                                        System.out.println("temp");     // TODO: something here
-                                    }
-                                    break;
-
-                                case DialogInterface.BUTTON_NEGATIVE:
-                                    binding.password.setError(getString(R.string.error_incorrect_password));
-                                    binding.password.requestFocus();
-                                    break;
-                            }
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
                         }
-                    };
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
-                    builder.setMessage(R.string.confirm_registry).setPositiveButton(R.string.yes, dialogClickListener)
-                            .setNegativeButton(R.string.no, dialogClickListener).show();
-                }
-            } else {
-                binding.password.setError(getString(R.string.error_incorrect_password));
-                binding.password.requestFocus();
-            }
+                        // [START_EXCLUDE]
+                        hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END create_user_with_email]
+    }
+
+    private void signIn(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
+        if (!validateForm()) {
+            return;
         }
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
+        showProgressDialog();
+
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // [START_EXCLUDE]
+                        hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END sign_in_with_email]
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        updateUI(null);
+    }
+
+    private void goToGames() {
+        // Disable button
+        findViewById(R.id.goToGamesButton).setEnabled(false);
+
+        // Sets the current user.
+        currentUser = mAuth.getCurrentUser();
+        // Creates the intent to go to Game Choice Activity.
+        Intent goToGamesIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
+        LoginActivity.this.startActivity(goToGamesIntent);
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = mEmailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+            mEmailField.setError(null);
+        }
+
+        String password = mPasswordField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+        return valid;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.emailCreateAccountButton) {
+            createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+        } else if (i == R.id.emailSignInButton) {
+            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+        } else if (i == R.id.signOutButton) {
+            signOut();
+        } else if (i == R.id.goToGamesButton) {
+            goToGames();
         }
     }
 }

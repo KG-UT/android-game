@@ -1,6 +1,5 @@
 package fall2018.csc2017.gamecentre.game;
 
-import android.arch.persistence.room.Ignore;
 
 import java.io.Serializable;
 import java.util.Stack;
@@ -10,23 +9,16 @@ import java.util.Stack;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 abstract public class BoardManager implements Serializable {
-    /** TODO: add type converter?
+    /**
      * The board being managed.
      */
-    @Ignore
     protected Board board;
 
-    /** TODO: type converter?
+    /**
      * A stack of moves made, for move reversals.
      */
-    @Ignore
     private Stack<int[]> stackOfMoves = new Stack<>();
 
-    // TODO:  idk, take a look later
-    public void setScore(int score) {
-        this.boardScore = score;
-    }
-    // TODO come back
     public void setStackOfMoves(Stack<int[]> stackOfMoves) {
         this.stackOfMoves = stackOfMoves;
     }
@@ -42,13 +34,13 @@ abstract public class BoardManager implements Serializable {
     /**
      * The score.
      */
-    @Ignore
+
     private int boardScore = 0;
-    // TODO: temp
+
     public int getUndosLeft() {
         return undosLeft;
     }
-    // TODO: come back
+
     public Stack<int[]> getStackOfMoves() {
         return stackOfMoves;
     }

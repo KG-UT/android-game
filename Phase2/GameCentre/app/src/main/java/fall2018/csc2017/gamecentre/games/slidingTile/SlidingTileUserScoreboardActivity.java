@@ -15,7 +15,6 @@ import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.Scoreboard;
 import fall2018.csc2017.gamecentre.ScoreboardActivity;
 
-import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 // Adapted from https://stacktips.com/tutorials/android/android-listview-tutorial
 
@@ -91,7 +90,7 @@ public class SlidingTileUserScoreboardActivity extends ScoreboardActivity {
      * Returns a new sorted scoreboard that is filled with every user's scores
      */
     public Scoreboard setupScoreboard() {
-        List<Score> listOfScores = databaseTools.getUserSlidingTileScores(myUser.getUsername());
+        List<Score> listOfScores = databaseTools.getUserSlidingTileScores("temp");
         Scoreboard newScoreboard = new Scoreboard(listOfScores);
         newScoreboard.organizeScoreBoard();
         return newScoreboard;

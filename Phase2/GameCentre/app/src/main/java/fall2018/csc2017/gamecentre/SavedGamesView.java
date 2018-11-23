@@ -19,7 +19,6 @@ import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 
-import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 
 /**
@@ -35,7 +34,7 @@ public class SavedGamesView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_games_view);
-        ArrayList<Score> scores = database.getUserSlidingTileScores(myUser.getUsername());
+        ArrayList<Score> scores = database.getUserSlidingTileScores("temp");
         for (Score s : scores) {
             Log.d("TAG", "" + s.getUserScore());
         }

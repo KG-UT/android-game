@@ -1,6 +1,5 @@
 package fall2018.csc2017.gamecentre.games.ticTacToe;
 
-import android.arch.persistence.room.Entity;
 
 import java.util.List;
 
@@ -9,7 +8,6 @@ import fall2018.csc2017.gamecentre.game.Board;
 /**
  * The tic tac toe board.
  */
-@Entity(tableName = "tttGames")
 public class TicTacToeBoard extends Board {
     public TicTacToeBoard(int rows, int cols, List<TicTacToeTile> tiles){
         super(rows, cols, tiles);

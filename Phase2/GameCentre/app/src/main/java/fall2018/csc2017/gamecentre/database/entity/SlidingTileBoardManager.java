@@ -1,10 +1,5 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,34 +11,26 @@ import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
 
-import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-@Entity(tableName = "slidingTileBoards")
 public class SlidingTileBoardManager extends BoardManager {
 
-    @NonNull
-    @PrimaryKey
-    public String owner = myUser.getUsername();
 
     /**
      * A stack of moves made, for move reversals.
      */
-    @Ignore
     private Stack<int[]> stStackOfMoves = new Stack<>();
 
     /**
      * The score.
      */
-    @Ignore
     private int boardScore = 0;
 
     /**
      * The number of undos left.
      */
-    @Ignore
     private int undosLeft = 3;
 
     /**

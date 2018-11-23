@@ -10,8 +10,8 @@ import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
+import fall2018.csc2017.gamecentre.database.entity.User;
 
-import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 /**
  * The class responsible for handling the end-of-game behaviour for Sliding Tile games.
@@ -67,7 +67,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         long _id = 1;
-        Score theScore = new Score(_id, this.score, myUser);
+        Score theScore = new Score(_id, this.score, new User(42069, "temp", "temp"));
         database.insertSlidingTileScore(theScore);
     }
 }

@@ -1,21 +1,14 @@
 package fall2018.csc2017.gamecentre.database.entity;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-
 import fall2018.csc2017.gamecentre.games.go.GoBoard;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 
-import static fall2018.csc2017.gamecentre.view.LoginActivity.myUser;
 
 /**
  * Manages a Go Board by placing stones, checking for end-of-game conditions,
  * determining a winner, and handling taps.
  */
-@Entity(tableName = "goBoards")
 public class GoBoardManager extends BoardManager {
     // TODO: make this less garbage in formatting. Temporary.
     public String getOwner() {
@@ -33,14 +26,13 @@ public class GoBoardManager extends BoardManager {
     /**
      * The owner of this specific game of Go.
      */
-    @NonNull
-    @PrimaryKey
-    public String owner = myUser.getUsername();
 
-    /** TODO: Type converter?
+    public String owner = "temp";
+
+    /**
      * The Go board being managed.
      */
-    @Ignore
+
     private GoBoard board;
     // TODO: make better formatting
     public void setWhitePlayerAreaScore(int whitePlayerAreaScore) {
