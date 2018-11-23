@@ -2,7 +2,7 @@ package fall2018.csc2017.gamecentre.games.go;
 
 import android.os.Bundle;
 
-import fall2018.csc2017.gamecentre.SettingsActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;
 
 public class GoSettingsActivity extends SettingsActivity {
     @Override

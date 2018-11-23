@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.database.entity;
+package fall2018.csc2017.gamecentre;
 
 
 

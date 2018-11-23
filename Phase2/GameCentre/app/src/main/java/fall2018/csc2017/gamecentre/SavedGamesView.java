@@ -15,8 +15,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 
 

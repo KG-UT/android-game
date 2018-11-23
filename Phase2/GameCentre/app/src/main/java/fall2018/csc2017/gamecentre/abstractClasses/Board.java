@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.game;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 import android.support.annotation.NonNull;
 
@@ -8,8 +8,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-
-import fall2018.csc2017.gamecentre.Tile;
 
 /**
  * The items board.

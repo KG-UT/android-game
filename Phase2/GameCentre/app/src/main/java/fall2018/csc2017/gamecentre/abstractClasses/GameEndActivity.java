@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

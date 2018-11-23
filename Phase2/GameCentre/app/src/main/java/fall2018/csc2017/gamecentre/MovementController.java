@@ -3,7 +3,7 @@ package fall2018.csc2017.gamecentre;
 import android.content.Context;
 import android.widget.Toast;
 
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
 
 public class MovementController {

@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# From Firebase docs https://firebase.google.com/docs/database/android/start/
+-keepattributes Signature
+
+-keepclassmembers class com.

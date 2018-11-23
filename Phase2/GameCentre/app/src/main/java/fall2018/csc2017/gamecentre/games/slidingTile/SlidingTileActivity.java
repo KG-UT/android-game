@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
-import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.CustomAdapter;
-import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 

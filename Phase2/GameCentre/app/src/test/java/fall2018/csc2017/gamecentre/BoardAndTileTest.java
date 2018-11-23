@@ -1,21 +1,18 @@
 package fall2018.csc2017.gamecentre;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.database.entity.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
 import static org.junit.Assert.*;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoard;
 
 
-import org.mockito.ArgumentMatchers;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 /**

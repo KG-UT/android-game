@@ -19,12 +19,11 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import fall2018.csc2017.gamecentre.CustomAdapter;
-import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.database.entity.TicTacToeBoardManager;
+import fall2018.csc2017.gamecentre.boardManagers.TicTacToeBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
-import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoard;
 
 /**
  * The game activity.

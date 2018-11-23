@@ -7,7 +7,7 @@ import android.widget.RadioGroup;
 import android.widget.ToggleButton;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.SettingsActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;
 
 /**
  * The settings activity for Sliding Tiles (view)

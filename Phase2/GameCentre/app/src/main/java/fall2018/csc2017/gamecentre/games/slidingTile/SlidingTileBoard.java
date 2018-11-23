@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Tile;
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 
 /**
  * The sliding tiles board.

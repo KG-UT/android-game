@@ -3,7 +3,7 @@ package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 
 /**
  * The tic tac toe board.

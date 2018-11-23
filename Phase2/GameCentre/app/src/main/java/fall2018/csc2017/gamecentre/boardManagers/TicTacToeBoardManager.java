@@ -1,6 +1,4 @@
-package fall2018.csc2017.gamecentre.database.entity;
-
-import android.support.annotation.NonNull;
+package fall2018.csc2017.gamecentre.boardManagers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,15 +7,14 @@ import java.util.Random;
 
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoard;
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class TicTacToeBoardManager extends BoardManager {
-
-
+    
     // TODO: TEMP
     public TicTacToeBoardManager() {}
 

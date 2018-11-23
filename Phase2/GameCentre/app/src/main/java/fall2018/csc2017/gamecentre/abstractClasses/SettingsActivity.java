@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.HashMap;
+
+import fall2018.csc2017.gamecentre.R;
 
 /**
  * The abstract class for a game's Settings activity.

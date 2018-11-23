@@ -13,7 +13,7 @@ import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.Scoreboard;
-import fall2018.csc2017.gamecentre.ScoreboardActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreboardActivity;
 
 
 // Adapted from https://stacktips.com/tutorials/android/android-listview-tutorial

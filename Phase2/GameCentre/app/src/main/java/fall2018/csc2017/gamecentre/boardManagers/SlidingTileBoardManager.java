@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.database.entity;
+package fall2018.csc2017.gamecentre.boardManagers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,8 +7,8 @@ import java.util.Stack;
 import java.util.Random;
 
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoard;
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
 
 

@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.game;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 
 import java.io.Serializable;

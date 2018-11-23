@@ -1,9 +1,10 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import fall2018.csc2017.gamecentre.Scoreboard;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 /**

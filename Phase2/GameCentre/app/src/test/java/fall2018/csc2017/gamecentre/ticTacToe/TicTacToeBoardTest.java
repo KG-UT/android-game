@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.ticTacToe.TicTacToeBoard;
 import fall2018.csc2017.gamecentre.ticTacToe.TicTacToeTile;
-
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

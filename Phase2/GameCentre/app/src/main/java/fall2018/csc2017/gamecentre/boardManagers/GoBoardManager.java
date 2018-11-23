@@ -1,8 +1,8 @@
-package fall2018.csc2017.gamecentre.database.entity;
+package fall2018.csc2017.gamecentre.boardManagers;
 
 import fall2018.csc2017.gamecentre.games.go.GoBoard;
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
 
 /**
