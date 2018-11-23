@@ -3,13 +3,11 @@ package fall2018.csc2017.gamecentre.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,17 +15,29 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.User;
 
 // Code adapted from: https://github.com/firebase/quickstart-android/tree/master/auth/app/src/main/java/com/google/firebase/quickstart
+// https://www.androidhive.info/2016/10/android-working-with-firebase-realtime-database/
 
 /**
  * The login activity.
  */
 public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
-
+    // A tag.
     private static final String TAG = "EmailPassword";
+
+    /**
+     * The user's id in firebase.
+     */
+    private String userId;
 
     // Views
     private EditText mEmailField;
@@ -36,7 +46,9 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     // Auth
     private FirebaseAuth mAuth;
 
+    // Firebase User and database references.
     public FirebaseUser currentUser;
+    public DatabaseReference mDatabase;
 
 
     @Override
@@ -54,13 +66,18 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         findViewById(R.id.signOutButton).setOnClickListener(this);
         findViewById(R.id.goToGamesButton).setOnClickListener(this);
 
-        // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
+        // Initialize database instance.
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * Updates the UI depending on whether the user has been authenticated or not.
+     *
+     * @param user  The FirebaseUser.
+     */
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
@@ -86,6 +103,12 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     }
     // [END on_start_check_user]
 
+    /**
+     * Creates a user account and stores the user into the database.
+     *
+     * @param email The new user's email.
+     * @param password  The new user's password.
+     */
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
@@ -104,6 +127,17 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            // Gets the userId for where it'll be stored in the database.
+                            userId = mDatabase.push().getKey();
+                            String newUserEmail = currentUser.getEmail();
+                            // The new user.
+                            User newUser = new User(userId, newUserEmail);
+
+                            mDatabase.child(userId).setValue(newUser);
+
+                            addUserChangeListener();
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -117,9 +151,14 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                         // [END_EXCLUDE]
                     }
                 });
-        // [END create_user_with_email]
     }
 
+    /**
+     * Attempts to login given an email and password.
+     *
+     * @param email The user's email.
+     * @param password  The user's password.
+     */
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
@@ -128,7 +167,6 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
         showProgressDialog();
 
-        // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -151,16 +189,21 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                         // [END_EXCLUDE]
                     }
                 });
-        // [END sign_in_with_email]
     }
 
+    /**
+     * Signs a user out and returns view to sign up.
+     */
     private void signOut() {
         mAuth.signOut();
         updateUI(null);
     }
 
+    /**
+     * Moves to GameChoiceActivity.
+     */
     private void goToGames() {
-        // Disable button
+        // Enable button
         findViewById(R.id.goToGamesButton).setEnabled(false);
 
         // Sets the current user.
@@ -170,26 +213,57 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         LoginActivity.this.startActivity(goToGamesIntent);
     }
 
+    /**
+     * Validates the login / sign up form.
+     *
+     * @return the status of the form validation as a boolean.
+     */
     private boolean validateForm() {
-        boolean valid = true;
-
+        // Check to make sure there's an email.
         String email = mEmailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
             mEmailField.setError("Required.");
-            valid = false;
+            return false;
         } else {
             mEmailField.setError(null);
         }
-
+        // Checks for password.
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
             mPasswordField.setError("Required.");
-            valid = false;
+            return false;
         } else {
             mPasswordField.setError(null);
         }
 
-        return valid;
+        return true;
+    }
+
+    /**
+     * User data change listener
+     */
+    private void addUserChangeListener() {
+        // User data change listener
+        mDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                // Check for null
+                if (user == null) {
+                    Log.e(TAG, "User data is null!");
+                    return;
+                }
+
+                Log.e(TAG, "User data is changed!" + user.getUsername());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "Failed to read user", error.toException());
+            }
+        });
     }
 
     @Override

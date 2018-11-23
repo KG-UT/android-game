@@ -32,7 +32,6 @@ public class GoBoardManager extends BoardManager {
     /**
      * The Go board being managed.
      */
-
     private GoBoard board;
     // TODO: make better formatting
     public void setWhitePlayerAreaScore(int whitePlayerAreaScore) {
@@ -72,7 +71,7 @@ public class GoBoardManager extends BoardManager {
      * @param numCols   The number of columns.
      */
     public GoBoardManager(int numRows, int numCols) {
-
+        String s = "Temp";
     }
 
     /**
