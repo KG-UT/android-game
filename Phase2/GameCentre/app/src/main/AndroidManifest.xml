@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".App.GameChoiceActivity"/>
-        <activity android:name=".slidingTile.ScoreboardGameActivity" />
+        <activity android:name=".ScoreboardGameUserActivity" />
         <activity android:name=".slidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".slidingTile.SlidingTileStartingActivity" />
         <activity android:name=".slidingTile.SlidingTileActivity" />
@@ -35,8 +35,7 @@
         <activity android:name=".ticTacToe.TicTacToeActivity"/>
 
         <activity android:name=".SavedGamesView"/>
-        <activity android:name=".slidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".slidingTile.ScoreboardUserActivity"></activity>
+        <activity android:name=".slidingTile.SlidingTileEndActivity"></activity>
     </application>
 
 </manifest>

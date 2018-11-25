@@ -17,6 +17,7 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
+import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -138,7 +139,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * Switch to the SlidingTileGameScoreboardActivity
      */
     private void switchToScoreboard() {
-        Intent tmp = new Intent(this, ScoreboardGameActivity.class);
+        Intent tmp = new Intent(this, ScoreboardGameUserActivity.class);
         startActivity(tmp);
     }
 
