@@ -19,6 +19,11 @@ public abstract class ScoreboardActivity extends AppCompatActivity {
     protected DBTools databaseTools = new DBTools(this);
 
     /**
+     * Determines if the scoreboard is the game scoreboard or the user scoreboard
+     */
+    protected boolean isGameScoreboard = true;
+
+    /**
      * Add other scoreboard button listener.
      */
     abstract protected void addOtherScoreboardButtonListener();

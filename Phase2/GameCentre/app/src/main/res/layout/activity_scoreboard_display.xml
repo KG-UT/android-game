@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ListView
-        android:id="@+id/slidingTilesGameListViewer"
+        android:id="@+id/scoreboardListViewer"
         android:layout_width="298dp"
         android:layout_height="300dp"
         android:layout_marginStart="43dp"
@@ -14,10 +14,10 @@
         android:layout_marginEnd="43dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGamePlayerScoreTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreboardPlayerScoreTextView" />
 
     <TextView
-        android:id="@+id/slidingTilesGamePlayerScoreTextView"
+        android:id="@+id/scoreboardPlayerScoreTextView"
         android:layout_width="219dp"
         android:layout_height="32dp"
         android:layout_marginStart="76dp"
@@ -28,10 +28,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGameScoreboardTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreboardTitleTextView" />
 
     <TextView
-        android:id="@+id/slidingTilesGameScoreboardTitleTextView"
+        android:id="@+id/scoreboardTitleTextView"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="43dp"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/slidingTilesToUserScoreboardButton"
+        android:id="@+id/scoreboardToUserScoreboardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
@@ -56,6 +56,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGameListViewer"
+        app:layout_constraintTop_toBottomOf="@+id/scoreboardListViewer"
         app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

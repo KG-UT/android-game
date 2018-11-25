@@ -19,15 +19,10 @@ import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
  */
 public class ScoreboardGameUserActivity extends ScoreboardActivity {
 
-    /**
-     * Determines if the scoreboard is the game scoreboard or the user scoreboard
-     */
-    private boolean isGameScoreboard = true;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sliding_tiles_game_scoreboard_display);
+        setContentView(R.layout.activity_scoreboard_display);
 
         scoreBoardView();
         scoreBoardTitleView();
@@ -39,7 +34,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      * Add other scoreboard button listener.
      */
     protected void addOtherScoreboardButtonListener() {
-        Button newButton = findViewById(R.id.slidingTilesToUserScoreboardButton);
+        Button newButton = findViewById(R.id.scoreboardToUserScoreboardButton);
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +59,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
         ListView ScoreboardListView;
         ArrayAdapter arrayAdapter;
 
-        ScoreboardListView = findViewById(R.id.slidingTilesGameListViewer);
+        ScoreboardListView = findViewById(R.id.scoreboardListViewer);
 
         arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, setupCombinedScoreboard());
@@ -75,7 +70,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      * Displays the scoreboard title.
      */
     protected void scoreBoardTitleView() {
-        TextView scoreBoardTitle = findViewById(R.id.slidingTilesGameScoreboardTitleTextView);
+        TextView scoreBoardTitle = findViewById(R.id.scoreboardTitleTextView);
         if (isGameScoreboard) {
             String scoreBoardTitleText = "General Scoreboard";
             scoreBoardTitle.setText(scoreBoardTitleText);
@@ -105,7 +100,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
     /**
      * Sets up the the scoreboard for a game.
      *
-     * @return the scoreboard
+     * @return the scoreboard of the game
      */
     private Scoreboard setupScoreboardForGame(List<Score> listOfScores, String nameOfGame) {
         Scoreboard newScoreboard = new Scoreboard(listOfScores, nameOfGame);

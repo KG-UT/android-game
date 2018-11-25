@@ -25,6 +25,7 @@ public class Scoreboard {
      * Creates a scoreboard
      *
      * @param listOfScores the list of scores
+     * @param nameOfGame the name of the game that has these scores
      */
     public Scoreboard(List<Score> listOfScores, String nameOfGame) {
         this.scoreBoardArray = (ArrayList<Score>) listOfScores;
