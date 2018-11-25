@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".app.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -25,19 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.GameChoiceActivity"/>
-        <activity android:name=".games.SlidingTile.SlidingTileGameScoreboardActivity" />
-        <activity android:name=".games.SlidingTile.SlidingTilesSettingsActivity" />
-        <activity android:name=".games.SlidingTile.SlidingTileStartingActivity" />
-        <activity android:name=".games.SlidingTile.SlidingTileActivity" />
-        <activity android:name=".games.TicTacToe.TicTacToeStartingActivity"/>
-        <activity android:name=".games.TicTacToe.TicTacToeSettingsActivity" />
-        <activity android:name=".games.TicTacToe.TicTacToeActivity"/>
-        <activity android:name=".games.TicTacToe.TicTacToeGameScoreboardActivity"/>
+        <activity android:name=".App.GameChoiceActivity"/>
+        <activity android:name=".slidingTile.ScoreboardGameActivity" />
+        <activity android:name=".slidingTile.SlidingTilesSettingsActivity" />
+        <activity android:name=".slidingTile.SlidingTileStartingActivity" />
+        <activity android:name=".slidingTile.SlidingTileActivity" />
+        <activity android:name=".ticTacToe.TicTacToeStartingActivity"/>
+        <activity android:name=".ticTacToe.TicTacToeSettingsActivity" />
+        <activity android:name=".ticTacToe.TicTacToeActivity"/>
 
         <activity android:name=".SavedGamesView"/>
-        <activity android:name=".games.SlidingTile.SlidingTileEndActivity"/>
-        <activity android:name=".games.SlidingTile.SlidingTileUserScoreboardActivity"></activity>
+        <activity android:name=".slidingTile.SlidingTileEndActivity"/>
+        <activity android:name=".slidingTile.ScoreboardUserActivity"></activity>
     </application>
 
 </manifest>

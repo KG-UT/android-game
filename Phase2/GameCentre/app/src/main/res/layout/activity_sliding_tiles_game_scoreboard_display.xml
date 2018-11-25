@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/startingActivityButton"
+        android:id="@+id/slidingTilesStartingActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -15,10 +15,10 @@
         android:text="To Main Menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userListViewer" />
+        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGameListViewer" />
 
     <ListView
-        android:id="@+id/userListViewer"
+        android:id="@+id/slidingTilesGameListViewer"
         android:layout_width="298dp"
         android:layout_height="300dp"
         android:layout_marginStart="43dp"
@@ -26,10 +26,10 @@
         android:layout_marginEnd="43dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playersTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGamePlayerScoreTextView" />
 
     <TextView
-        android:id="@+id/playersTextView"
+        android:id="@+id/slidingTilesGamePlayerScoreTextView"
         android:layout_width="219dp"
         android:layout_height="32dp"
         android:layout_marginStart="76dp"
@@ -40,10 +40,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreboardTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGameScoreboardTitleTextView" />
 
     <TextView
-        android:id="@+id/scoreboardTitleTextView"
+        android:id="@+id/slidingTilesGameScoreboardTitleTextView"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="43dp"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/toUserButton"
+        android:id="@+id/slidingTilesToUserScoreboardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
         android:layout_marginBottom="40dp"
         android:text="To Personal Scoreboard"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/startingActivityButton"
+        app:layout_constraintEnd_toStartOf="@+id/slidingTilesStartingActivityButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userListViewer" />
+        app:layout_constraintTop_toBottomOf="@+id/slidingTilesGameListViewer" />
 </android.support.constraint.ConstraintLayout>

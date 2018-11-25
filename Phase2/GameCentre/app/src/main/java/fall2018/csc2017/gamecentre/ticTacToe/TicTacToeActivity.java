@@ -179,7 +179,7 @@ public class TicTacToeActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
+//        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
     }
 
 //    private void addUndoMoveButtonListener(){

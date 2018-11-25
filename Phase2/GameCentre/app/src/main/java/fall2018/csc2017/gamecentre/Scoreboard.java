@@ -15,13 +15,20 @@ public class Scoreboard {
      */
     private ArrayList<Score> scoreBoardArray;
 
+
+    /**
+     * The name of the game that the scoreboard recorded scores for.
+     */
+    private String scoreboardGameName;
+
     /**
      * Creates a scoreboard
      *
      * @param listOfScores the list of scores
      */
-    public Scoreboard(List<Score> listOfScores) {
+    public Scoreboard(List<Score> listOfScores, String nameOfGame) {
         this.scoreBoardArray = (ArrayList<Score>) listOfScores;
+        this.scoreboardGameName = nameOfGame;
     }
 
     /**
@@ -48,6 +55,7 @@ public class Scoreboard {
      */
     public List<String> getScoreBoardDataStringForm() {
         ArrayList<String> scoreBoardArrayStringForm = new ArrayList<>(0);
+        scoreBoardArrayStringForm.add(scoreboardGameName + ":");
         int gameScoreRank = 1;
         for (Score score: this.getScoreBoardData()) {
             scoreBoardArrayStringForm.add(Integer.toString(gameScoreRank) +

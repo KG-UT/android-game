@@ -67,8 +67,7 @@ public class TicTacToeEndActivity extends GameEndActivity {
         // Noted for later:
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        long _id = 1;
-        Score theScore = new Score(_id, this.score, myUser);
+        Score theScore = new Score(this.score, myUser);
         database.insertSlidingTileScore(theScore);
     }
 }

@@ -4,13 +4,10 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * The Score class which is used in the score board (Just a placeholder for now).
- */
-public class Score implements Comparable<Score>, Serializable {
+abstract public class ScoreAbstract implements Serializable {
 
     /**
-     * The Score's id in the database.
+     * The ScoreAbstract's id in the database.
      */
     private long _id;
 
@@ -25,25 +22,25 @@ public class Score implements Comparable<Score>, Serializable {
     private int userScore;
 
     /**
-     * Creates a score where username comes from user (Used to create score at the endgame)
+     * Creates a ScoreAbstract where username comes from user (Used to create score at the endgame)
      */
-    public Score(int userScore, User user) {
+    public ScoreAbstract(int userScore, User user) {
         this._id = 1;
         this.userName = user.getUsername();
         this.userScore = userScore;
     }
 
     /**
-     * Creates a score where username comes from a string
+     * Creates a ScoreAbstract where username comes from a string
      */
-    public Score(long _id, int userScore, String userName) {
+    public ScoreAbstract(long _id, int userScore, String userName) {
         this._id = _id;
         this.userName = userName;
         this.userScore = userScore;
     }
 
     /**
-     * Returns the Score's id.
+     * Returns the ScoreAbstract's id.
      * Type of long required for SQLite.
      *
      * @return the id
@@ -53,7 +50,7 @@ public class Score implements Comparable<Score>, Serializable {
     }
 
     /**
-     * Sets the Score's id.
+     * Sets the ScoreAbstract's id.
      * Type of long required for SQLite.
      *
      * @param _id the id.
@@ -74,17 +71,6 @@ public class Score implements Comparable<Score>, Serializable {
      */
     public int getUserScore() {
         return this.userScore;
-    }
-
-    @Override
-    public int compareTo(@NonNull Score comparedToScore) {
-        if(comparedToScore.getUserScore() > this.getUserScore()) {
-            return 1;
-        } else if (comparedToScore.getUserScore() < this.getUserScore()) {
-            return -1;
-        } else {
-            return 0;
-        }
     }
 
     @Override

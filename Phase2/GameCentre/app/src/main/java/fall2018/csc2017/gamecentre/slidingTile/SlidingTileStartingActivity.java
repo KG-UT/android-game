@@ -138,7 +138,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * Switch to the SlidingTileGameScoreboardActivity
      */
     private void switchToScoreboard() {
-        Intent tmp = new Intent(this, SlidingTileGameScoreboardActivity.class);
+        Intent tmp = new Intent(this, ScoreboardGameActivity.class);
         startActivity(tmp);
     }
 
