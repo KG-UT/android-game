@@ -34,7 +34,10 @@ import fall2018.csc2017.gamecentre.User;
  */
 public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
     // A tag.
-    private static final String TAG = "EmailPassword";
+    private static final String TAG_INSERT_USER = "userInsertion";
+    private static final String TAG_CREATE_ACCOUNT = "createAccount";
+    private static final String TAG_SIGN_IN = "signIn";
+    private static final String TAG_USER_CHANGE = "dataChanged";
 
     /**
      * The user's id in firebase.
@@ -86,7 +89,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
             findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
             findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
             findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
-
+            // Ignore that a user isn't email verified yet, we don't actually care.
             findViewById(R.id.goToGamesButton).setEnabled(!user.isEmailVerified());
         } else {
             findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
@@ -112,7 +115,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      * @param password  The new user's password.
      */
     private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
+        Log.d(TAG_CREATE_ACCOUNT, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -126,16 +129,17 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            Log.d(TAG_CREATE_ACCOUNT, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 
-                            currentUser = user;
                             // TODO: See if this is actually an issue.
+                            // I don't think it is, since creating new users is fine so far
+                            // and changes are reflected in the database.
                             addUserToDatabase(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.w(TAG_CREATE_ACCOUNT, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -156,6 +160,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         // Gets the userId for where it'll be stored in the database.
         userId = mDatabase.push().getKey();
         String newUserEmail = newUser.getEmail();
+
         // The new user.
         User userToInsert = new User(userId, newUserEmail);
 
@@ -164,15 +169,13 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
+                        Log.d(TAG_INSERT_USER, "insertedUserIntoDatabase:success");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
+                        Log.w(TAG_INSERT_USER, "insertUserIntoDatabase:failure");
                     }
                 });
 
@@ -186,7 +189,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      * @param password  The user's password.
      */
     private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
+        Log.d(TAG_SIGN_IN, "signIn:" + email);
         if (!validateForm()) {
             return;
         }
@@ -199,12 +202,12 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
+                            Log.d(TAG_SIGN_IN, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Log.w(TAG_SIGN_IN, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -231,7 +234,6 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     private void goToGames() {
         // Enable button
         findViewById(R.id.goToGamesButton).setEnabled(false);
-        System.out.println(currentUser.getEmail());
         // Creates the intent to go to Game Choice Activity.
         Intent goToGamesIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
         LoginActivity.this.startActivity(goToGamesIntent);
@@ -275,17 +277,17 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
                 // Check for null
                 if (user == null) {
-                    Log.e(TAG, "User data is null!");
+                    Log.e(TAG_USER_CHANGE, "User data is null!");
                     return;
                 }
 
-                Log.e(TAG, "User data is changed!" + user.getUsername());
+                Log.e(TAG_USER_CHANGE, "User data is changed!" + user.getUsername());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
-                Log.e(TAG, "Failed to read user", error.toException());
+                Log.e(TAG_USER_CHANGE, "Failed to read user", error.toException());
             }
         });
     }
