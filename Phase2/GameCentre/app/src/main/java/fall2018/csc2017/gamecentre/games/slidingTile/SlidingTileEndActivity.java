@@ -67,7 +67,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         long _id = 1;
-        Score theScore = new Score(_id, this.score, new User(42069, "temp", "temp"));
+        Score theScore = new Score(_id, this.score, new User("42069", "temp"));
         database.insertSlidingTileScore(theScore);
     }
 }

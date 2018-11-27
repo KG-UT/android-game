@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -104,7 +106,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     // [END on_start_check_user]
 
     /**
-     * Creates a user account and stores the user into the database.
+     * Creates a user account.
      *
      * @param email The new user's email.
      * @param password  The new user's password.
@@ -127,17 +129,10 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            // Gets the userId for where it'll be stored in the database.
-                            userId = mDatabase.push().getKey();
-                            String newUserEmail = currentUser.getEmail();
-                            // The new user.
-                            User newUser = new User(userId, newUserEmail);
 
-                            mDatabase.child(userId).setValue(newUser);
-
-                            addUserChangeListener();
-
-
+                            currentUser = user;
+                            // TODO: See if this is actually an issue.
+                            addUserToDatabase(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -145,12 +140,43 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
                         // [START_EXCLUDE]
                         hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
+    }
+    // Code adapted from https://firebase.google.com/docs/database/android/read-and-write
+    /**
+     *  Adds the new user to the database.
+     *
+     * @param newUser   The authenticated new user.
+     */
+    private void addUserToDatabase(FirebaseUser newUser) {
+        // Gets the userId for where it'll be stored in the database.
+        userId = mDatabase.push().getKey();
+        String newUserEmail = newUser.getEmail();
+        // The new user.
+        User userToInsert = new User(userId, newUserEmail);
+
+        // Adds on success and on failure listeners to the user being inserted.
+        mDatabase.child("users").child(userId).setValue(userToInsert)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+
+        addUserChangeListener();
     }
 
     /**
@@ -205,9 +231,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     private void goToGames() {
         // Enable button
         findViewById(R.id.goToGamesButton).setEnabled(false);
-
-        // Sets the current user.
-        currentUser = mAuth.getCurrentUser();
+        System.out.println(currentUser.getEmail());
         // Creates the intent to go to Game Choice Activity.
         Intent goToGamesIntent = new Intent(LoginActivity.this, GameChoiceActivity.class);
         LoginActivity.this.startActivity(goToGamesIntent);
