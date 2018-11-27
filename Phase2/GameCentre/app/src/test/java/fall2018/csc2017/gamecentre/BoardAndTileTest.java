@@ -160,5 +160,17 @@ public class BoardAndTileTest {
         assertEquals(1,boardManager.getUndosLeft());
 
     }
+
+    /**
+     * tests shuffle function
+     */
+    @Test
+    public void testshuffle() {
+        setUpCorrect();
+        assertTrue(boardManager.puzzleSolved());
+        SlidingTileBoardManager bm = new SlidingTileBoardManager(5,5);
+        assertFalse(bm.puzzleSolved());
+    }
+
 }
 
