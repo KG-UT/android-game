@@ -144,5 +144,21 @@ public class BoardAndTileTest {
 
 
     }
+
+    /**
+     * Test whether number of Undo's are updating correctly
+     */
+    @Test
+    public void testUndosLeft()
+    { setUpCorrect();
+        boardManager.touchMove(11);
+        boardManager.touchMove(10);
+        assertEquals(9999, boardManager.getBoard().getTile(2, 2).getId());
+        boardManager.undoMove();
+        boardManager.undoMove();
+        assertEquals(9999, boardManager.getBoard().getTile(3, 3).getId());
+        assertEquals(1,boardManager.getUndosLeft());
+
+    }
 }
 
