@@ -102,6 +102,7 @@ public class BoardAndTileTest {
     /**
      * Test whether isValidHelp works.
      */
+
     @Test
     public void testIsValidTap() {
         setUpCorrect();
@@ -110,5 +111,38 @@ public class BoardAndTileTest {
         assertEquals(false, boardManager.isValidTap(10));
     }
 
+    /**
+     * Test whether touchMove() works, and that score updates
+     */
+    @Test
+    public void testTouchMove() {
+        setUpCorrect();
+        boardManager.touchMove(14);
+        assertEquals(1,boardManager.getScore());
+    }
+
+    /**
+     * Test whether canUndo() works
+     */
+    @Test
+    public void testcanUndo(){
+        setUpCorrect();
+        boardManager.touchMove(11);
+        assertTrue(boardManager.canUndo());
+    }
+
+    /**
+     * Test whether undoMove() works
+     */
+    @Test
+    public void testUndoMove() {
+        setUpCorrect();
+        boardManager.touchMove(11);
+        assertEquals(9999, boardManager.getBoard().getTile(2, 3).getId());
+        boardManager.undoMove();
+        assertEquals(9999, boardManager.getBoard().getTile(3, 3).getId());
+
+
+    }
 }
 
