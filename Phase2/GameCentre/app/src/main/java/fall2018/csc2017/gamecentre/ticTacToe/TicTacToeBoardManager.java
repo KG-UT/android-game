@@ -65,14 +65,6 @@ class TicTacToeBoardManager extends BoardManager {
     }
 
     /**
-     * Manage a board that has been pre-populated.
-     * @param board the board
-     */
-    public TicTacToeBoardManager(Board board) {
-        super(board);
-    }
-
-    /**
      * Return all blank locations on the tic tac toe board
      *
      * @return All blank locations on the tic tac toe board

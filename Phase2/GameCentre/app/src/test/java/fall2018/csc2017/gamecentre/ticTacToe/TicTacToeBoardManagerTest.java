@@ -212,6 +212,31 @@ public class TicTacToeBoardManagerTest {
     }
 
     /**
-     * Test puzzle solved
+     * Test if the puzzle is solved for a blank game
      */
+    @Test
+    public void testPuzzleSolvedNewGame() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        assertEquals(false, boardManager.puzzleSolved());
+    }
+
+    /**
+     * Test if the puzzle is solved for a full board where player won
+     */
+    @Test
+    public void testPuzzleSolvedPlayerWon() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        fillLeftRightDiagonal(boardManager, TicTacToeTile.X);
+        assertEquals(false, boardManager.puzzleSolved());
+    }
+
+    /**
+     * Test if the puzzle is solved for a full board where computer
+     */
+    @Test
+    public void testPuzzleSolvedComputerWon() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        fillLeftRightDiagonal(boardManager, TicTacToeTile.O);
+        assertEquals(true, boardManager.puzzleSolved());
+    }
 }

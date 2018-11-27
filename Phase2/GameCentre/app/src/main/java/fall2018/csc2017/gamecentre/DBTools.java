@@ -1,3 +1,6 @@
+/**
+ * Excluded from tests because it is a model and performs database operations
+ */
 package fall2018.csc2017.gamecentre;
 
 import android.content.ContentValues;
