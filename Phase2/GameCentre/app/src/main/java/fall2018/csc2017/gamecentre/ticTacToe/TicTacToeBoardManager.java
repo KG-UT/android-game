@@ -81,7 +81,7 @@ class TicTacToeBoardManager extends BoardManager {
         ArrayList<Integer[]> blankLocations = new ArrayList<>();
         Iterator<Object> iterator = getBoard().iterator();
 
-        for(int i = 0; i < board.numObjects() - 1; i++) {
+        for(int i = 0; i < board.numObjects(); i++) {
             TicTacToeTile tile = (TicTacToeTile) iterator.next();
             if(tile.getState().equals(TicTacToeTile.BLANK)) {
                 int row = i / Board.getNumRows();
@@ -162,7 +162,7 @@ class TicTacToeBoardManager extends BoardManager {
         TicTacToeBoard board = getBoard();
         String state = board.getTile(rowNum, 0).getState();
         if(state == TicTacToeTile.BLANK) {
-            return state;
+            return NO_SAME;
         }
         for(int i = 0; i < Board.getNumCols(); i++) {
             if(!board.getTile(rowNum, i).getState().equals(state)) {
@@ -182,7 +182,7 @@ class TicTacToeBoardManager extends BoardManager {
         TicTacToeBoard board = getBoard();
         String state = board.getTile(0, colNum).getState();
         if(state == TicTacToeTile.BLANK) {
-            return state;
+            return NO_SAME;
         }
         for(int i = 0; i < Board.getNumRows(); i++) {
             if(!board.getTile(i, colNum).getState().equals(state)) {
@@ -202,7 +202,7 @@ class TicTacToeBoardManager extends BoardManager {
         TicTacToeBoard board = getBoard();
         String state = board.getTile(board.getNumRows()/2, board.getNumCols()/2).getState();
         if(state == TicTacToeTile.BLANK) {
-            return state;
+            return NO_SAME;
         }
         for(int i = 0; i < Board.getNumCols(); i++) {
             if(!board.getTile(i, i).getState().equals(state)) {
@@ -222,7 +222,7 @@ class TicTacToeBoardManager extends BoardManager {
         TicTacToeBoard board = getBoard();
         String state = board.getTile(board.getNumRows()/2, board.getNumCols()/2).getState();
         if(state == TicTacToeTile.BLANK) {
-            return state;
+            return NO_SAME;
         }
         for(int i = 0; i < Board.getNumCols(); i++) {
             if(!board.getTile( i, Board.getNumCols() - i - 1).getState().equals(state)) {
