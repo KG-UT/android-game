@@ -1,3 +1,6 @@
+/**
+ * Excluded from tests because it is an abstract class
+ **/
 package fall2018.csc2017.gamecentre;
 
 import android.os.Bundle;
