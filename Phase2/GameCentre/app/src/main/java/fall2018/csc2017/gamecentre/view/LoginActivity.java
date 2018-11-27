@@ -33,7 +33,7 @@ import fall2018.csc2017.gamecentre.User;
  * The login activity.
  */
 public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
-    // A tag.
+    // Logging tags.
     private static final String TAG_INSERT_USER = "userInsertion";
     private static final String TAG_CREATE_ACCOUNT = "createAccount";
     private static final String TAG_SIGN_IN = "signIn";
@@ -52,7 +52,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     private FirebaseAuth mAuth;
 
     // Firebase User and database references.
-    public FirebaseUser currentUser;
+    public static FirebaseUser currentUser;
     public DatabaseReference mDatabase;
 
 
@@ -156,7 +156,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      *
      * @param newUser   The authenticated new user.
      */
-    private void addUserToDatabase(FirebaseUser newUser) {
+    private void addUserToDatabase(final FirebaseUser newUser) {
         // Gets the userId for where it'll be stored in the database.
         userId = mDatabase.push().getKey();
         String newUserEmail = newUser.getEmail();
@@ -170,6 +170,9 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG_INSERT_USER, "insertedUserIntoDatabase:success");
+                        // Given success of creating new user, we can guarantee that
+                        // it will be non-null.
+                        currentUser = newUser;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -196,6 +199,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
         showProgressDialog();
 
+        // Attempts to sign in with an email and password.
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

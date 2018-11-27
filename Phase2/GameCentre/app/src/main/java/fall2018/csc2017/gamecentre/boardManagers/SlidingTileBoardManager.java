@@ -11,12 +11,18 @@ import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
 
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class SlidingTileBoardManager extends BoardManager {
 
+    /** TODO: Possibly look into making this final for immutability purposes.
+     * The key value for the owner.
+     */
+    private String ownerKeyValue;
 
     /**
      * A stack of moves made, for move reversals.
@@ -38,6 +44,7 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     public SlidingTileBoardManager() {
         this(4, 4);
+        this.ownerKeyValue = currentUser.getUid();
     }
 
     /**
@@ -46,12 +53,15 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     public SlidingTileBoardManager(SlidingTileBoard board) {
         super(board);
+        this.ownerKeyValue = currentUser.getUid();
     }
 
     /**
      * Manage a new shuffled board.
      */
     public SlidingTileBoardManager(int numRows, int numCols) {
+        this.ownerKeyValue = currentUser.getUid();
+
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -245,6 +255,15 @@ public class SlidingTileBoardManager extends BoardManager {
         } else{
             return 99999999;
         }
+    }
+
+    /**
+     * Returns the owner's key value.
+     *
+     * @return the String of the owner's key value in the database.
+     */
+    public String getOwnerKeyValue() {
+        return ownerKeyValue;
     }
 
 //   /**
