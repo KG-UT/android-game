@@ -239,7 +239,7 @@ public class SlidingTileBoardManager extends BoardManager {
     * Getter function for the Undos left.
     * @return the number of undos the player has left.
     */
-   int getUndosLeft() {
+  public int getUndosLeft() {
        if (undosLeft >= 0){
            return undosLeft;
        } else{
