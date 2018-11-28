@@ -2,6 +2,7 @@ package fall2018.csc2017.gamecentre.games.matchingCards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.game.BoardManager;
@@ -10,6 +11,7 @@ import fall2018.csc2017.gamecentre.game.BoardManager;
  * Manage the Board, flipping cards up/down, checking for a win
  */
 public class MatchingCardsBoardManager extends BoardManager {
+
     /*
      * The game score.
      */
@@ -44,5 +46,19 @@ public class MatchingCardsBoardManager extends BoardManager {
 
         Collections.shuffle(tiles);
         setBoard(new MatchingCardsBoard(numRows, numCols, tiles));
+    }
+
+    @Override
+    public boolean puzzleSolved() {
+        boolean solved = true;
+        MatchingCardsBoard board = (MatchingCardsBoard) getBoard();
+        Iterator<Object> boardIterator = board.iterator();
+        for(int i = 0; i < MatchingCardsBoard.numTiles(); i++) {
+            MatchingCardsTile currentTile = (MatchingCardsTile) boardIterator.next();
+            if(!currentTile.isFaceUp()) {
+                solved = false;
+            }
+        }
+        return solved;
     }
 }
