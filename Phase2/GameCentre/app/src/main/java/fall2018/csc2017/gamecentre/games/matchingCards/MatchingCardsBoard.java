@@ -30,7 +30,7 @@ public class MatchingCardsBoard extends Board {
      * states if two cards are currently face up
      * @return a boolean stating if two cards are currently face up
      */
-    public boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
+    boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
 
     /**
      * return the MatchingCardsTile at (row, col)
