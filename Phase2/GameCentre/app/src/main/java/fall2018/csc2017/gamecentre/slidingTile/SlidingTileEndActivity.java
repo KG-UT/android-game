@@ -10,6 +10,7 @@ import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
+import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -66,7 +67,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // Noted for later:
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        Score theScore = new Score(this.score, myUser);
+        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.score, myUser);
         database.insertSlidingTileScore(theScore);
     }
 }

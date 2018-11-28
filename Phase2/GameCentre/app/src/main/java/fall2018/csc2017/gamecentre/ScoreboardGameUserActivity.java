@@ -87,11 +87,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      */
     private List<String> setupCombinedScoreboard() {
         List<String> scoreBoardListData = new ArrayList<>();
-        scoreBoardListData.addAll(setupScoreboardForGame(getSlidingTilesScoresFromDatabase(),
+
+        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getSlidingTilesScoresFromDatabase(),
                 "Sliding Tiles").getScoreBoardDataStringForm());
-        scoreBoardListData.addAll(setupScoreboardForGame(getTicTacToeScoresFromDatabase(),
+        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getTicTacToeScoresFromDatabase(),
                 "TicTacToe").getScoreBoardDataStringForm());
-        scoreBoardListData.addAll(setupScoreboardForGame(getGoScoresFromDatabase(),
+        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getGoScoresFromDatabase(),
                 "Go").getScoreBoardDataStringForm());
 
         return scoreBoardListData;
@@ -102,8 +103,30 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the scoreboard of the game
      */
-    private Scoreboard setupScoreboardForGame(List<Score> listOfScores, String nameOfGame) {
-        Scoreboard newScoreboard = new Scoreboard(listOfScores, nameOfGame);
+    private Scoreboard setupSlidingTilesScoreboard(List<ScoreSlidingTiles> listOfScores, String nameOfGame) {
+        ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, nameOfGame);
+        newScoreboard.organizeScoreBoard();
+        return newScoreboard;
+    }
+
+    /**
+     * Sets up the the scoreboard for a game.
+     *
+     * @return the scoreboard of the game
+     */
+    private Scoreboard setupTicTacToeScoreboard(List<ScoreTicTacToe> listOfScores, String nameOfGame) {
+        ScoreboardTicTacToe newScoreboard = new ScoreboardTicTacToe(listOfScores, nameOfGame);
+        newScoreboard.organizeScoreBoard();
+        return newScoreboard;
+    }
+
+    /**
+     * Sets up the the scoreboard for a game.
+     *
+     * @return the scoreboard of the game
+     */
+    private Scoreboard setupGoScoreboard(List<ScoreGo> listOfScores, String nameOfGame) {
+        ScoreboardGo newScoreboard = new ScoreboardGo(listOfScores, nameOfGame);
         newScoreboard.organizeScoreBoard();
         return newScoreboard;
     }
@@ -113,10 +136,10 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the list of all sliding tile scores.
      */
-    private List<Score> getSlidingTilesScoresFromDatabase() {
+    private List<ScoreSlidingTiles> getSlidingTilesScoresFromDatabase() {
         if (isGameScoreboard) {
             List<User> listOfUsers = databaseTools.getAllUsers();
-            List<Score> listOfScoresSlidingTiles = new ArrayList<>();
+            List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
             for (User user : listOfUsers) {
                 listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
             }
@@ -131,10 +154,10 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the list of all TicTacToe scores.
      */
-    private List<Score> getTicTacToeScoresFromDatabase() {
+    private List<ScoreSlidingTiles> getTicTacToeScoresFromDatabase() {
         if (isGameScoreboard) {
             List<User> listOfUsers = databaseTools.getAllUsers();
-            List<Score> listOfScoresSlidingTiles = new ArrayList<>();
+            List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
             for (User user : listOfUsers) {
                 listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
             }
@@ -149,10 +172,10 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the list of all Go scores.
      */
-    private List<Score> getGoScoresFromDatabase() {
+    private List<ScoreSlidingTiles> getGoScoresFromDatabase() {
         if (isGameScoreboard) {
             List<User> listOfUsers = databaseTools.getAllUsers();
-            List<Score> listOfScoresSlidingTiles = new ArrayList<>();
+            List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
             for (User user : listOfUsers) {
                 listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
             }

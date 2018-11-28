@@ -31,8 +31,8 @@ public class SavedGamesView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_games_view);
-        ArrayList<Score> scores = database.getUserSlidingTileScores(myUser.getUsername());
-        for(Score s: scores) {
+        ArrayList<ScoreSlidingTiles> scores = database.getUserSlidingTileScores(myUser.getUsername());
+        for(ScoreSlidingTiles s: scores) {
             Log.d("TAG", "" + s.getUserScore());
         }
 
