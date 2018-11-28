@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
+package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 

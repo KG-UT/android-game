@@ -35,6 +35,7 @@
         <activity android:name=".games.ticTacToe.TicTacToeEndActivity"/>
 
         <activity android:name=".SavedGamesView"/>
+        <activity android:name=".ScoreboardGameUserActivity"/>
         <activity android:name=".games.slidingTile.SlidingTileEndActivity"/>
     </application>
 
