@@ -1,14 +1,19 @@
 package fall2018.csc2017.gamecentre.games.matchingCards;
 
 import fall2018.csc2017.gamecentre.game.Board;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Matching Cards game board.
  */
 public class MatchingCardsBoard extends Board {
+    /*
+     * The cards that are currently face up
+     */
+    private ArrayList<MatchingCardsTile> faceUpCards = new ArrayList<>();
 
-    private boolean cardIsUp = false;
     /**
      * A new board of tiles in row-major order.
      * Precondition: len(tiles) == NUM_ROWS * NUM_COLS
@@ -20,6 +25,12 @@ public class MatchingCardsBoard extends Board {
     public MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
         super(rows, cols, tiles);
     }
+
+    /**
+     * states if two cards are currently face up
+     * @return a boolean stating if two cards are currently face up
+     */
+    public boolean twoCardsAreUp(){return faceUpCards.size() == 2;}
 
     /**
      * return the MatchingCardsTile at (row, col)
@@ -37,9 +48,7 @@ public class MatchingCardsBoard extends Board {
     void flipCardUp(int row, int column){
         MatchingCardsTile card = (MatchingCardsTile) getItem(row, column);
         card.setFaceUp();
-        if (cardIsUp){
-            flipAllCardsDown();
-        } else {cardIsUp = true;}
+        faceUpCards.add(card);
     }
 
     /**
