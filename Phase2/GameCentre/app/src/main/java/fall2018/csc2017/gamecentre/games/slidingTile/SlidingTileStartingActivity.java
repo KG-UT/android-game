@@ -106,8 +106,6 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
 //                saveToFile(TEMP_SAVE_FILENAME);
 //                makeToastSavedText();
                 startActivity(new Intent(SlidingTileStartingActivity.this, SavedGamesView.class));
-
-
             }
             });
     }

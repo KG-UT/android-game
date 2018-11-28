@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import fall2018.csc2017.gamecentre.CustomAdapter;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
@@ -252,5 +253,25 @@ public class TicTacToeActivity extends GameActivity {
 //            tmp.putExtra("SCORE", score);
 //            startActivity(tmp);
         }
+    }
+
+    @Override
+    public void saveToDatabase() {
+
+    }
+
+    @Override
+    public void retrieveDeSerializedBoardManager(String gameKeyValue) {
+
+    }
+
+    @Override
+    public String serializeBoardManager() {
+        return null;
+    }
+
+    @Override
+    public BoardManager deSerializeBoardManager(String serializedBoardManager) {
+        return null;
     }
 }

@@ -75,6 +75,19 @@ public class Tile implements Comparable<Tile>, Serializable {
         this.id = backgroundId;
     }
 
+    /**
+     * Empty constructor for Firebase.
+     */
+    public Tile() {}
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int compareTo(@NonNull Tile o) {
         return o.id - this.id;

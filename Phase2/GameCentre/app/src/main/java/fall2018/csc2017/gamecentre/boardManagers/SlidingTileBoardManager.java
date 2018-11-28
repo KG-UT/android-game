@@ -1,5 +1,7 @@
 package fall2018.csc2017.gamecentre.boardManagers;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,14 +21,20 @@ import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
  */
 public class SlidingTileBoardManager extends BoardManager {
 
-    /** TODO: Possibly look into making this final for immutability purposes.
+    /**
      * The key value for the owner.
      */
-    private String ownerKeyValue;
+    @Exclude
+    private final String ownerKeyValue = currentUser.getUid();
+
+    // TODO: Make final
+    @Exclude
+    private String gameKeyValue;
 
     /**
      * A stack of moves made, for move reversals.
      */
+    @Exclude
     private Stack<int[]> stStackOfMoves = new Stack<>();
 
     /**
@@ -44,7 +52,6 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     public SlidingTileBoardManager() {
         this(4, 4);
-        this.ownerKeyValue = currentUser.getUid();
     }
 
     /**
@@ -53,15 +60,12 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     public SlidingTileBoardManager(SlidingTileBoard board) {
         super(board);
-        this.ownerKeyValue = currentUser.getUid();
     }
 
     /**
      * Manage a new shuffled board.
      */
     public SlidingTileBoardManager(int numRows, int numCols) {
-        this.ownerKeyValue = currentUser.getUid();
-
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
@@ -265,6 +269,15 @@ public class SlidingTileBoardManager extends BoardManager {
     public String getOwnerKeyValue() {
         return ownerKeyValue;
     }
+
+    public String getGameKeyValue() {
+        return gameKeyValue;
+    }
+
+    public void setGameKeyValue(String gameKeyValue) {
+        this.gameKeyValue = gameKeyValue;
+    }
+
 
 //   /**
 //    * Set undos as as some value.

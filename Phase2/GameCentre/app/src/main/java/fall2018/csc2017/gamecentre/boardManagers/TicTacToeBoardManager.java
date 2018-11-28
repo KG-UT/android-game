@@ -10,15 +10,23 @@ import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
 import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class TicTacToeBoardManager extends BoardManager {
-    
-    // TODO: TEMP
+    /**
+     * The owner's key value.
+     */
+    private final String ownerKeyValue = currentUser.getUid();
+
+    /**
+     * Default constructor for Firebase to use.
+     */
     public TicTacToeBoardManager() {}
 
-    /** TODO: Room has issue with Entities and Pojos having unusable public constructors.
+    /**
      * Manage a new 3 by 3 tic tac toe board
      */
     public TicTacToeBoardManager(int numRows, int numCols) {
@@ -78,6 +86,7 @@ public class TicTacToeBoardManager extends BoardManager {
 
     /**
      * Make a move at row, col, with state
+     *
      * @param row the row to make the move
      * @param col the col to make the move
      * @param state the new state to be set

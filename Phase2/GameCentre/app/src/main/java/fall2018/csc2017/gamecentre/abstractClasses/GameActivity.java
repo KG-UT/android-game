@@ -2,6 +2,9 @@ package fall2018.csc2017.gamecentre.abstractClasses;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,18 +19,11 @@ abstract public class GameActivity extends AppCompatActivity implements Observer
     abstract public void display();
 
     /**
-     * Loads the game activity associated with a given file path.
-     *
-     * @param fileName the file path.
-     */
-    abstract protected void loadFromFile(String fileName);
-
-    /**
      * Saves the current game activity state.
-     *
-     * @param fileName the file path.
      */
-    abstract public void saveToFile(String fileName);
+    abstract public void saveToDatabase();
+
+    abstract public void retrieveDeSerializedBoardManager(String gameKeyValue);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +36,14 @@ abstract public class GameActivity extends AppCompatActivity implements Observer
     }
 
     @Override
-    public void update(Observable o, Object arg) { display(); }
+    public void update(Observable o, Object arg) {
+        display();
+    }
 
+    abstract public String serializeBoardManager();
 
-
+    abstract public BoardManager deSerializeBoardManager(String serializedBoardManager);
 
 }
+
+

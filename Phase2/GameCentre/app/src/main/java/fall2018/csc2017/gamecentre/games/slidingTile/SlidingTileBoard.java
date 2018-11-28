@@ -22,6 +22,7 @@ public class SlidingTileBoard extends Board {
         super(rows, cols, tiles);
     }
 
+
     /**
      * Return the number of tiles on the board.
      * @return the number of tiles on the board

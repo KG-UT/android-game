@@ -50,6 +50,11 @@ abstract public class Board extends Observable implements Serializable, Iterable
         }
     }
 
+    /**
+     * Default constructor for firebase.
+     */
+    public Board() {}
+
     @NonNull
     @Override
     public Iterator<Object> iterator() {

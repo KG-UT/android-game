@@ -33,11 +33,8 @@ import fall2018.csc2017.gamecentre.User;
  * The login activity.
  */
 public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
-    // Logging tags.
-    private static final String TAG_INSERT_USER = "userInsertion";
-    private static final String TAG_CREATE_ACCOUNT = "createAccount";
-    private static final String TAG_SIGN_IN = "signIn";
-    private static final String TAG_USER_CHANGE = "dataChanged";
+    // Logging
+    private static final String TAG = "LoginActivity";
 
     /**
      * The user's id in firebase.
@@ -50,6 +47,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
     // Auth
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     // Firebase User and database references.
     public static FirebaseUser currentUser;
@@ -76,6 +74,23 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
         // Initialize database instance.
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // Code adapted from https://stackoverflow.com/questions/41533159/firebase-getcurrentuser-is-returning-null-in-new-android-activity
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                if (currentUser != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + currentUser.getUid());
+                    finish();
+
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
     }
 
     /**
@@ -98,15 +113,21 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         }
     }
 
-    // [START on_start_check_user]
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
-    // [END on_start_check_user]
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        currentUser = mAuth.getCurrentUser();
+
+    }
 
     /**
      * Creates a user account.
@@ -115,7 +136,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      * @param password  The new user's password.
      */
     private void createAccount(String email, String password) {
-        Log.d(TAG_CREATE_ACCOUNT, "createAccount:" + email);
+        Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -129,7 +150,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG_CREATE_ACCOUNT, "createUserWithEmail:success");
+                            Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 
@@ -139,7 +160,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                             addUserToDatabase(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG_CREATE_ACCOUNT, "createUserWithEmail:failure", task.getException());
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -169,7 +190,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG_INSERT_USER, "insertedUserIntoDatabase:success");
+                        Log.d(TAG, "insertedUserIntoDatabase:success");
                         // Given success of creating new user, we can guarantee that
                         // it will be non-null.
                         currentUser = newUser;
@@ -178,7 +199,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG_INSERT_USER, "insertUserIntoDatabase:failure");
+                        Log.w(TAG, "insertUserIntoDatabase:failure");
                     }
                 });
 
@@ -192,7 +213,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      * @param password  The user's password.
      */
     private void signIn(String email, String password) {
-        Log.d(TAG_SIGN_IN, "signIn:" + email);
+        Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
         }
@@ -206,12 +227,12 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG_SIGN_IN, "signInWithEmail:success");
+                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG_SIGN_IN, "signInWithEmail:failure", task.getException());
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -274,24 +295,24 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      */
     private void addUserChangeListener() {
         // User data change listener
-        mDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
 
                 // Check for null
                 if (user == null) {
-                    Log.e(TAG_USER_CHANGE, "User data is null!");
+                    Log.e(TAG, "User data is null!");
                     return;
                 }
 
-                Log.e(TAG_USER_CHANGE, "User data is changed!" + user.getUsername());
+                Log.e(TAG, "User data is changed!" + user.getUsername());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
-                Log.e(TAG_USER_CHANGE, "Failed to read user", error.toException());
+                Log.e(TAG, "Failed to read user", error.toException());
             }
         });
     }
