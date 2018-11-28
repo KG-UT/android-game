@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsActivity">
+
+    <Button
+        android:id="@+id/MatchingScoreButton"
+        android:layout_width="152dp"
+        android:layout_height="74dp"
+        android:layout_alignTop="@+id/MatchingStartButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="284dp"
+        android:layout_marginEnd="129dp"
+        android:text="Score Board" />
+        <!--android:onClick="scoreboardPressed"-->
+        <!--android:text="@string/score_board" />-->
+
+    <TextView
+        android:id="@+id/GameText"
+        android:layout_width="238dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="37dp"
+        android:gravity="center"
+        android:text="Welcome to Matching Cards !"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <Button
+        android:id="@+id/MatchingLoadButton"
+        android:layout_width="155dp"
+        android:layout_height="63dp"
+        android:layout_below="@+id/MatchingStartButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="124dp"
+        android:text="load Saved Game" />
+
+    <Button
+        android:id="@+id/MatchingSaveButton"
+        android:layout_width="144dp"
+        android:layout_height="68dp"
+        android:layout_below="@+id/GameText"
+        android:layout_marginStart="-136dp"
+        android:layout_marginTop="215dp"
+        android:layout_toEndOf="@+id/MatchingStartButton"
+        android:text="Load AutoSave Game" />
+
+    <Button
+        android:id="@+id/MatchingStartButton"
+        android:layout_width="128dp"
+        android:layout_height="73dp"
+        android:layout_below="@+id/GameText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="23dp"
+        android:text="New Game" />
+    <!--android:onClick="settingsPressed"/>-->
+
+</RelativeLayout>

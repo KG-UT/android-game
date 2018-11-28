@@ -3,7 +3,7 @@ package fall2018.csc2017.gamecentre.games.ticTacToe;
 import java.io.Serializable;
 
 /**
- * A Tile in a sliding tiles puzzle.
+ * A Tile in a TicTacToe Game.
  */
 public class TicTacToeTile implements Serializable {
     /**
