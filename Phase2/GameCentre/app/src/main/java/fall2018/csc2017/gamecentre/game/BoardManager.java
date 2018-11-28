@@ -55,7 +55,7 @@ abstract public class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-    abstract int getScore();
+    abstract public int getScore();
 
     /**
      * Return whether or not the puzzle is solved or game is over
