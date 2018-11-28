@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.App;
+package fall2018.csc2017.gamecentre.app;
 
 import android.content.Intent;
 import android.os.Bundle;

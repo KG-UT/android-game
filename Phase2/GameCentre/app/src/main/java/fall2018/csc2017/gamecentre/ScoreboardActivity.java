@@ -6,11 +6,6 @@ package fall2018.csc2017.gamecentre;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-<<<<<<< HEAD
-import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
-
-=======
->>>>>>> 5724a0e59e64733cf570630fb408f82c1b49f4f1
 /**
  * The abstract class for Scoreboard activity.
  */
