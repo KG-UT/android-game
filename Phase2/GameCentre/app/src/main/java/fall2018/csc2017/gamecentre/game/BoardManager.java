@@ -14,6 +14,11 @@ abstract public class BoardManager implements Serializable {
     protected Board board;
 
     /**
+     * The score
+     */
+    protected int score = 0;
+
+    /**
      * A boardManager without an initial board
      */
     BoardManager() {}
@@ -26,6 +31,8 @@ abstract public class BoardManager implements Serializable {
         this.board = board;
     }
 
+    BoardManager(int row, int col) {}
+    }
     /**
      * Return the current board.
      */
@@ -67,5 +74,11 @@ abstract public class BoardManager implements Serializable {
      */
     abstract public boolean isValidTap(int position);
 
+    /**
+     * Increment the score
+     *
+     * @param amount the amount to increment by
+     */
+    public void incrementScore(int amount){score += amount}
 
 }
