@@ -83,12 +83,16 @@ public class MatchingCardsBoardManager extends BoardManager {
             board.flipCardUp(row, col);
             score += 1;
             if (board.twoTempCardsAreUp()){
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                ArrayList<MatchingCardsTile> FaceupTiles = board.getTempFaceupCards();
+                boolean equalNums = FaceupTiles.get(0).getNumber() == FaceupTiles.get(1).getNumber();
+                if (!equalNums) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    board.flipTempCardsDown();
                 }
-                board.flipTempCardsDown();
             };
         }
     }
