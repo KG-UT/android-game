@@ -93,6 +93,7 @@ public class MatchingCardsBoardManager extends BoardManager {
                     }
                     board.flipTempCardsDown();
                 }
+                board.clearTempFaceUpCards();
             };
         }
     }
