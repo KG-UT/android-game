@@ -22,7 +22,7 @@ public class MatchingCardsBoard extends Board {
      * @param cols the number of columns
      * @param tiles the tiles for the board
      */
-    public MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
+    MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
         super(rows, cols, tiles);
     }
 
