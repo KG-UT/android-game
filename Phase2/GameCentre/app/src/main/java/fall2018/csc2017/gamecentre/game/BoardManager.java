@@ -14,14 +14,9 @@ abstract public class BoardManager implements Serializable {
     protected Board board;
 
     /**
-     * A stack of moves made, for move reversals.
-     */
-    private Stack<int[]> stackOfMoves = new Stack<>();
-
-    /**
      * A boardManager without an initial board
      */
-    public BoardManager() {}
+    BoardManager() {}
 
     /**
      * Manage a board that has been pre-populated.
