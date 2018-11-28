@@ -1,12 +1,6 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
-import android.support.annotation.NonNull;
-
-import java.util.Observable;
-
-import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Tile;
@@ -26,14 +20,6 @@ public class SlidingTileBoard extends Board {
      */
     public SlidingTileBoard(int rows, int cols, List<Tile> tiles){
         super(rows, cols, tiles);
-    }
-
-    /**
-     * Return the number of tiles on the board.
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return NUM_COLS * NUM_ROWS;
     }
 
     /**

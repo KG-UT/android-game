@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.slidingTile.*;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.games.slidingTile.*;
 
 import org.mockito.ArgumentMatchers;
 import static org.junit.Assert.assertTrue;
@@ -171,6 +171,8 @@ public class BoardAndTileTest {
 //        SlidingTileBoardManager bm = new SlidingTileBoardManager(5,5);
 //        assertFalse(bm.puzzleSolved());
 //    }
+
+
 
 }
 

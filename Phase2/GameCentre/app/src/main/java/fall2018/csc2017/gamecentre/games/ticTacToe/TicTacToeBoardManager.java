@@ -1,19 +1,12 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
+package fall2018.csc2017.gamecentre.games.ticTacToe;
 
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import fall2018.csc2017.gamecentre.Tile;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoard;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
 
 /**
  * Manage a tic tac toe board.

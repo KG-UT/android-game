@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.App;
+package fall2018.csc2017.gamecentre.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
-import fall2018.csc2017.gamecentre.ticTacToe.TicTacToeStartingActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeStartingActivity;
 
 /**
  * The game activity.
@@ -33,7 +33,6 @@ public class GameChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent tmp = new Intent(GameChoiceActivity.this, SlidingTileStartingActivity.class);
-
                 startActivity(tmp);
             }
         });
