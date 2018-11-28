@@ -12,7 +12,7 @@ public class MatchingCardsBoard extends Board {
     /*
      * The cards that are currently face up
      */
-    private ArrayList<MatchingCardsTile> faceUpCards = new ArrayList<>();
+    private ArrayList<MatchingCardsTile> tempFaceUpCards = new ArrayList<>();
 
     /**
      * A new board of tiles in row-major order.
@@ -30,7 +30,7 @@ public class MatchingCardsBoard extends Board {
      * states if two cards are currently face up
      * @return a boolean stating if two cards are currently face up
      */
-    public boolean twoCardsAreUp(){return faceUpCards.size() == 2;}
+    public boolean twoCardsAreUp(){return tempFaceUpCards.size() == 2;}
 
     /**
      * return the MatchingCardsTile at (row, col)
