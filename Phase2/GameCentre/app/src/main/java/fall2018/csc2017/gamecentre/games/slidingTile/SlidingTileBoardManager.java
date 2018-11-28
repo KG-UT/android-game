@@ -146,7 +146,7 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
-        for (int position=0; position<getBoard().numTiles(); position++){
+        for (int position=0; position<SlidingTileBoard.numTiles(); position++){
             if (isValidTap(position)){
                 validMoves.add(position);
             }
