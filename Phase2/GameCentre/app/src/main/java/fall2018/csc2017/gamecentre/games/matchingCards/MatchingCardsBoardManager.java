@@ -66,4 +66,31 @@ public class MatchingCardsBoardManager extends BoardManager {
         }
         return solved;
     }
+
+    /**
+     * Process a touch at position in the board, flipping cards when appropriate.
+     *
+     * @param position the position
+     */
+    public void touchMove(int position) {
+        int row = position / MatchingCardsBoard.getNumRows();
+        int col = position % MatchingCardsBoard.getNumCols();
+        MatchingCardsBoard board = getBoard();
+        MatchingCardsTile tile = board.getCard(row, col);
+
+        if(!tile.isFaceUp()) {
+            board.flipCardUp(row, col);
+            score += 1;
+            if (board.twoCardsAreUp()){
+                Thread.sleep(2000);
+                board.flipTempCardsDown();
+            };
+        }
+    }
+
+    /**
+     * Return the current board.
+     */
+    public MatchingCardsBoard getBoard() { return (MatchingCardsBoard) super.getBoard(); }
+
 }
