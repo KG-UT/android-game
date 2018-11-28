@@ -205,7 +205,7 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * @return a boolean showing if there are moves in the stack of moves.
      */
-    boolean canUndo(){
+   public boolean canUndo(){
         return !stackOfMoves.isEmpty();
     }
 
@@ -214,7 +214,8 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-    void undoMove() {
+
+    public void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
@@ -238,7 +239,7 @@ public class SlidingTileBoardManager extends BoardManager {
     * Getter function for the Undos left.
     * @return the number of undos the player has left.
     */
-   int getUndosLeft() {
+  public int getUndosLeft() {
        if (undosLeft >= 0){
            return undosLeft;
        } else{
