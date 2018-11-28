@@ -67,4 +67,11 @@ public class MatchingCardsBoard extends Board {
     ArrayList<MatchingCardsTile> getTempFaceupCards(){
         return tempFaceUpCards;
     }
+
+    /**
+     * resets the TempFaceUpCards array.
+     */
+    void clearTempFaceUpCards(){
+        tempFaceUpCards.clear();
+    }
 }
