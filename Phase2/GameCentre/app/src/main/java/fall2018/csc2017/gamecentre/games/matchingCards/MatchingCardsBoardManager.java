@@ -48,6 +48,11 @@ public class MatchingCardsBoardManager extends BoardManager {
         setBoard(new MatchingCardsBoard(numRows, numCols, tiles));
     }
 
+    /**
+     * Return whether the tiles are all face-up.
+     *
+     * @return whether the tiles are all face-up.
+     */
     @Override
     public boolean puzzleSolved() {
         boolean solved = true;
