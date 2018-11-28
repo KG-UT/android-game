@@ -20,12 +20,25 @@ public class ScoreTicTacToe extends ScoreAbstract implements Comparable<ScoreTic
 
     @Override
     public int compareTo(@NonNull ScoreTicTacToe comparedToScore) {
-        if(comparedToScore.getUserScore() < this.getUserScore()) {
+        if(comparedToScore.getUserScore() > this.getUserScore()) {
             return 1;
-        } else if (comparedToScore.getUserScore() > this.getUserScore()) {
+        } else if (comparedToScore.getUserScore() < this.getUserScore()) {
             return -1;
         } else {
-            return 0;
+            return Integer.compare(comparedToScore.getUserName().compareTo(this.getUserName()), 0);
+        }
+    }
+
+    @Override
+    public boolean equals(Object comparedToObject) {
+        if (comparedToObject == null) {
+            return false;
+        } else if (!(comparedToObject instanceof ScoreTicTacToe)) {
+            return false;
+        } else {
+            ScoreTicTacToe comparedToScore = (ScoreTicTacToe) comparedToObject;
+            return (this.getUserName().equals(comparedToScore.getUserName()) &&
+                    (this.getUserScore() == comparedToScore.getUserScore()));
         }
     }
 }

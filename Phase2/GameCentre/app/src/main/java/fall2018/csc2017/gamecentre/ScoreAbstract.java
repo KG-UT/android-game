@@ -1,7 +1,5 @@
 package fall2018.csc2017.gamecentre;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 
 abstract public class ScoreAbstract implements Serializable {
@@ -72,6 +70,11 @@ abstract public class ScoreAbstract implements Serializable {
     public int getUserScore() {
         return this.userScore;
     }
+
+    @Override
+    abstract public boolean equals(Object comparedToObject);
+
+
 
     @Override
     public String toString() {
