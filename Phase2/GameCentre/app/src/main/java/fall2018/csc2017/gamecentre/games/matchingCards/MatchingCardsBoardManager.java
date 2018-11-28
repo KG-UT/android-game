@@ -56,7 +56,7 @@ public class MatchingCardsBoardManager extends BoardManager {
     @Override
     public boolean puzzleSolved() {
         boolean solved = true;
-        MatchingCardsBoard board = (MatchingCardsBoard) getBoard();
+        MatchingCardsBoard board = getBoard();
         Iterator<Object> boardIterator = board.iterator();
         for(int i = 0; i < MatchingCardsBoard.numTiles(); i++) {
             MatchingCardsTile currentTile = (MatchingCardsTile) boardIterator.next();
