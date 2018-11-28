@@ -2,6 +2,9 @@ package fall2018.csc2017.gamecentre.games.matchingCards;
 
 import java.io.Serializable;
 
+/**
+ * A Matching Cards tile.
+ */
 public class MatchingCardsTile implements Serializable {
 
     /**
