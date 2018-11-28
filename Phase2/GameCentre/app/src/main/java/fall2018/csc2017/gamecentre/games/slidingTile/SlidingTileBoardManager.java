@@ -48,7 +48,7 @@ public class SlidingTileBoardManager extends BoardManager {
     /**
      * Manage a new shuffled board.
      */
-    SlidingTileBoardManager(int numRows, int numCols) {
+   public SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {

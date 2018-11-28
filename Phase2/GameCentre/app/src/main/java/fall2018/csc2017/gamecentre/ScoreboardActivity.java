@@ -3,14 +3,16 @@
  **/
 package fall2018.csc2017.gamecentre;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+<<<<<<< HEAD
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
+=======
+>>>>>>> 5724a0e59e64733cf570630fb408f82c1b49f4f1
 /**
- * The abstract class for Scoreboard activity in general.
+ * The abstract class for Scoreboard activity.
  */
 public abstract class ScoreboardActivity extends AppCompatActivity {
 
@@ -20,37 +22,27 @@ public abstract class ScoreboardActivity extends AppCompatActivity {
     }
 
     /**
+     * Initializes a database to work with
+     */
+    protected DBTools databaseTools = new DBTools(this);
+
+    /**
+     * Determines if the scoreboard is the game scoreboard or the user scoreboard
+     */
+    protected boolean isGameScoreboard = true;
+
+    /**
      * Add other scoreboard button listener.
      */
-    abstract public void addOtherScoreboardButtonListener();
+    abstract protected void addOtherScoreboardButtonListener();
 
     /**
-     * Add a listener to the other scoreboard button
+     * Displays the scoreboard.
      */
-    abstract public void addStartingActivityButtonListener();
+    abstract protected void scoreBoardView();
 
     /**
-     * Switches to other scoreboard.
+     * Displays the scoreboard title.
      */
-    abstract public void switchToOtherScoreboard();
-
-    /**
-     * Switch to the SlidingTileStartingActivity
-     */
-    public void switchToStartingActivity() {
-        Intent tmp = new Intent(this, SlidingTileStartingActivity.class);
-        startActivity(tmp);
-    }
-
-    /**
-     * Score board view.
-     */
-    abstract public void scoreBoardView();
-
-    /**
-     * Sets scoreboard.
-     *
-     * @return the scoreboard
-     */
-    abstract public Scoreboard setupScoreboard();
+    abstract protected void scoreBoardTitleView();
 }
