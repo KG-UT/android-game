@@ -72,6 +72,7 @@ public class MatchingCardsBoardManager extends BoardManager {
      *
      * @param position the position
      */
+    @Override
     public void touchMove(int position) {
         int row = position / MatchingCardsBoard.getNumRows();
         int col = position % MatchingCardsBoard.getNumCols();
@@ -82,7 +83,11 @@ public class MatchingCardsBoardManager extends BoardManager {
             board.flipCardUp(row, col);
             score += 1;
             if (board.twoCardsAreUp()){
-                Thread.sleep(2000);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 board.flipTempCardsDown();
             };
         }
