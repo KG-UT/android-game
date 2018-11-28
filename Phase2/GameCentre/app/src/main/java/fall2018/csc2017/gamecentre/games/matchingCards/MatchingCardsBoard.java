@@ -3,6 +3,9 @@ package fall2018.csc2017.gamecentre.games.matchingCards;
 import fall2018.csc2017.gamecentre.game.Board;
 import java.util.List;
 
+/**
+ * The Matching Cards game board.
+ */
 public class MatchingCardsBoard extends Board {
 
     private boolean cardIsUp = false;
