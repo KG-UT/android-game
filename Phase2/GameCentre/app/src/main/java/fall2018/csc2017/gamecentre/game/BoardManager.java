@@ -21,7 +21,7 @@ abstract public class BoardManager implements Serializable {
     /**
      * A boardManager without an initial board
      */
-    BoardManager() {}
+    public BoardManager() {}
 
     /**
      * Manage a board that has been pre-populated.
