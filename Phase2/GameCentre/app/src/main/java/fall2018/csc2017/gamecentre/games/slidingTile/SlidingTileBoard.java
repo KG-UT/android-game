@@ -23,14 +23,6 @@ public class SlidingTileBoard extends Board {
     }
 
     /**
-     * Return the number of tiles on the board.
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return NUM_COLS * NUM_ROWS;
-    }
-
-    /**
      * Return the number of columns of the board.
      * @return the number of columns of the board
      */
