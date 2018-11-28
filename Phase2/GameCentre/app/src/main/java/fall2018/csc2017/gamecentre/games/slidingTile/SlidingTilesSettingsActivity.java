@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;

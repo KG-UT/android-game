@@ -1,10 +1,10 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;

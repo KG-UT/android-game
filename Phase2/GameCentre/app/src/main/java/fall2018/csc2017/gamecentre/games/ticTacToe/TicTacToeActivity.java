@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
+package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 /**
  * The game activity.
@@ -147,7 +147,7 @@ public class TicTacToeActivity extends GameActivity {
         saveToFile(SlidingTileStartingActivity.SAVE_FILENAME);
     }
 
-    /*
+    /**
      * Gives score.
      * @Returns the score.
      */
@@ -155,7 +155,7 @@ public class TicTacToeActivity extends GameActivity {
         return boardManager.getScore();
     }
 
-    /*
+    /**
      * Updates the score text to display.
      */
     private void updateScoreText(){

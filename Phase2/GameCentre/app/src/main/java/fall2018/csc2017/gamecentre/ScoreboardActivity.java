@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 /**
  * The abstract class for Scoreboard activity in general.

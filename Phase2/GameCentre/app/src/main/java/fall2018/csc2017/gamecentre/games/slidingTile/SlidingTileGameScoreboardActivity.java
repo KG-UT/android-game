@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.Scoreboard;
 import fall2018.csc2017.gamecentre.ScoreboardActivity;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileUserScoreboardActivity;
 import fall2018.csc2017.gamecentre.User;
 
 //Adapted from https://stacktips.com/tutorials/android/android-listview-tutorial
@@ -23,7 +22,7 @@ import fall2018.csc2017.gamecentre.User;
 /**
  * The general sliding tile scoreboard activity class
  */
-public class TicTacToeGameScoreboardActivity extends ScoreboardActivity {
+public class SlidingTileGameScoreboardActivity extends ScoreboardActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

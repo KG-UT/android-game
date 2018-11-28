@@ -1,15 +1,15 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 import java.util.Random;
+import java.util.Stack;
 
+import fall2018.csc2017.gamecentre.Tile;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
-import fall2018.csc2017.gamecentre.Tile;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.

@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.go;
+package fall2018.csc2017.gamecentre.games.go;
 
 /**
  * The class representing the black and white stone playing pieces in Go.

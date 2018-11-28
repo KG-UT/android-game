@@ -1,9 +1,6 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
-
-import android.support.annotation.NonNull;
+package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 
 /**
  * A Tile in a sliding tiles puzzle.

@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
 /**
  * The object representation of a sliding tile saved game in the database.

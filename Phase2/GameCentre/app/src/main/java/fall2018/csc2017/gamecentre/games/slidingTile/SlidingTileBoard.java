@@ -1,12 +1,6 @@
-package fall2018.csc2017.gamecentre.slidingTile;
+package fall2018.csc2017.gamecentre.games.slidingTile;
 
-import android.support.annotation.NonNull;
-
-import java.util.Observable;
-
-import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Tile;
