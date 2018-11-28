@@ -161,8 +161,8 @@ public class SlidingTileBoardManager extends BoardManager {
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-        int row = position / Board.getNumCols();
-        int col = position % Board.getNumRows();
+        int row = position / SlidingTileBoard.getNumCols();
+        int col = position % SlidingTileBoard.getNumRows();
         return nearestBlank(row, col) != null;
     }
 
