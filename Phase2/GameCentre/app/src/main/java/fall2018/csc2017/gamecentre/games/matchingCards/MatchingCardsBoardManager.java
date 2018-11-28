@@ -98,4 +98,24 @@ public class MatchingCardsBoardManager extends BoardManager {
      */
     public MatchingCardsBoard getBoard() { return (MatchingCardsBoard) super.getBoard(); }
 
+    /**
+     * returns the current score
+     * @return the score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * states if the tap is valid
+     * @param position the position of the tap
+     * @return whether the tap is valid
+     */
+    @Override
+    public boolean isValidTap(int position) {
+        int row = position / MatchingCardsBoard.getNumCols();
+        int col = position % MatchingCardsBoard.getNumRows();
+        MatchingCardsTile tile = getBoard().getCard(row, col);
+        return !tile.isFaceUp();
+    }
 }
