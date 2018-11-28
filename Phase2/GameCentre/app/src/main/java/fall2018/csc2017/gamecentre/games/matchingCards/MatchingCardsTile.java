@@ -50,4 +50,10 @@ public class MatchingCardsTile implements Serializable {
     boolean isequal(MatchingCardsTile other){
         return this.getNumber() == other.getNumber();
     }
+
+    /**
+     * Returns a bool stating if this card is face up.
+     * @return a bool stating if this card is face up.
+     */
+    boolean isFaceUp(){return faceUp;}
 }
