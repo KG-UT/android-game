@@ -19,16 +19,6 @@ abstract public class BoardManager implements Serializable {
     private Stack<int[]> stackOfMoves = new Stack<>();
 
     /**
-     * The score.
-     */
-    private int score = 0;
-
-    /**
-     * The number of undos left.
-     */
-    private int undosLeft = 3;
-
-    /**
      * A boardManager without an initial board
      */
     public BoardManager() {}
