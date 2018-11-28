@@ -66,4 +66,12 @@ public class MatchingCardsBoardManager extends BoardManager {
         }
         return solved;
     }
+
+    public void touchMove(int pos) {
+
+    }
+
+    public boolean isValidTap(int pos) {
+        return false;
+    }
 }
