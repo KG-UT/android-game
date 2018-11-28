@@ -79,7 +79,7 @@ public class SlidingTileBoardManager extends BoardManager {
         SlidingTileBoard board = getBoard();
 
         Iterator<Object> boardIterator = board.iterator();
-        for(int i = 0; i < board.numTiles() - 1; i++) {
+        for(int i = 0; i < Board.numTiles() - 1; i++) {
             Tile currentTile = (Tile) boardIterator.next();
             int currentTileId = currentTile.getId();
             if(currentTileId - previousTileId != 1) {
