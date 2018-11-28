@@ -48,18 +48,16 @@ public class MatchingCardsBoard extends Board {
     void flipCardUp(int row, int column){
         MatchingCardsTile card = (MatchingCardsTile) getItem(row, column);
         card.setFaceUp();
-        faceUpCards.add(card);
+        tempFaceUpCards.add(card);
     }
 
     /**
-     * flips all the cards on the board down
+     * flips the temporary face up cards back down.
      */
-    void flipAllCardsDown(){
-        for (int row=0; row < NUM_ROWS; row++){
-            for (int col=0; col < NUM_COLS; col++){
-                MatchingCardsTile card = getCard(row, col);
-                card.setFaceDown();
-            }
+    void flipTempCardsDown(){
+        for (int i=0; i<2; i++){
+            MatchingCardsTile tile = tempFaceUpCards.get(i);
+            tile.setFaceDown();
         }
     }
 }
