@@ -60,4 +60,11 @@ public class MatchingCardsBoard extends Board {
             tile.setFaceDown();
         }
     }
+
+    /**
+     * gets the temporarily face-up cards
+     */
+    ArrayList<MatchingCardsTile> getTempFaceupCards(){
+        return tempFaceUpCards;
+    }
 }
