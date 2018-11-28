@@ -82,7 +82,7 @@ public class MatchingCardsBoardManager extends BoardManager {
         if(!tile.isFaceUp()) {
             board.flipCardUp(row, col);
             score += 1;
-            if (board.twoCardsAreUp()){
+            if (board.twoTempCardsAreUp()){
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
