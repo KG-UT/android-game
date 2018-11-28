@@ -131,7 +131,7 @@ abstract public class Board extends Observable implements Serializable, Iterable
      * return the number of tiles on the board.
      * @return the number of tiles on the board.
      */
-    public static int NumTiles(){ return NUM_COLS*NUM_ROWS;}
+    public static int numTiles(){ return NUM_COLS*NUM_ROWS;}
     /**
      * Return the item at (row, col)
      *
