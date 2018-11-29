@@ -31,8 +31,6 @@ abstract public class BoardManager implements Serializable {
         this.board = board;
     }
 
-    BoardManager(int row, int col) {}
-    }
     /**
      * Return the current board.
      */
@@ -79,6 +77,6 @@ abstract public class BoardManager implements Serializable {
      *
      * @param amount the amount to increment by
      */
-    public void incrementScore(int amount){score += amount}
+    void incrementScore(int amount){score += amount;}
 
 }
