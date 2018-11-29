@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
+
 public class TicTacToeBoardManagerTest {
     private final int NUM_ROWS = 3;
     private final int NUM_COLS = 3;

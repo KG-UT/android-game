@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.GameChoiceActivity"/>
+        <activity android:name=".App.GameChoiceActivity"/>
         <activity android:name=".games.slidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".games.slidingTile.SlidingTileStartingActivity" />
         <activity android:name=".games.slidingTile.SlidingTileActivity" />

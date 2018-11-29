@@ -11,9 +11,30 @@ import static org.junit.Assert.assertNotEquals;
 
 public class scoreGoTest extends scoreTest {
 
+    /**
+     * Setup scores in preparation for tests.
+     */
     protected ScoreGo setupScores() {
         User newUser = new User(1, "John", "Password");
         return new ScoreGo(10, newUser);
+    }
+
+    /**
+     * Test whether ScoreGo initialization works.
+     */
+    @Test
+    public void testScoreInitialization() {
+        User newUser = new User(1, "John", "Password");
+        ScoreGo newGoScore1 = new ScoreGo(1, 10, newUser.getUsername());
+        ScoreGo newGoScore2 = new ScoreGo(10, newUser);
+
+        assertEquals(1, newGoScore1.get_id());
+        assertEquals(10, newGoScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newGoScore1.getUserName());
+
+        assertEquals(1, newGoScore2.get_id());
+        assertEquals(10, newGoScore2.getUserScore());
+        assertEquals(newUser.getUsername(), newGoScore2.getUserName());
     }
 
     /**
