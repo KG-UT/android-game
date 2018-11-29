@@ -77,6 +77,6 @@ abstract public class BoardManager implements Serializable {
      *
      * @param amount the amount to increment by
      */
-    void incrementScore(int amount){score += amount;}
+    public void incrementScore(int amount){score += amount;}
 
 }
