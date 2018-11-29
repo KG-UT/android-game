@@ -71,7 +71,7 @@ public class MatchingCardsActivity extends GameActivity {
                         display();
                     }
                 });
-        addSave1ButtonListener();
+        addSaveButtonListener();
     }
 
     public void display() {
@@ -161,9 +161,9 @@ public class MatchingCardsActivity extends GameActivity {
         }
     }
 
-    private void addSave1ButtonListener() {
-        Button Save1Button = findViewById(R.id.MatchingSaveButton);
-        Save1Button.setOnClickListener(new View.OnClickListener() {
+    private void addSaveButtonListener() {
+        Button SaveButton = findViewById(R.id.MatchingSaveButton);
+        SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveToFile(SAVE_FILE);
