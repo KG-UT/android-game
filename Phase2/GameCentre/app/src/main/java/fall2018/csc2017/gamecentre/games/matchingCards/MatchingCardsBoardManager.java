@@ -56,7 +56,7 @@ public class MatchingCardsBoardManager extends BoardManager {
     @Override
     public boolean puzzleSolved() {
         boolean solved = true;
-        MatchingCardsBoard board = (MatchingCardsBoard) getBoard();
+        MatchingCardsBoard board = getBoard();
         Iterator<Object> boardIterator = board.iterator();
         for(int i = 0; i < MatchingCardsBoard.numTiles(); i++) {
             MatchingCardsTile currentTile = (MatchingCardsTile) boardIterator.next();
@@ -67,11 +67,60 @@ public class MatchingCardsBoardManager extends BoardManager {
         return solved;
     }
 
-    public void touchMove(int pos) {
+    /**
+     * Process a touch at position in the board, flipping cards when appropriate.
+     *
+     * @param position the position
+     */
+    @Override
+    public void touchMove(int position) {
+        int row = position / MatchingCardsBoard.getNumRows();
+        int col = position % MatchingCardsBoard.getNumCols();
+        MatchingCardsBoard board = getBoard();
+        MatchingCardsTile tile = board.getCard(row, col);
 
+        if(!tile.isFaceUp()) {
+            board.flipCardUp(row, col);
+            score += 1;
+            if (board.twoTempCardsAreUp()){
+                ArrayList<MatchingCardsTile> FaceupTiles = board.getTempFaceupCards();
+                boolean equalNums = FaceupTiles.get(0).getNumber() == FaceupTiles.get(1).getNumber();
+                if (!equalNums) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    board.flipTempCardsDown();
+                }
+                board.clearTempFaceUpCards();
+            };
+        }
     }
 
-    public boolean isValidTap(int pos) {
-        return false;
+    /**
+     * Return the current board.
+     */
+    public MatchingCardsBoard getBoard() { return (MatchingCardsBoard) super.getBoard(); }
+
+    /**
+     * returns the current score
+     * @return the score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * states if the tap is valid
+     * @param position the position of the tap
+     * @return whether the tap is valid
+     */
+    @Override
+    public boolean isValidTap(int position) {
+        int row = position / MatchingCardsBoard.getNumCols();
+        int col = position % MatchingCardsBoard.getNumRows();
+        MatchingCardsTile tile = getBoard().getCard(row, col);
+        return !tile.isFaceUp();
     }
 }

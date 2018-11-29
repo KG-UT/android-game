@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.GameChoiceActivity"/>
+        <activity android:name=".App.GameChoiceActivity"/>
         <activity android:name=".games.slidingTile.SlidingTilesSettingsActivity" />
         <activity android:name=".games.slidingTile.SlidingTileStartingActivity" />
         <activity android:name=".games.slidingTile.SlidingTileActivity" />
@@ -33,7 +33,9 @@
         <activity android:name=".games.ticTacToe.TicTacToeSettingsActivity" />
         <activity android:name=".games.ticTacToe.TicTacToeActivity"/>
         <activity android:name=".games.ticTacToe.TicTacToeEndActivity"/>
-
+        <activity android:name=".games.matchingCards.MatchingCardsActivity"/>
+        <activity android:name=".games.matchingCards.MatchingCardsStartingActivity"/>
+        <activity android:name=".games.matchingCards.MatchingCardsEndActivity"/>
         <activity android:name=".SavedGamesView"/>
         <activity android:name=".games.slidingTile.SlidingTileEndActivity"/>
     </application>

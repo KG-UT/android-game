@@ -47,7 +47,7 @@ public class MatchingCardsTile implements Serializable {
      * @param other Another MatchingCardsTile.
      * @return a boolean stating if this card is equal to another.
      */
-    boolean isequal(MatchingCardsTile other){
+    boolean isEqual(MatchingCardsTile other){
         return this.getNumber() == other.getNumber();
     }
 

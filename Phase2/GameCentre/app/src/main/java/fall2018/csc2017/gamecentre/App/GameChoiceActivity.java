@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.app;
+package fall2018.csc2017.gamecentre.App;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsStartingActivity;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeStartingActivity;
 
@@ -22,6 +23,7 @@ public class GameChoiceActivity extends AppCompatActivity {
 
         addSlidingTilesButtonListener();
         addTicTacToeButtonListener();
+        addMatchingCardsButtonListener();
     }
 
     /**
@@ -48,6 +50,20 @@ public class GameChoiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent tmp = new Intent(GameChoiceActivity.this, TicTacToeStartingActivity.class);
 
+                startActivity(tmp);
+            }
+        });
+    }
+
+    /**
+     * Add a button listener for the Matching Cards game option
+     */
+    private void addMatchingCardsButtonListener(){
+        Button matchingCardsButton = findViewById(R.id.MatchingCardsbutton);
+        matchingCardsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tmp = new Intent(GameChoiceActivity.this, MatchingCardsStartingActivity.class);
                 startActivity(tmp);
             }
         });

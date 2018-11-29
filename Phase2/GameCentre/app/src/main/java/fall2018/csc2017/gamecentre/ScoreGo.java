@@ -20,12 +20,25 @@ public class ScoreGo extends ScoreAbstract implements Comparable<ScoreGo> {
 
     @Override
     public int compareTo(@NonNull ScoreGo comparedToScore) {
-        if(comparedToScore.getUserScore() > this.getUserScore()) {
+        if(comparedToScore.getUserScore() < this.getUserScore()) {
             return 1;
-        } else if (comparedToScore.getUserScore() < this.getUserScore()) {
+        } else if (comparedToScore.getUserScore() > this.getUserScore()) {
             return -1;
         } else {
-            return 0;
+            return Integer.compare(comparedToScore.getUserName().compareTo(this.getUserName()), 0);
+        }
+    }
+
+    @Override
+    public boolean equals(Object comparedToObject) {
+        if (comparedToObject == null) {
+            return false;
+        } else if (!(comparedToObject instanceof ScoreGo)) {
+            return false;
+        } else {
+            ScoreGo comparedToScore = (ScoreGo) comparedToObject;
+            return (this.getUserName().equals(comparedToScore.getUserName()) &&
+                    (this.getUserScore() == comparedToScore.getUserScore()));
         }
     }
 }

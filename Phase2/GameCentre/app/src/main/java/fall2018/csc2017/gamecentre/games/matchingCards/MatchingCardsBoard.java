@@ -12,7 +12,7 @@ public class MatchingCardsBoard extends Board {
     /*
      * The cards that are currently face up
      */
-    private ArrayList<MatchingCardsTile> faceUpCards = new ArrayList<>();
+    private ArrayList<MatchingCardsTile> tempFaceUpCards = new ArrayList<>();
 
     /**
      * A new board of tiles in row-major order.
@@ -22,7 +22,7 @@ public class MatchingCardsBoard extends Board {
      * @param cols the number of columns
      * @param tiles the tiles for the board
      */
-    public MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
+    MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
         super(rows, cols, tiles);
     }
 
@@ -30,7 +30,7 @@ public class MatchingCardsBoard extends Board {
      * states if two cards are currently face up
      * @return a boolean stating if two cards are currently face up
      */
-    public boolean twoCardsAreUp(){return faceUpCards.size() == 2;}
+    boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
 
     /**
      * return the MatchingCardsTile at (row, col)
@@ -48,18 +48,30 @@ public class MatchingCardsBoard extends Board {
     void flipCardUp(int row, int column){
         MatchingCardsTile card = (MatchingCardsTile) getItem(row, column);
         card.setFaceUp();
-        faceUpCards.add(card);
+        tempFaceUpCards.add(card);
     }
 
     /**
-     * flips all the cards on the board down
+     * flips the temporary face up cards back down.
      */
-    void flipAllCardsDown(){
-        for (int row=0; row < NUM_ROWS; row++){
-            for (int col=0; col < NUM_COLS; col++){
-                MatchingCardsTile card = getCard(row, col);
-                card.setFaceDown();
-            }
+    void flipTempCardsDown(){
+        for (int i=0; i<2; i++){
+            MatchingCardsTile tile = tempFaceUpCards.get(i);
+            tile.setFaceDown();
         }
+    }
+
+    /**
+     * gets the temporarily face-up cards
+     */
+    ArrayList<MatchingCardsTile> getTempFaceupCards(){
+        return tempFaceUpCards;
+    }
+
+    /**
+     * resets the TempFaceUpCards array.
+     */
+    void clearTempFaceUpCards(){
+        tempFaceUpCards.clear();
     }
 }
