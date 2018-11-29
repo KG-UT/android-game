@@ -2,15 +2,13 @@ package fall2018.csc2017.gamecentre.firebase;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
-public interface DatabaseTools {
+abstract class DatabaseTools {
 
-    public String serializeBoardManager();
+    abstract String serializeBoardManager(BoardManager boardManager);
 
-    public BoardManager deSerializeBoardManager(String serializedBoardManager);
+    abstract BoardManager deSerializeBoardManager(String serializedBoardManager);
 
-    public BoardManager retrieveDeSerializedBoardManager(String gameKeyValue);
+    abstract BoardManager retrieveBoardManager(String gameKeyValue);
 
-    public void saveToDatabase(BoardManager boardManager);
-
-
+    abstract void saveToDatabase(BoardManager boardManager);
 }

@@ -4,28 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -38,6 +23,7 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileDatabaseTools;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
@@ -75,6 +61,7 @@ public class SlidingTileActivity extends GameActivity {
     private static int columnWidth, columnHeight;
 
     // TODO: make this final in a refactoring.
+    private SlidingTileDatabaseTools slidingTileDatabaseTools = new SlidingTileDatabaseTools();
 
 
     public HashMap<String, Object> getSettings() {
@@ -89,23 +76,25 @@ public class SlidingTileActivity extends GameActivity {
         updateTileButtons();
         updateScoreText();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
+
+        // TODO: THIS IS TEMPORARY FOR TESTING
+        slidingTileDatabaseTools.retrieveBoardManager(boardManager.getGameKeyValue());
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: Add database tings here
-
 
         HashMap<String, Object> settings = getSettings();
         boardManager = (SlidingTileBoardManager) settings.get("PRELOADED_BOARD_MANAGER");
+
         if(boardManager == null) {
             int numRows = (int) settings.get("NUM_ROWS");
             int numCols = (int) settings.get("NUM_COLS");
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
         // Saves the boardManager to firebase.
-        saveToDatabase();
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -178,7 +167,7 @@ public class SlidingTileActivity extends GameActivity {
             }
             nextPos++;
         }
-        saveToDatabase();
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
     }
 
     /**
@@ -213,7 +202,7 @@ public class SlidingTileActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToDatabase();
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
     }
 
     private void addUndoMoveButtonListener(){
@@ -233,7 +222,7 @@ public class SlidingTileActivity extends GameActivity {
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToDatabase();
+                slidingTileDatabaseTools.saveToDatabase(boardManager);
             }
         });
     }

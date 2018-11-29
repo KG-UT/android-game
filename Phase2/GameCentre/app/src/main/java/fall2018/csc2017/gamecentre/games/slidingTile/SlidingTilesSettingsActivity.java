@@ -8,6 +8,8 @@ import android.widget.ToggleButton;
 
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;
+import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileDatabaseTools;
 
 /**
  * The settings activity for Sliding Tiles (view)
@@ -18,6 +20,8 @@ public class SlidingTilesSettingsActivity extends SettingsActivity {
      */
     public int NUM_ROWS = 4;
     public int NUM_COLS = 4;
+
+    private SlidingTileDatabaseTools slidingTileDatabaseTools = new SlidingTileDatabaseTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

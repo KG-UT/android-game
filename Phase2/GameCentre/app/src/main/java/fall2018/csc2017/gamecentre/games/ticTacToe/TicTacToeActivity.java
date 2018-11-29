@@ -254,24 +254,4 @@ public class TicTacToeActivity extends GameActivity {
 //            startActivity(tmp);
         }
     }
-
-    @Override
-    public void saveToDatabase() {
-
-    }
-
-    @Override
-    public void retrieveDeSerializedBoardManager(String gameKeyValue) {
-
-    }
-
-    @Override
-    public String serializeBoardManager() {
-        return null;
-    }
-
-    @Override
-    public BoardManager deSerializeBoardManager(String serializedBoardManager) {
-        return null;
-    }
 }

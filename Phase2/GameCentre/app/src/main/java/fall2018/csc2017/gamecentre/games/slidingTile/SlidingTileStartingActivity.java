@@ -18,6 +18,7 @@ import fall2018.csc2017.gamecentre.boardManagers.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -42,6 +43,11 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      * The board manager.
      */
     private SlidingTileBoardManager slidingTileBoardManager;
+
+    /**
+     * The Database methods needed for sliding tiles.
+     */
+    private SlidingTileDatabaseTools slidingTileDatabaseTools = new SlidingTileDatabaseTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +85,6 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loadFromFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastLoadedText();
                 switchToSettings();
             }
         });
@@ -102,9 +105,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveToFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastSavedText();
+//
                 startActivity(new Intent(SlidingTileStartingActivity.this, SavedGamesView.class));
             }
             });

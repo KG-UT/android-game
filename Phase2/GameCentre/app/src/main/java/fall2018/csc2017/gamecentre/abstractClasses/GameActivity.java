@@ -18,13 +18,6 @@ abstract public class GameActivity extends AppCompatActivity implements Observer
      */
     abstract public void display();
 
-    /**
-     * Saves the current game activity state.
-     */
-    abstract public void saveToDatabase();
-
-    abstract public void retrieveDeSerializedBoardManager(String gameKeyValue);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +32,6 @@ abstract public class GameActivity extends AppCompatActivity implements Observer
     public void update(Observable o, Object arg) {
         display();
     }
-
-    abstract public String serializeBoardManager();
-
-    abstract public BoardManager deSerializeBoardManager(String serializedBoardManager);
 
 }
 
