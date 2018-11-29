@@ -78,7 +78,7 @@ public class SlidingTileActivity extends GameActivity {
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
 
         // TODO: THIS IS TEMPORARY FOR TESTING
-        slidingTileDatabaseTools.retrieveBoardManager(boardManager.getGameKeyValue());
+//        slidingTileDatabaseTools.retrieveBoardManager(boardManager.getGameKeyValue());
     }
 
     @Override

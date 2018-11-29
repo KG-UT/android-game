@@ -46,6 +46,8 @@ public final class SlidingTileDatabaseTools extends DatabaseTools {
         if (slidingTileBoardManager.getGameKeyValue() == null) {
             gameKeyValue = mDatabase.child("users").child(ownerKeyValue)
                     .child("st-games").push().getKey();
+
+            slidingTileBoardManager.setGameKeyValue(gameKeyValue);
         } else {
             gameKeyValue = slidingTileBoardManager.getGameKeyValue();
         }
