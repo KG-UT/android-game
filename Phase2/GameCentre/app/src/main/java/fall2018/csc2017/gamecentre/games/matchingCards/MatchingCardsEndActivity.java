@@ -1,7 +1,17 @@
 package fall2018.csc2017.gamecentre.games.matchingCards;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+
+import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
 public class MatchingCardsEndActivity extends GameEndActivity {
 
@@ -15,23 +25,46 @@ public class MatchingCardsEndActivity extends GameEndActivity {
      */
     DBTools database = new DBTools(MatchingCardsEndActivity.this);
 
-    /**
-     * Display the score as a Textview.
-     */
-    public void displayScore(){};
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.score = getIntent().getIntExtra("SCORE", 0);
+        setContentView(R.layout.activity_ending_);
+        saveScore();
+        displayScore();
+        addMenuButtonListener();
+    }
 
-    /**
-     * Save score to database.
-     */
-    public void saveScore(){};
+    @Override
+    public void displayScore() {
+        TextView score = findViewById(R.id.EndScore);
+        String textToSetTo = "Score: " + this.score;
+        score.setText(textToSetTo);
+    }
 
-    /**
-     * Adds a main menu button listener. (Interact on click)
-     */
-    public void addMenuButtonListener(){};
+    @Override
+    public void saveScore() {
+        // Noted for later:
+        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
+        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
+        ScoreMatchingCards theScore = new ScoreMatchingCards(this.score, myUser);
+       // database.insertSlidingTileScore(theScore);
+    }
 
-    /**
-     * Send us to the main menu
-     */
-    public void toMenu(){};
+    @Override
+    public void addMenuButtonListener() {
+        Button menu = findViewById(R.id.Menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMenu();
+            }
+        });
+    }
+
+    @Override
+    public void toMenu(){
+        Intent tmp = new Intent(this, MatchingCardsStartingActivity.class);
+        startActivity(tmp);
+    }
 }
