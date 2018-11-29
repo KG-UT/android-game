@@ -13,7 +13,7 @@ import fall2018.csc2017.gamecentre.game.BoardManager;
  * Game is based on how many times the user can beat a randomly playing computer
  * before the user loses.
  */
-class TicTacToeBoardManager extends BoardManager {
+public class TicTacToeBoardManager extends BoardManager {
     /**
      * The default string to represent no same states (X or O) for a row, col or diagonal
      */
@@ -277,4 +277,8 @@ class TicTacToeBoardManager extends BoardManager {
         }
     }
 
+    @Override
+    public int getScore() {
+        return 0;
+    }
 }

@@ -1,8 +1,14 @@
 package fall2018.csc2017.gamecentre.ticTacToe;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static org.junit.Assert.*;
+
 
 public class TicTacToeBoardManagerTest {
     private final int NUM_ROWS = 3;
