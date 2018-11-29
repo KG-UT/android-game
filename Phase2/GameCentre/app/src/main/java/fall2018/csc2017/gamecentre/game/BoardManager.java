@@ -14,19 +14,9 @@ abstract public class BoardManager implements Serializable {
     protected Board board;
 
     /**
-     * A stack of moves made, for move reversals.
+     * The score
      */
-    private Stack<int[]> stackOfMoves = new Stack<>();
-
-    /**
-     * The score.
-     */
-    private int score = 0;
-
-    /**
-     * The number of undos left.
-     */
-    private int undosLeft = 3;
+    protected int score = 0;
 
     /**
      * A boardManager without an initial board
@@ -65,22 +55,7 @@ abstract public class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-    public int getScore() { return score;}
-
-    /**
-     * Setter function for the score
-     *
-     */
-
-    /**
-     * Increment the score
-     *
-     * @param amount amount to increment score by
-     */
-    public void incrementScore(int amount) {
-        this.score += amount;
-    }
-
+    abstract public int getScore();
 
     /**
      * Return whether or not the puzzle is solved or game is over
@@ -97,5 +72,11 @@ abstract public class BoardManager implements Serializable {
      */
     abstract public boolean isValidTap(int position);
 
+    /**
+     * Increment the score
+     *
+     * @param amount the amount to increment by
+     */
+    public void incrementScore(int amount){score += amount;}
 
 }

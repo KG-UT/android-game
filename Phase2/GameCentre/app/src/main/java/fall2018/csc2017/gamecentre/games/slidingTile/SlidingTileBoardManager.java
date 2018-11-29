@@ -8,13 +8,14 @@ import java.util.Random;
 import java.util.Stack;
 
 import fall2018.csc2017.gamecentre.Tile;
+import fall2018.csc2017.gamecentre.app.Undoable;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class SlidingTileBoardManager extends BoardManager {
+public class SlidingTileBoardManager extends BoardManager implements Undoable {
     /**
      * A stack of moves made, for move reversals.
      */
@@ -146,7 +147,7 @@ public class SlidingTileBoardManager extends BoardManager {
      */
     private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
-        for (int position=0; position<getBoard().numTiles(); position++){
+        for (int position=0; position<SlidingTileBoard.numTiles(); position++){
             if (isValidTap(position)){
                 validMoves.add(position);
             }
@@ -161,8 +162,8 @@ public class SlidingTileBoardManager extends BoardManager {
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-        int row = position / Board.getNumCols();
-        int col = position % Board.getNumRows();
+        int row = position / SlidingTileBoard.getNumCols();
+        int col = position % SlidingTileBoard.getNumRows();
         return nearestBlank(row, col) != null;
     }
 
@@ -214,7 +215,6 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-
     public void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];
