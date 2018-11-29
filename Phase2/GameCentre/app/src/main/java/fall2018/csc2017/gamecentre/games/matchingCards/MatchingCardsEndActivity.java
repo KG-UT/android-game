@@ -1,8 +1,20 @@
 package fall2018.csc2017.gamecentre.games.matchingCards;
 
+import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 
 public class MatchingCardsEndActivity extends GameEndActivity {
+
+    /**
+     * The score attained by the user.
+     */
+    int score;
+
+    /**
+     * The Database.
+     */
+    DBTools database = new DBTools(MatchingCardsEndActivity.this);
+
     /**
      * Display the score as a Textview.
      */
