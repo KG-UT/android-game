@@ -40,6 +40,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
         setContentView(R.layout.activity_matching_starting);
         addNewGameButtonListener();
         addAutoSaveButtonListener();
+        addScoreboardButtonListener();
     }
 
     /**
@@ -118,7 +119,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //loadFromFile(SAVE_FILENAME);
+                loadFromFile(SAVE_FILENAME);
                 Intent tmp = new Intent(MatchingCardsStartingActivity.this, MatchingCardsActivity.class);
 
                 HashMap<String, Object> settings = new HashMap<>();
@@ -127,6 +128,19 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
 
                 startActivity(tmp);
 
+            }
+        });
+    }
+
+    /**
+     * Add a listener to the scoreboard button
+     */
+    private void addScoreboardButtonListener() {
+        Button scoreboardButton = findViewById(R.id.MatchingScoreButton);
+        scoreboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
             }
         });
     }
