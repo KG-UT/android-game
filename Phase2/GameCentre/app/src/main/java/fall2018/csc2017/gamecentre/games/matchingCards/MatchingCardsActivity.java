@@ -91,7 +91,7 @@ public class MatchingCardsActivity extends GameActivity {
         for (int row = 0; row != Board.getNumRows(); row++) {
             for (int col = 0; col != Board.getNumCols(); col++) {
                 Button tmp = new Button(context);
-                tmp.setText(board.getCard(row, col).getNumber());
+                tmp.setText(Integer.toString(board.getCard(row, col).getNumber()));
                 tmp.setTextSize(64);
                 tmp.setBackgroundColor(Color.parseColor("#ffffff"));
                 this.tileButtons.add(tmp);
@@ -108,7 +108,7 @@ public class MatchingCardsActivity extends GameActivity {
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();
             int col = nextPos % Board.getNumCols();
-            b.setText(board.getCard(row, col).getNumber());
+            b.setText(Integer.toString(board.getCard(row, col).getNumber()));
             nextPos++;
         }
         saveToFile(MatchingCardsStartingActivity.SAVE_FILENAME);
