@@ -162,7 +162,7 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     private void addSave1ButtonListener() {
-        Button Save1Button = findViewById(R.id.MatchingAutoSaveButton);
+        Button Save1Button = findViewById(R.id.MatchingSaveButton);
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
