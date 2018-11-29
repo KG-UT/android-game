@@ -6,6 +6,7 @@ import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import fall2018.csc2017.gamecentre.games.ticTacToe.*;
 
 import static org.junit.Assert.*;
 
