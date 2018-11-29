@@ -1,4 +1,4 @@
-package fall2018.csc2017.ticTacToe;
+package fall2018.csc2017.gamecentre.ticTacToe;
 
 import org.junit.Test;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.ticTacToe.TicTacToeBoard;
-import fall2018.csc2017.gamecentre.ticTacToe.TicTacToeTile;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoard;
+import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeTile;
 
 import static org.junit.Assert.*;
 
@@ -105,4 +105,3 @@ public class TicTacToeBoardTest {
     }
 
 }
-

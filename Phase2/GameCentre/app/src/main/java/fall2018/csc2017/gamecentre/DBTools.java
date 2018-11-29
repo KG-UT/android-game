@@ -1,3 +1,6 @@
+/**
+ * Excluded from tests because it is a model and performs database operations
+ */
 package fall2018.csc2017.gamecentre;
 
 import android.content.ContentValues;
@@ -8,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileSavedGame;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileSavedGame;
 
 /**
  * This class handles all database matters from reading to updating information.
@@ -333,7 +336,7 @@ public class DBTools extends SQLiteOpenHelper {
      * @param queryValues the query values from the Score object.
      * @return the Score object.
      */
-    public Score insertSlidingTileScore(Score queryValues) {
+    public ScoreSlidingTiles insertSlidingTileScore(ScoreSlidingTiles queryValues) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ST_SCORE_OWNER, queryValues.getUserName());
@@ -351,8 +354,8 @@ public class DBTools extends SQLiteOpenHelper {
      * @param owner the current user
      * @return the user's sliding tile scores as an ArrayList<Score>.
      */
-    public ArrayList<Score> getUserSlidingTileScores(String owner) {
-        ArrayList<Score> userSlidingTileScores = new ArrayList<>();
+    public ArrayList<ScoreSlidingTiles> getUserSlidingTileScores(String owner) {
+        ArrayList<ScoreSlidingTiles> userSlidingTileScores = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         // Cursor arguments
         String[] columnToSearch = new String[] { COLUMN_ST_SCORE_VALUE, COLUMN_ST_SCORE_ID, COLUMN_ST_OWNER };
@@ -374,7 +377,7 @@ public class DBTools extends SQLiteOpenHelper {
                 //String currentOwner = LoginActivity.myUser.getUsername();
                 int currentScoreValue = cursor.getInt(scoreValueColumnIdx);
                 // TODO: Change the way User is passed in here as an arg.
-                Score currentScore = new Score(currentScoreId, currentScoreValue, currentOwner);
+                ScoreSlidingTiles currentScore = new ScoreSlidingTiles(currentScoreId, currentScoreValue, currentOwner);
                 userSlidingTileScores.add(currentScore);
             } while (cursor.moveToNext());
         }

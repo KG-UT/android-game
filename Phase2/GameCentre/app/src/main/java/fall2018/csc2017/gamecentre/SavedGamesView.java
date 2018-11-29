@@ -15,8 +15,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileBoardManager;
-import fall2018.csc2017.gamecentre.slidingTile.SlidingTileActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -31,8 +31,8 @@ public class SavedGamesView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_games_view);
-        ArrayList<Score> scores = database.getUserSlidingTileScores(myUser.getUsername());
-        for(Score s: scores) {
+        ArrayList<ScoreSlidingTiles> scores = database.getUserSlidingTileScores(myUser.getUsername());
+        for(ScoreSlidingTiles s: scores) {
             Log.d("TAG", "" + s.getUserScore());
         }
 

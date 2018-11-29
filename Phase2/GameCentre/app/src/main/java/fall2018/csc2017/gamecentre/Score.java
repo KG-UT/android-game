@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 
 /**
- * The Score class which is used in the score board.
+ * The Score class which is used in the score board (Just a placeholder for now).
  */
 public class Score implements Comparable<Score>, Serializable {
 
@@ -25,10 +25,10 @@ public class Score implements Comparable<Score>, Serializable {
     private int userScore;
 
     /**
-     * Creates a score where username comes from user
+     * Creates a score where username comes from user (Used to create score at the endgame)
      */
-    public Score(long _id, int userScore, User user) {
-        this._id = _id;
+    public Score(int userScore, User user) {
+        this._id = 1;
         this.userName = user.getUsername();
         this.userScore = userScore;
     }
