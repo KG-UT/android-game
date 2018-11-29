@@ -8,8 +8,16 @@ import static org.junit.Assert.assertEquals;
 
 abstract public class scoreTest {
 
-
+    /**
+     * Setup scores in preparation for tests.
+     */
     abstract protected ScoreAbstract setupScores();
+
+    /**
+     * Test whether the initialization of scores work.
+     */
+    @Test
+    abstract public void testScoreInitialization();
 
     /**
      * Test whether method get_id works.

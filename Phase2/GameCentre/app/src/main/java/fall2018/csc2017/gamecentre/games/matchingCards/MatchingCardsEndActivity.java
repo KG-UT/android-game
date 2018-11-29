@@ -9,7 +9,10 @@ import android.widget.TextView;
 import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.ScoreGo;
+import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileEndActivity;
+import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -18,43 +21,53 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int score;
+    int endScore;
 
     /**
      * The Database.
      */
-    DBTools database = new DBTools(MatchingCardsEndActivity.this);
+    DBTools database = new DBTools(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.score = getIntent().getIntExtra("SCORE", 0);
-        setContentView(R.layout.activity_ending_);
+        this.endScore = getIntent().getIntExtra("SCORE", 0);
+        setContentView(R.layout.activity_matching_ending);
+
         saveScore();
         displayScore();
         addMenuButtonListener();
     }
 
-    @Override
-    public void displayScore() {
-        TextView score = findViewById(R.id.EndScore);
-        String textToSetTo = "Score: " + this.score;
-        score.setText(textToSetTo);
-    }
-
-    @Override
-    public void saveScore() {
+    /**
+     * Save score to database.
+     */
+    public void saveScore(){
         // Noted for later:
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        ScoreMatchingCards theScore = new ScoreMatchingCards(this.score, myUser);
-       // database.insertSlidingTileScore(theScore);
+//        ScoreGo currScore = new ScoreGo(this.endScore, myUser);
+//        database.insertSlidingTileScore(currScore);
+
+        ScoreSlidingTiles currScore = new ScoreSlidingTiles(this.endScore, myUser);
+        database.insertSlidingTileScore(currScore);
     }
 
-    @Override
-    public void addMenuButtonListener() {
-        Button menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
+    /**
+     * Display the score as a TextView.
+     */
+    public void displayScore(){
+        TextView matchingCardsText = findViewById(R.id.MatchingTilesEndScore);
+        String matchingTilesEndScoreText = "Your Score: " + this.endScore;
+        matchingCardsText.setText(matchingTilesEndScoreText);
+    }
+
+    /**
+     * Adds a main menu button listener. (Interact on click)
+     */
+    public void addMenuButtonListener(){
+        Button matchingCardsStartingMenuButton = findViewById(R.id.MatchingTilesBackToMainMenuButton);
+        matchingCardsStartingMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -62,7 +75,9 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         });
     }
 
-    @Override
+    /**
+     * Send us to the matching cards starting menu
+     */
     public void toMenu(){
         Intent tmp = new Intent(this, MatchingCardsStartingActivity.class);
         startActivity(tmp);

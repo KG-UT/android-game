@@ -37,6 +37,7 @@
         <activity android:name=".games.matchingCards.MatchingCardsStartingActivity"/>
         <activity android:name=".games.matchingCards.MatchingCardsEndActivity"/>
         <activity android:name=".SavedGamesView"/>
+        <activity android:name=".ScoreboardGameUserActivity"/>
         <activity android:name=".games.slidingTile.SlidingTileEndActivity"/>
     </application>
 

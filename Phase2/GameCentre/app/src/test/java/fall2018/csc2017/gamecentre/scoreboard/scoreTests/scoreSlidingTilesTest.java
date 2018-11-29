@@ -10,9 +10,30 @@ import static org.junit.Assert.*;
 
 public class scoreSlidingTilesTest extends scoreTest {
 
+    /**
+     * Setup scores in preparation for tests.
+     */
     protected ScoreSlidingTiles setupScores() {
         User newUser = new User(1, "John", "Password");
         return new ScoreSlidingTiles(10, newUser);
+    }
+
+    /**
+     * Test whether ScoreSlidingTiles initialization works.
+     */
+    @Test
+    public void testScoreInitialization() {
+        User newUser = new User(1, "John", "Password");
+        ScoreSlidingTiles newScoreSlidingScore1 = new ScoreSlidingTiles(1, 10, newUser.getUsername());
+        ScoreSlidingTiles newScoreSlidingScore2 = new ScoreSlidingTiles(10, newUser);
+
+        assertEquals(1, newScoreSlidingScore1.get_id());
+        assertEquals(10, newScoreSlidingScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newScoreSlidingScore1.getUserName());
+
+        assertEquals(1, newScoreSlidingScore2.get_id());
+        assertEquals(10, newScoreSlidingScore2.getUserScore());
+        assertEquals(newUser.getUsername(), newScoreSlidingScore2.getUserName());
     }
 
     /**
