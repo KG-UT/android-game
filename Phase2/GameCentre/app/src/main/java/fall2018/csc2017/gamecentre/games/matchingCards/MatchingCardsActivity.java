@@ -109,10 +109,9 @@ public class MatchingCardsActivity extends GameActivity {
             int row = nextPos / Board.getNumRows();
             int col = nextPos % Board.getNumCols();
             MatchingCardsTile card = board.getCard(row, col);
-            b.setText(Integer.toString(card.getNumber()));
             if (card.isFaceUp()){
-                b.setVisibility(View.VISIBLE);
-            } else { b.setVisibility(View.INVISIBLE);}
+                b.setText(Integer.toString(card.getNumber()));
+            } else {b.setText("");}
             nextPos++;
         }
         saveToFile(MatchingCardsStartingActivity.SAVE_FILENAME);
