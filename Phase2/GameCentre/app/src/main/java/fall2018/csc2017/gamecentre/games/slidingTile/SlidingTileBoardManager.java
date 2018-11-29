@@ -8,13 +8,14 @@ import java.util.Random;
 import java.util.Stack;
 
 import fall2018.csc2017.gamecentre.Tile;
+import fall2018.csc2017.gamecentre.app.Undoable;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class SlidingTileBoardManager extends BoardManager {
+public class SlidingTileBoardManager extends BoardManager implements Undoable {
     /**
      * A stack of moves made, for move reversals.
      */
@@ -214,7 +215,6 @@ public class SlidingTileBoardManager extends BoardManager {
      *
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
-
     public void undoMove() {
         int[] backPosition = stackOfMoves.pop();
         int row = backPosition[0];

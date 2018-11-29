@@ -10,6 +10,8 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,14 +46,6 @@ public class TicTacToeActivity extends GameActivity {
      */
     private ArrayList<Button> tileButtons;
 
-    /**
-     * Constants for swiping directions. Should be an enum, probably.
-     */
-    public static final int UP = 1;
-    public static final int DOWN = 2;
-    public static final int LEFT = 3;
-    public static final int RIGHT = 4;
-
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
@@ -64,7 +58,6 @@ public class TicTacToeActivity extends GameActivity {
      * Set up the background image for each button based on the master list
      * of positions, and then call the adapter to set the view.
      */
-    // Display
     public void display() {
         updateTileButtons();
         updateScoreText();
@@ -108,9 +101,18 @@ public class TicTacToeActivity extends GameActivity {
                         display();
                     }
                 });
-//        updateUndosLeftText();
-//        addUndoMoveButtonListener();
+
+        removeUndoText();
+        addUndoMoveButtonListener();
         addSave1ButtonListener();
+    }
+
+    /**
+     * Remove the undo text from the main activity
+     */
+    private void removeUndoText() {
+        TextView undosLeft = findViewById(R.id.UndosLeft);
+        undosLeft.setText("");
     }
 
     /**
@@ -160,18 +162,9 @@ public class TicTacToeActivity extends GameActivity {
      */
     private void updateScoreText(){
         TextView score = findViewById(R.id.Score);
-        String textToSetTo = "Score: " + Integer.toString(boardManager.getScore());
+        String textToSetTo = "Number of times beaten/tied computer: " + Integer.toString(boardManager.getScore());
         score.setText(textToSetTo);
     }
-
-    /**
-     * Updates the text to display the number of undos left.
-     */
-//    private void updateUndosLeftText(){
-//        TextView undosLeft = findViewById(R.id.UndosLeft);
-//        String textToSetTo = "Undos Left: " + Integer.toString(boardManager.getUndosLeft());
-//        undosLeft.setText(textToSetTo);
-//    }
 
     /**
      * Dispatch onPause() to fragments.
@@ -182,17 +175,16 @@ public class TicTacToeActivity extends GameActivity {
 //        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
     }
 
-//    private void addUndoMoveButtonListener(){
-//        Button loadButton = findViewById(R.id.UndoButton);
-//        loadButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                if (boardManager.canUndo()){
-//                    boardManager.undoMove();
-//                    updateUndosLeftText();
-//                }
-//            }
-//        });
-//    }
+    private void addUndoMoveButtonListener(){
+        Button loadButton = findViewById(R.id.UndoButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (boardManager.canUndo()){
+                    boardManager.undoMove();
+                }
+            }
+        });
+    }
 
     /**
      * Load the board manager from fileName.
