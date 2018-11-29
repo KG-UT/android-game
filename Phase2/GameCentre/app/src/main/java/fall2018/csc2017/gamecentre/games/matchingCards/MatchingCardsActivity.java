@@ -1,9 +1,12 @@
 package fall2018.csc2017.gamecentre.games.matchingCards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import java.io.FileNotFoundException;
@@ -12,14 +15,13 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Observable;
 
 import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoard;
-import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 
 public class MatchingCardsActivity extends GameActivity {
@@ -34,11 +36,43 @@ public class MatchingCardsActivity extends GameActivity {
      */
     private ArrayList<Button> tileButtons;
 
-    public static final String SAVE_FILE_1 = "Matching_Cards_save_file.ser";
+    public static final String SAVE_FILE = "Matching_Cards_save_file.ser";
 
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(boardManager == null)
+        { boardManager = new MatchingCardsBoardManager(4,4); }
+
+        createTileButtons(this);
+        setContentView(R.layout.activity_matching_main);
+        // Add View to activity
+        gridView = findViewById(R.id.matchingGrid);
+        gridView.setNumColumns(Board.getNumCols());
+        gridView.setBoardManager(boardManager);
+        boardManager.getBoard().addObserver(this);
+        // Observer sets up desired dimensions as well as calls our display function
+        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
+                                this);
+                        int displayWidth = gridView.getMeasuredWidth();
+                        int displayHeight = gridView.getMeasuredHeight();
+
+                        columnWidth = displayWidth / Board.getNumCols();
+                        columnHeight = displayHeight / Board.getNumRows();
+
+                        display();
+                    }
+                });
+        addSave1ButtonListener();
+    }
 
     public void display() {
         updateTileButtons();
@@ -81,6 +115,15 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     /**
+     * Dispatch onPause() to fragments.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveToFile(MatchingCardsStartingActivity.TEMP_SAVE_FILENAME_1);
+    }
+
+    /**
      * Load the board manager from fileName.
      *
      * @param fileName the name of the file
@@ -119,13 +162,24 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     private void addSave1ButtonListener() {
-        Button Save1Button = findViewById(R.id.MatchingSaveButton);
+        Button Save1Button = findViewById(R.id.MatchingAutoSaveButton);
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(SAVE_FILE_1);
+                saveToFile(SAVE_FILE);
 
             }
         });
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        display();
+        if (boardManager.puzzleSolved()){
+            int score = boardManager.getScore();
+            Intent tmp = new Intent(MatchingCardsActivity.this, MatchingCardsEndActivity.class);
+            tmp.putExtra("SCORE", score);
+            startActivity(tmp);
+        }
     }
 }
