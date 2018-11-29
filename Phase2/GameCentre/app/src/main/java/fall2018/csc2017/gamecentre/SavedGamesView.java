@@ -27,17 +27,13 @@ import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 public class SavedGamesView extends AppCompatActivity {
 //    DBTools database= new DBTools(this);
     private SlidingTileBoardManager slidingTileBoardManager;
-    DBTools database= new DBTools(this);
     private BoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_games_view);
-        ArrayList<Score> scores = database.getUserSlidingTileScores("temp");
-        for (Score s : scores) {
-            Log.d("TAG", "" + s.getUserScore());
-        }
+
     }
 
 //    @Override
