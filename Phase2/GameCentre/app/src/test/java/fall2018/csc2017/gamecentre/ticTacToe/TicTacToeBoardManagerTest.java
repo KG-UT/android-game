@@ -86,7 +86,7 @@ public class TicTacToeBoardManagerTest {
     }
 
     /**
-     * Test Computer making a move
+     * Test that a computer move registers on the board
      */
     @Test
     public void testComputerMakeMove() {
@@ -101,19 +101,46 @@ public class TicTacToeBoardManagerTest {
      * Test touch move when there is no winner
      */
     @Test
-    public void testTouchMoveNoWinner() {
-//        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
-//        TicTacToeBoard board = boardManager.getBoard();
-//        int originalAvailableMoves = boardManager.getAllBlanks().size();
-//        boardManager.touchMove(8);
-//        int newAvailableMoves = boardManager.getAllBlanks().size();
-//        assertEquals(true, newAvailableMoves < originalAvailableMoves);
-//
-//        fillAllExpectOne(boardManager, TicTacToeTile.O);
-//        Integer[] lastMove = boardManager.getAllBlanks().get(0);
-//        boardManager.touchMove(lastMove[0] * board.getNumCols() + lastMove[1]);
-//        assertEquals(board.numObjects(), boardManager.getAllBlanks().size());
-//        assertEquals(1, boardManager.getScore());
+    public void testTouchMoveNoWinnerAndBoardFull() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+
+        assertEquals(NUM_COLS * NUM_ROWS, boardManager.getAllBlanks().size());
+
+        TicTacToeBoard board = boardManager.getBoard();
+        String[] moves = {TicTacToeTile.X,  TicTacToeTile.O, TicTacToeTile.O,
+                          TicTacToeTile.X, TicTacToeTile.O, TicTacToeTile.O,
+                          TicTacToeTile.O, TicTacToeTile.X};
+        for(int i = 0; i < moves.length; i++) {
+            int row = i / NUM_ROWS;
+            int col = i % NUM_COLS;
+            boardManager.makeMove(row, col, moves[i]);
+        }
+        boardManager.touchMove(8);
+
+        int availableMoves = boardManager.getAllBlanks().size();
+        assertEquals(NUM_COLS * NUM_ROWS, availableMoves);
+    }
+
+    /**
+     * Test touch move when there is no winner
+     */
+    @Test
+    public void testTouchMoveNoWinnerAndBoardNotFull() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+
+        assertEquals(9, boardManager.getAllBlanks().size());
+
+        TicTacToeBoard board = boardManager.getBoard();
+        String[] moves = {TicTacToeTile.X};
+        for(int i = 0; i < moves.length; i++) {
+            int row = i / NUM_ROWS;
+            int col = i % NUM_COLS;
+            boardManager.makeMove(row, col, moves[i]);
+        }
+        boardManager.touchMove(3);
+
+        int availableMoves = boardManager.getAllBlanks().size();
+        assertEquals(NUM_COLS * NUM_ROWS - 3, availableMoves);
     }
 
     /**
@@ -176,7 +203,6 @@ public class TicTacToeBoardManagerTest {
         fillRow(boardManager, 1, TicTacToeTile.O);
         assertEquals(TicTacToeTile.O, boardManager.getWinner());
     }
-
 
     /**
      * Test if the board manager gets the correct winner from a col win
