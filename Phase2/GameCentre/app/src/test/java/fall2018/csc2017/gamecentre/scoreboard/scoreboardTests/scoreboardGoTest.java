@@ -19,7 +19,7 @@ public class scoreboardGoTest extends scoreboardTest {
     @Test
     public void testGetScoreBoardData() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "Username", "Password");
+        User newUser = new User("1", "Username");
         for (int i=0; i<20; i++) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
             listOfScores.add(newSlidingTilesScore);
@@ -35,7 +35,7 @@ public class scoreboardGoTest extends scoreboardTest {
     @Test
     public void testOrganizeScoreBoard() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "Username", "Password");
+        User newUser = new User("1", "Username");
         for (int i=20; i>0; i--) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
             listOfScores.add(newSlidingTilesScore);

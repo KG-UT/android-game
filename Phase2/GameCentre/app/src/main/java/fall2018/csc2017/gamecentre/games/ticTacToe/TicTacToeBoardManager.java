@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
+
 
 /**
  * Manage a tic tac toe board.
@@ -113,13 +114,14 @@ public class TicTacToeBoardManager extends BoardManager {
         String winner = getWinner();
         if(winner.equals(NO_WINNER)) {
             if (getAllBlanks().size() == 0) {
-                getBoard().reset();
+                // TODO: Why is this not in my version lol
+//                getBoard().reset();
                 this.incrementScore(1);
             } else {
                 computerMakeMove();
             }
         } else if(winner.equals(CURRENT_PLAYER)) {
-            getBoard().reset();
+//            getBoard().reset();
             this.incrementScore(1);
         }
     }

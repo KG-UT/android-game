@@ -13,9 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-import fall2018.csc2017.gamecentre.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 
 public class MatchingCardsStartingActivity extends GameStartingActivity {

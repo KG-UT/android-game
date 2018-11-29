@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotEquals;
 public class scoreGoTest extends scoreTest {
 
     protected ScoreGo setupScores() {
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         return new ScoreGo(10, newUser);
     }
 
@@ -21,7 +21,7 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testCompareToNumbers() {
-        User newUser1 = new User(1, "John", "Password");
+        User newUser1 = new User("1", "John");
         ScoreGo newGoScore1 = new ScoreGo(20, newUser1);
         ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
         ScoreGo newGoScore3 = new ScoreGo(15, newUser1);
@@ -38,8 +38,8 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testCompareToNames() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreGo newGoScore1 = new ScoreGo(15, newUser1);
         ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
         ScoreGo newGoScore3 = new ScoreGo(15, newUser2);
@@ -54,8 +54,8 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testEquals() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreGo newGoScore1 = new ScoreGo(15, newUser1);
         ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
         ScoreGo newGoScore3 = new ScoreGo(15, newUser2);

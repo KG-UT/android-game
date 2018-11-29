@@ -7,11 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.DBTools;
-import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.User;
+import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 public class MatchingCardsEndActivity extends GameEndActivity {
 
@@ -47,6 +48,8 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         // Noted for later:
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
+        // TODO: TEMP
+        User myUser = new User(currentUser.getUid(), currentUser.getEmail());
         ScoreMatchingCards theScore = new ScoreMatchingCards(this.score, myUser);
        // database.insertSlidingTileScore(theScore);
     }

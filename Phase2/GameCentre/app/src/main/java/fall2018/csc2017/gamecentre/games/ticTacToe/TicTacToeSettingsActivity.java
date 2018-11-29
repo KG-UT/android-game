@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.SettingsActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;
 
 /**
  * The settings activity for Sliding Tiles (view)
