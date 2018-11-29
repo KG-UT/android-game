@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.app;
+package fall2018.csc2017.gamecentre.App;
 
 import java.util.Stack;
 
