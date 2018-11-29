@@ -41,10 +41,6 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
      */
     private int NUM_ROWS;
     /**
-     * The score (how many times the user beat or tied the computer)
-     */
-    private int score = 0;
-    /**
      * Stack to keep track of moves
      */
     private Stack<int[]> stackOfMoves = new Stack<>();
@@ -303,6 +299,6 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
 
     @Override
     public int getScore() {
-        return 0;
+        return score;
     }
 }

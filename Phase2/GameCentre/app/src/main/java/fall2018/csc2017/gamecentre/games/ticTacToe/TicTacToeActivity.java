@@ -162,6 +162,7 @@ public class TicTacToeActivity extends GameActivity {
      */
     private void updateScoreText(){
         TextView score = findViewById(R.id.Score);
+        Log.d("TAG", "" + boardManager.getScore());
         String textToSetTo = "Number of times beaten/tied computer: " + Integer.toString(boardManager.getScore());
         score.setText(textToSetTo);
     }
