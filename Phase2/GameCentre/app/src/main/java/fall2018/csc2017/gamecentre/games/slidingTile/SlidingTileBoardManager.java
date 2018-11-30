@@ -29,6 +29,9 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     private final String ownerKeyValue = currentUser.getUid();
 
     // TODO: Make final
+    /**
+     * The key value for the game.
+     */
     @Exclude
     private String gameKeyValue;
 
@@ -49,7 +52,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     private int undosLeft = 3;
 
     /**
-     * Manage a new 4 by 4 shuffled board
+     * Manage a new 4 by 4 shuffled board.
      */
     public SlidingTileBoardManager() {
         this(4, 4);
@@ -57,6 +60,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
 
     /**
      * Manage a board that has been pre-populated.
+     *
      * @param board the board
      */
     public SlidingTileBoardManager(SlidingTileBoard board) {
@@ -65,6 +69,9 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
 
     /**
      * Manage a new shuffled board.
+     *
+     * @param numRows number of rows fo the board
+     * @param numCols number of columns fo the board
      */
     public SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
@@ -80,6 +87,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
 
     /**
      * Return the current board.
+     *
+     * @return the current SlidingTileBoard
      */
     public SlidingTileBoard getBoard() {
         return (SlidingTileBoard) super.getBoard();
@@ -138,7 +147,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
             return null;
         }
     }
-    /** A shuffling algorithm to scramble the board.
+    /**
+     * A shuffling algorithm to scramble the board.
      */
     private void shuffle(){
         int NUM_RANDOM_MOVES = 30;
@@ -147,8 +157,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         }
     }
 
-    /** From the valid moves available, makes a random move.
-     *
+    /**
+     * From the valid moves available, makes a random move.
      */
     private void makeRandomMove(){
         ArrayList<Integer> validMoves = getValidMoves();
@@ -157,8 +167,10 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         hiddenMove(validMoves.get(moveIndex));
     }
 
-    /** Get an ArrayList of valid moves.
+    /**
+     * Get an ArrayList of valid moves.
      *
+     * @return the arraylist of integers that represent all valid moves
      */
     private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
@@ -258,6 +270,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
 
     /**
      * Getter function for the Undos left.
+     *
      * @return the number of undos the player has left.
      */
     public int getUndosLeft() {
