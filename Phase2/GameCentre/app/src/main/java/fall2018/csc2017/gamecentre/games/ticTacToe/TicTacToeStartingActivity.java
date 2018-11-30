@@ -11,10 +11,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,7 +67,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
         super.onCreate(savedInstanceState);
         boardManager = new TicTacToeBoardManager(4, 4);
         gameDatabaseTools = new GameDatabaseTools();
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile();
 
         setContentView(R.layout.activity_tic_tac_toe_starting);
         addNewGameButtonListener();
@@ -152,57 +156,25 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (TicTacToeBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
      * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
      */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    @Override
+    public void saveToFile() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        gameDatabaseTools.saveToDatabase(boardManager, user.getUid());
     }
 
-    /**
-     * Adds a listener for the AutoSaveButton.
-     */
-    private void addAutoSaveButtonListener() {
-        Button AutoSaveButton = findViewById(R.id.TicTacToeAutosaveButton);
-        AutoSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new OnCompleteListener<QuerySnapshot>() {
+    private void loadSavedGame() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        gameDatabaseTools.getTicTacToeBoardManager(user.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                byte[] boardManagerBytes = (byte[]) document.getData().get(LoginActivity.currentUser);
+                            DocumentSnapshot document = task.getResult();
+                            if(document.exists()) {
+                                document.getData().get(LoginActivity.currentUser);
+                                byte[] boardManagerBytes = (byte[]) document.getData().get(user.getUid());
                                 try {
                                     gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
                                     Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
@@ -216,11 +188,20 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
 
                                 }
                             }
-                        } else {
-
                         }
                     }
-                };
+                });
+    }
+
+    /**
+     * Adds a listener for the AutoSaveButton.
+     */
+    private void addAutoSaveButtonListener() {
+        Button AutoSaveButton = findViewById(R.id.TicTacToeAutosaveButton);
+        AutoSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSavedGame();
             }
         });
     }
