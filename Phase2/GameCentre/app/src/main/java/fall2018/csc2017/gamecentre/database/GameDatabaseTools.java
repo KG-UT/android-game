@@ -8,6 +8,8 @@ import com.google.android.gms.tasks.Task;
 //import com.google.cloud.firestore.DocumentReference;
 //import com.google.cloud.firestore.DocumentSnapshot;
 //import com.google.cloud.firestore.Firestore;
+import com.google.common.primitives.Bytes;
+import com.google.firebase.firestore.Blob;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,14 +26,16 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
-
 
 // Code adapted from: https://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
 
@@ -220,13 +224,13 @@ public class GameDatabaseTools {
      private void saveToDatabaseHelper(String owner, String gameType, byte[] boardManagerBytes) {
          DocumentReference docRef = db.collection(gameType).document(owner);
          // Adds document data with id of "owner" and the score.
-         Map<String, Object> data = new HashMap<>();
-         data.put("owner", boardManagerBytes);
+         Map<String, Blob> data = new HashMap<>();
+         data.put("owner", Blob.fromBytes(boardManagerBytes));
          // Async writing of data
          try {
              docRef.set(data);
          } catch (Exception e) {
-             Log.e("TEMP", "Error inserting board manager bytes into database.");
+             Log.e("TEMP", e.getMessage());
          }
      }
 

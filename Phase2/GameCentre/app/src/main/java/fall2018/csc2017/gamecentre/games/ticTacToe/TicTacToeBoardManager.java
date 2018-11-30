@@ -1,5 +1,6 @@
 package fall2018.csc2017.gamecentre.games.ticTacToe;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import fall2018.csc2017.gamecentre.App.Undoable;
  * Game is based on how many times the user can beat a randomly playing computer
  * before the user loses.
  */
-public class TicTacToeBoardManager extends BoardManager implements Undoable {
+public class TicTacToeBoardManager extends BoardManager implements Undoable, Serializable {
     /**
      * The default string to represent no same states (X or O) for a row, col or diagonal.
      */
