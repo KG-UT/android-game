@@ -17,6 +17,7 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
+import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -50,13 +51,14 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
 
         setContentView(R.layout.activity_tic_tac_toe_starting);
         addNewGameButtonListener();
+        addScoreboardButtonListener();
     }
 
     /**
      * Add a listener to the scoreboard button
      */
     private void addScoreboardButtonListener() {
-        Button scoreboardButton = findViewById(R.id.ScoreboardButton);
+        Button scoreboardButton = findViewById(R.id.TicTacToeScoreboardButton);
         scoreboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +137,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
      * Switch to the SlidingTileGameScoreboardActivity
      */
     private void switchToScoreboard() {
-        Intent tmp = new Intent(this, TicTacToeStartingActivity.class);
+        Intent tmp = new Intent(this, ScoreboardGameUserActivity.class);
         startActivity(tmp);
     }
 

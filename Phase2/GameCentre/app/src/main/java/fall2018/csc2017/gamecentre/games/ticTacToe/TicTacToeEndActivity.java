@@ -12,6 +12,7 @@ import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
+
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 /**
@@ -21,7 +22,7 @@ public class TicTacToeEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int score;
+    int endScore;
 
     /**
      * The Database.
@@ -31,8 +32,9 @@ public class TicTacToeEndActivity extends GameEndActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.score = getIntent().getIntExtra("SCORE", 0);
+        this.endScore = getIntent().getIntExtra("SCORE", 0);
         setContentView(R.layout.activity_ending_);
+
         saveScore();
         displayScore();
         addMenuButtonListener();
@@ -40,15 +42,15 @@ public class TicTacToeEndActivity extends GameEndActivity {
 
     @Override
     public void displayScore() {
-        TextView score = findViewById(R.id.EndScore);
-        String textToSetTo = "Score: " + this.score;
-        score.setText(textToSetTo);
+        TextView ticTacToeText = findViewById(R.id.EndScore);
+        String ticTacToeEndMessage = "Score: " + this.endScore;
+        ticTacToeText.setText(ticTacToeEndMessage);
     }
 
     @Override
     public void addMenuButtonListener() {
-        Button menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
+        Button ticTacToeMenuButton = findViewById(R.id.Menu);
+        ticTacToeMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -69,7 +71,6 @@ public class TicTacToeEndActivity extends GameEndActivity {
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         // TODO: THIS IS TEMP, FIX LATER
         User TEMP_USER = new User(currentUser.getUid(), currentUser.getEmail());
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.score, TEMP_USER);
-        database.insertSlidingTileScore(theScore);
+        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, TEMP_USER);
     }
 }

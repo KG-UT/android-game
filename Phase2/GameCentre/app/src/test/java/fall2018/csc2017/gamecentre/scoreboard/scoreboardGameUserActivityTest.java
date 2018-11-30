@@ -5,10 +5,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.ScoreGo;
+import fall2018.csc2017.gamecentre.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.ScoreTicTacToe;
-import fall2018.csc2017.gamecentre.ScoreboardGo;
+import fall2018.csc2017.gamecentre.ScoreboardMatchingCards;
 import fall2018.csc2017.gamecentre.ScoreboardSlidingTies;
 import fall2018.csc2017.gamecentre.ScoreboardTicTacToe;
 import fall2018.csc2017.gamecentre.User;
@@ -44,17 +44,17 @@ public class scoreboardGameUserActivityTest {
      */
     @Test
     public void testSetupGoScoreboard() {
-        List<ScoreGo> listOfScores = new ArrayList<>();
-        List<ScoreGo> correctListOfScores = new ArrayList<>();
+        List<ScoreMatchingCards> listOfScores = new ArrayList<>();
+        List<ScoreMatchingCards> correctListOfScores = new ArrayList<>();
         User newUser = new User(1, "John", "Password");
         for (int i=1; i<6; i++) {
-            ScoreGo newGoScore = new ScoreGo(6-i, newUser);
+            ScoreMatchingCards newGoScore = new ScoreMatchingCards(6-i, newUser);
             listOfScores.add(newGoScore);
 
-            ScoreGo newCorrectSlidingTilesScore = new ScoreGo(i, newUser);
+            ScoreMatchingCards newCorrectSlidingTilesScore = new ScoreMatchingCards(i, newUser);
             correctListOfScores.add(newCorrectSlidingTilesScore);
         }
-        ScoreboardGo newScoreboard = new ScoreboardGo(listOfScores, "New Game");
+        ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, "New Game");
         newScoreboard.organizeScoreBoard();
 
         assertEquals("New Game", newScoreboard.getScoreboardGameName());

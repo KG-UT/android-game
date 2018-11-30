@@ -97,7 +97,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
         scoreBoardListData.addAll(setupSlidingTilesScoreboard(getTicTacToeScoresFromDatabase(),
                 "TicTacToe").getScoreBoardDataStringForm());
         scoreBoardListData.addAll(setupSlidingTilesScoreboard(getGoScoresFromDatabase(),
-                "Go").getScoreBoardDataStringForm());
+                "Matching Cards").getScoreBoardDataStringForm());
 
         return scoreBoardListData;
     }
@@ -129,8 +129,8 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the scoreboard of the game
      */
-    private Scoreboard setupGoScoreboard(List<ScoreGo> listOfScores, String nameOfGame) {
-        ScoreboardGo newScoreboard = new ScoreboardGo(listOfScores, nameOfGame);
+    private Scoreboard setupGoScoreboard(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
+        ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, nameOfGame);
         newScoreboard.organizeScoreBoard();
         return newScoreboard;
     }

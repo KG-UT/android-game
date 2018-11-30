@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,59 +8,82 @@
 
     <Button
         android:id="@+id/MatchingScoreButton"
-        android:layout_width="152dp"
-        android:layout_height="74dp"
-        android:layout_alignTop="@+id/MatchingStartButton"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="284dp"
-        android:layout_marginEnd="129dp"
-        android:text="Score Board" />
-        <!--android:onClick="scoreboardPressed"-->
-        <!--android:text="@string/score_board" />-->
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="134dp"
+        android:text="Score Board"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MatchingLoadButton" />
+    <!--android:onClick="scoreboardPressed"-->
+    <!--android:text="@string/score_board" />-->
 
     <TextView
         android:id="@+id/GameText"
-        android:layout_width="238dp"
-        android:layout_height="53dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="37dp"
         android:gravity="center"
-        android:text="Welcome to Matching Cards !"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:text="Welcome to Matching Cards!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/MatchingLoadButton"
-        android:layout_width="155dp"
-        android:layout_height="63dp"
-        android:layout_below="@+id/MatchingStartButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="124dp"
-        android:text="load Saved Game" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="117dp"
+        android:text="load Saved Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MatchingSaveButton" />
 
     <Button
         android:id="@+id/MatchingSaveButton"
-        android:layout_width="144dp"
-        android:layout_height="68dp"
-        android:layout_below="@+id/GameText"
-        android:layout_marginStart="-136dp"
-        android:layout_marginTop="215dp"
-        android:layout_toEndOf="@+id/MatchingStartButton"
-        android:text="Load AutoSave Game" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="103dp"
+        android:text="Load AutoSave Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MatchingStartButton" />
 
     <Button
         android:id="@+id/MatchingStartButton"
-        android:layout_width="128dp"
-        android:layout_height="73dp"
-        android:layout_below="@+id/GameText"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="23dp"
-        android:text="New Game" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="143dp"
+        android:text="New Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="2dp"
+        android:text="Your score is how many turns it takes you to match all the cards!"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GameText" />
     <!--android:onClick="settingsPressed"/>-->
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

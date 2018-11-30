@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.ticTacToe.;
+package fall2018.csc2017.gamecentre.ticTacToe;
 import org.junit.Test;
 
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
