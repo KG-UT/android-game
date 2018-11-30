@@ -27,16 +27,14 @@ public class scoreSlidingTilesTest extends scoreTest {
     @Test
     public void testScoreInitialization() {
         User newUser = new User("1", "John");
-        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(1, 10, newUser.getUsername());
+        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(1,  newUser.getUsername());
         ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(10, newUser.getUsername());
 
-        assertEquals(1, newScore1.get_id());
-        assertEquals(10, newScore1.getUserScore());
-        assertEquals(newUser.getUsername(), newScore1.getUserName());
+        assertEquals(1, newScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newScore1.getOwner());
 
-        assertEquals(1, newScore2.get_id());
         assertEquals(10, newScore2.getUserScore());
-        assertEquals(newUser.getUsername(), newScore2.getUserName());
+        assertEquals(newUser.getUsername(), newScore2.getOwner());
     }
 
     /**

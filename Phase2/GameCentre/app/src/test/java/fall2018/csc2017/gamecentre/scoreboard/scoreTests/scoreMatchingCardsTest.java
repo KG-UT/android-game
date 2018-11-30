@@ -28,16 +28,14 @@ public class scoreMatchingCardsTest extends scoreTest {
     @Test
     public void testScoreInitialization() {
         User newUser = new User("1", "John");
-        ScoreMatchingCards newScore1 = new ScoreMatchingCards(1, 10, newUser);
+        ScoreMatchingCards newScore1 = new ScoreMatchingCards(1,  newUser.getUsername());
         ScoreMatchingCards newScore2 = new ScoreMatchingCards(10, newUser.getUsername());
 
-        assertEquals(1, newScore1.get_id());
-        assertEquals(10, newScore1.getUserScore());
-        assertEquals(newUser.getUsername(), newScore1.getUserName());
+        assertEquals(1, newScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newScore1.getOwner());
 
-        assertEquals(1, newScore2.get_id());
         assertEquals(10, newScore2.getUserScore());
-        assertEquals(newUser.getUsername(), newScore2.getUserName());
+        assertEquals(newUser.getUsername(), newScore2.getOwner());
     }
 
     /**
