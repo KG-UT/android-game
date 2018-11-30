@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import fall2018.csc2017.gamecentre.app.Undoable;
+import fall2018.csc2017.gamecentre.App.Undoable;
 import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.game.BoardManager;
 
