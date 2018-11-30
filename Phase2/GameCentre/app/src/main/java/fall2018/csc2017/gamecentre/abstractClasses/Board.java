@@ -51,7 +51,7 @@ abstract public class Board extends Observable implements Serializable, Iterable
     }
 
     /**
-     * Default constructor for firebase.
+     * Default constructor for database.
      */
     public Board() {}
 

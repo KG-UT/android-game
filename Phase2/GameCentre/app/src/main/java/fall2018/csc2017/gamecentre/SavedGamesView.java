@@ -70,7 +70,7 @@ public class SavedGamesView extends AppCompatActivity {
         });
     }
 
-    /** TODO: Reimplement this properly with firebase
+    /** TODO: Reimplement this properly with database
      * Load the board manager from SAVE_FILE1
      *
      */

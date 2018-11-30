@@ -23,7 +23,7 @@ public class scoreSlidingTilesTest extends scoreTest {
      */
     @Test
     public void testScoreInitialization() {
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         ScoreSlidingTiles newScoreSlidingScore1 = new ScoreSlidingTiles(1, 10, newUser.getUsername());
         ScoreSlidingTiles newScoreSlidingScore2 = new ScoreSlidingTiles(10, newUser);
 

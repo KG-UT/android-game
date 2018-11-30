@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-import fall2018.csc2017.gamecentre.game.Board;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoard;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoardManager;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsTile;
@@ -26,7 +25,7 @@ public class MatchingCardsBoardManagerTest {
      */
     private List<MatchingCardsTile> makeTiles() {
         List<MatchingCardsTile> tiles = new ArrayList<>();
-        final int numTiles = Board.getNumRows() * Board.getNumCols();
+        final int numTiles = MatchingCardsBoard.getNumRows() * MatchingCardsBoard.getNumCols();
         for (int tileNum = 0; tileNum != numTiles / 2; tileNum++) {
             tiles.add(new MatchingCardsTile(tileNum));
             tiles.add(new MatchingCardsTile(tileNum));

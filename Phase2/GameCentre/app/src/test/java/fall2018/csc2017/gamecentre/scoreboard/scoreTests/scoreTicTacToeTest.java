@@ -24,7 +24,7 @@ public class scoreTicTacToeTest extends scoreTest {
      */
     @Test
     public void testScoreInitialization() {
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(1, 10, newUser.getUsername());
         ScoreTicTacToe newTicTacToeScore2 = new ScoreTicTacToe(10, newUser);
 
