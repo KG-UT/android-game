@@ -9,10 +9,7 @@ import android.widget.TextView;
 import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreGo;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
-import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileEndActivity;
-import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
@@ -75,7 +72,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     public void saveScore(){
         // Noted for later:
         // TODO: Connect with database
-//        ScoreGo currScore = new ScoreGo(this.endScore, myUser);
+//        ScoreMatchingCards currScore = new ScoreMatchingCards(this.endScore, myUser);
 //        database.insertSlidingTileScore(currScore);
 
         ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);

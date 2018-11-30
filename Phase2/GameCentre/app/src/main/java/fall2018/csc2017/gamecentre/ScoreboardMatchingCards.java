@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ScoreboardGo extends Scoreboard {
+public class ScoreboardMatchingCards extends Scoreboard {
 
     /**
      * Score data is arranged in an array list. Smaller scores are closer to the top of the
      * scoreboard (similar (*but not same) concept to golf, where the less moves the better)
      */
-    private ArrayList<ScoreGo> scoreBoardArray;
+    private ArrayList<ScoreMatchingCards> scoreBoardArray;
 
     /**
      * Creates a scoreboard
@@ -18,9 +18,9 @@ public class ScoreboardGo extends Scoreboard {
      * @param listOfScores the list of scores
      * @param nameOfGame the name of the game that has these scores
      */
-    public ScoreboardGo(List<ScoreGo> listOfScores, String nameOfGame) {
+    public ScoreboardMatchingCards(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
         super(nameOfGame);
-        this.scoreBoardArray = (ArrayList<ScoreGo>) listOfScores;
+        this.scoreBoardArray = (ArrayList<ScoreMatchingCards>) listOfScores;
     }
 
     /**
@@ -28,7 +28,7 @@ public class ScoreboardGo extends Scoreboard {
      *
      * @return the score board data
      */
-    public List<ScoreGo> getScoreBoardData() {
+    public List<ScoreMatchingCards> getScoreBoardData() {
         return this.scoreBoardArray;
     }
 
