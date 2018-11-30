@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.game.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
 /**
  * Manage the Board, flipping cards up/down, checking for a win

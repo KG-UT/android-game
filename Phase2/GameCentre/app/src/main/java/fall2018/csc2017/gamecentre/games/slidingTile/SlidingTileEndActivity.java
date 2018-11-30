@@ -7,12 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.DBTools;
-import fall2018.csc2017.gamecentre.GameEndActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.User;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 
 /**
  * The class responsible for handling the end-of-game behaviour for Sliding Tile games.
@@ -21,7 +23,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int score;
+    int endScore;
 
     /**
      * The Database.
@@ -31,8 +33,9 @@ public class SlidingTileEndActivity extends GameEndActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.score = getIntent().getIntExtra("SCORE", 0);
+        this.endScore = getIntent().getIntExtra("SCORE", 0);
         setContentView(R.layout.activity_ending_);
+
         saveScore();
         displayScore();
         addMenuButtonListener();
@@ -40,15 +43,15 @@ public class SlidingTileEndActivity extends GameEndActivity {
 
     @Override
     public void displayScore() {
-        TextView score = findViewById(R.id.EndScore);
-        String textToSetTo = "Score: " + this.score;
-        score.setText(textToSetTo);
+        TextView slidingTilesText = findViewById(R.id.EndScore);
+        String slidingTilesEndMessage = "Score: " + this.endScore;
+        slidingTilesText.setText(slidingTilesEndMessage);
     }
 
     @Override
     public void addMenuButtonListener() {
-        Button menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
+        Button slidingTilesMenuButton = findViewById(R.id.Menu);
+        slidingTilesMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -67,7 +70,10 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // Noted for later:
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.score, myUser);
-        database.insertSlidingTileScore(theScore);
+
+        User TEMP_USER = new User(currentUser.getUid(), currentUser.getEmail());
+
+        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, TEMP_USER);
+
     }
 }

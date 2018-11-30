@@ -2,7 +2,7 @@ package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 
 /**
  * The tic tac toe board.
@@ -44,9 +44,6 @@ public class TicTacToeBoard extends Board {
         notifyObservers();
     }
 
-    /**
-     * Reset the board
-     */
     public void reset() {
         for(int i = 0; i < getNumRows(); i++) {
             for(int j = 0; j < getNumCols(); j++) {
@@ -57,6 +54,4 @@ public class TicTacToeBoard extends Board {
         setChanged();
         notifyObservers();
     }
-
-
 }

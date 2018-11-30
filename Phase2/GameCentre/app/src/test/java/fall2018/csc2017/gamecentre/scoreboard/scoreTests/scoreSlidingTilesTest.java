@@ -14,7 +14,7 @@ public class scoreSlidingTilesTest extends scoreTest {
      * Setup scores in preparation for tests.
      */
     protected ScoreSlidingTiles setupScores() {
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         return new ScoreSlidingTiles(10, newUser);
     }
 
@@ -41,7 +41,7 @@ public class scoreSlidingTilesTest extends scoreTest {
      */
     @Test
     public void testCompareToNumbers() {
-        User newUser1 = new User(1, "John", "Password");
+        User newUser1 = new User("1", "John");
         ScoreSlidingTiles newSlidingTilesScore1 = new ScoreSlidingTiles(20, newUser1);
         ScoreSlidingTiles newSlidingTilesScore2 = new ScoreSlidingTiles(15, newUser1);
         ScoreSlidingTiles newSlidingTilesScore3 = new ScoreSlidingTiles(15, newUser1);
@@ -58,8 +58,8 @@ public class scoreSlidingTilesTest extends scoreTest {
      */
     @Test
     public void testCompareToNames() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreSlidingTiles newSlidingTilesScore1 = new ScoreSlidingTiles(15, newUser1);
         ScoreSlidingTiles newSlidingTilesScore2 = new ScoreSlidingTiles(15, newUser1);
         ScoreSlidingTiles newSlidingTilesScore3 = new ScoreSlidingTiles(15, newUser2);
@@ -74,8 +74,8 @@ public class scoreSlidingTilesTest extends scoreTest {
      */
     @Test
     public void testEquals() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreSlidingTiles newSlidingTilesScore1 = new ScoreSlidingTiles(15, newUser1);
         ScoreSlidingTiles newSlidingTilesScore2 = new ScoreSlidingTiles(15, newUser1);
         ScoreSlidingTiles newSlidingTilesScore3 = new ScoreSlidingTiles(15, newUser2);

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Tile;
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 
 /**
  * The sliding tiles board.
@@ -20,6 +20,15 @@ public class SlidingTileBoard extends Board {
      */
     public SlidingTileBoard(int rows, int cols, List<Tile> tiles){
         super(rows, cols, tiles);
+    }
+
+
+    /**
+     * Return the number of tiles on the board.
+     * @return the number of tiles on the board
+     */
+    public static int numTiles() {
+        return NUM_COLS * NUM_ROWS;
     }
 
     /**

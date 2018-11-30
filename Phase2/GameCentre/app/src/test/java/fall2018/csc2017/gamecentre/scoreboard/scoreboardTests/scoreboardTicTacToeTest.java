@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.ScoreAbstract;
+import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.ScoreTicTacToe;
+import fall2018.csc2017.gamecentre.ScoreboardSlidingTies;
 import fall2018.csc2017.gamecentre.ScoreboardTicTacToe;
 import fall2018.csc2017.gamecentre.User;
 
@@ -19,7 +21,7 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
      */
     protected List<ScoreTicTacToe> setupListOfScores() {
         List<ScoreTicTacToe> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
             ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
             listOfScores.add(newTicTacToeScore);
@@ -50,8 +52,14 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
      */
     @Test
     public void testGetScoreBoardData() {
-        ScoreboardTicTacToe newScoreboard = setupScoreboard(setupListOfScores());
+        User newUser = new User("1", "Username");
         List<ScoreTicTacToe> listOfScores = setupListOfScores();
+
+        for (int i=0; i<20; i++) {
+            ScoreTicTacToe newSlidingTilesScore = new ScoreTicTacToe(i, newUser);
+            listOfScores.add(newSlidingTilesScore);
+        }
+        ScoreboardTicTacToe newScoreboard = setupScoreboard(setupListOfScores());
 
         assertEquals(listOfScores, newScoreboard.getScoreBoardData());
     }
@@ -61,11 +69,18 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
      */
     @Test
     public void testOrganizeScoreBoard() {
-        ScoreboardTicTacToe newScoreboard = setupScoreboard(setupListOfScores());
+        List<ScoreTicTacToe> listOfScores = new ArrayList<>();
+
+        User newUser = new User("1", "Username");
+        for (int i=20; i>0; i--) {
+            ScoreTicTacToe newSlidingTilesScore = new ScoreTicTacToe(i, newUser);
+            listOfScores.add(newSlidingTilesScore);
+        }
+        ScoreboardTicTacToe newScoreboard = new ScoreboardTicTacToe(listOfScores, "Sliding Tiles");
+
         newScoreboard.organizeScoreBoard();
 
         List<ScoreTicTacToe> correctListOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
         for (int i=5; i>0; i--) {
             ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
             correctListOfScores.add(newTicTacToeScore);

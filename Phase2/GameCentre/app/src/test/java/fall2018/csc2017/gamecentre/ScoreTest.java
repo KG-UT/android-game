@@ -9,7 +9,7 @@ public class ScoreTest {
      */
     @Test
     public void testIntialization() {
-        User testUser = new User(123, "testUser", "test");
+        User testUser = new User("123", "testUser");
         Score score = new Score(123, 10, "testUser");
         assertEquals(10, score.getUserScore());
         assertEquals(123, score.get_id());

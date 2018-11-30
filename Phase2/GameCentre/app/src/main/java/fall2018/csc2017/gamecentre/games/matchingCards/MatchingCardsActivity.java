@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import fall2018.csc2017.gamecentre.CustomAdapter;
-import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
+import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 
 
 public class MatchingCardsActivity extends GameActivity {
@@ -53,8 +54,9 @@ public class MatchingCardsActivity extends GameActivity {
         // Add View to activity
         gridView = findViewById(R.id.matchingGrid);
         gridView.setNumColumns(Board.getNumCols());
-        gridView.setBoardManager(boardManager);
-        boardManager.getBoard().addObserver(this);
+        gridView.setBoardManager( (BoardManager) boardManager);
+        // TODO: My branch doesn't have addObserver.
+//        boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {

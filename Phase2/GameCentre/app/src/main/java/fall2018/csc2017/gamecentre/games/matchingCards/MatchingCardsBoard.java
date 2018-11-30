@@ -1,6 +1,6 @@
 package fall2018.csc2017.gamecentre.games.matchingCards;
 
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 
 import java.util.ArrayList;
 import java.util.List;

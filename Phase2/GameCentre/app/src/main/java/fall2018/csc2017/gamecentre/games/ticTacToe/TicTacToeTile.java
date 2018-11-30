@@ -9,9 +9,9 @@ public class TicTacToeTile implements Serializable {
     /**
      * Possible states
      */
-    public static final String X = "X";
-    public static final String O = "O";
-    public static final String BLANK = "";
+    public static String X = "X";
+    public static String O = "O";
+    public static String BLANK = "";
 
     /**
      * The current state of the title

@@ -15,7 +15,7 @@ public class scoreTicTacToeTest extends scoreTest {
      * Setup scores in preparation for tests.
      */
     protected ScoreTicTacToe setupScores() {
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         return new ScoreTicTacToe(10, newUser);
     }
 
@@ -42,7 +42,7 @@ public class scoreTicTacToeTest extends scoreTest {
      */
     @Test
     public void testCompareToNumbers() {
-        User newUser1 = new User(1, "John", "Password");
+        User newUser1 = new User("1", "John");
         ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(20, newUser1);
         ScoreTicTacToe newTicTacToeScore2 = new ScoreTicTacToe(15, newUser1);
         ScoreTicTacToe newTicTacToeScore3 = new ScoreTicTacToe(15, newUser1);
@@ -59,8 +59,8 @@ public class scoreTicTacToeTest extends scoreTest {
      */
     @Test
     public void testCompareToNames() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(15, newUser1);
         ScoreTicTacToe newTicTacToeScore2 = new ScoreTicTacToe(15, newUser1);
         ScoreTicTacToe newTicTacToeScore3 = new ScoreTicTacToe(15, newUser2);
@@ -75,8 +75,8 @@ public class scoreTicTacToeTest extends scoreTest {
      */
     @Test
     public void testEquals() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(15, newUser1);
         ScoreTicTacToe newTicTacToeScore2 = new ScoreTicTacToe(15, newUser1);
         ScoreTicTacToe newTicTacToeScore3 = new ScoreTicTacToe(15, newUser2);

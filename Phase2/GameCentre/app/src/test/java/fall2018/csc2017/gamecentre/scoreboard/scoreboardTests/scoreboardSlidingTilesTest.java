@@ -19,11 +19,13 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
      */
     protected List<ScoreSlidingTiles> setupListOfScores() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "Username");
+
         for (int i=1; i<6; i++) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
             listOfScores.add(newSlidingTilesScore);
         }
+
         return listOfScores;
     }
 
@@ -62,7 +64,8 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
     @Test
     public void testOrganizeScoreBoard() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "Username");
+
         for (int i=5; i>0; i--) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
             listOfScores.add(newSlidingTilesScore);
