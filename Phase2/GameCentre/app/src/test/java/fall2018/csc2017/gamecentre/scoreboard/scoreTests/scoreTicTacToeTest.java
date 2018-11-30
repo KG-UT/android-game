@@ -19,7 +19,7 @@ public class scoreTicTacToeTest extends scoreTest {
      */
     protected ScoreTicTacToe setupScores() {
         User newUser = new User("1", "John");
-        return new ScoreTicTacToe(10, newUser);
+        return new ScoreTicTacToe(10, newUser.getUsername());
     }
 
     /**
@@ -28,16 +28,14 @@ public class scoreTicTacToeTest extends scoreTest {
     @Test
     public void testScoreInitialization() {
         User newUser = new User("1", "John");
-        ScoreTicTacToe newScore1 = new ScoreTicTacToe(1, 10, newUser.getUsername());
-        ScoreTicTacToe newScore2 = new ScoreTicTacToe(10, newUser);
+        ScoreTicTacToe newScore1 = new ScoreTicTacToe(1,  newUser.getUsername());
+        ScoreTicTacToe newScore2 = new ScoreTicTacToe(10, newUser.getUsername());
 
-        assertEquals(1, newScore1.get_id());
-        assertEquals(10, newScore1.getUserScore());
-        assertEquals(newUser.getUsername(), newScore1.getUserName());
+        assertEquals(1, newScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newScore1.getOwner());
 
-        assertEquals(1, newScore2.get_id());
         assertEquals(10, newScore2.getUserScore());
-        assertEquals(newUser.getUsername(), newScore2.getUserName());
+        assertEquals(newUser.getUsername(), newScore2.getOwner());
     }
 
     /**
@@ -46,9 +44,9 @@ public class scoreTicTacToeTest extends scoreTest {
     @Test
     public void testCompareToNumbers() {
         User newUser1 = new User("1", "John");
-        ScoreTicTacToe newScore1 = new ScoreTicTacToe(20, newUser1);
-        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1);
-        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser1);
+        ScoreTicTacToe newScore1 = new ScoreTicTacToe(20, newUser1.getUsername());
+        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1.getUsername());
+        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser1.getUsername());
 
         assertEquals(-1, newScore1.compareTo(newScore2));
         assertEquals(1, newScore2.compareTo(newScore1));
@@ -64,9 +62,9 @@ public class scoreTicTacToeTest extends scoreTest {
     public void testCompareToNames() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreTicTacToe newScore1 = new ScoreTicTacToe(15, newUser1);
-        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1);
-        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser2);
+        ScoreTicTacToe newScore1 = new ScoreTicTacToe(15, newUser1.getUsername());
+        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1.getUsername());
+        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser2.getUsername());
 
         assertEquals(-1, newScore1.compareTo(newScore3));
         assertEquals(0, newScore1.compareTo(newScore2));
@@ -80,11 +78,11 @@ public class scoreTicTacToeTest extends scoreTest {
     public void testEquals() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreTicTacToe newScore1 = new ScoreTicTacToe(15, newUser1);
-        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1);
-        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser2);
-        ScoreTicTacToe newScore4 = new ScoreTicTacToe(10, newUser2);
-        ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(15, newUser2);
+        ScoreTicTacToe newScore1 = new ScoreTicTacToe(15, newUser1.getUsername());
+        ScoreTicTacToe newScore2 = new ScoreTicTacToe(15, newUser1.getUsername());
+        ScoreTicTacToe newScore3 = new ScoreTicTacToe(15, newUser2.getUsername());
+        ScoreTicTacToe newScore4 = new ScoreTicTacToe(10, newUser2.getUsername());
+        ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(15, newUser2.getUsername());
 
         assertEquals(true, newScore1.equals(newScore2));
         assertEquals(false, newScore1.equals(null));
