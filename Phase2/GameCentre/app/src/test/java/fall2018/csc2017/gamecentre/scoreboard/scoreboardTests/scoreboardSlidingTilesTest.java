@@ -70,7 +70,7 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
         User newUser = new User("1", "John");
 
         for (int i=5; i>0; i--) {
-            ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
+            ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser.getUsername());
             listOfScores.add(newSlidingTilesScore);
         }
         ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "New Game");

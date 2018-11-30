@@ -71,7 +71,7 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
         User newUser = new User("1", "John");
         List<ScoreTicTacToe> correctListOfScores = new ArrayList<>();
         for (int i=5; i>0; i--) {
-            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
+            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser.getUsername());
             correctListOfScores.add(newTicTacToeScore);
         }
 
