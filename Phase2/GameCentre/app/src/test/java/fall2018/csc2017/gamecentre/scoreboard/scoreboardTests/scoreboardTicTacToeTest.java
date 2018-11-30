@@ -24,7 +24,7 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
         List<ScoreTicTacToe> listOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
+            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser.getUsername());
             listOfScores.add(newTicTacToeScore);
         }
         return listOfScores;
@@ -71,7 +71,7 @@ public class scoreboardTicTacToeTest extends scoreboardTest {
         User newUser = new User("1", "John");
         List<ScoreTicTacToe> correctListOfScores = new ArrayList<>();
         for (int i=5; i>0; i--) {
-            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
+            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser.getUsername());
             correctListOfScores.add(newTicTacToeScore);
         }
 
