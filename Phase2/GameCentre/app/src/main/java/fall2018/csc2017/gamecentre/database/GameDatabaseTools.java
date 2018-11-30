@@ -1,8 +1,10 @@
 package fall2018.csc2017.gamecentre.database;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.api.core.ApiFuture;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 //import com.google.cloud.firestore.DocumentReference;
 //import com.google.cloud.firestore.DocumentSnapshot;
 //import com.google.cloud.firestore.Firestore;
@@ -12,6 +14,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -115,7 +119,7 @@ public class GameDatabaseTools {
      * @throws IOException            Throws an exception if there is an error with input/output.
      * @throws ClassNotFoundException Throws an exception if the board manager class is not found.
      */
-     private TicTacToeBoardManager convertBytesToTicTacToeBoardManager(byte[] boardManagerBytes)
+     public TicTacToeBoardManager convertBytesToTicTacToeBoardManager(byte[] boardManagerBytes)
              throws IOException, ClassNotFoundException {
             try (ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
                  ObjectInput input = new ObjectInputStream(bis)) {
@@ -147,7 +151,7 @@ public class GameDatabaseTools {
      * @throws IOException            Throws an exception if there is an error with input/output.
      * @throws ClassNotFoundException Throws an exception if the board manager class is not found.
      */
-    private SlidingTileBoardManager convertBytesToSlidingTileBoardManager(byte[] boardManagerBytes)
+    public SlidingTileBoardManager convertBytesToSlidingTileBoardManager(byte[] boardManagerBytes)
             throws IOException, ClassNotFoundException {
         try (ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
              ObjectInput input = new ObjectInputStream(bis)) {
@@ -233,23 +237,10 @@ public class GameDatabaseTools {
      * @param owner    the owner
      * @return the board manager
      */
-    public TicTacToeBoardManager getTicTacToeBoardManager(String owner) {
+    public DocumentReference getTicTacToeBoardManager(String owner) {
         // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
         DocumentReference docRef = db.collection("ttt-games").document(owner);
-        ApiFuture<DocumentSnapshot> future = docRef.get();
-        try {
-            DocumentSnapshot document = future.get();
-            if (document.exists()) {
-                // TODO: if this an issue?
-                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-
-                return convertBytesToTicTacToeBoardManager(boardManagerBytes);
-            }
-        } catch (Exception e) {
-            Log.e("TAG", "Error getting board manager.");
-        }
-        // TODO: Make this less cancer.
-        return null;
+        return docRef;
     }
 
     /**
@@ -258,24 +249,24 @@ public class GameDatabaseTools {
      * @param owner    the owner
      * @return the board manager
      */
-    public SlidingTileBoardManager getSlidingTileBoardManager(String owner) {
-        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
-        DocumentReference docRef = db.collection("st-games").document(owner);
-        ApiFuture<DocumentSnapshot> future = docRef.get();
-        try {
-            DocumentSnapshot document = future.get();
-            if (document.exists()) {
-                // TODO: if this an issue?
-                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-
-                return convertBytesToSlidingTileBoardManager(boardManagerBytes);
-            }
-        } catch (Exception e) {
-            Log.e("TAG", "Error getting board manager.");
-        }
-        // TODO: Make this less cancer.
-        return null;
-    }
+//    public SlidingTileBoardManager getSlidingTileBoardManager(String owner) {
+//        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
+//        DocumentReference docRef = db.collection("st-games").document(owner);
+//        ApiFuture<DocumentSnapshot> future = docRef.get();
+//        try {
+//            DocumentSnapshot document = future.get();
+//            if (document.exists()) {
+//                // TODO: if this an issue?
+//                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
+//
+//                return convertBytesToSlidingTileBoardManager(boardManagerBytes);
+//            }
+//        } catch (Exception e) {
+//            Log.e("TAG", "Error getting board manager.");
+//        }
+//        // TODO: Make this less cancer.
+//        return null;
+//    }
 
     /**
      * Retrieves the board manager from the database for a user for a specific game.
@@ -283,22 +274,22 @@ public class GameDatabaseTools {
      * @param owner    the owner
      * @return the board manager
      */
-    public MatchingCardsBoardManager getMatchingCardsBoardManager(String owner) {
-        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
-        DocumentReference docRef = db.collection("mc-games").document(owner);
-        ApiFuture<DocumentSnapshot> future = docRef.get();
-        try {
-            DocumentSnapshot document = future.get();
-            if (document.exists()) {
-                // TODO: if this an issue?
-                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-
-                return convertBytesToMatchingCardsBoardManager(boardManagerBytes);
-            }
-        } catch (Exception e) {
-            Log.e("TAG", "Error getting board manager.");
-        }
-        // TODO: Make this less cancer.
-        return null;
-    }
+//    public MatchingCardsBoardManager getMatchingCardsBoardManager(String owner) {
+//        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
+//        DocumentReference docRef = db.collection("mc-games").document(owner);
+//        ApiFuture<DocumentSnapshot> future = docRef.get();
+//        try {
+//            DocumentSnapshot document = future.get();
+//            if (document.exists()) {
+//                // TODO: if this an issue?
+//                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
+//
+//                return convertBytesToMatchingCardsBoardManager(boardManagerBytes);
+//            }
+//        } catch (Exception e) {
+//            Log.e("TAG", "Error getting board manager.");
+//        }
+//        // TODO: Make this less cancer.
+//        return null;
+//    }
 }

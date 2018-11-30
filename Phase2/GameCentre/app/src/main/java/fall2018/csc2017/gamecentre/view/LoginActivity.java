@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuth.AuthStateListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +52,8 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
      * The FirebaseAuth and its corresponding listener.
      */
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private AuthStateListener mAuthListener;
+
 
     // Firebase User and database references.
     /**
@@ -83,9 +85,9 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Code adapted from https://stackoverflow.com/questions/41533159/firebase-getcurrentuser-is-returning-null-in-new-android-activity
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 if (currentUser != null) {
                     // User is signed in

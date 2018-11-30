@@ -2,7 +2,6 @@ package fall2018.csc2017.gamecentre.database;
 
 import android.util.Log;
 
-import com.google.api.core.ApiFuture;
 //import com.google.cloud.firestore.DocumentReference;
 //import com.google.cloud.firestore.Firestore;
 //import com.google.cloud.firestore.QueryDocumentSnapshot;
@@ -55,26 +54,26 @@ public class UserDatabaseTools {
      *
      * @return An Arraylist of all the users in our database.
      */
-    public ArrayList<User> getAllUsers() {
-        ApiFuture<QuerySnapshot> query = db.collection("users").get();
-        ArrayList<User> allUsers = new ArrayList<>();
-
-        // TODO: Will we lose marks? :-(
-        try {
-            QuerySnapshot querySnapshot = query.get();
-
-            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
-            for (DocumentSnapshot document : documents) {
-                String tmpEmail = document.getString("email");
-                User tmp = new User("tmp", tmpEmail);
-                allUsers.add(tmp);
-            }
-
-            return allUsers;
-        } catch (Exception e) {
-            Log.e("TAG", "Problem getting all users.");
-        }
-        // TODO: Less cancer
-        return null;
-    }
+//    public ArrayList<User> getAllUsers() {
+//        ApiFuture<QuerySnapshot> query = db.collection("users").get();
+//        ArrayList<User> allUsers = new ArrayList<>();
+//
+//        // TODO: Will we lose marks? :-(
+//        try {
+//            QuerySnapshot querySnapshot = query.get();
+//
+//            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
+//            for (DocumentSnapshot document : documents) {
+//                String tmpEmail = document.getString("email");
+//                User tmp = new User("tmp", tmpEmail);
+//                allUsers.add(tmp);
+//            }
+//
+//            return allUsers;
+//        } catch (Exception e) {
+//            Log.e("TAG", "Problem getting all users.");
+//        }
+//        // TODO: Less cancer
+//        return null;
+//    }
 }

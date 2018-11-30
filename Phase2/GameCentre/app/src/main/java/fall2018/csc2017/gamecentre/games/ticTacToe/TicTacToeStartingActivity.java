@@ -2,10 +2,19 @@ package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,7 +26,11 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
+import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
+
+import fall2018.csc2017.gamecentre.view.LoginActivity;
+import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -43,15 +56,20 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
      */
     private TicTacToeBoardManager boardManager;
 
+    private GameDatabaseTools gameDatabaseTools;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boardManager = new TicTacToeBoardManager(4, 4);
+        gameDatabaseTools = new GameDatabaseTools();
         saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_tic_tac_toe_starting);
         addNewGameButtonListener();
         addScoreboardButtonListener();
+        addAutoSaveButtonListener();
+
     }
 
     /**
@@ -75,9 +93,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loadFromFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastLoadedText();
+                makeToastLoadedText();
                 switchToSettings();
             }
         });
@@ -98,12 +114,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveToFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastSavedText();
                 startActivity(new Intent(TicTacToeStartingActivity.this, SavedGamesView.class));
-
-
             }
         });
     }
@@ -122,7 +133,6 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
     protected void onResume() {
         super.onResume();
         Log.d("TILE", "LOADING FROM FILE.....");
-        loadFromFile(TEMP_SAVE_FILENAME);
     }
 
     /**
@@ -181,22 +191,36 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
 
     /**
      * Adds a listener for the AutoSaveButton.
-     *
      */
     private void addAutoSaveButtonListener() {
         Button AutoSaveButton = findViewById(R.id.AutoSaveButton);
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
+                new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                byte[] boardManagerBytes = (byte[]) document.getData().get(LoginActivity.currentUser);
+                                try {
+                                    gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
+                                    Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
 
-                HashMap<String, Object> settings = new HashMap<>();
-                settings.put("PRELOADED_BOARD_MANAGER", boardManager);
-                tmp.putExtra("SETTINGS", settings);
+                                    HashMap<String, Object> settings = new HashMap<>();
+                                    settings.put("PRELOADED_BOARD_MANAGER", boardManager);
+                                    tmp.putExtra("SETTINGS", settings);
 
-                startActivity(tmp);
+                                    startActivity(tmp);
+                                } catch (Exception e) {
 
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+                };
             }
         });
     }
