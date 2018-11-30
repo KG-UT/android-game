@@ -55,15 +55,21 @@ public class UserDatabaseTools {
         ArrayList<User> allUsers = new ArrayList<>();
 
         // TODO: Will we lose marks? :-(
-        QuerySnapshot querySnapshot = query.get();
+        try {
+            QuerySnapshot querySnapshot = query.get();
 
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-            String tmpEmail = document.getString("email");
-            User tmp = new User("tmp", tmpEmail);
-            allUsers.add(tmp);
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                String tmpEmail = document.getString("email");
+                User tmp = new User("tmp", tmpEmail);
+                allUsers.add(tmp);
+            }
+
+            return allUsers;
+        } catch (Exception e) {
+            Log.e("TAG", "Problem getting all users.");
         }
-
-        return allUsers;
+        // TODO: Less cancer
+        return null;
     }
 }

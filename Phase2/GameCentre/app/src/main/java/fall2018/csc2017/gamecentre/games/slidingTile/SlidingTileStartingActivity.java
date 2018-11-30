@@ -17,8 +17,8 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
+import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
-import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -47,7 +47,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
     /**
      * The Database methods needed for sliding tiles.
      */
-    private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
+    private GameDatabaseTools slidingTileDatabaseTools = new GameDatabaseTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

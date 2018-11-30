@@ -31,12 +31,6 @@ import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
  * The game activity.
  */
 public class SlidingTileActivity extends GameActivity {
-
-    /**
-     * The sliding tiles database path constant.
-     */
-    private static final String ST_GAMES_PATH = "st-games";
-
     /**
      * The board manager.
      */
@@ -95,7 +89,7 @@ public class SlidingTileActivity extends GameActivity {
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
         // Saves the boardManager to database.
-        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
+        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -168,7 +162,7 @@ public class SlidingTileActivity extends GameActivity {
             }
             nextPos++;
         }
-        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
+        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
     }
 
     /**
@@ -204,7 +198,7 @@ public class SlidingTileActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
+        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
     }
 
     /**
@@ -230,7 +224,7 @@ public class SlidingTileActivity extends GameActivity {
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
+                GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
             }
         });
     }
