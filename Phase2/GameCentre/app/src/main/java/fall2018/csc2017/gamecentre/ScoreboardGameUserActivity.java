@@ -92,7 +92,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
                 "Sliding Tiles").getScoreBoardDataStringForm());
         scoreBoardListData.addAll(setupSlidingTilesScoreboard(getTicTacToeScoresFromDatabase(),
                 "TicTacToe").getScoreBoardDataStringForm());
-        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getGoScoresFromDatabase(),
+        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getMatchingCardsScoresFromDatabase(),
                 "Matching Cards").getScoreBoardDataStringForm());
 
         return scoreBoardListData;
@@ -125,14 +125,14 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the scoreboard of the game
      */
-    private Scoreboard setupGoScoreboard(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
+    private Scoreboard setupMatchingCardsScoreboard(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
         ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, nameOfGame);
         newScoreboard.organizeScoreBoard();
         return newScoreboard;
     }
 
     /**
-     * Gets all the sliding tile scores from the database.
+     * Gets all the Sliding Tile scores from the database.
      *
      * @return the list of all sliding tile scores.
      */
@@ -168,11 +168,11 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
     }
 
     /**
-     * Gets all the Go scores from the database.
+     * Gets all the Matching Cards scores from the database.
      *
      * @return the list of all Go scores.
      */
-    private List<ScoreSlidingTiles> getGoScoresFromDatabase() {
+    private List<ScoreSlidingTiles> getMatchingCardsScoresFromDatabase() {
         if (isGameScoreboard) {
             List<User> listOfUsers = databaseTools.getAllUsers();
             List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
