@@ -29,10 +29,10 @@ public class scoreboardGameUserActivityTest {
         List<ScoreSlidingTiles> correctListOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreSlidingTiles newTicTacToeScore = new ScoreSlidingTiles(6-i, newUser);
+            ScoreSlidingTiles newTicTacToeScore = new ScoreSlidingTiles(6-i, newUser.getUsername());
             listOfScores.add(newTicTacToeScore);
 
-            ScoreSlidingTiles newCorrectSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
+            ScoreSlidingTiles newCorrectSlidingTilesScore = new ScoreSlidingTiles(i, newUser.getUsername());
             correctListOfScores.add(newCorrectSlidingTilesScore);
         }
         ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "New Game");
@@ -51,10 +51,10 @@ public class scoreboardGameUserActivityTest {
         List<ScoreMatchingCards> correctListOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreMatchingCards newGoScore = new ScoreMatchingCards(6-i, newUser);
+            ScoreMatchingCards newGoScore = new ScoreMatchingCards(6-i, newUser.getUsername());
             listOfScores.add(newGoScore);
 
-            ScoreMatchingCards newCorrectSlidingTilesScore = new ScoreMatchingCards(i, newUser);
+            ScoreMatchingCards newCorrectSlidingTilesScore = new ScoreMatchingCards(i, newUser.getUsername());
             correctListOfScores.add(newCorrectSlidingTilesScore);
         }
         ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, "New Game");
@@ -73,10 +73,10 @@ public class scoreboardGameUserActivityTest {
         List<ScoreTicTacToe> correctListOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
+            ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser.getUsername());
             listOfScores.add(newTicTacToeScore);
 
-            ScoreTicTacToe newCorrectTicTacToeScore = new ScoreTicTacToe(6-i, newUser);
+            ScoreTicTacToe newCorrectTicTacToeScore = new ScoreTicTacToe(6-i, newUser.getUsername());
             correctListOfScores.add(newCorrectTicTacToeScore);
         }
         ScoreboardTicTacToe newScoreboard = new ScoreboardTicTacToe(listOfScores, "New Game");
