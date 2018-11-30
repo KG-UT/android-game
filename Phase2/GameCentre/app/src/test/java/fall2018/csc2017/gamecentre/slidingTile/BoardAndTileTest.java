@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.Tile;
+import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.*;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 import static org.junit.Assert.*;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoard;
@@ -15,7 +17,6 @@ import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoard;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -45,6 +46,7 @@ public class BoardAndTileTest {
      * Make a solved Board.
      */
     private void setUpCorrect() {
+        User newUser = new User("1", "John");
         List<Tile> tiles = makeTiles();
         SlidingTileBoard board = new SlidingTileBoard(4,4,tiles);
         slidingTileBoardManager = new SlidingTileBoardManager(board);
@@ -92,11 +94,11 @@ public class BoardAndTileTest {
         setUpCorrect();
 
         assertEquals(15, slidingTileBoardManager.getBoard().getTile(3, 2).getId());
-        assertEquals(16, slidingTileBoardManager.getBoard().getTile(3, 3).getId());
+        assertEquals(9999, slidingTileBoardManager.getBoard().getTile(3, 3).getId());
 
         slidingTileBoardManager.getBoard().swapTiles(3, 3, 3, 2);
 
-        assertEquals(16, slidingTileBoardManager.getBoard().getTile(3, 2).getId());
+        assertEquals(9999, slidingTileBoardManager.getBoard().getTile(3, 2).getId());
         assertEquals(15, slidingTileBoardManager.getBoard().getTile(3, 3).getId());
     }
 
@@ -109,8 +111,8 @@ public class BoardAndTileTest {
         setUpCorrect();
 
         assertTrue(slidingTileBoardManager.isValidTap(11));
-        assertTrue(slidingTileBoardManager.isValidTap(15));
-        assertTrue(slidingTileBoardManager.isValidTap(10));
+        assertTrue(slidingTileBoardManager.isValidTap(14));
+        assertFalse(slidingTileBoardManager.isValidTap(10));
     }
 
     /**

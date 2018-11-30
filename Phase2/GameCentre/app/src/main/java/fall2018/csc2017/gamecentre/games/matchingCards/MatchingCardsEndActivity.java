@@ -42,7 +42,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         // TODO: TEMP
-        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, "FUCK");
+        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, currentUser.getEmail());
         databaseTool.saveToDatabase(theScore, "Matching Tiles");
 
     }
