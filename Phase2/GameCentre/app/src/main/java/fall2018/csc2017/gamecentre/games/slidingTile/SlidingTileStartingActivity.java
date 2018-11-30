@@ -55,8 +55,6 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         //saveToFile(TEMP_SAVE_FILENAME);
         slidingTileBoardManager = new SlidingTileBoardManager();
 
-        saveToFile();
-
         setContentView(R.layout.activity_sliding_tile_starting_);
         addScoreboardButtonListener();
         addNewGameButtonListener();

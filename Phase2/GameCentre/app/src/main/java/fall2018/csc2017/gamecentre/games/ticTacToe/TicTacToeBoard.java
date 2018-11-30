@@ -1,5 +1,6 @@
 package fall2018.csc2017.gamecentre.games.ticTacToe;
 
+import java.io.Serializable;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.abstractClasses.Board;

@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.Blob;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -67,7 +68,6 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
         super.onCreate(savedInstanceState);
         boardManager = new TicTacToeBoardManager(4, 4);
         gameDatabaseTools = new GameDatabaseTools();
-        saveToFile();
 
         setContentView(R.layout.activity_tic_tac_toe_starting);
         addNewGameButtonListener();
@@ -174,7 +174,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
                             DocumentSnapshot document = task.getResult();
                             if(document.exists()) {
                                 document.getData().get(LoginActivity.currentUser);
-                                byte[] boardManagerBytes = (byte[]) document.getData().get(user.getUid());
+                                byte[] boardManagerBytes = ((Blob) document.getData().get("owner")).toBytes();
                                 try {
                                     gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
                                     Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);

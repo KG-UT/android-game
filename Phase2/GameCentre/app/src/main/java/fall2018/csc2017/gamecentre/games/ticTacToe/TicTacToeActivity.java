@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
@@ -25,6 +28,7 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 /**
@@ -57,6 +61,8 @@ public class TicTacToeActivity extends GameActivity {
      */
     private static int columnWidth, columnHeight;
 
+    GameDatabaseTools gameDatabaseTools;
+
     /**
      * The database.
      */
@@ -77,6 +83,8 @@ public class TicTacToeActivity extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        gameDatabaseTools = new GameDatabaseTools();
 
         HashMap<String, Object> settings = getSettings();
         boardManager = (TicTacToeBoardManager) settings.get("PRELOADED_BOARD_MANAGER");
@@ -155,7 +163,7 @@ public class TicTacToeActivity extends GameActivity {
             b.setText(board.getTile(row, col).getState());
             nextPos++;
         }
-        saveToFile(SlidingTileStartingActivity.SAVE_FILENAME);
+        saveToFile();
     }
 
     /**
@@ -200,41 +208,11 @@ public class TicTacToeActivity extends GameActivity {
     }
 
     /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (TicTacToeBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
      * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
      */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    public void saveToFile() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        gameDatabaseTools.saveToDatabase(boardManager, user.getUid());
     }
 
     /**
@@ -245,7 +223,7 @@ public class TicTacToeActivity extends GameActivity {
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(SAVE_FILE_1);
+                saveToFile();
 
             }
         });
