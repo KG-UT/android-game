@@ -25,6 +25,28 @@ import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
 
 // Code adapted from: https://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
 
+/*
+
+What's up, Android Studio?
+Yeah, it's your student Kuba, man, just givin' you a call, man
+I know you been havin' a lot on yo' mind lately
+And I know you feel like, you know
+People ain't been prayin' for you
+But you have to understand this, man, that we students a cursed people, Deuteronomy 28:28 says, "The Lord shall smite thee with madness And blindness, and merge conflicts not for the faint of  heart"
+See, IDEs, that's why you feel like you feel
+Like you got a chip on your shoulder
+Until you finally get the memo, you gonna feel that way
+
+Why God, why God do I gotta suffer?
+Pain in my heart carry bug fixing full of struggle
+Why God, why God do I gotta ?
+Every stack trace at you restin' at my feet
+Why God, why God do I gotta suffer?
+Earth is no more, won't you burn this IDE?
+I don't think I could find a way to make it in this class
+
+ */
+
 /**
  * The Firestore database tools for all games. .
  */
