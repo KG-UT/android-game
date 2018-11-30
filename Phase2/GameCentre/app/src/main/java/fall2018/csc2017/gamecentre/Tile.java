@@ -80,10 +80,20 @@ public class Tile implements Comparable<Tile>, Serializable {
      */
     public Tile() {}
 
+    /**
+     * Sets the value of background to the given int.
+     *
+     * @param background The tile's new background.
+     */
     public void setBackground(int background) {
         this.background = background;
     }
 
+    /**
+     * Sets the value of id to the given int.
+     *
+     * @param id The tile's new id.
+     */
     public void setId(int id) {
         this.id = id;
     }

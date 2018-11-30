@@ -2,10 +2,13 @@ package fall2018.csc2017.gamecentre.scoreboard.scoreTests;
 
 import org.junit.Test;
 
-import fall2018.csc2017.gamecentre.ScoreAbstract;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Set of tests for all scores.
+ */
 abstract public class scoreTest {
 
     /**

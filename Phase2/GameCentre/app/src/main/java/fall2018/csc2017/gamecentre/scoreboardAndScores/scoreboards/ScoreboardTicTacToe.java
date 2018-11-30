@@ -1,17 +1,22 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
+import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
 
-public class ScoreboardSlidingTies extends Scoreboard {
+/**
+ * A scoreboard of tictactoe scores which can store and manipulate them.
+ */
+public class ScoreboardTicTacToe extends Scoreboard {
 
     /**
      * Score data is arranged in an array list. Smaller scores are closer to the top of the
      * scoreboard (similar (*but not same) concept to golf, where the less moves the better)
      */
-    private ArrayList<ScoreSlidingTiles> scoreBoardArray;
+    private ArrayList<ScoreTicTacToe> scoreBoardArray;
 
     /**
      * Creates a scoreboard
@@ -19,9 +24,9 @@ public class ScoreboardSlidingTies extends Scoreboard {
      * @param listOfScores the list of scores
      * @param nameOfGame the name of the game that has these scores
      */
-    public ScoreboardSlidingTies(List<ScoreSlidingTiles> listOfScores, String nameOfGame) {
+    public ScoreboardTicTacToe(List<ScoreTicTacToe> listOfScores, String nameOfGame) {
         super(nameOfGame);
-        this.scoreBoardArray = (ArrayList<ScoreSlidingTiles>) listOfScores;
+        this.scoreBoardArray = (ArrayList<ScoreTicTacToe>) listOfScores;
     }
 
     /**
@@ -29,7 +34,7 @@ public class ScoreboardSlidingTies extends Scoreboard {
      *
      * @return the score board data
      */
-    public List<ScoreSlidingTiles> getScoreBoardData() {
+    public List<ScoreTicTacToe> getScoreBoardData() {
         return this.scoreBoardArray;
     }
 

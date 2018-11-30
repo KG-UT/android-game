@@ -2,7 +2,11 @@ package fall2018.csc2017.gamecentre;
 
 import java.io.Serializable;
 
+/**
+ * The abstract class of a score.
+ */
 abstract public class ScoreAbstract implements Serializable {
+
     /**
      * A string that contains the username of the user that got this score
      */
@@ -14,7 +18,10 @@ abstract public class ScoreAbstract implements Serializable {
     private int userScore;
 
     /**
-     * Creates a ScoreAbstract where username comes from a string
+     * Creates a ScoreAbstract where username comes from user (Used to create score at the endgame).
+     *
+     * @param userScore the int value of a score
+     * @param owner the user that got the score
      */
     public ScoreAbstract(int userScore, String owner) {
         this.userScore = userScore;
@@ -23,6 +30,8 @@ abstract public class ScoreAbstract implements Serializable {
 
     /**
      * Returns a string of the user that got this score
+     *
+     * @return the username of the owner
      */
     public String getOwner() {
         return this.userName;

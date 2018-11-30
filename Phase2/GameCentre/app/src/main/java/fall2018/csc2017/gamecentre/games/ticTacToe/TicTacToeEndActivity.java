@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
 /**

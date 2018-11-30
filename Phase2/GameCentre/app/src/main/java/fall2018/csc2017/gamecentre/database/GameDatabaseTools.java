@@ -72,17 +72,22 @@ public class GameDatabaseTools {
      */
     public void saveToDatabase(BoardManager boardManager, String gameType, String owner) {
         // TODO: Is this an issue?
-        byte[] boardManagerBytes = convertBoardManagerToBytes(boardManager);
-         DocumentReference docRef = db.collection(gameType).document(owner);
-         // Adds document data with id of "owner" and the score.
-         Map<String, Object> data = new HashMap<>();
-         data.put("owner", boardManagerBytes);
-         // Async writing of data
-         try {
-             docRef.set(data);
-         } catch (Exception e) {
-             Log.e("TEMP", "Error inserting board manager bytes into database.");
-         }
+        try {
+            byte[] boardManagerBytes = convertBoardManagerToBytes(boardManager);
+
+            DocumentReference docRef = db.collection(gameType).document(owner);
+            // Adds document data with id of "owner" and the score.
+            Map<String, Object> data = new HashMap<>();
+            data.put("owner", boardManagerBytes);
+            // Async writing of data
+            try {
+                docRef.set(data);
+            } catch (Exception e) {
+                Log.e("TEMP", "Error inserting board manager bytes into database.");
+            }
+        } catch (IOException e) {
+            Log.e("TAG", "I/O Error.");
+        }
      }
 
     /**
@@ -92,20 +97,22 @@ public class GameDatabaseTools {
      * @param gameType the game type
      * @return the board manager
      */
-    public BoardManager getBoardManager(String owner, String gameType){
+    public BoardManager getBoardManager(String owner, String gameType) {
         // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
         DocumentReference docRef = db.collection(gameType).document(owner);
         ApiFuture<DocumentSnapshot> future = docRef.get();
-        DocumentSnapshot document = future.get();
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                // TODO: if this an issue?
+                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
 
-
-        BoardManager boardManager;
-        if (document.exists()) {
-            // TODO: if this an issue?
-            byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-            // TODO: Is this one an issue?
-            BoardManager boardManager = convertBytesToBoardManager(boardManagerBytes);
+                return convertBytesToBoardManager(boardManagerBytes);
+            }
+        } catch (Exception e) {
+            Log.e("TAG", "Error getting board manager.");
         }
-        return boardManager;
-     }
+        // TODO: Make this less cancer.
+        return null;
+    }
 }

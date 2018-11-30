@@ -12,7 +12,7 @@ import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
  */
 public class MatchingCardsBoardManager extends BoardManager {
 
-    /*
+    /**
      * The game score.
      */
     private int score = 0;
@@ -20,7 +20,7 @@ public class MatchingCardsBoardManager extends BoardManager {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    MatchingCardsBoardManager() {
+   public MatchingCardsBoardManager() {
         this(4, 4);
     }
 
@@ -98,7 +98,8 @@ public class MatchingCardsBoardManager extends BoardManager {
     public MatchingCardsBoard getBoard() { return (MatchingCardsBoard) super.getBoard(); }
 
     /**
-     * returns the current score
+     * Returns the current score.
+     *
      * @return the score
      */
     public int getScore() {
@@ -106,7 +107,8 @@ public class MatchingCardsBoardManager extends BoardManager {
     }
 
     /**
-     * states if the tap is valid
+     * States if the tap is valid.
+     *
      * @param position the position of the tap
      * @return whether the tap is valid
      */

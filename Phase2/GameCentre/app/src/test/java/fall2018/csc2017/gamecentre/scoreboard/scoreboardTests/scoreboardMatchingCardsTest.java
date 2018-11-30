@@ -5,20 +5,22 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.ScoreAbstract;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
-import fall2018.csc2017.gamecentre.ScoreMatchingCards;
-import fall2018.csc2017.gamecentre.ScoreboardMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardMatchingCards;
 import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.assertEquals;
 
-public class scoreboardGoTest extends scoreboardTest {
+/**
+ * Set of tests for ScoreboardMatchingCards.
+ */
+public class scoreboardMatchingCardsTest extends scoreboardTest {
 
     /**
      * Setup scores in preparation for tests.
      */
-
     protected List<ScoreMatchingCards> setupListOfScores() {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
         User newUser = new User("1", "John");

@@ -1,17 +1,22 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores.scores;
 
 import android.support.annotation.NonNull;
 
-public class ScoreMatchingCards extends ScoreAbstract implements Comparable<ScoreMatchingCards> {
+import fall2018.csc2017.gamecentre.ScoreAbstract;
+
+/**
+ * Creates a ScoreSlidingTiles which stores int value scores, users and can compare them.
+ */
+public class ScoreSlidingTiles extends ScoreAbstract implements Comparable<ScoreSlidingTiles> {
     /**
-     * Creates a ScoreMatchingCards where username comes from a string
+     * Creates a ScoreSlidingTiles where username comes from a string
      */
-    public ScoreMatchingCards(int userScore, String userName) {
+    public ScoreSlidingTiles(int userScore, String userName) {
         super(userScore, userName);
     }
 
     @Override
-    public int compareTo(@NonNull ScoreMatchingCards comparedToScore) {
+    public int compareTo(@NonNull ScoreSlidingTiles comparedToScore) {
         if(comparedToScore.getUserScore() < this.getUserScore()) {
             return 1;
         } else if (comparedToScore.getUserScore() > this.getUserScore()) {
@@ -25,10 +30,10 @@ public class ScoreMatchingCards extends ScoreAbstract implements Comparable<Scor
     public boolean equals(Object comparedToObject) {
         if (comparedToObject == null) {
             return false;
-        } else if (!(comparedToObject instanceof ScoreMatchingCards)) {
+        } else if (!(comparedToObject instanceof ScoreSlidingTiles)) {
             return false;
         } else {
-            ScoreMatchingCards comparedToScore = (ScoreMatchingCards) comparedToObject;
+            ScoreSlidingTiles comparedToScore = (ScoreSlidingTiles) comparedToObject;
             return (this.getOwner().equals(comparedToScore.getOwner()) &&
                     (this.getUserScore() == comparedToScore.getUserScore()));
         }

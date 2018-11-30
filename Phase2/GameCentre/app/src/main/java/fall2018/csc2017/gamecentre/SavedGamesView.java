@@ -7,17 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
@@ -54,6 +50,9 @@ public class SavedGamesView extends AppCompatActivity {
 //        addSaveButtonListener1();
 ////    }
 
+    /**
+     * Adds a listener for saveGameButton1.
+     */
     private void addSaveButtonListener1() {
         Button SaveGame1Button = findViewById(R.id.saveGameButton1);
         SaveGame1Button.setOnClickListener(new View.OnClickListener() {

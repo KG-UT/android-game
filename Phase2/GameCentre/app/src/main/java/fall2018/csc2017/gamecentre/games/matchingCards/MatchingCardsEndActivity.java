@@ -7,13 +7,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
-
+/**
+ * The MatchingCardsEndActivity class which displays the screen after the game is finished.
+ */
 public class MatchingCardsEndActivity extends GameEndActivity {
 
     /**

@@ -25,6 +25,7 @@ public class SlidingTileBoard extends Board {
 
     /**
      * Return the number of tiles on the board.
+     *
      * @return the number of tiles on the board
      */
     public static int numTiles() {
@@ -33,6 +34,7 @@ public class SlidingTileBoard extends Board {
 
     /**
      * Return the number of columns of the board.
+     *
      * @return the number of columns of the board
      */
     public static int getNumCols() {
@@ -41,6 +43,7 @@ public class SlidingTileBoard extends Board {
 
     /**
      * Return the number of rows of the board.
+     *
      * @return the number of rows of the board
      */
     public static int getNumRows() {
@@ -48,7 +51,7 @@ public class SlidingTileBoard extends Board {
     }
 
     /**
-     * Return the tile at (row, col)
+     * Return the tile at (row, col).
      *
      * @param row the tile row
      * @param col the tile column
@@ -59,7 +62,7 @@ public class SlidingTileBoard extends Board {
     }
 
     /**
-     * Set the tile at (row, col)
+     * Set the tile at (row, col).
      *
      * @param row the tile row
      * @param col the tile column
@@ -70,7 +73,7 @@ public class SlidingTileBoard extends Board {
     }
 
     /**
-     * Swap the tiles at (row1, col1) and (row2, col2)
+     * Swap the tiles at (row1, col1) and (row2, col2).
      *
      * @param row1 the first tile row
      * @param col1 the first tile col
