@@ -163,16 +163,16 @@ public class BoardAndTileTest {
 
     }
 
-//    /**
-//     * tests shuffle function
-//     */
-//    @Test
-//    public void testshuffle() {
-//        setUpCorrect();
-//        assertTrue(boardManager.puzzleSolved());
-//        SlidingTileBoardManager bm = new SlidingTileBoardManager(5,5);
-//        assertFalse(bm.puzzleSolved());
-//    }
+    /**
+     * tests shuffle function
+     */
+    @Test
+    public void testshuffle() {
+        setUpCorrect();
+        assertTrue(boardManager.puzzleSolved());
+        SlidingTileBoardManager bm = new SlidingTileBoardManager(5,5);
+        assertFalse(bm.puzzleSolved());
+    }
 
 
 

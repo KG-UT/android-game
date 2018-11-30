@@ -25,18 +25,18 @@ public class ScoreboardSlidingTies extends Scoreboard {
     }
 
     /**
-     * Organizes and sorts the score board.
-     */
-    public void organizeScoreBoard() {
-        Collections.sort(scoreBoardArray);
-    }
-
-    /**
      * Returns the data within the array list of the scoreboard
      *
      * @return the score board data
      */
     public List<ScoreSlidingTiles> getScoreBoardData() {
         return this.scoreBoardArray;
+    }
+
+    /**
+     * Organizes and sorts the score board.
+     */
+    public void organizeScoreBoard() {
+        Collections.sort(scoreBoardArray);
     }
 }

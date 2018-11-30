@@ -14,11 +14,13 @@ import fall2018.csc2017.gamecentre.Tile;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
+import fall2018.csc2017.gamecentre.App.Undoable;
+
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class SlidingTileBoardManager extends BoardManager {
+public class SlidingTileBoardManager extends BoardManager implements Undoable {
 
     /**
      * The key value for the owner.

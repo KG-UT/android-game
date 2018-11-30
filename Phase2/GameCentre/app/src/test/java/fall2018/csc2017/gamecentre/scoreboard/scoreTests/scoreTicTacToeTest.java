@@ -11,9 +11,30 @@ import static org.junit.Assert.assertNotEquals;
 
 public class scoreTicTacToeTest extends scoreTest {
 
+    /**
+     * Setup scores in preparation for tests.
+     */
     protected ScoreTicTacToe setupScores() {
         User newUser = new User("1", "John");
         return new ScoreTicTacToe(10, newUser);
+    }
+
+    /**
+     * Test whether ScoreTicTacToe initialization works.
+     */
+    @Test
+    public void testScoreInitialization() {
+        User newUser = new User(1, "John", "Password");
+        ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(1, 10, newUser.getUsername());
+        ScoreTicTacToe newTicTacToeScore2 = new ScoreTicTacToe(10, newUser);
+
+        assertEquals(1, newTicTacToeScore1.get_id());
+        assertEquals(10, newTicTacToeScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newTicTacToeScore1.getUserName());
+
+        assertEquals(1, newTicTacToeScore2.get_id());
+        assertEquals(10, newTicTacToeScore2.getUserScore());
+        assertEquals(newUser.getUsername(), newTicTacToeScore2.getUserName());
     }
 
     /**

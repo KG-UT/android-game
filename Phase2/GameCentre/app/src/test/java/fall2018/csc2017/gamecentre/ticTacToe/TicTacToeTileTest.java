@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.ticTacToe;
+package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

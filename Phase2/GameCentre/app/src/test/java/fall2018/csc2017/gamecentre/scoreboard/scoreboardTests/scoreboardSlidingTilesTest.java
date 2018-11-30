@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.ScoreAbstract;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.ScoreboardSlidingTies;
 import fall2018.csc2017.gamecentre.User;
@@ -14,17 +15,45 @@ import static org.junit.Assert.assertEquals;
 public class scoreboardSlidingTilesTest extends scoreboardTest {
 
     /**
+     * Setup scores in preparation for tests.
+     */
+    protected List<ScoreSlidingTiles> setupListOfScores() {
+        List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
+        User newUser = new User("1", "Username");
+
+        for (int i=1; i<6; i++) {
+            ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
+            listOfScores.add(newSlidingTilesScore);
+        }
+
+        return listOfScores;
+    }
+
+    /**
+     * Setup scoreboard in preparation for tests.
+     */
+    protected ScoreboardSlidingTies setupScoreboard(List<? extends ScoreAbstract> listOfScores) {
+        return new ScoreboardSlidingTies(setupListOfScores(), "New Game");
+    }
+
+    /**
+     * Test whether ScoreboardSlidingTiles initialization works.
+     */
+    @Test
+    public void testScoreboardInitialization() {
+        ScoreboardSlidingTies newScoreboard = setupScoreboard(setupListOfScores());
+
+        assertEquals("New Game", newScoreboard.getScoreboardGameName());
+        assertEquals(setupListOfScores(), newScoreboard.getScoreBoardData());
+    }
+
+    /**
      * Test whether method getScoreBoardData works.
      */
     @Test
     public void testGetScoreBoardData() {
-        List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User("1", "Username");
-        for (int i=0; i<20; i++) {
-            ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
-            listOfScores.add(newSlidingTilesScore);
-        }
-        ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "Sliding Tiles");
+        ScoreboardSlidingTies newScoreboard = setupScoreboard(setupListOfScores());
+        List<ScoreSlidingTiles> listOfScores = setupListOfScores();
 
         assertEquals(listOfScores, newScoreboard.getScoreBoardData());
     }
@@ -36,18 +65,16 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
     public void testOrganizeScoreBoard() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
         User newUser = new User("1", "Username");
-        for (int i=20; i>0; i--) {
+
+        for (int i=5; i>0; i--) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
             listOfScores.add(newSlidingTilesScore);
         }
-        ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "Sliding Tiles");
+        ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "New Game");
         newScoreboard.organizeScoreBoard();
 
-        List<ScoreSlidingTiles> correctListOfScores = new ArrayList<>();
-        for (int i=1; i<21; i++) {
-            ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
-            correctListOfScores.add(newSlidingTilesScore);
-        }
+        List<ScoreSlidingTiles> correctListOfScores = setupListOfScores();
+
         assertEquals(correctListOfScores, newScoreboard.getScoreBoardData());
     }
 }

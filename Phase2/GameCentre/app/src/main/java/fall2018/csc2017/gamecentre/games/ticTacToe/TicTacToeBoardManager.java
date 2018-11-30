@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
-
+import fall2018.csc2017.gamecentre.App.Undoable;
 
 /**
  * Manage a tic tac toe board.
  * Game is based on how many times the user can beat a randomly playing computer
  * before the user loses.
  */
-public class TicTacToeBoardManager extends BoardManager {
+public class TicTacToeBoardManager extends BoardManager implements Undoable {
     /**
      * The default string to represent no same states (X or O) for a row, col or diagonal
      */
@@ -40,9 +41,9 @@ public class TicTacToeBoardManager extends BoardManager {
      */
     private int NUM_ROWS;
     /**
-     * The score (how many times the user beat or tied the computer)
+     * Stack to keep track of moves
      */
-    private int score = 0;
+    private Stack<int[]> stackOfMoves = new Stack<>();
 
     /**
      * Manage a new 3 by 3 tic tac toe board
@@ -80,6 +81,23 @@ public class TicTacToeBoardManager extends BoardManager {
     }
 
     /**
+     * Determine whether or not a move can be undone
+     */
+    public boolean canUndo() {
+        return stackOfMoves.size() > 1;
+    }
+
+    /**
+     * Undo the player's move and the computer's move
+     */
+    public void undoMove() {
+        int[] computerMove = stackOfMoves.pop();
+        int[] playerMove = stackOfMoves.pop();
+        makeMove(computerMove[0], computerMove[1], TicTacToeTile.BLANK);
+        makeMove(playerMove[0], playerMove[1], TicTacToeTile.BLANK);
+    }
+
+    /**
      * Make a random tic tac toe move if possible
      */
     public void computerMakeMove() {
@@ -90,7 +108,7 @@ public class TicTacToeBoardManager extends BoardManager {
             Random randomGenerator = new Random();
             int index = randomGenerator.nextInt(blankLocations.size());
             Integer[] position = blankLocations.get(index);
-
+            stackOfMoves.add(new int[]{position[0], position[1]});
             makeMove(position[0], position[1], TicTacToeTile.O);
         }
     }
@@ -110,6 +128,7 @@ public class TicTacToeBoardManager extends BoardManager {
         int row = position / Board.getNumRows();
         int col = position % Board.getNumCols();
 
+        stackOfMoves.add(new int[]{row, col});
         makeMove(row, col, CURRENT_PLAYER);
         String winner = getWinner();
         if(winner.equals(NO_WINNER)) {
@@ -280,6 +299,6 @@ public class TicTacToeBoardManager extends BoardManager {
 
     @Override
     public int getScore() {
-        return 0;
+        return score;
     }
 }

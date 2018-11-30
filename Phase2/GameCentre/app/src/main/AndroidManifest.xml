@@ -38,6 +38,7 @@
         <activity android:name=".view.GameChoiceActivity"/>
         <activity android:name=".ScoreboardGameUserActivity" />
         <activity android:name=".SavedGamesView"/>
+        <activity android:name=".ScoreboardGameUserActivity"/>
         <activity android:name=".games.slidingTile.SlidingTileEndActivity"/>
 
     </application>

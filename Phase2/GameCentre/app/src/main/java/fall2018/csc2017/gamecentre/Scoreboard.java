@@ -23,9 +23,13 @@ abstract public class Scoreboard {
     }
 
     /**
-     * Organizes and sorts the score board.
+     * Returns the name of the game for the scores in scoreboard
+     *
+     * @return the name of the game of the scores in the scoreboard
      */
-    abstract public void organizeScoreBoard();
+    public String getScoreboardGameName() {
+        return scoreboardGameName;
+    }
 
     /**
      * Returns the data within the array list of the scoreboard
@@ -34,6 +38,10 @@ abstract public class Scoreboard {
      */
     abstract public List<? extends ScoreAbstract> getScoreBoardData();
 
+    /**
+     * Organizes and sorts the score board.
+     */
+    abstract public void organizeScoreBoard();
 
     /**
      * Returns a list of strings where each string contains the rank, username and score of a user's
