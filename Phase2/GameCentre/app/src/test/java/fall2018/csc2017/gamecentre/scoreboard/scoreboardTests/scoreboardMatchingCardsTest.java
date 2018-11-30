@@ -25,7 +25,7 @@ public class scoreboardMatchingCardsTest extends scoreboardTest {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser);
+            ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser.getUsername());
             listOfScores.add(newGoScore);
         }
         return listOfScores;
@@ -69,7 +69,7 @@ public class scoreboardMatchingCardsTest extends scoreboardTest {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=5; i>0; i--) {
-            ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser);
+            ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser.getUsername());
             listOfScores.add(newGoScore);
         }
         ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, "New Game");
