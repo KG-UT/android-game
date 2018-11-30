@@ -17,11 +17,15 @@ import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsTile;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class MatchingCardsBoardManagerTest {
-    /** The board manager for testing. */
+
+    /**
+     * The board manager for testing.
+     */
     private MatchingCardsBoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
+     *
      * @return a set of tiles that are in order
      */
     private List<MatchingCardsTile> makeTiles() {
@@ -34,7 +38,9 @@ public class MatchingCardsBoardManagerTest {
         return tiles;
     }
 
-
+    /**
+     * Sets up the boardmanager.
+     */
     public void setUp(){
         List<MatchingCardsTile> tiles = makeTiles();
         MatchingCardsBoard board = new MatchingCardsBoard(4,4, tiles);
@@ -42,7 +48,7 @@ public class MatchingCardsBoardManagerTest {
     }
 
     /**
-     * Test whether touchMove works
+     * Test whether touchMove works.
      */
     @Test
     public void testTouchMove(){

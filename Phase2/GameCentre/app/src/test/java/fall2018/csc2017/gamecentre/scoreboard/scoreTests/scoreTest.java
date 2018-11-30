@@ -6,6 +6,9 @@ import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Set of tests for all scores.
+ */
 abstract public class scoreTest {
 
     /**

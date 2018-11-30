@@ -15,6 +15,9 @@ import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Set of tests for ScoreboardGameUserActivity.
+ */
 public class scoreboardGameUserActivityTest {
 
     /**

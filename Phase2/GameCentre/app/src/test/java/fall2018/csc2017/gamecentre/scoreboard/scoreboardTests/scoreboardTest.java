@@ -10,6 +10,9 @@ import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Set of tests for all scoreboards.
+ */
 abstract public class scoreboardTest {
 
     /**

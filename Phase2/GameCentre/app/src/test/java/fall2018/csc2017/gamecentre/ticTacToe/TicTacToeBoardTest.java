@@ -97,7 +97,7 @@ public class TicTacToeBoardTest {
             board.updateTile(randomI, randomJ, TicTacToeTile.O);
         }
         // TODO: Mine doesn't have reset?
-//        board.reset();
+        board.reset();
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 assertEquals(board.getTile(i, j).getState(), TicTacToeTile.BLANK);

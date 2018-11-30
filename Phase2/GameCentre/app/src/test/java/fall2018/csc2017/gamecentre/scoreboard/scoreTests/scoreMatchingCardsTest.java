@@ -9,6 +9,9 @@ import fall2018.csc2017.gamecentre.User;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Set of tests for ScoreMatchingCards.
+ */
 public class scoreMatchingCardsTest extends scoreTest {
 
     /**

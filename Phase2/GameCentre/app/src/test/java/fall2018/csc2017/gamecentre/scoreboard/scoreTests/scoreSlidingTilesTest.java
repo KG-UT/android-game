@@ -8,6 +8,9 @@ import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.*;
 
+/**
+ * Set of tests for ScoreSlidingTiles.
+ */
 public class scoreSlidingTilesTest extends scoreTest {
 
     /**

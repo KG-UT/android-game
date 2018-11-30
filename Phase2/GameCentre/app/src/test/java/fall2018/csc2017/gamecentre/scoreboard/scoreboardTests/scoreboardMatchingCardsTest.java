@@ -13,12 +13,14 @@ import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.assertEquals;
 
-public class scoreboardGoTest extends scoreboardTest {
+/**
+ * Set of tests for ScoreboardMatchingCards.
+ */
+public class scoreboardMatchingCardsTest extends scoreboardTest {
 
     /**
      * Setup scores in preparation for tests.
      */
-
     protected List<ScoreMatchingCards> setupListOfScores() {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
