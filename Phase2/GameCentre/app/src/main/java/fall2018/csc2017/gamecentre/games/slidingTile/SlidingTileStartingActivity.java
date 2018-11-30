@@ -18,7 +18,7 @@ import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
 import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
-import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
+import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
