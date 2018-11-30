@@ -74,6 +74,14 @@ public class MatchingCardsBoardManagerTest {
         assertFalse(boardManager.isValidTap(3));
             }
 
-
-
+    /**
+     *  Test whether getScore works correctly
+     */
+    @Test
+    public void testgetScore(){
+        MatchingCardsBoardManager temp1 = new MatchingCardsBoardManager();
+        temp1.touchMove(3);
+        temp1.touchMove(5);
+        assertEquals(2,temp1.getScore());
+    }
 }
