@@ -37,7 +37,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
 
     /**
-     * The user's id in firebase.
+     * The user's id in database.
      */
     private String userId;
 
@@ -47,7 +47,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
     // Auth
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth.AuthListener mAuthListener;
 
     // Firebase User and database references.
     public static FirebaseUser currentUser;

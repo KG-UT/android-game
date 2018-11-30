@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.firebase;
+package fall2018.csc2017.gamecentre.database;
 
 import android.util.Log;
 
@@ -22,7 +22,7 @@ import fall2018.csc2017.gamecentre.User;
  */
 public class UserDatabaseTools {
 
-    private Firestore db = InitializeDatabase.getDatabase();
+    private Firestore db = Database.getDatabase();
 
     /**
      * Inserts a user into the Firestore database.
@@ -43,6 +43,11 @@ public class UserDatabaseTools {
         }
     }
 
+    /**
+     * Returns every user that is in our database.
+     *
+     * @return An Arraylist of all the users in our database.
+     */
     public ArrayList<User> getAllUsers() {
         ApiFuture<QuerySnapshot> query = db.collection("users").get();
         ArrayList<User> allUsers = new ArrayList<>();
@@ -58,10 +63,5 @@ public class UserDatabaseTools {
         }
 
         return allUsers;
-
-
     }
-
-
-
 }

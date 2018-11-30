@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.firebase;
+package fall2018.csc2017.gamecentre.database;
 
 import android.util.Log;
 
@@ -10,17 +10,15 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
 
-import fall2018.csc2017.gamecentre.view.BaseLoginActivity;
-
-public class InitializeDatabase {
+public class Database {
 
     private static Firestore db;
 
-    public void initDatabase() {
+    private static void initDatabase() {
         // Code adapted from https://firebase.google.com/docs/admin/setup#initialize_the_sdk
         try {
-            String path = InitializeDatabase.class
-                    .getResource("InitializeDatabase.class").toString();
+            String path = Database.class
+                    .getResource("Database.class").toString();
 
             FileInputStream serviceAccount = new FileInputStream(path);
 
@@ -38,7 +36,16 @@ public class InitializeDatabase {
         }
     }
 
+    /**
+     * Gets the database.
+     *
+     * @return the Firestore database
+     */
     public static Firestore getDatabase() {
+        // If the db hasn't been initialized, do so.
+        if (db == null) {
+            initDatabase();
+        }
         return db;
     }
 }

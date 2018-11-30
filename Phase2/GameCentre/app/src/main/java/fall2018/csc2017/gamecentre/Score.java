@@ -10,14 +10,9 @@ import java.io.Serializable;
 public class Score implements Comparable<Score>, Serializable {
 
     /**
-     * The Score's id in the database.
-     */
-    private long _id;
-
-    /**
      * A string that contains the username of the user that got this score
      */
-    private String userName;
+    private String owner;
 
     /**
      * An int that represents the score that the user got
@@ -25,48 +20,21 @@ public class Score implements Comparable<Score>, Serializable {
     private int userScore;
 
     /**
-     * Creates a score where username comes from user (Used to create score at the endgame)
-     */
-    public Score(int userScore, User user) {
-        this._id = 1;
-        this.userName = user.getUsername();
-        this.userScore = userScore;
-    }
-
-    /**
-     * Creates a score where username comes from a string
-     */
-    public Score(long _id, int userScore, String userName) {
-        this._id = _id;
-        this.userName = userName;
-        this.userScore = userScore;
-    }
-
-    /**
-     * Returns the Score's id.
-     * Type of long required for SQLite.
+     * Initializes a Score.
      *
-     * @return the id
+     * @param userScore the user's score.
+     * @param owner the owner of this score.
      */
-    public long get_id() {
-        return _id;
-    }
-
-    /**
-     * Sets the Score's id.
-     * Type of long required for SQLite.
-     *
-     * @param _id the id.
-     */
-    public void set_id(long _id) {
-        this._id = _id;
+    public Score(int userScore, String owner) {
+        this.userScore = userScore;
+        this.owner = owner;
     }
 
     /**
      * Returns a string of the user that got this score
      */
-    public String getUserName() {
-        return this.userName;
+    public String getOwner() {
+        return this.owner;
     }
 
     /**
@@ -89,6 +57,6 @@ public class Score implements Comparable<Score>, Serializable {
 
     @Override
     public String toString() {
-        return getUserName() + ":" + " " + Integer.toString(getUserScore());
+        return getOwner() + ":" + " " + Integer.toString(getUserScore());
     }
 }

@@ -34,11 +34,11 @@ dependencies {
     // See http://www.vogella.com/tutorials/Mockito/article.html
     testImplementation "org.mockito:mockito-core:2.+"
 
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.database:database-core:16.0.1'
+    implementation 'com.google.database:database-auth:16.0.1'
+    implementation 'com.google.database:database-database:16.0.1'
 
-    implementation 'com.google.firebase:firebase-admin:6.6.0'
+    implementation 'com.google.database:database-admin:6.6.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
