@@ -49,6 +49,8 @@ public class MatchingCardsBoard extends Board {
         MatchingCardsTile card = (MatchingCardsTile) getItem(row, column);
         card.setFaceUp();
         tempFaceUpCards.add(card);
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -59,6 +61,8 @@ public class MatchingCardsBoard extends Board {
             MatchingCardsTile tile = tempFaceUpCards.get(i);
             tile.setFaceDown();
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -73,5 +77,7 @@ public class MatchingCardsBoard extends Board {
      */
     public void clearTempFaceUpCards(){
         tempFaceUpCards.clear();
+        setChanged();
+        notifyObservers();
     }
 }

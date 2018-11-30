@@ -61,7 +61,6 @@ public class TicTacToeActivity extends GameActivity {
         updateTileButtons();
         updateScoreText();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
-
     }
 
     @Override
