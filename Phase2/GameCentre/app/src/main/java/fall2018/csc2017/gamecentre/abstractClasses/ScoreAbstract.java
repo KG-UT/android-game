@@ -1,6 +1,8 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.abstractClasses;
 
 import java.io.Serializable;
+
+import fall2018.csc2017.gamecentre.User;
 
 abstract public class ScoreAbstract implements Serializable {
 

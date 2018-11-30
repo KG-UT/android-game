@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
@@ -19,7 +19,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int endScore;
+    private int endScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

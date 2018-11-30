@@ -2,8 +2,8 @@ package fall2018.csc2017.gamecentre.scoreboard.scoreTests;
 
 import org.junit.Test;
 
-import fall2018.csc2017.gamecentre.ScoreMatchingCards;
-import fall2018.csc2017.gamecentre.ScoreTicTacToe;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
 import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.assertEquals;

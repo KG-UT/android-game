@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
+import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardSlidingTies;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardTicTacToe;
+import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.ScoreboardActivity;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;

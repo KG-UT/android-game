@@ -1,6 +1,9 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores.scores;
 
 import android.support.annotation.NonNull;
+
+import fall2018.csc2017.gamecentre.User;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 public class ScoreTicTacToe extends ScoreAbstract implements Comparable<ScoreTicTacToe> {
 

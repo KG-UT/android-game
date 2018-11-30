@@ -285,20 +285,15 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
         return NO_WINNER;
     }
 
-    @Override
     /**
      * Puzzle is "solved", when the user gets beaten by the computer.
      */
+    @Override
     public boolean puzzleSolved() {
         if(this.getWinner().equals(COMPUTER_PLAYER)){
             return true;
         } else {
             return false;
         }
-    }
-
-    @Override
-    public int getScore() {
-        return score;
     }
 }

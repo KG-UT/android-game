@@ -14,11 +14,6 @@ abstract public class BoardManager implements Serializable {
      */
     protected Board board;
 
-    /**
-     * The score
-     */
-    protected int score = 0;
-
     private Stack<int[]> stackOfMoves = new Stack<>();
 
     /**
@@ -55,7 +50,6 @@ abstract public class BoardManager implements Serializable {
     public int getBoardScore() {
         return boardScore;
     }
-
 
     /**
      * A boardManager without an initial board
@@ -94,7 +88,9 @@ abstract public class BoardManager implements Serializable {
      *
      * @return the score associated with this board.
      */
-    abstract public int getScore();
+    public int getScore() {
+        return this.boardScore;
+    }
 
     /**
      * Increment the score

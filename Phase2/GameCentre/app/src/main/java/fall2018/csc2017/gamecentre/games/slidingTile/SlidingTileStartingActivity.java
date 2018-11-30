@@ -17,7 +17,7 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
-import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
 import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
 
 /**

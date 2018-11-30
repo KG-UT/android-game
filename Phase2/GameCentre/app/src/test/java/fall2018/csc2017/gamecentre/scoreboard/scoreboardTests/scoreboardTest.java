@@ -5,8 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.ScoreAbstract;
-import fall2018.csc2017.gamecentre.Scoreboard;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
+import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
 
 import static org.junit.Assert.assertEquals;
 

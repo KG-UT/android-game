@@ -1,25 +1,28 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores.scores;
 
 import android.support.annotation.NonNull;
 
-public class ScoreSlidingTiles extends ScoreAbstract implements Comparable<ScoreSlidingTiles> {
+import fall2018.csc2017.gamecentre.User;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
+
+public class ScoreMatchingCards extends ScoreAbstract implements Comparable<ScoreMatchingCards> {
 
     /**
-     * Creates a ScoreSlidingTiles where username comes from user (Used to create score at the endgame)
+     * Creates a ScoreMatchingCards where username comes from user (Used to create score at the endgame)
      */
-    public ScoreSlidingTiles(int userScore, User user) {
+    public ScoreMatchingCards(int userScore, User user) {
         super(userScore, user);
     }
 
     /**
-     * Creates a ScoreSlidingTiles where username comes from a string
+     * Creates a ScoreMatchingCards where username comes from a string
      */
-    public ScoreSlidingTiles(long _id, int userScore, String userName) {
+    public ScoreMatchingCards(long _id, int userScore, String userName) {
         super(_id, userScore, userName);
     }
 
     @Override
-    public int compareTo(@NonNull ScoreSlidingTiles comparedToScore) {
+    public int compareTo(@NonNull ScoreMatchingCards comparedToScore) {
         if(comparedToScore.getUserScore() < this.getUserScore()) {
             return 1;
         } else if (comparedToScore.getUserScore() > this.getUserScore()) {
@@ -33,10 +36,10 @@ public class ScoreSlidingTiles extends ScoreAbstract implements Comparable<Score
     public boolean equals(Object comparedToObject) {
         if (comparedToObject == null) {
             return false;
-        } else if (!(comparedToObject instanceof ScoreSlidingTiles)) {
+        } else if (!(comparedToObject instanceof ScoreMatchingCards)) {
             return false;
         } else {
-            ScoreSlidingTiles comparedToScore = (ScoreSlidingTiles) comparedToObject;
+            ScoreMatchingCards comparedToScore = (ScoreMatchingCards) comparedToObject;
             return (this.getUserName().equals(comparedToScore.getUserName()) &&
                     (this.getUserScore() == comparedToScore.getUserScore()));
         }
