@@ -16,7 +16,6 @@ public class User {
      */
     private String username;
 
-
     /**
      * No-arg constructor for Firebase.
      */

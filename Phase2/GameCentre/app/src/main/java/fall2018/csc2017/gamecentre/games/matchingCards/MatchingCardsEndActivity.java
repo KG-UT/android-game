@@ -19,7 +19,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int endScore;
+    private int endScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

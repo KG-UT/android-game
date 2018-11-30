@@ -7,12 +7,10 @@
 
     <TextView
         android:id="@+id/MatchingScoreText"
-        android:layout_width="382dp"
+        android:layout_width="159dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginTop="6dp"
         android:text="Score :"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
