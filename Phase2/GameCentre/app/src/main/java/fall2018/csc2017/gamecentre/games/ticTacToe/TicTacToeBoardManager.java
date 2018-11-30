@@ -17,36 +17,39 @@ import fall2018.csc2017.gamecentre.App.Undoable;
  */
 public class TicTacToeBoardManager extends BoardManager implements Undoable {
     /**
-     * The default string to represent no same states (X or O) for a row, col or diagonal
+     * The default string to represent no same states (X or O) for a row, col or diagonal.
      */
     private String NO_SAME = "";
     /**
-     * The default string to represent no winner
+     * The default string to represent no winner.
      */
     private String NO_WINNER = "";
     /**
-     * The state for the current player
+     * The state for the current player.
      */
     private String CURRENT_PLAYER = TicTacToeTile.X;
     /**
-     * The state for the computer
+     * The state for the computer.
      */
     private String COMPUTER_PLAYER = TicTacToeTile.O;
     /**
-     * Number of columns of the tic tac toe board
+     * Number of columns of the tic tac toe board.
      */
     private int NUM_COLS;
     /**
-     * Number of rows of the tic tac toe board
+     * Number of rows of the tic tac toe board.
      */
     private int NUM_ROWS;
     /**
-     * Stack to keep track of moves
+     * Stack to keep track of moves.
      */
     private Stack<int[]> stackOfMoves = new Stack<>();
 
     /**
-     * Manage a new 3 by 3 tic tac toe board
+     * Manage a new 3 by 3 tic tac toe board.
+     *
+     * @param numRows the number of rows
+     * @param numCols the number of columns
      */
     public TicTacToeBoardManager(int numRows, int numCols) {
         NUM_COLS = numCols;
@@ -60,7 +63,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Return all blank locations on the tic tac toe board
+     * Return all blank locations on the tic tac toe board.
      *
      * @return All blank locations on the tic tac toe board
      */
@@ -81,14 +84,16 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Determine whether or not a move can be undone
+     * Determine whether or not a move can be undone.
+     *
+     * @return whether or not an undo is allowed
      */
     public boolean canUndo() {
         return stackOfMoves.size() > 1;
     }
 
     /**
-     * Undo the player's move and the computer's move
+     * Undo the player's move and the computer's move.
      */
     public void undoMove() {
         int[] computerMove = stackOfMoves.pop();
@@ -98,7 +103,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Make a random tic tac toe move if possible
+     * Make a random tic tac toe move if possible.
      */
     public void computerMakeMove() {
         ArrayList<Integer[]> blankLocations = getAllBlanks();
@@ -114,7 +119,8 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Make a move at row, col, with state
+     * Make a move at row, col, with state.
+     *
      * @param row the row to make the move
      * @param col the col to make the move
      * @param state the new state to be set
@@ -158,7 +164,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Check whether the row has the same states and return it if any
+     * Check whether the row has the same states and return it if any.
      *
      * @param rowNum The row to examine
      * @return the state that is the same on the row
@@ -178,7 +184,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Check whether the column has the same states and return it if any
+     * Check whether the column has the same states and return it if any.
      *
      * @param colNum the col to examine
      * @return the state that is the same on the col (otherwise return NO_SAME)
@@ -199,7 +205,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
 
     /**
      * Check whether the diagonal (from top left to bottom right)
-     * has the same state and return the state if any
+     * has the same state and return the state if any.
      *
      * @return the state that is the same on the diagonal (otherwise return NO_SAME)
      */
@@ -219,7 +225,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
 
     /**
      * Check whether the diagonal from bottom left to top right has the same state and return
-     * the state if any
+     * the state if any.
      *
      * @return the state that is the same on the diagonal (otherwise return NO_SAME)
      */
@@ -238,7 +244,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Check whether any of the rows of the board contain the same state
+     * Check whether any of the rows of the board contain the same state.
      *
      * @return the state that is the same on any of the rows if it exists (otherwise returns NO_SAME)
      */
@@ -252,7 +258,7 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Check whether any of the cols of the board contain the same state
+     * Check whether any of the cols of the board contain the same state.
      *
      * @return the state that is the same on any of the cols if it exists (otherwise returns NO_SAME)
      */
@@ -266,8 +272,9 @@ public class TicTacToeBoardManager extends BoardManager implements Undoable {
     }
 
     /**
-     * Return the winner of the game if any otherwise return NO_WINNER
-     * @return
+     * Return the winner of the game if any otherwise return NO_WINNER.
+     *
+     * @return the winner of the game in string value
      */
     public String getWinner() {
         if(!this.rowsSame().equals(NO_SAME)) {

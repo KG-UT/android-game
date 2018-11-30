@@ -64,6 +64,9 @@ public class SlidingTileActivity extends GameActivity {
     private static int columnWidth, columnHeight;
 
     // TODO: make this final in a refactoring.
+    /**
+     * The database.
+     */
     private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
 
     /**
