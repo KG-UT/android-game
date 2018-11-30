@@ -218,7 +218,6 @@ public class GameDatabaseTools {
      * @param boardManagerBytes byte array of a board manager
      */
      private void saveToDatabaseHelper(String owner, String gameType, byte[] boardManagerBytes) {
-
          DocumentReference docRef = db.collection(gameType).document(owner);
          // Adds document data with id of "owner" and the score.
          Map<String, Object> data = new HashMap<>();

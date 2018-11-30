@@ -55,7 +55,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         //saveToFile(TEMP_SAVE_FILENAME);
         slidingTileBoardManager = new SlidingTileBoardManager();
 
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile();
 
         setContentView(R.layout.activity_sliding_tile_starting_);
         addScoreboardButtonListener();
@@ -171,15 +171,15 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
      *
      * @param fileName the name of the file
      */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(slidingTileBoardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    public void saveToFile() {
+//        try {
+//            ObjectOutputStream outputStream = new ObjectOutputStream(
+//                    this.openFileOutput(fileName, MODE_PRIVATE));
+//            outputStream.writeObject(slidingTileBoardManager);
+//            outputStream.close();
+//        } catch (IOException e) {
+//            Log.e("Exception", "File write failed: " + e.toString());
+//        }
     }
 
     /**
