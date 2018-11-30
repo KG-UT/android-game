@@ -9,8 +9,9 @@ import java.util.List;
  * The Matching Cards game board.
  */
 public class MatchingCardsBoard extends Board {
-    /*
-     * The cards that are currently face up
+
+    /**
+     * The cards that currently face up
      */
     private ArrayList<MatchingCardsTile> tempFaceUpCards = new ArrayList<>();
 
@@ -27,13 +28,15 @@ public class MatchingCardsBoard extends Board {
     }
 
     /**
-     * states if two cards are currently face up
+     * States if two cards are currently face up.
+     *
      * @return a boolean stating if two cards are currently face up
      */
     public boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
 
     /**
-     * return the MatchingCardsTile at (row, col)
+     * Returns the MatchingCardsTile at (row, col).
+     *
      * @param row the MatchingCardsTile row
      * @param col the MatchingCardsTile column
      * @return The matchingCardsTile
@@ -41,7 +44,8 @@ public class MatchingCardsBoard extends Board {
     public MatchingCardsTile getCard(int row, int col){return (MatchingCardsTile) getItem(row, col);}
 
     /**
-     * flips the card at (row, col) up
+     * Flips the card at (row, col) up.
+     *
      * @param row the MatchingCardsTile row
      * @param column the MatchingCardsTile column
      */
@@ -54,7 +58,7 @@ public class MatchingCardsBoard extends Board {
     }
 
     /**
-     * flips the temporary face up cards back down.
+     * Flips the temporary face up cards back down.
      */
     public void flipTempCardsDown(){
         for (int i=0; i<2; i++){
@@ -66,14 +70,14 @@ public class MatchingCardsBoard extends Board {
     }
 
     /**
-     * gets the temporarily face-up cards
+     * Gets the temporarily face-up cards.
      */
     public ArrayList<MatchingCardsTile> getTempFaceupCards(){
         return tempFaceUpCards;
     }
 
     /**
-     * resets the TempFaceUpCards array.
+     * Resets the TempFaceUpCards array.
      */
     public void clearTempFaceUpCards(){
         tempFaceUpCards.clear();

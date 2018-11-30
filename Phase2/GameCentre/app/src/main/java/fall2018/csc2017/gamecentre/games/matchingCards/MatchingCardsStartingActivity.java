@@ -17,18 +17,21 @@ import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 
+/**
+ * The MatchingCardsStartingActivity that displays the starting menu for matching cards.
+ */
 public class MatchingCardsStartingActivity extends GameStartingActivity {
 
     /**
-     * The board manager.
+     * The corresponding board manager.
      */
     private MatchingCardsBoardManager boardManager;
     /**
-     * The autosave .ser file.
+     * The autosave .ser file name.
      */
     public static final String SAVE_FILENAME = "Matching_Cards_autosave_file.ser";
     /**
-     * A temporary save file.
+     * A temporary save file name.
      */
     public static final String TEMP_SAVE_FILENAME_1 = "Matching_Cards_save_file_tmp.ser";
 
@@ -92,7 +95,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Add a button listener for the Matching Cards game option
+     * Add a button listener for the Matching Cards game option.
      */
     private void addNewGameButtonListener(){
         Button newGameButton = findViewById(R.id.MatchingStartButton);
@@ -106,13 +109,16 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Switch to the MatchingCardsGameScoreboardActivity
+     * Switch to the MatchingCardsGameScoreboardActivity.
      */
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardGameUserActivity.class);
         startActivity(tmp);
     }
 
+    /**
+     * Adds a listener for when MatchingSaveButton is pressed.
+     */
     private void addAutoSaveButtonListener() {
         Button AutoSaveButton = findViewById(R.id.MatchingSaveButton);
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +138,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Add a listener to the scoreboard button
+     * Add a listener to the scoreboard button.
      */
     private void addScoreboardButtonListener() {
         Button scoreboardButton = findViewById(R.id.MatchingScoreButton);
