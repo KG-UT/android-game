@@ -73,9 +73,12 @@ THE WAY THE GAMES WORKS -
      match all the initally flipped down cards, in as less moves as possible.
      The cards are numbered in pairs, from 0 to 7.
      Each time you click a card, your score increases.
-     The first initial card clicked from the initial face down cards will stay up.
-     On clicking another card which is face down, if it matches the previous card, it will flip over.
-     Otherwise the earlier card will flip down again, and you should try and remember it's position.
+     The initally card clicked from the initial face down cards will stay up.
+     On clicking another card which is face down, it will flip over. if it matches the previous card, you will have a matching pair
+     that will stay up for the rest of the game.
+     Otherwise, if the newly clicked card doesn't match the earlier card, it will stay up until you click
+     another card, and then both the cards(earlier and the not matching card) will flip down again,
+     and you should try and remember their positions.
      Each time you click a card, your score increases.
      There is a save button which saves the game if you click it.
      Once you have matched all the pairs, the game ends.
