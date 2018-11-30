@@ -2,7 +2,7 @@ package fall2018.csc2017.gamecentre.scoreboard.scoreTests;
 
 import org.junit.Test;
 
-import fall2018.csc2017.gamecentre.ScoreGo;
+import fall2018.csc2017.gamecentre.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.ScoreTicTacToe;
 import fall2018.csc2017.gamecentre.User;
 
@@ -14,19 +14,19 @@ public class scoreGoTest extends scoreTest {
     /**
      * Setup scores in preparation for tests.
      */
-    protected ScoreGo setupScores() {
+    protected ScoreMatchingCards setupScores() {
         User newUser = new User(1, "John", "Password");
-        return new ScoreGo(10, newUser);
+        return new ScoreMatchingCards(10, newUser);
     }
 
     /**
-     * Test whether ScoreGo initialization works.
+     * Test whether ScoreMatchingCards initialization works.
      */
     @Test
     public void testScoreInitialization() {
         User newUser = new User(1, "John", "Password");
-        ScoreGo newGoScore1 = new ScoreGo(1, 10, newUser.getUsername());
-        ScoreGo newGoScore2 = new ScoreGo(10, newUser);
+        ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(1, 10, newUser.getUsername());
+        ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(10, newUser);
 
         assertEquals(1, newGoScore1.get_id());
         assertEquals(10, newGoScore1.getUserScore());
@@ -43,9 +43,9 @@ public class scoreGoTest extends scoreTest {
     @Test
     public void testCompareToNumbers() {
         User newUser1 = new User(1, "John", "Password");
-        ScoreGo newGoScore1 = new ScoreGo(20, newUser1);
-        ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore3 = new ScoreGo(15, newUser1);
+        ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(20, newUser1);
+        ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser1);
 
         assertEquals(1, newGoScore1.compareTo(newGoScore2));
         assertEquals(-1, newGoScore2.compareTo(newGoScore1));
@@ -61,9 +61,9 @@ public class scoreGoTest extends scoreTest {
     public void testCompareToNames() {
         User newUser1 = new User(1, "John", "Password");
         User newUser2 = new User(1, "Jane", "Password");
-        ScoreGo newGoScore1 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore3 = new ScoreGo(15, newUser2);
+        ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser2);
 
         assertEquals(-1, newGoScore1.compareTo(newGoScore3));
         assertEquals(0, newGoScore1.compareTo(newGoScore2));
@@ -77,10 +77,10 @@ public class scoreGoTest extends scoreTest {
     public void testEquals() {
         User newUser1 = new User(1, "John", "Password");
         User newUser2 = new User(1, "Jane", "Password");
-        ScoreGo newGoScore1 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore3 = new ScoreGo(15, newUser2);
-        ScoreGo newGoScore4 = new ScoreGo(10, newUser2);
+        ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser2);
+        ScoreMatchingCards newGoScore4 = new ScoreMatchingCards(10, newUser2);
         ScoreTicTacToe newTicTacToeScore1 = new ScoreTicTacToe(15, newUser2);
 
         assertEquals(true, newGoScore1.equals(newGoScore2));
