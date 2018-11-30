@@ -1,70 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity">
+    android:layout_height="match_parent">
+    <!--tools:context="fall2018.csc2017.gamecentre.slidingTile.SlidingTileStartingActivity">-->
 
     <TextView
         android:id="@+id/GameText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="193dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="66dp"
         android:gravity="center"
         android:text="The Sliding Tiles Game"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/NewGameButton"
-        android:layout_width="190dp"
-        android:layout_height="62dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="143dp"
         android:text="New Game"
-        android:textSize="24sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/ScoreboardButton"
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="222dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="135dp"
         android:text="Scoreboard"
-        android:textSize="24sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SavedGamesButton" />
 
     <Button
         android:id="@+id/SavedGamesButton"
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="148dp"
-        android:text="Saved Games"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="117dp"
+        android:text="Load Saved Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AutoSaveButton" />
 
     <Button
         android:id="@+id/AutoSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="60dp"
-        android:text="Last Played Game"
-        android:textSize="24sp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="103dp"
+        android:text="Load Autosave Game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/NewGameButton" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:text="Your score is the number of turns it takes you to solve the puzzle!"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GameText" />
+
+</android.support.constraint.ConstraintLayout>
