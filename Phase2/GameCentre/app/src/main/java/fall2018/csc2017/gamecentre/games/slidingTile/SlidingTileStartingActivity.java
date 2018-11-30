@@ -14,10 +14,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-import fall2018.csc2017.gamecentre.GameStartingActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
 import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -41,13 +42,20 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
     /**
      * The board manager.
      */
-    private SlidingTileBoardManager boardManager;
+    private SlidingTileBoardManager slidingTileBoardManager;
+
+    /**
+     * The Database methods needed for sliding tiles.
+     */
+    private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new SlidingTileBoardManager();
         //saveToFile(TEMP_SAVE_FILENAME);
+        slidingTileBoardManager = new SlidingTileBoardManager();
+
+        saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_sliding_tile_starting_);
         addScoreboardButtonListener();
@@ -77,9 +85,6 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loadFromFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastLoadedText();
                 switchToSettings();
             }
         });
@@ -100,12 +105,8 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveToFile(SAVE_FILENAME);
-//                saveToFile(TEMP_SAVE_FILENAME);
-//                makeToastSavedText();
+//
                 startActivity(new Intent(SlidingTileStartingActivity.this, SavedGamesView.class));
-
-
             }
             });
     }
@@ -153,7 +154,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (SlidingTileBoardManager) input.readObject();
+                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -174,7 +175,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
+            outputStream.writeObject(slidingTileBoardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -190,7 +191,7 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
                 Intent tmp = new Intent(SlidingTileStartingActivity.this, SlidingTileActivity.class);
 
                 HashMap<String, Object> settings = new HashMap<>();
-                settings.put("PRELOADED_BOARD_MANAGER", boardManager);
+                settings.put("PRELOADED_BOARD_MANAGER", slidingTileBoardManager);
                 tmp.putExtra("SETTINGS", settings);
 
                 startActivity(tmp);

@@ -10,7 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreboardActivity;
+
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 //Adapted from https://stacktips.com/tutorials/android/android-listview-tutorial
 
@@ -18,6 +20,8 @@ import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
  * The general sliding tile scoreboard activity class
  */
 public class ScoreboardGameUserActivity extends ScoreboardActivity {
+    // TODO: Rework this, this is temp.
+    private User myUser = new User(currentUser.getUid(), currentUser.getEmail());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,11 +142,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      */
     private List<ScoreSlidingTiles> getSlidingTilesScoresFromDatabase() {
         if (isGameScoreboard) {
-            List<User> listOfUsers = databaseTools.getAllUsers();
+//            List<User> listOfUsers = databaseTools.getAllUsers();
             List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
-            for (User user : listOfUsers) {
-                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
-            }
+            // TODO: This is deprecated. Need to implement method to get all users.
+//            for (User user : listOfUsers) {
+//                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
+//            }
             return listOfScoresSlidingTiles;
         } else {
             return databaseTools.getUserSlidingTileScores(myUser.getUsername());
@@ -156,11 +161,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      */
     private List<ScoreSlidingTiles> getTicTacToeScoresFromDatabase() {
         if (isGameScoreboard) {
-            List<User> listOfUsers = databaseTools.getAllUsers();
+//            List<User> listOfUsers = databaseTools.getAllUsers();
+            // TODO: Deprecated. WIll implement new method.
             List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
-            for (User user : listOfUsers) {
-                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
-            }
+//            for (User user : listOfUsers) {
+//                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
+//            }
             return listOfScoresSlidingTiles;
         } else {
             return databaseTools.getUserSlidingTileScores(myUser.getUsername());
@@ -174,11 +180,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      */
     private List<ScoreSlidingTiles> getMatchingCardsScoresFromDatabase() {
         if (isGameScoreboard) {
-            List<User> listOfUsers = databaseTools.getAllUsers();
+//            List<User> listOfUsers = databaseTools.getAllUsers();
+            // TODO: Deprecated. Will fix.
             List<ScoreSlidingTiles> listOfScoresSlidingTiles = new ArrayList<>();
-            for (User user : listOfUsers) {
-                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
-            }
+//            for (User user : listOfUsers) {
+//                listOfScoresSlidingTiles.addAll(databaseTools.getUserSlidingTileScores(user.getUsername()));
+//            }
             return listOfScoresSlidingTiles;
         } else {
             return databaseTools.getUserSlidingTileScores(myUser.getUsername());

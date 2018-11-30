@@ -7,12 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.DBTools;
-import fall2018.csc2017.gamecentre.GameEndActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.Score;
+import fall2018.csc2017.gamecentre.ScoreAbstract;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.User;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 
 /**
  * The class responsible for handling the end-of-game behaviour for Sliding Tile games.
@@ -66,9 +68,12 @@ public class SlidingTileEndActivity extends GameEndActivity {
     @Override
     public void saveScore() {
         // Noted for later:
-        // TODO: Connect with database
+        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
+        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
 
-        ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);
-        database.insertSlidingTileScore(gameScore);
+        User TEMP_USER = new User(currentUser.getUid(), currentUser.getEmail());
+
+        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, TEMP_USER);
+
     }
 }

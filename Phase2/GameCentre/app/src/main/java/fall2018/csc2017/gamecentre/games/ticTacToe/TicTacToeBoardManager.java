@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.App.Undoable;
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
 
 /**
  * Manage a tic tac toe board.

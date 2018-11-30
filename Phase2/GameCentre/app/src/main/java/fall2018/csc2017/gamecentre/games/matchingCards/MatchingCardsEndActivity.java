@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import fall2018.csc2017.gamecentre.DBTools;
-import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.User;
+import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 
 public class MatchingCardsEndActivity extends GameEndActivity {
 
@@ -19,11 +20,6 @@ public class MatchingCardsEndActivity extends GameEndActivity {
      * The score attained by the user.
      */
     int endScore;
-
-    /**
-     * The Database.
-     */
-    DBTools database = new DBTools(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +30,19 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         saveScore();
         displayScore();
         addMenuButtonListener();
+    }
+
+    /**
+     * Save score to database.
+     */
+    public void saveScore(){
+        // Noted for later:
+        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
+        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
+        // TODO: TEMP
+        User myUser = new User(currentUser.getUid(), currentUser.getEmail());
+        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, myUser);
+
     }
 
     /**
@@ -64,18 +73,5 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     public void toMenu(){
         Intent tmp = new Intent(this, MatchingCardsStartingActivity.class);
         startActivity(tmp);
-    }
-
-    /**
-     * Save score to database.
-     */
-    public void saveScore(){
-        // Noted for later:
-        // TODO: Connect with database
-//        ScoreMatchingCards currScore = new ScoreMatchingCards(this.endScore, myUser);
-//        database.insertSlidingTileScore(currScore);
-
-        ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);
-        database.insertSlidingTileScore(gameScore);
     }
 }

@@ -4,28 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+import fall2018.csc2017.gamecentre.Tile;
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.CustomAdapter;
-import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.game.Board;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
 
-/**
+
+/** TODO: FIX JAVADOCS.
+ *  TODO: Add Logging
  * The game activity.
  */
 public class SlidingTileActivity extends GameActivity {
@@ -56,6 +54,10 @@ public class SlidingTileActivity extends GameActivity {
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
 
+    // TODO: make this final in a refactoring.
+    private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
+
+
     public HashMap<String, Object> getSettings() {
         return (HashMap<String, Object>) getIntent().getSerializableExtra("SETTINGS");
     }
@@ -64,12 +66,13 @@ public class SlidingTileActivity extends GameActivity {
      * Set up the background image for each button based on the master list
      * of positions, and then call the adapter to set the view.
      */
-    // Display
     public void display() {
         updateTileButtons();
         updateScoreText();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
 
+        // TODO: THIS IS TEMPORARY FOR TESTING
+//        slidingTileDatabaseTools.retrieveBoardManager(boardManager.getGameKeyValue());
     }
 
     @Override
@@ -78,11 +81,14 @@ public class SlidingTileActivity extends GameActivity {
 
         HashMap<String, Object> settings = getSettings();
         boardManager = (SlidingTileBoardManager) settings.get("PRELOADED_BOARD_MANAGER");
+
         if(boardManager == null) {
             int numRows = (int) settings.get("NUM_ROWS");
             int numCols = (int) settings.get("NUM_COLS");
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
+        // Saves the boardManager to firebase.
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -126,7 +132,12 @@ public class SlidingTileActivity extends GameActivity {
                 Button tmp = new Button(context);
                 tmp.setText(board.getTile(row, col).getDisplayNumber());
                 tmp.setTextSize(64);
-                tmp.setBackgroundColor(Color.parseColor("#ffffff"));
+                if (board.getTile(row, col).getId() == Tile.PEPE_ID) {
+                    tmp.setBackgroundResource(R.drawable.feels_good_pepe);
+                } else {
+                    tmp.setBackgroundResource(R.drawable.tile_16);
+                    tmp.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
                 this.tileButtons.add(tmp);
             }
         }
@@ -141,30 +152,36 @@ public class SlidingTileActivity extends GameActivity {
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();
             int col = nextPos % Board.getNumCols();
-            b.setText(board.getTile(row, col).getDisplayNumber());
+            if (board.getTile(row, col).getId() == Tile.PEPE_ID) {
+                b.setBackgroundResource(R.drawable.feels_good_pepe);
+                b.setText("");
+            } else {
+                b.setBackgroundResource(R.drawable.tile_16);
+                b.setText(board.getTile(row, col).getDisplayNumber());
+            }
             nextPos++;
         }
-        saveToFile(SlidingTileStartingActivity.SAVE_FILENAME);
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
     }
 
-    /*
+    /**
      * Gives score.
-     * @Returns the score.
+     * @return the score.
      */
     public int getScore(){
-        return boardManager.getScore();
+        return boardManager.getBoardScore();
     }
 
-    /*
+    /**
      * Updates the score text to display.
      */
     private void updateScoreText(){
         TextView score = findViewById(R.id.Score);
-        String textToSetTo = "Score: " + Integer.toString(boardManager.getScore());
+        String textToSetTo = "Score: " + Integer.toString(boardManager.getBoardScore());
         score.setText(textToSetTo);
     }
 
-    /*
+    /**
      * Updates the text to display the number of undos left.
      */
     private void updateUndosLeftText(){
@@ -179,7 +196,7 @@ public class SlidingTileActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
+        slidingTileDatabaseTools.saveToDatabase(boardManager);
     }
 
     private void addUndoMoveButtonListener(){
@@ -194,60 +211,25 @@ public class SlidingTileActivity extends GameActivity {
         });
     }
 
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (SlidingTileBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
     private void addSave1ButtonListener() {
         Button Save1Button = findViewById(R.id.SaveButton);
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(SAVE_FILE_1);
-
+                slidingTileDatabaseTools.saveToDatabase(boardManager);
             }
         });
+    }
+
+    private void setBoardManager(SlidingTileBoardManager stbm) {
+        this.boardManager = stbm;
     }
 
     @Override
     public void update(Observable o, Object arg) {
         display();
         if (boardManager.puzzleSolved()){
-            int score = boardManager.getScore();
+            int score = boardManager.getBoardScore();
             Intent tmp = new Intent(SlidingTileActivity.this, SlidingTileEndActivity.class);
             tmp.putExtra("SCORE", score);
             startActivity(tmp);

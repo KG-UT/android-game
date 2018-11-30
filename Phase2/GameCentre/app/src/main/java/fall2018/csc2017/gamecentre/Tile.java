@@ -22,7 +22,7 @@ public class Tile implements Comparable<Tile>, Serializable {
     /**
      * The blank tile id
      */
-    public static final int BLANK_ID = 9999;
+    public static final int PEPE_ID = 9999;
 
     /**
      * Return the background id.
@@ -48,7 +48,7 @@ public class Tile implements Comparable<Tile>, Serializable {
      * @return number to display for the tile
      */
     public String getDisplayNumber() {
-        if (this.id == BLANK_ID) {
+        if (this.id == PEPE_ID) {
             return "";
         } else {
             return String.valueOf(this.id);
@@ -69,10 +69,23 @@ public class Tile implements Comparable<Tile>, Serializable {
     /**
      * A tile with a background id; look up and set the id.
      *
-     * @param backgroundId
+     * @param backgroundId  The tile's background Id.
      */
     public Tile(int backgroundId) {
         this.id = backgroundId;
+    }
+
+    /**
+     * Empty constructor for Firebase.
+     */
+    public Tile() {}
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

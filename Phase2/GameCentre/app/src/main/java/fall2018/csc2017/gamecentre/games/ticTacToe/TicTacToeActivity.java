@@ -1,7 +1,6 @@
 package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +21,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import fall2018.csc2017.gamecentre.CustomAdapter;
-import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
@@ -154,7 +153,7 @@ public class TicTacToeActivity extends GameActivity {
      * @Returns the score.
      */
     public int getScore(){
-        return boardManager.getScore();
+        return boardManager.getBoardScore();
     }
 
     /**
@@ -240,10 +239,10 @@ public class TicTacToeActivity extends GameActivity {
     public void update(Observable o, Object arg) {
         display();
         if (boardManager.puzzleSolved()){
-            int score = boardManager.getScore();
-            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
-            tmp.putExtra("SCORE", score);
-            startActivity(tmp);
+            int score = boardManager.getBoardScore();
+//            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
+//            tmp.putExtra("SCORE", score);
+//            startActivity(tmp);
         }
     }
 }

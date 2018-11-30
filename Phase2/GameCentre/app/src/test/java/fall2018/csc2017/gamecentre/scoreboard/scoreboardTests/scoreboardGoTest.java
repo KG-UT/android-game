@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc2017.gamecentre.ScoreAbstract;
+
 import fall2018.csc2017.gamecentre.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.ScoreboardMatchingCards;
 import fall2018.csc2017.gamecentre.User;
@@ -17,9 +18,10 @@ public class scoreboardGoTest extends scoreboardTest {
     /**
      * Setup scores in preparation for tests.
      */
+
     protected List<ScoreMatchingCards> setupListOfScores() {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
             ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser);
             listOfScores.add(newGoScore);
@@ -61,8 +63,9 @@ public class scoreboardGoTest extends scoreboardTest {
      */
     @Test
     public void testOrganizeScoreBoard() {
+
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=5; i>0; i--) {
             ScoreMatchingCards newGoScore = new ScoreMatchingCards(i, newUser);
             listOfScores.add(newGoScore);

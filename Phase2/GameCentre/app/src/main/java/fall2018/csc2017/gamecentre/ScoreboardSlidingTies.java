@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
 
 public class ScoreboardSlidingTies extends Scoreboard {
 

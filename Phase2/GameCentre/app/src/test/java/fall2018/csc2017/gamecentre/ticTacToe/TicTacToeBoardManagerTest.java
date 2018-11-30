@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.games.ticTacToe;
+package fall2018.csc2017.gamecentre.ticTacToe;
 import org.junit.Test;
 
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
@@ -21,15 +21,6 @@ public class TicTacToeBoardManagerTest {
     public TicTacToeBoardManager createTicTacToeBoardManager() {
         TicTacToeBoardManager board = new TicTacToeBoardManager(NUM_ROWS, NUM_COLS);
         return board;
-    }
-
-    public void fillAllExpectOne(TicTacToeBoardManager boardManager, String player) {
-        Iterator<Integer[]> moves = boardManager.getAllBlanks().iterator();
-        int numMoves = boardManager.getAllBlanks().size();
-        for(int i = 0; i < numMoves - 1; i++) {
-            Integer[] move = moves.next();
-            boardManager.makeMove(move[0], move[1], player);
-        }
     }
 
     public void fillRow(TicTacToeBoardManager boardManager, int rowNum, String player) {
@@ -117,9 +108,9 @@ public class TicTacToeBoardManagerTest {
         assertEquals(NUM_COLS * NUM_ROWS, boardManager.getAllBlanks().size());
 
         TicTacToeBoard board = boardManager.getBoard();
-        String[] moves = {TicTacToeTile.X,  TicTacToeTile.O, TicTacToeTile.O,
-                          TicTacToeTile.X, TicTacToeTile.O, TicTacToeTile.O,
-                          TicTacToeTile.O, TicTacToeTile.X};
+        String[] moves = {TicTacToeTile.X,  TicTacToeTile.X, TicTacToeTile.O,
+                          TicTacToeTile.O, TicTacToeTile.O, TicTacToeTile.X,
+                          TicTacToeTile.X, TicTacToeTile.O};
         for(int i = 0; i < moves.length; i++) {
             int row = i / NUM_ROWS;
             int col = i % NUM_COLS;
@@ -158,13 +149,21 @@ public class TicTacToeBoardManagerTest {
      */
     @Test
     public void testTouchMoveHasWinner() {
-//        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
-//        fillAllExpectOne(boardManager, TicTacToeTile.X);
-//
-//        Integer[] lastMove = boardManager.getAllBlanks().get(0);
-//        boardManager.touchMove(lastMove[0] * board.getNumCols() + lastMove[1]);
-//        assertEquals(board.numObjects(), boardManager.getAllBlanks().size());
-//        assertEquals(1, boardManager.getScore());
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+
+        assertEquals(9, boardManager.getAllBlanks().size());
+
+        TicTacToeBoard board = boardManager.getBoard();
+        String[] moves = {TicTacToeTile.X,  TicTacToeTile.X};
+        for(int i = 0; i < moves.length; i++) {
+            int row = i / NUM_ROWS;
+            int col = i % NUM_COLS;
+            boardManager.makeMove(row, col, moves[i]);
+        }
+        boardManager.touchMove(2);
+
+        int availableMoves = boardManager.getAllBlanks().size();
+        assertEquals(NUM_COLS * NUM_ROWS, availableMoves);
     }
 
     /**
@@ -274,5 +273,39 @@ public class TicTacToeBoardManagerTest {
         TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
         fillLeftRightDiagonal(boardManager, TicTacToeTile.O);
         assertEquals(true, boardManager.puzzleSolved());
+    }
+
+    /**
+     * Test get score
+     */
+    @Test
+    public void testGetScore() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        assertEquals(0, boardManager.getScore());
+        boardManager.incrementScore(1);
+        boardManager.incrementScore(1);
+        assertEquals(2, boardManager.getScore());
+    }
+
+    /**
+     * Test undo move
+     */
+    @Test
+    public void testCanUndo() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        assertEquals(false, boardManager.canUndo());
+        boardManager.touchMove(1);
+        assertEquals(true, boardManager.canUndo());
+    }
+
+    /**
+     * Test Undo Move
+     */
+    @Test
+    public void testUndoMove() {
+        TicTacToeBoardManager boardManager = createTicTacToeBoardManager();
+        boardManager.touchMove(2);
+        boardManager.undoMove();
+        assertEquals(NUM_COLS * NUM_ROWS, boardManager.getAllBlanks().size());
     }
 }

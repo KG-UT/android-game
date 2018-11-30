@@ -1,30 +1,47 @@
 package fall2018.csc2017.gamecentre.games.slidingTile;
 
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Stack;
+import java.util.Random;
 
+import fall2018.csc2017.gamecentre.abstractClasses.Board;
+import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
+
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 import fall2018.csc2017.gamecentre.App.Undoable;
-import fall2018.csc2017.gamecentre.game.Board;
-import fall2018.csc2017.gamecentre.game.BoardManager;
+
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class SlidingTileBoardManager extends BoardManager implements Undoable {
+
+    /**
+     * The key value for the owner.
+     */
+    @Exclude
+    private final String ownerKeyValue = currentUser.getUid();
+
+    // TODO: Make final
+    @Exclude
+    private String gameKeyValue;
+
     /**
      * A stack of moves made, for move reversals.
      */
-    private Stack<int[]> stackOfMoves = new Stack<>();
+    @Exclude
+    private Stack<int[]> stStackOfMoves = new Stack<>();
 
     /**
      * The score.
      */
-    private int score = 0;
+    private int boardScore = 0;
 
     /**
      * The number of undos left.
@@ -34,7 +51,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    SlidingTileBoardManager() {
+    public SlidingTileBoardManager() {
         this(4, 4);
     }
 
@@ -49,13 +66,13 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     /**
      * Manage a new shuffled board.
      */
-   public SlidingTileBoardManager(int numRows, int numCols) {
+    public SlidingTileBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
         for (int tileNum = 1; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
-        tiles.add(new Tile(Tile.BLANK_ID));
+        tiles.add(new Tile(Tile.PEPE_ID));
 
         setBoard(new SlidingTileBoard(numRows, numCols, tiles));
         shuffle();
@@ -80,7 +97,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         SlidingTileBoard board = getBoard();
 
         Iterator<Object> boardIterator = board.iterator();
-        for(int i = 0; i < Board.numTiles() - 1; i++) {
+        for(int i = 0; i < board.numTiles() - 1; i++) {
             Tile currentTile = (Tile) boardIterator.next();
             int currentTileId = currentTile.getId();
             if(currentTileId - previousTileId != 1) {
@@ -101,7 +118,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      * @return An array representing the row and col of the nearest blank space
      */
     private int[] nearestBlank(int row, int col) {
-        int blankId = Tile.BLANK_ID;
+        int pepeId = Tile.PEPE_ID;
         SlidingTileBoard board = getBoard();
 
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
@@ -109,21 +126,19 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         Tile left = col == 0 ? null : board.getTile(row, col - 1);
         Tile right = col == Board.getNumCols() - 1 ? null : board.getTile(row, col + 1);
 
-        if (below != null && below.getId() == blankId) {
+        if (below != null && below.getId() == pepeId) {
             return new int[] {row + 1, col};
-        } else if (above != null && above.getId() == blankId) {
+        } else if (above != null && above.getId() == pepeId) {
             return new int[] {row - 1, col};
-        }  else if (left != null && left.getId() == blankId) {
+        }  else if (left != null && left.getId() == pepeId) {
             return new int[] {row, col - 1};
-        } else if (right != null && right.getId() == blankId) {
+        } else if (right != null && right.getId() == pepeId) {
             return new int[] {row, col + 1};
         } else {
             return null;
         }
     }
-    /* A shuffling algorithm to scramble the board.
-     *
-     * @param tiles The tiles to be shuffled.
+    /** A shuffling algorithm to scramble the board.
      */
     private void shuffle(){
         int NUM_RANDOM_MOVES = 30;
@@ -132,7 +147,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         }
     }
 
-    /* From the valid moves available, makes a random move.
+    /** From the valid moves available, makes a random move.
      *
      */
     private void makeRandomMove(){
@@ -142,12 +157,12 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         hiddenMove(validMoves.get(moveIndex));
     }
 
-    /* Get an ArrayList of valid moves.
+    /** Get an ArrayList of valid moves.
      *
      */
     private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
-        for (int position=0; position<SlidingTileBoard.numTiles(); position++){
+        for (int position=0; position<getBoard().numTiles(); position++){
             if (isValidTap(position)){
                 validMoves.add(position);
             }
@@ -162,8 +177,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-        int row = position / SlidingTileBoard.getNumCols();
-        int col = position % SlidingTileBoard.getNumRows();
+        int row = position / Board.getNumCols();
+        int col = position % Board.getNumRows();
         return nearestBlank(row, col) != null;
     }
 
@@ -179,11 +194,17 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         int[] blankLocation = nearestBlank(row, col);
         if(blankLocation != null) {
             hiddenMove(position);
-            stackOfMoves.add(blankLocation);
-            score += 1;
+            stStackOfMoves.add(blankLocation);
+            boardScore += 1;
         }
     }
-    /*
+
+    @Override
+    public int getScore() {
+        return getBoardScore();
+    }
+
+    /**
      * The computer performs a move, so it doesnt not affect player score, nor get recorded
      * for undos.
      *
@@ -206,8 +227,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      *
      * @return a boolean showing if there are moves in the stack of moves.
      */
-   public boolean canUndo(){
-        return !stackOfMoves.isEmpty();
+    public boolean canUndo(){
+        return !stStackOfMoves.isEmpty();
     }
 
     /**
@@ -216,7 +237,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      * PRECONDITION: THE MOVE STACK IS NOT EMPTY
      */
     public void undoMove() {
-        int[] backPosition = stackOfMoves.pop();
+        int[] backPosition = stStackOfMoves.pop();
         int row = backPosition[0];
         int col = backPosition[1];
         int[] blankLocation = nearestBlank(row, col);
@@ -233,19 +254,37 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      *
      * @return the score associated with this board.
      */
-   public int getScore() { return score;}
+    public int getBoardScore() { return boardScore;}
 
-   /**
-    * Getter function for the Undos left.
-    * @return the number of undos the player has left.
-    */
-  public int getUndosLeft() {
-       if (undosLeft >= 0){
-           return undosLeft;
-       } else{
-           return 99999999;
-       }
-   }
+    /**
+     * Getter function for the Undos left.
+     * @return the number of undos the player has left.
+     */
+    public int getUndosLeft() {
+        if (undosLeft >= 0){
+            return undosLeft;
+        } else{
+            return 99999999;
+        }
+    }
+
+    /**
+     * Returns the owner's key value.
+     *
+     * @return the String of the owner's key value in the database.
+     */
+    public String getOwnerKeyValue() {
+        return ownerKeyValue;
+    }
+
+    public String getGameKeyValue() {
+        return gameKeyValue;
+    }
+
+    public void setGameKeyValue(String gameKeyValue) {
+        this.gameKeyValue = gameKeyValue;
+    }
+
 
 //   /**
 //    * Set undos as as some value.
