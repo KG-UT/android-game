@@ -83,9 +83,8 @@ public class MatchingCardsBoardManager extends BoardManager {
             board.flipCardUp(row, col);
             score += 1;
             if (board.twoTempCardsAreUp()){
-                ArrayList<MatchingCardsTile> FaceupTiles = board.getTempFaceupCards();
-                boolean equalNums = FaceupTiles.get(0).getNumber() == FaceupTiles.get(1).getNumber();
-                if (!equalNums) {
+                ArrayList<MatchingCardsTile> faceupTiles = board.getTempFaceupCards();
+                if (!faceupTiles.get(0).isEqual(faceupTiles.get(1))) {
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
