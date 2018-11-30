@@ -70,8 +70,13 @@ public class MatchingCardsBoardTest {
         MatchingCardsBoard board = new MatchingCardsBoard(4,4, tiles);
         board.flipCardUp(0,0);
         board.flipCardUp(0,1);
+        for (MatchingCardsTile tile : board.getTempFaceupCards()){
+            assertTrue(tile.isFaceUp());
+        }
         board.flipTempCardsDown();
-        assertFalse(board.twoTempCardsAreUp());
+        for (MatchingCardsTile tile : board.getTempFaceupCards()){
+            assertFalse(tile.isFaceUp());
+        }
     }
 
     /**
