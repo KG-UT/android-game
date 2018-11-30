@@ -42,14 +42,23 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
     private String userId;
 
     // Views
+    /**
+     * The EditText for emails and passwords.
+     */
     private EditText mEmailField;
     private EditText mPasswordField;
 
     // Auth
+    /**
+     * The FirebaseAuth and its corresponding listener.
+     */
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthListener mAuthListener;
 
     // Firebase User and database references.
+    /**
+     * The references for Firebase User and the database.
+     */
     public static FirebaseUser currentUser;
     public DatabaseReference mDatabase;
 
@@ -171,6 +180,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     }
                 });
     }
+
     // Code adapted from https://firebase.google.com/docs/database/android/read-and-write
     /**
      *  Adds the new user to the database.

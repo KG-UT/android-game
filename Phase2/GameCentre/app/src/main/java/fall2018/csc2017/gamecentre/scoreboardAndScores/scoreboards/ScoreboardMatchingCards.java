@@ -1,9 +1,15 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
+
+/**
+ * A scoreboard of matching cards scores which can store and manipulate them.
+ */
 public class ScoreboardMatchingCards extends Scoreboard {
 
     /**

@@ -17,8 +17,8 @@ import java.util.HashMap;
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.SavedGamesView;
-import fall2018.csc2017.gamecentre.ScoreboardGameUserActivity;
-import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
+import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -182,6 +182,9 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
         }
     }
 
+    /**
+     * Adds a listener for the AutoSaveButton.
+     */
     private void addAutoSaveButtonListener() {
         Button AutoSaveButton = findViewById(R.id.AutoSaveButton);
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {

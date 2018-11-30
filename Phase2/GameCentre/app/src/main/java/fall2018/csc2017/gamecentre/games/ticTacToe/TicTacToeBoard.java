@@ -13,7 +13,7 @@ public class TicTacToeBoard extends Board {
     }
 
     /**
-     * Return the tile at (row, col)
+     * Return the tile at (row, col).
      *
      * @param row the tile row
      * @param col the tile column
@@ -24,7 +24,7 @@ public class TicTacToeBoard extends Board {
     }
 
     /**
-     * Set the tile at (row, col)
+     * Set the tile at (row, col).
      *
      * @param row the tile row
      * @param col the tile column
@@ -35,7 +35,7 @@ public class TicTacToeBoard extends Board {
     }
 
     /**
-     * Update the tile at (row, col)
+     * Update the tile at (row, col).
      */
     public void updateTile(int row, int col, String newState) {
         ((TicTacToeTile) getItem(row, col)).setState(newState);
@@ -44,6 +44,9 @@ public class TicTacToeBoard extends Board {
         notifyObservers();
     }
 
+    /**
+     * Resets the board to a clean state.
+     */
     public void reset() {
         for(int i = 0; i < getNumRows(); i++) {
             for(int j = 0; j < getNumCols(); j++) {

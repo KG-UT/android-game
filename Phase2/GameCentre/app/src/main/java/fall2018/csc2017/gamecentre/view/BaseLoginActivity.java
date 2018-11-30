@@ -21,13 +21,19 @@ import java.util.Properties;
 import fall2018.csc2017.gamecentre.R;
 
 /**
- * uses shit for LoginActivity
+ * Contains some of the methods for LoginActivity
  */
 public class BaseLoginActivity extends AppCompatActivity {
 
+    /**
+     * The progress message.
+     */
     @VisibleForTesting
     public ProgressDialog mProgressDialog;
 
+    /**
+     * Shows the progress messages.
+     */
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -38,12 +44,18 @@ public class BaseLoginActivity extends AppCompatActivity {
         mProgressDialog.show();
     }
 
+    /**
+     * Hides the progress messages.
+     */
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
     }
 
+    /**
+     * Hides the keyboard.
+     */
     public void hideKeyboard(View view) {
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {

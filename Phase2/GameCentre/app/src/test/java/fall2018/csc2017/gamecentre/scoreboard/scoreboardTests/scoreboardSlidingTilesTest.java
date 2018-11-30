@@ -5,13 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.ScoreAbstract;
-import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
-import fall2018.csc2017.gamecentre.ScoreboardSlidingTies;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardSlidingTies;
 import fall2018.csc2017.gamecentre.User;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Set of tests for ScoreboardSlidingTiles.
+ */
 public class scoreboardSlidingTilesTest extends scoreboardTest {
 
     /**
@@ -19,7 +22,7 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
      */
     protected List<ScoreSlidingTiles> setupListOfScores() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User("1", "Username");
+        User newUser = new User("1", "John");
 
         for (int i=1; i<6; i++) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
@@ -64,7 +67,7 @@ public class scoreboardSlidingTilesTest extends scoreboardTest {
     @Test
     public void testOrganizeScoreBoard() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
-        User newUser = new User("1", "Username");
+        User newUser = new User("1", "John");
 
         for (int i=5; i>0; i--) {
             ScoreSlidingTiles newSlidingTilesScore = new ScoreSlidingTiles(i, newUser);

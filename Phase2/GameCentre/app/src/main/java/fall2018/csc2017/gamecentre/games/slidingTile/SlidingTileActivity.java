@@ -21,12 +21,14 @@ import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
 
+// TODO: FIX JAVADOCS.
+// TODO: Add Logging.
 
-/** TODO: FIX JAVADOCS.
- *  TODO: Add Logging
+/**
  * The game activity.
  */
 public class SlidingTileActivity extends GameActivity {
+
     /**
      * The autosave .ser file.
      */
@@ -51,13 +53,27 @@ public class SlidingTileActivity extends GameActivity {
     public static final int RIGHT = 4;
 
     // Grid View and calculated column height and width based on device size
+    /**
+     * The corresponding GestureDetectGridView associated with this activity.
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * The int value of the width and height of the board.
+     */
     private static int columnWidth, columnHeight;
 
     // TODO: make this final in a refactoring.
+    /**
+     * The database.
+     */
     private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
 
-
+    /**
+     * Returns the settings defined in this activity.
+     *
+     * @return the settings value
+     */
     public HashMap<String, Object> getSettings() {
         return (HashMap<String, Object>) getIntent().getSerializableExtra("SETTINGS");
     }
@@ -166,6 +182,7 @@ public class SlidingTileActivity extends GameActivity {
 
     /**
      * Gives score.
+     *
      * @return the score.
      */
     public int getScore(){
@@ -199,6 +216,9 @@ public class SlidingTileActivity extends GameActivity {
         slidingTileDatabaseTools.saveToDatabase(boardManager);
     }
 
+    /**
+     * Adds a listener for the UndoButton.
+     */
     private void addUndoMoveButtonListener(){
         Button loadButton = findViewById(R.id.UndoButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +231,9 @@ public class SlidingTileActivity extends GameActivity {
         });
     }
 
+    /**
+     * Adds a listener for the SaveButton.
+     */
     private void addSave1ButtonListener() {
         Button Save1Button = findViewById(R.id.SaveButton);
         Save1Button.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +244,11 @@ public class SlidingTileActivity extends GameActivity {
         });
     }
 
+    /**
+     * Sets the value of boardManager.
+     *
+     * @param  stbm the SlidingTileBoardManager to set boardManager to
+     */
     private void setBoardManager(SlidingTileBoardManager stbm) {
         this.boardManager = stbm;
     }

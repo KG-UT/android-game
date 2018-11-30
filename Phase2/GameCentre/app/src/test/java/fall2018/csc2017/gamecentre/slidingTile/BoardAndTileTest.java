@@ -1,10 +1,11 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.slidingTile;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.Tile;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.*;
 
@@ -32,7 +33,6 @@ public class BoardAndTileTest {
      */
     private List<Tile> makeTiles() {
         List<Tile> tiles = new ArrayList<>();
-       // final int numTiles = boardManager.getBoard().getNumRows() * boardManager.getBoard().getNumCols();
         final int numTiles = 4*4;
         for (int tileNum = 0; tileNum < numTiles - 1; tileNum++) {
             tiles.add(new Tile(tileNum + 1, tileNum));

@@ -14,12 +14,16 @@ import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
  * The settings activity for Sliding Tiles (view)
  */
 public class SlidingTilesSettingsActivity extends SettingsActivity {
+
     /**
-     * The desired number of rows and columns
+     * The desired number of rows and columns.
      */
     public int NUM_ROWS = 4;
     public int NUM_COLS = 4;
 
+    /**
+     * The Database.
+     */
     private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
 
     @Override

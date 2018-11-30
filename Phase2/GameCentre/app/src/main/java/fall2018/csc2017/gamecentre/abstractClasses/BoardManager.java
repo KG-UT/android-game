@@ -9,11 +9,15 @@ import java.util.Stack;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 abstract public class BoardManager implements Serializable {
+
     /**
      * The board being managed.
      */
     protected Board board;
 
+    /**
+     * The stack of ints that define a series of moves.
+     */
     private Stack<int[]> stackOfMoves = new Stack<>();
 
     /**
@@ -21,14 +25,29 @@ abstract public class BoardManager implements Serializable {
      */
     private int undosLeft = 3;
 
+    /**
+     * Sets the new value of stackOfMoves (from class).
+     *
+     * @param stackOfMoves the new stack value of stackOfMoves (from class)
+     */
     public void setStackOfMoves(Stack<int[]> stackOfMoves) {
         this.stackOfMoves = stackOfMoves;
     }
 
+    /**
+     * Sets the new value of boardScore (from class).
+     *
+     * @param boardScore the new int value of stackOfMoves (from class)
+     */
     public void setBoardScore(int boardScore) {
         this.boardScore = boardScore;
     }
 
+    /**
+     * Sets the new value of undosLeft (from class).
+     *
+     * @param undosLeft the new int value of undosLeft (from class)
+     */
     public void setUndosLeft(int undosLeft) {
         this.undosLeft = undosLeft;
     }
@@ -36,17 +55,31 @@ abstract public class BoardManager implements Serializable {
     /**
      * The score.
      */
-
     private int boardScore = 0;
 
+    /**
+     * Returns the amount of undos left.
+     *
+     * @return the int value of the amount of undos left
+     */
     public int getUndosLeft() {
         return undosLeft;
     }
 
+    /**
+     * Returns the stack of moves.
+     *
+     * @return the stack of ints defined by stackOfMoves
+     */
     public Stack<int[]> getStackOfMoves() {
         return stackOfMoves;
     }
 
+    /**
+     * Return the amount of undos left.
+     *
+     * @return the int value of the amount of undos left
+     */
     public int getBoardScore() {
         return boardScore;
     }
@@ -58,6 +91,7 @@ abstract public class BoardManager implements Serializable {
 
     /**
      * Manage a board that has been pre-populated.
+     *
      * @param board the board
      */
     public BoardManager(Board board) {

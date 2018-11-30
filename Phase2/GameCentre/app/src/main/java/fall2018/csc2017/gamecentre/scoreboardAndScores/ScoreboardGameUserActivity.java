@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.scoreboardAndScores;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.R;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
+import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardMatchingCards;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardSlidingTies;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scoreboards.ScoreboardTicTacToe;
+import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.ScoreboardActivity;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
@@ -96,7 +105,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
                 "Sliding Tiles").getScoreBoardDataStringForm());
         scoreBoardListData.addAll(setupSlidingTilesScoreboard(getTicTacToeScoresFromDatabase(),
                 "TicTacToe").getScoreBoardDataStringForm());
-        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getGoScoresFromDatabase(),
+        scoreBoardListData.addAll(setupSlidingTilesScoreboard(getMatchingCardsScoresFromDatabase(),
                 "Matching Cards").getScoreBoardDataStringForm());
 
         return scoreBoardListData;
@@ -129,14 +138,14 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      *
      * @return the scoreboard of the game
      */
-    private Scoreboard setupGoScoreboard(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
+    private Scoreboard setupMatchingCardsScoreboard(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
         ScoreboardMatchingCards newScoreboard = new ScoreboardMatchingCards(listOfScores, nameOfGame);
         newScoreboard.organizeScoreBoard();
         return newScoreboard;
     }
 
     /**
-     * Gets all the sliding tile scores from the database.
+     * Gets all the Sliding Tile scores from the database.
      *
      * @return the list of all sliding tile scores.
      */
@@ -174,11 +183,11 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
     }
 
     /**
-     * Gets all the Go scores from the database.
+     * Gets all the Matching Cards scores from the database.
      *
      * @return the list of all Go scores.
      */
-    private List<ScoreSlidingTiles> getGoScoresFromDatabase() {
+    private List<ScoreSlidingTiles> getMatchingCardsScoresFromDatabase() {
         if (isGameScoreboard) {
 //            List<User> listOfUsers = databaseTools.getAllUsers();
             // TODO: Deprecated. Will fix.

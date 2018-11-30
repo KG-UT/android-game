@@ -46,9 +46,19 @@ public class TicTacToeActivity extends GameActivity {
     private ArrayList<Button> tileButtons;
 
     // Grid View and calculated column height and width based on device size
+    /**
+     * The corresponding GestureDetectGridView associated with this activity.
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * The int value of the width and height of the board.
+     */
     private static int columnWidth, columnHeight;
 
+    /**
+     * The database.
+     */
     public HashMap<String, Object> getSettings() {
         return (HashMap<String, Object>) getIntent().getSerializableExtra("SETTINGS");
     }
@@ -149,7 +159,8 @@ public class TicTacToeActivity extends GameActivity {
 
     /**
      * Gives score.
-     * @Returns the score.
+     *
+     * @return the score.
      */
     public int getScore(){
         return boardManager.getBoardScore();
@@ -173,6 +184,9 @@ public class TicTacToeActivity extends GameActivity {
 //        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
     }
 
+    /**
+     * Adds a listener for the UndoButton.
+     */
     private void addUndoMoveButtonListener(){
         Button loadButton = findViewById(R.id.UndoButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
@@ -222,6 +236,9 @@ public class TicTacToeActivity extends GameActivity {
         }
     }
 
+    /**
+     * Adds a listener for the SaveButton.
+     */
     private void addSave1ButtonListener() {
         Button Save1Button = findViewById(R.id.SaveButton);
         Save1Button.setOnClickListener(new View.OnClickListener() {

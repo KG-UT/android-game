@@ -17,33 +17,78 @@ import android.widget.GridView;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 
-
+/**
+ * A custom GridView that contains logic for swipes between buttons.
+ */
 public class GestureDetectGridView extends GridView {
+
+    /**
+     * Variables that define accepted characteristics of swipe.
+     */
     public static final int SWIPE_MIN_DISTANCE = 100;
     public static final int SWIPE_MAX_OFF_PATH = 100;
     public static final int SWIPE_THRESHOLD_VELOCITY = 100;
+
+    /**
+     * A GestureDetector that detects gestures such as swipes etc.
+     */
     private GestureDetector gDetector;
+
+    /**
+     * Set of variables for the MovementController.
+     */
     private MovementController mController;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
+
+    /**
+     * The current board manager .
+     */
     private BoardManager BoardManager;
 
+    /**
+     * Creates a new GestureDetectGridView.
+     *
+     * @param context the current context
+     */
     public GestureDetectGridView(Context context) {
         super(context);
         init(context);
     }
 
+    /**
+     * Creates a new GestureDetectGridView.
+     *
+     * @param context the current context
+     * @param attrs the set of attributes
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
+    /**
+     * Creates a new GestureDetectGridView.
+     *
+     * @param context the current context
+     * @param attrs the set of attributes
+     * @param defStyleAttr an int that defines a style
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
+
+
+    /**
+     * Creates a new GestureDetectGridView.
+     *
+     * @param context the current context
+     * @param attrs the set of attributes
+     * @param defStyleAttr an int that defines a style
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP) // API 21
     public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr,
                                  int defStyleRes) {
@@ -51,6 +96,11 @@ public class GestureDetectGridView extends GridView {
         init(context);
     }
 
+    /**
+     * Helps initialize the GestureDetectGridView.
+     *
+     * @param context the current context
+     */
     private void init(final Context context) {
         mController = new MovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {

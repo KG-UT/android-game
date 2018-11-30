@@ -37,6 +37,9 @@ public class TicTacToeSettingsActivity extends SettingsActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Sets the number of rows and columns based on the view.
+     */
     public void onRadioButtonClicked(View view) {
         switch(view.getId()) {
             case R.id.ticTacToe3By3:
