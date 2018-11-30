@@ -23,7 +23,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int endScore;
+    private int endScore;
 
     /**
      * The Database.
