@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class MatchingCardsActivity extends GameActivity {
         // Add View to activity
         gridView = findViewById(R.id.matchingGrid);
         gridView.setNumColumns(Board.getNumCols());
-        gridView.setBoardManager( (BoardManager) boardManager);
+        gridView.setBoardManager(boardManager);
         // TODO: My branch doesn't have addObserver.
         boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
@@ -78,6 +79,7 @@ public class MatchingCardsActivity extends GameActivity {
 
     public void display() {
         updateTileButtons();
+        updateScoreText();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
 
     }
@@ -104,7 +106,7 @@ public class MatchingCardsActivity extends GameActivity {
     /**
      * Update the backgrounds on the buttons to match the tiles.
      */
-    private void updateTileButtons() {
+    public void updateTileButtons() {
         MatchingCardsBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
@@ -175,6 +177,15 @@ public class MatchingCardsActivity extends GameActivity {
 
             }
         });
+    }
+
+    /**
+     * Updates the score text to display.
+     */
+    private void updateScoreText(){
+        TextView score = findViewById(R.id.MatchingScoreText);
+        String textToSetTo = "Score: " + Integer.toString(boardManager.getScore());
+        score.setText(textToSetTo);
     }
 
     @Override
