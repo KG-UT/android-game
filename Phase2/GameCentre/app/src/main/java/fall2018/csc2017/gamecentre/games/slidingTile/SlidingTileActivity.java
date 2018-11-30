@@ -19,7 +19,7 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
+import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
 
 
 /** TODO: FIX JAVADOCS.
@@ -87,7 +87,7 @@ public class SlidingTileActivity extends GameActivity {
             int numCols = (int) settings.get("NUM_COLS");
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
-        // Saves the boardManager to firebase.
+        // Saves the boardManager to database.
         slidingTileDatabaseTools.saveToDatabase(boardManager);
 
         createTileButtons(this);
