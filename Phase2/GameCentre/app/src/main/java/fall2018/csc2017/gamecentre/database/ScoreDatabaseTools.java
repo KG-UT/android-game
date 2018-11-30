@@ -32,12 +32,11 @@ public class ScoreDatabaseTools {
     private Firestore db = Database.getDatabase();
 
     /**
-     * Inserts a user's score into the matching cards score database.
+     * Inserts a user's score into the specified score database.
      *
      * @param userScore The user's score.
      */
-    @Override
-    public void insertScore(ScoreAbstract userScore, String scoreType) {
+    public void saveToDatabase(ScoreAbstract userScore, String scoreType) {
         String owner = userScore.getOwner();
         // We store the scores as strings to prevent nulls while unboxing.
         String strScore = String.valueOf(userScore.getUserScore());
@@ -56,12 +55,11 @@ public class ScoreDatabaseTools {
     }
 
     /**
-     * Returns all the scores for tic tac toe associated with a specific user.
+     * Returns all the scores for the specified game associated with a specific user.
      *
      * @param user The current user
-     * @return All the user's scores tic tac toe.
+     * @return All the user's scores for a specific game.
      */
-    @Override
     public ArrayList<ScoreAbstract> getUserScores(User user, String scoreType) {
         String owner = user.getUsername();
         ArrayList<ScoreAbstract> userScores = new ArrayList<>();
@@ -81,11 +79,10 @@ public class ScoreDatabaseTools {
     }
 
     /**
-     * Returns all the scores for all users for tic tac toe.
+     * Returns all the scores for all users for a specific game.
      *
-     * @return all the scores for tic tac toe ever stored.
+     * @return all the scores for the specific gameever stored.
      */
-    @Override
     public ArrayList<ScoreAbstract> getAllGameScores(String scoreType) {
         ApiFuture<QuerySnapshot> query = db.collection(scoreType).get();
         ArrayList<ScoreAbstract> allTTTScores = new ArrayList<>();

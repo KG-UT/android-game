@@ -18,10 +18,12 @@ import fall2018.csc2017.gamecentre.User;
 // Code adapted from: https://firebase.google.com/docs/firestore/quickstart
 
 /**
- * The Firestore database tools for User operations.
+ * The Firestore database tools for saving and retrieving users.
  */
 public class UserDatabaseTools {
-
+    /**
+     * The database.
+     */
     private Firestore db = Database.getDatabase();
 
     /**
