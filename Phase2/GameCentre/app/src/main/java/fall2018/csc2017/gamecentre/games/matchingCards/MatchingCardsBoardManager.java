@@ -26,6 +26,7 @@ public class MatchingCardsBoardManager extends BoardManager {
 
     /**
      * Manage a board that has been pre-populated.
+     *
      * @param board the board
      */
     public MatchingCardsBoardManager(MatchingCardsBoard board) {
@@ -39,7 +40,7 @@ public class MatchingCardsBoardManager extends BoardManager {
     public MatchingCardsBoardManager(int numRows, int numCols) {
         List<MatchingCardsTile> tiles = new ArrayList<>();
         final int numTiles = numRows * numCols;
-        for (int tileNum = 0; tileNum != numTiles/2; tileNum++) {
+        for (int tileNum = 0; tileNum != numTiles / 2; tileNum++) {
             tiles.add(new MatchingCardsTile(tileNum));
             tiles.add(new MatchingCardsTile(tileNum));
         }
@@ -58,9 +59,9 @@ public class MatchingCardsBoardManager extends BoardManager {
         boolean solved = true;
         MatchingCardsBoard board = getBoard();
         Iterator<Object> boardIterator = board.iterator();
-        for(int i = 0; i < MatchingCardsBoard.numTiles(); i++) {
+        for (int i = 0; i < MatchingCardsBoard.numTiles(); i++) {
             MatchingCardsTile currentTile = (MatchingCardsTile) boardIterator.next();
-            if(!currentTile.isFaceUp()) {
+            if (!currentTile.isFaceUp()) {
                 solved = false;
             }
         }
@@ -77,18 +78,17 @@ public class MatchingCardsBoardManager extends BoardManager {
         int row = position / MatchingCardsBoard.getNumRows();
         int col = position % MatchingCardsBoard.getNumCols();
         MatchingCardsBoard board = getBoard();
-        MatchingCardsTile tile = board.getCard(row, col);
 
-        if(!tile.isFaceUp()) {
+        // In case you try to do a move, while two temp cards are already up
+        if (!board.twoTempCardsAreUp()){
             board.flipCardUp(row, col);
             score += 1;
-            if (board.twoTempCardsAreUp()){
-                ArrayList<MatchingCardsTile> faceupTiles = board.getTempFaceupCards();
-                if (!faceupTiles.get(0).isEqual(faceupTiles.get(1))) {
-                    board.flipTempCardsDown();
-                }
-                board.clearTempFaceUpCards();
+        } else{
+            ArrayList<MatchingCardsTile> faceupTiles = board.getTempFaceupCards();
+            if (!faceupTiles.get(0).isEqual(faceupTiles.get(1))) {
+                board.flipTempCardsDown();
             }
+            board.clearTempFaceUpCards();
         }
     }
 
