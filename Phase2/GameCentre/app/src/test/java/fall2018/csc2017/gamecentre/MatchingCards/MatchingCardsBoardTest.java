@@ -65,7 +65,7 @@ public class MatchingCardsBoardTest {
      * Test if flipTempCardsDown is working
      */
     @Test
-    public void testflipTempCardsDown(){
+    public void testFlipTempCardsDown(){
         List<MatchingCardsTile> tiles = createMatchingCardsTiles();
         MatchingCardsBoard board = new MatchingCardsBoard(4,4, tiles);
         board.flipCardUp(0,0);
