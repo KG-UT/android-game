@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import fall2018.csc2017.gamecentre.User;
 
+/**
+ * The abstract class of a score.
+ */
 abstract public class ScoreAbstract implements Serializable {
 
     /**
@@ -12,17 +15,20 @@ abstract public class ScoreAbstract implements Serializable {
     private long _id;
 
     /**
-     * A string that contains the username of the user that got this score
+     * A string that contains the username of the user that got this score.
      */
     private String userName;
 
     /**
-     * An int that represents the score that the user got
+     * An int that represents the score that the user got.
      */
     private int userScore;
 
     /**
-     * Creates a ScoreAbstract where username comes from user (Used to create score at the endgame)
+     * Creates a ScoreAbstract where username comes from user (Used to create score at the endgame).
+     *
+     * @param userScore the int value of a score
+     * @param user the user that got the score
      */
     public ScoreAbstract(int userScore, User user) {
         this._id = 1;
@@ -31,7 +37,11 @@ abstract public class ScoreAbstract implements Serializable {
     }
 
     /**
-     * Creates a ScoreAbstract where username comes from a string
+     * Creates a ScoreAbstract where username comes from a string.
+     *
+     * @param _id the long id value of a score
+     * @param userScore the int value of the score
+     * @param userName the string value of the username of the person that got the score
      */
     public ScoreAbstract(long _id, int userScore, String userName) {
         this._id = _id;
@@ -61,6 +71,8 @@ abstract public class ScoreAbstract implements Serializable {
 
     /**
      * Returns a string of the user that got this score
+     *
+     * @return the username of the user associated with this score
      */
     public String getUserName() {
         return this.userName;
@@ -68,6 +80,8 @@ abstract public class ScoreAbstract implements Serializable {
 
     /**
      * Returns an int that is the user's score
+     *
+     * @return the score associated with this score
      */
     public int getUserScore() {
         return this.userScore;
@@ -75,8 +89,6 @@ abstract public class ScoreAbstract implements Serializable {
 
     @Override
     abstract public boolean equals(Object comparedToObject);
-
-
 
     @Override
     public String toString() {

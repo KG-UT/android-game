@@ -6,7 +6,7 @@ import java.util.List;
 import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 /**
- * The Scoreboard class
+ * The abstract scoreboard class that stores and manipulates scores.
  */
 abstract public class Scoreboard {
 
