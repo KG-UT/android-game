@@ -20,7 +20,7 @@ public class MatchingCardsBoardManager extends BoardManager {
     /**
      * Manage a new 4 by 4 shuffled board
      */
-    MatchingCardsBoardManager() {
+   public MatchingCardsBoardManager() {
         this(4, 4);
     }
 
