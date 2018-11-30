@@ -21,7 +21,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int score;
+    int endScore;
 
     /**
      * The Database.
@@ -31,8 +31,9 @@ public class SlidingTileEndActivity extends GameEndActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.score = getIntent().getIntExtra("SCORE", 0);
+        this.endScore = getIntent().getIntExtra("SCORE", 0);
         setContentView(R.layout.activity_ending_);
+
         saveScore();
         displayScore();
         addMenuButtonListener();
@@ -40,15 +41,15 @@ public class SlidingTileEndActivity extends GameEndActivity {
 
     @Override
     public void displayScore() {
-        TextView score = findViewById(R.id.EndScore);
-        String textToSetTo = "Score: " + this.score;
-        score.setText(textToSetTo);
+        TextView slidingTilesText = findViewById(R.id.EndScore);
+        String slidingTilesEndMessage = "Score: " + this.endScore;
+        slidingTilesText.setText(slidingTilesEndMessage);
     }
 
     @Override
     public void addMenuButtonListener() {
-        Button menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
+        Button slidingTilesMenuButton = findViewById(R.id.Menu);
+        slidingTilesMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -65,9 +66,9 @@ public class SlidingTileEndActivity extends GameEndActivity {
     @Override
     public void saveScore() {
         // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.score, myUser);
-        database.insertSlidingTileScore(theScore);
+        // TODO: Connect with database
+
+        ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);
+        database.insertSlidingTileScore(gameScore);
     }
 }

@@ -10,6 +10,7 @@ import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
+import fall2018.csc2017.gamecentre.ScoreTicTacToe;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
 
 import static fall2018.csc2017.gamecentre.LoginActivity.myUser;
@@ -21,7 +22,7 @@ public class TicTacToeEndActivity extends GameEndActivity {
     /**
      * The score attained by the user.
      */
-    int score;
+    int endScore;
 
     /**
      * The Database.
@@ -31,8 +32,9 @@ public class TicTacToeEndActivity extends GameEndActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.score = getIntent().getIntExtra("SCORE", 0);
+        this.endScore = getIntent().getIntExtra("SCORE", 0);
         setContentView(R.layout.activity_ending_);
+
         saveScore();
         displayScore();
         addMenuButtonListener();
@@ -40,15 +42,15 @@ public class TicTacToeEndActivity extends GameEndActivity {
 
     @Override
     public void displayScore() {
-        TextView score = findViewById(R.id.EndScore);
-        String textToSetTo = "Score: " + this.score;
-        score.setText(textToSetTo);
+        TextView ticTacToeText = findViewById(R.id.EndScore);
+        String ticTacToeEndMessage = "Score: " + this.endScore;
+        ticTacToeText.setText(ticTacToeEndMessage);
     }
 
     @Override
     public void addMenuButtonListener() {
-        Button menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
+        Button ticTacToeMenuButton = findViewById(R.id.Menu);
+        ticTacToeMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -65,9 +67,12 @@ public class TicTacToeEndActivity extends GameEndActivity {
     @Override
     public void saveScore() {
         // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.score, myUser);
-        database.insertSlidingTileScore(theScore);
+        // TODO: Connect with database
+
+//        ScoreTicTacToe gameScore = new ScoreTicTacToe(this.endScore, myUser);
+//        database.insertSlidingTileScore(gameScore);
+
+        ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);
+        database.insertSlidingTileScore(gameScore);
     }
 }

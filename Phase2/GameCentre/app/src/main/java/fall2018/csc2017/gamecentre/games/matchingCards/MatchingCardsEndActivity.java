@@ -32,7 +32,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.endScore = getIntent().getIntExtra("SCORE", 0);
-        setContentView(R.layout.activity_matching_ending);
+        setContentView(R.layout.activity_ending_);
 
         saveScore();
         displayScore();
@@ -40,34 +40,20 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     }
 
     /**
-     * Save score to database.
-     */
-    public void saveScore(){
-        // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-//        ScoreGo currScore = new ScoreGo(this.endScore, myUser);
-//        database.insertSlidingTileScore(currScore);
-
-        ScoreSlidingTiles currScore = new ScoreSlidingTiles(this.endScore, myUser);
-        database.insertSlidingTileScore(currScore);
-    }
-
-    /**
      * Display the score as a TextView.
      */
     public void displayScore(){
-        TextView matchingCardsText = findViewById(R.id.MatchingTilesEndScore);
-        String matchingTilesEndScoreText = "Your Score: " + this.endScore;
-        matchingCardsText.setText(matchingTilesEndScoreText);
+        TextView matchingCardsText = findViewById(R.id.EndScore);
+        String matchingCardsEndMessage = "Your Score: " + this.endScore;
+        matchingCardsText.setText(matchingCardsEndMessage);
     }
 
     /**
      * Adds a main menu button listener. (Interact on click)
      */
     public void addMenuButtonListener(){
-        Button matchingCardsStartingMenuButton = findViewById(R.id.MatchingTilesBackToMainMenuButton);
-        matchingCardsStartingMenuButton.setOnClickListener(new View.OnClickListener() {
+        Button matchingCardsMenuButton = findViewById(R.id.Menu);
+        matchingCardsMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toMenu();
@@ -81,5 +67,18 @@ public class MatchingCardsEndActivity extends GameEndActivity {
     public void toMenu(){
         Intent tmp = new Intent(this, MatchingCardsStartingActivity.class);
         startActivity(tmp);
+    }
+
+    /**
+     * Save score to database.
+     */
+    public void saveScore(){
+        // Noted for later:
+        // TODO: Connect with database
+//        ScoreGo currScore = new ScoreGo(this.endScore, myUser);
+//        database.insertSlidingTileScore(currScore);
+
+        ScoreSlidingTiles gameScore = new ScoreSlidingTiles(this.endScore, myUser);
+        database.insertSlidingTileScore(gameScore);
     }
 }
