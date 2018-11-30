@@ -2,7 +2,7 @@ package fall2018.csc2017.gamecentre.scoreboardAndScores.scores;
 
 import android.support.annotation.NonNull;
 
-import fall2018.csc2017.gamecentre.ScoreAbstract;
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 import fall2018.csc2017.gamecentre.User;
 
 /**
