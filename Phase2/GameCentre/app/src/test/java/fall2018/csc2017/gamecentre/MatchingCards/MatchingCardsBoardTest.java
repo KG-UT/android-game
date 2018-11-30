@@ -16,7 +16,7 @@ public class MatchingCardsBoardTest {
     /**
      * Creates the tiles
      */
-    public List<MatchingCardsTile> createMatchingCardsTiles(){
+    private List<MatchingCardsTile> createMatchingCardsTiles(){
         List<MatchingCardsTile> tiles = new ArrayList<>();
         final int numTiles = 4 * 4;
         for (int tileNum = 0; tileNum != numTiles/2; tileNum++) {
