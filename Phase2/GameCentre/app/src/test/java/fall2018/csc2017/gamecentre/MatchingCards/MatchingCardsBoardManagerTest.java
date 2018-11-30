@@ -56,13 +56,13 @@ public class MatchingCardsBoardManagerTest {
      */
 
     @Test
-        public void testPuzzleSolved(){
+    public void testPuzzleSolved(){
         assertTrue(boardManager.puzzleSolved());
         MatchingCardsBoardManager temp = new MatchingCardsBoardManager(4,4);
         //created a shuffled board
         temp.touchMove(3);
         assertFalse(temp.puzzleSolved());
-        }
+    }
 
     /**
      * Test whether isValidTap works
@@ -72,7 +72,7 @@ public class MatchingCardsBoardManagerTest {
         assertTrue(boardManager.isValidTap(5));
         boardManager.touchMove(3);
         assertFalse(boardManager.isValidTap(3));
-            }
+    }
 
     /**
      *  Test whether getScore works correctly
