@@ -169,7 +169,7 @@ public class BoardAndTileTest {
     @Test
     public void testshuffle() {
         setUpCorrect();
-        assertTrue(boardManager.puzzleSolved());
+        assertTrue(slidingTileBoardManager.puzzleSolved());
         SlidingTileBoardManager bm = new SlidingTileBoardManager(5,5);
         assertFalse(bm.puzzleSolved());
     }
