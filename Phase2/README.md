@@ -1,37 +1,35 @@
 
-                PROJECT TITLE : SLIDING TILES PUZZLE GAME
+                PROJECT TITLE : CSC 207 Project Phase 2
 
             Welcome to Our CSC 207 Android Application
+
+In this implementation the Tic Tac Toe Game can be played by the User.
+In this implementation the Matching Cards Game can be played by the User.
 In this implementation the Sliding Tiles Puzzle Game can be played by the User.
-We were given this task for Phase 1 of our CSC 207: Software Design course.
-Using an implementation of this project from an earlier assignment, we were to add, at least the following functionalities
+
+We were given this task for Phase 2 of our CSC 207: Software Design course.
+Using an implementation of this project from Phase 1 of the project, we were to add and improve, at least the following requirements
 to the previous implementation :
-1. A Game Launch Centre - with sign up/sign in option with username and password, starting new games, loading previously
-saved games.
-2.Scoreboard - click the scoreboard button to view the scoreboard. In the scoreboard, the main menu button
-goes back to the main menu, while the other button switches to the other scoreboard (user or game).
-3.Undo functionality - click this button in game to undo the last move. There are a limited amount of undoes
-however.
-4.Autosave functionality - click this button to in the starting menu to start a game at a previous autosave
-5.Changing the complexity of the game - three buttons in the settings screen allows one to choose between
-a 3x3, 4x4 and 5x5 board. After selecting the desired difficulty start the game.
+
+1. Code Coverage - Write a set of JUnit tests that cover as much of the code as you can.
+(Our Code Coverage is broken down in Walkthrough,pdf)
+
+2. Change the sliding tiles puzzle app so that the board is always solvable
+
+3. Add two more games of roughly the complexity of the sliding tile puzzle. Make sure the scoreboard features accommodate them.
+At least one new game has to have automatic save points of some kind, and at least one new game (maybe the same one) has to have undo.
+Our two new games are TicTacToe(Which has Undo) and Matching Cards, both of which have autosave functionality.
+
+4. Implement useful Design Patterns where required and Refactor code proactively.
+
+5. Fix style issues, fix code smells, add javadoc, etc
 
 
                 GETTING STARTED:
 ## URL:
- https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0589
+https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0702
 
-The above URL is a link to the remote repository where all of the code for the sliding tiles puzzle game is maintained.
-
-THE WAY THE GAME WORKS - You can slide the tiles adjacent to the blank area, in all 4 directions if possible.
-                         The game ends when the tiles are successfully ordered in terms of numbers, with the blank tile
-                         being at the bottom right. The Game can be saved with the save button present on the screen,
-                         which can be loaded by pressing back twice and then clicking the Saved Games Buttom and then
-                         clicking on the Saved Game button in the new layout.
-                         There is also an Undo button on the screen when playing the game which can be used to undo
-                         at least 3 moves by default.
-                         There is a score that is calculated based on number of moves, and the user who completes the
-                         game in minimum number of moves wins.
+The above URL is a link to the remote repository where all of the code for the application is maintained.
 
                 INSTALLATION AND SET UP
 ##  adapted from A2 sliding tile puzzle game instructions from Pages in Quercus CSC 207.
@@ -43,6 +41,50 @@ THE WAY THE GAME WORKS - You can slide the tiles adjacent to the blank area, in 
    the device OS as Android 8.1 API 27. You may need to download this specific build of Android at this step if you're not
    using the CDF computers. Leave all other settings to default values.
 5. Create and launch the virtual device and ensure it loads correctly.
+
+THE WAY THE GAMES WORKS -
+    You Log in with the log in screen. Enter your username and password (>= 6 characters).
+    You can sign up if you have not already done so before, otherwise you can sign in.
+    You will be taken to a screen where you can choose between three of the following games:
+
+1. Sliding Tiles :
+     You can slide the tiles adjacent to the blank area(which is a Pepe Frog), in all 4 directions if possible.
+     The game ends when the tiles are successfully ordered in terms of numbers, with the blank tile(Pepe Frog)
+     being at the bottom right. The Game can be saved with the save button present on the screen,
+     which can be loaded by pressing back twice and then clicking the Saved Games Buttom and then
+     clicking on the Saved Game button in the new layout. There is also an Autosave function which can be accessed from the starting screen.
+     There is also an Undo button on the screen when playing the game which can be used to undo at least 3 moves by default.
+     There is a score that is calculated based on number of moves, and the user who completes the game in minimum number of moves wins.
+
+2. Tic Tac Toe :
+     You will be taken to a page where there are two buttons :
+     Pressing New Game will take you to a settings screen where you can select the complexity of the game, 3x3 or 5x5
+     Once you have selected complexity, press start game to load the new game.
+     Your score is how many times you beat or tie with the computer before you lose.
+     Pressing Score button takes you to your scoreboard.
+     The Game is played by pressing on a blank tile, which will generate an X, and the computer will automatically plays an O,
+     and the way to win is to get 3 of your X's in a row - diagonal, horizontal or vertical. If the computer puts an O after an X,
+     you cannot press that tile. Users can strategically this block the opponent from winning by placing their X or O before the opponents.
+     There is an Undo Move button, which will undo your last move, a total of times.
+
+3. Matching Cards :
+     Pressing this takes you to a screen which has New Game button,Load Save Game, Load Autosave Game, and Scoreboard buttons.
+     Pressing New game will take you to a new game of 4x4 complexity, where the objective is to
+     match all the initally flipped down cards, in as less moves as possible.
+     The cards are numbered in pairs, from 0 to 7.
+     Each time you click a card, your score increases.
+     The initally card clicked from the initial face down cards will stay up.
+     On clicking another card which is face down, it will flip over. if it matches the previous card, you will have a matching pair
+     that will stay up for the rest of the game.
+     Otherwise, if the newly clicked card doesn't match the earlier card, it will stay up until you click
+     another card, and then both the cards(earlier and the not matching card) will flip down again,
+     and you should try and remember their positions.
+     Each time you click a card, your score increases.
+     There is a save button which saves the game if you click it.
+     Once you have matched all the pairs, the game ends.
+     Pressing Load Save Game on the starting screen will load the game you saved by pressing Save.
+     Pressing Load Autosave Game will load the autosaved game, which is saved at each click.
+     Pressing ScoreBoard will take you to the Game ScoreBoard.
 
               VARIOUS CLASSES FUNCTIONALITIES EXPLAINED:
 1. LoginActivity : Handles login and first time user creation

@@ -33,6 +33,9 @@ public class MatchingCardsBoardManagerTest {
         return tiles;
     }
 
+    /**
+     * Create a 4*4 board
+     */
     @Before
     public void setUp(){
         List<MatchingCardsTile> tiles = makeTiles();
@@ -56,13 +59,27 @@ public class MatchingCardsBoardManagerTest {
      */
 
     @Test
-    public void testPuzzleSolved(){
-        assertTrue(boardManager.puzzleSolved());
+        public void testPuzzleSolved(){
+        List<MatchingCardsTile> tiles_1 = new ArrayList<>();
+        int numTiles = MatchingCardsBoard.getNumRows() * MatchingCardsBoard.getNumCols();
+        for (int tileNum = 0; tileNum != numTiles / 2; tileNum++) {
+            MatchingCardsTile card_1 =  new MatchingCardsTile(tileNum);
+            card_1.setFaceUp();
+            MatchingCardsTile card_2 = new MatchingCardsTile(tileNum);
+            card_2.setFaceUp();
+            tiles_1.add(card_1);
+            tiles_1.add(card_2);
+        }
+        MatchingCardsBoard puzzle_board = new MatchingCardsBoard(4,4,tiles_1);
+        MatchingCardsBoardManager puzzle = new MatchingCardsBoardManager(puzzle_board);
+        //created solved board
+        assertTrue(puzzle.puzzleSolved());
+
         MatchingCardsBoardManager temp = new MatchingCardsBoardManager(4,4);
         //created a shuffled board
         temp.touchMove(3);
         assertFalse(temp.puzzleSolved());
-    }
+        }
 
     /**
      * Test whether isValidTap works
@@ -72,7 +89,7 @@ public class MatchingCardsBoardManagerTest {
         assertTrue(boardManager.isValidTap(5));
         boardManager.touchMove(3);
         assertFalse(boardManager.isValidTap(3));
-    }
+            }
 
     /**
      *  Test whether getScore works correctly
