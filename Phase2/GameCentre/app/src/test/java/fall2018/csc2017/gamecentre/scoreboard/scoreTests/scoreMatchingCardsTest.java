@@ -19,7 +19,7 @@ public class scoreMatchingCardsTest extends scoreTest {
      */
     protected ScoreMatchingCards setupScores() {
         User newUser = new User("1", "John");
-        return new ScoreMatchingCards(10, newUser);
+        return new ScoreMatchingCards(10, newUser.getUsername());
     }
 
     /**

@@ -18,7 +18,7 @@ public class scoreSlidingTilesTest extends scoreTest {
      */
     protected ScoreSlidingTiles setupScores() {
         User newUser = new User("1", "John");
-        return new ScoreSlidingTiles(10, newUser);
+        return new ScoreSlidingTiles(10, newUser.getUsername());
     }
 
     /**
@@ -28,7 +28,7 @@ public class scoreSlidingTilesTest extends scoreTest {
     public void testScoreInitialization() {
         User newUser = new User("1", "John");
         ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(1, 10, newUser.getUsername());
-        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(10, newUser);
+        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(10, newUser.getUsername());
 
         assertEquals(1, newScore1.get_id());
         assertEquals(10, newScore1.getUserScore());
@@ -45,9 +45,9 @@ public class scoreSlidingTilesTest extends scoreTest {
     @Test
     public void testCompareToNumbers() {
         User newUser1 = new User("1", "John");
-        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(20, newUser1);
-        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1);
-        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser1);
+        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(20, newUser1.getUsername());
+        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1.getUsername());
+        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser1.getUsername());
 
         assertEquals(1, newScore1.compareTo(newScore2));
         assertEquals(-1, newScore2.compareTo(newScore1));
@@ -63,9 +63,9 @@ public class scoreSlidingTilesTest extends scoreTest {
     public void testCompareToNames() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(15, newUser1);
-        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1);
-        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser2);
+        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(15, newUser1.getUsername());
+        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1.getUsername());
+        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser2.getUsername());
 
         assertEquals(-1, newScore1.compareTo(newScore3));
         assertEquals(0, newScore1.compareTo(newScore2));
@@ -79,11 +79,11 @@ public class scoreSlidingTilesTest extends scoreTest {
     public void testEquals() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(15, newUser1);
-        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1);
-        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser2);
-        ScoreSlidingTiles newScore4 = new ScoreSlidingTiles(10, newUser2);
-        ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(15, newUser2);
+        ScoreSlidingTiles newScore1 = new ScoreSlidingTiles(15, newUser1.getUsername());
+        ScoreSlidingTiles newScore2 = new ScoreSlidingTiles(15, newUser1.getUsername());
+        ScoreSlidingTiles newScore3 = new ScoreSlidingTiles(15, newUser2.getUsername());
+        ScoreSlidingTiles newScore4 = new ScoreSlidingTiles(10, newUser2.getUsername());
+        ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(15, newUser2.getUsername());
 
         assertEquals(true, newScore1.equals(newScore2));
         assertEquals(false, newScore1.equals(null));
