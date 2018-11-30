@@ -23,7 +23,6 @@ import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
-import fall2018.csc2017.gamecentre.boardManagers.TicTacToeBoardManager;
 
 /**
  * The game activity.

@@ -114,14 +114,13 @@ public class TicTacToeBoardManager extends BoardManager {
         String winner = getWinner();
         if(winner.equals(NO_WINNER)) {
             if (getAllBlanks().size() == 0) {
-                // TODO: Why is this not in my version lol
-//                getBoard().reset();
+                getBoard().reset();
                 this.incrementScore(1);
             } else {
                 computerMakeMove();
             }
         } else if(winner.equals(CURRENT_PLAYER)) {
-//            getBoard().reset();
+            getBoard().reset();
             this.incrementScore(1);
         }
     }

@@ -36,11 +36,10 @@
         <activity android:name=".games.matchingCards.MatchingCardsEndActivity"/>
 
         <activity android:name=".view.GameChoiceActivity"/>
-        <activity android:name=".games.slidingTile.SlidingTileGameScoreboardActivity" />
+        <activity android:name=".ScoreboardGameUserActivity" />
         <activity android:name=".SavedGamesView"/>
         <activity android:name=".games.slidingTile.SlidingTileEndActivity"/>
 
-        <activity android:name=".games.slidingTile.SlidingTileUserScoreboardActivity"></activity>
     </application>
 
 </manifest>
