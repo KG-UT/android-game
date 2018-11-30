@@ -297,20 +297,4 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     public void setGameKeyValue(String gameKeyValue) {
         this.gameKeyValue = gameKeyValue;
     }
-
-
-//   /**
-//    * Set undos as as some value.
-//    * PRECONDITION: i >= 0
-//    */
-//   public void setUndos(int i){
-//       undosLeft = i;
-//   }
-//
-//   /**
-//    * Give player unlimited Undos.
-//    */
-//   public void setUnlimitedUndos(){
-//       undosLeft = -1;
-//   };
 }
