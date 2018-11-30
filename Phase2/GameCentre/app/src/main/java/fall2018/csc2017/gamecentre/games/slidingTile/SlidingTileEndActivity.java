@@ -66,6 +66,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
 
         ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, "FUCK");
+        databaseTool.saveToDatabase(theScore, "Sliding Tiles");
 
     }
 }

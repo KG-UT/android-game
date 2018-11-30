@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
 
 /**
  * The class responsible for handling the end-of-game behaviour for Sliding Tile games.
@@ -64,6 +64,7 @@ public class TicTacToeEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         // TODO: THIS IS TEMP, FIX LATER
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, "FUCK");
+        ScoreTicTacToe theScore = new ScoreTicTacToe(this.endScore, "FUCK");
+        databaseTool.saveToDatabase(theScore, "TicTacToe");
     }
 }

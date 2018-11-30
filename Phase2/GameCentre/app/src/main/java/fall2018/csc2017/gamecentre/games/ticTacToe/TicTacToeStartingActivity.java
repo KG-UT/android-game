@@ -193,7 +193,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
      * Adds a listener for the AutoSaveButton.
      */
     private void addAutoSaveButtonListener() {
-        Button AutoSaveButton = findViewById(R.id.AutoSaveButton);
+        Button AutoSaveButton = findViewById(R.id.TicTacToeAutosaveButton);
         AutoSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

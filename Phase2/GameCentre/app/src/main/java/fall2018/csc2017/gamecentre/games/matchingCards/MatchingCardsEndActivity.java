@@ -43,6 +43,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         // TODO: TEMP
         ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, "FUCK");
+        databaseTool.saveToDatabase(theScore, "Matching Tiles");
 
     }
 
