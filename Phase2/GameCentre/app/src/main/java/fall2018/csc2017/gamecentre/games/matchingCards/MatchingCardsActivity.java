@@ -56,7 +56,7 @@ public class MatchingCardsActivity extends GameActivity {
         gridView.setNumColumns(Board.getNumCols());
         gridView.setBoardManager( (BoardManager) boardManager);
         // TODO: My branch doesn't have addObserver.
-//        boardManager.getBoard().addObserver(this);
+        boardManager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
