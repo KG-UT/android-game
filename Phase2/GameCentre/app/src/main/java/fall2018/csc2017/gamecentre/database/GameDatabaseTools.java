@@ -26,7 +26,7 @@ import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
 // Code adapted from: https://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
 
 /**
- * The Firestore database tools for all games.
+ * The Firestore database tools for all games. .
  */
 public class GameDatabaseTools {
     /**
