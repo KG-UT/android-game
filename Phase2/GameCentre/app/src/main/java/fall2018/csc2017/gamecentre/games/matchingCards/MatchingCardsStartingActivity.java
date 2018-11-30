@@ -107,7 +107,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Switch to the SlidingTileGameScoreboardActivity
+     * Switch to the MatchingCardsGameScoreboardActivity
      */
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardGameUserActivity.class);
