@@ -108,7 +108,10 @@ public class MatchingCardsActivity extends GameActivity {
         for (Button b : tileButtons) {
             int row = nextPos / Board.getNumRows();
             int col = nextPos % Board.getNumCols();
-            b.setText(Integer.toString(board.getCard(row, col).getNumber()));
+            MatchingCardsTile card = board.getCard(row, col);
+            if (card.isFaceUp()){
+                b.setText(Integer.toString(card.getNumber()));
+            } else {b.setText("");}
             nextPos++;
         }
         saveToFile(MatchingCardsStartingActivity.SAVE_FILENAME);
