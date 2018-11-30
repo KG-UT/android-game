@@ -85,11 +85,6 @@ public class MatchingCardsBoardManager extends BoardManager {
             if (board.twoTempCardsAreUp()){
                 ArrayList<MatchingCardsTile> faceupTiles = board.getTempFaceupCards();
                 if (!faceupTiles.get(0).isEqual(faceupTiles.get(1))) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     board.flipTempCardsDown();
                 }
                 board.clearTempFaceUpCards();
