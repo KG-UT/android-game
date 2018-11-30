@@ -19,7 +19,7 @@ public class scoreMatchingCardsTest extends scoreTest {
      */
     protected ScoreMatchingCards setupScores() {
         User newUser = new User("1", "John");
-        return new ScoreMatchingCards(10, newUser);
+        return new ScoreMatchingCards(10, newUser.getUsername());
     }
 
     /**
@@ -28,16 +28,14 @@ public class scoreMatchingCardsTest extends scoreTest {
     @Test
     public void testScoreInitialization() {
         User newUser = new User("1", "John");
-        ScoreMatchingCards newScore1 = new ScoreMatchingCards(1, 10, newUser.getUsername());
-        ScoreMatchingCards newScore2 = new ScoreMatchingCards(10, newUser);
+        ScoreMatchingCards newScore1 = new ScoreMatchingCards(1,  newUser.getUsername());
+        ScoreMatchingCards newScore2 = new ScoreMatchingCards(10, newUser.getUsername());
 
-        assertEquals(1, newScore1.get_id());
-        assertEquals(10, newScore1.getUserScore());
-        assertEquals(newUser.getUsername(), newScore1.getUserName());
+        assertEquals(1, newScore1.getUserScore());
+        assertEquals(newUser.getUsername(), newScore1.getOwner());
 
-        assertEquals(1, newScore2.get_id());
         assertEquals(10, newScore2.getUserScore());
-        assertEquals(newUser.getUsername(), newScore2.getUserName());
+        assertEquals(newUser.getUsername(), newScore2.getOwner());
     }
 
     /**
@@ -46,9 +44,9 @@ public class scoreMatchingCardsTest extends scoreTest {
     @Test
     public void testCompareToNumbers() {
         User newUser1 = new User("1", "John");
-        ScoreMatchingCards newScore1 = new ScoreMatchingCards(20, newUser1);
-        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1);
-        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser1);
+        ScoreMatchingCards newScore1 = new ScoreMatchingCards(20, newUser1.getUsername());
+        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1.getUsername());
+        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser1.getUsername());
 
         assertEquals(1, newScore1.compareTo(newScore2));
         assertEquals(-1, newScore2.compareTo(newScore1));
@@ -64,9 +62,9 @@ public class scoreMatchingCardsTest extends scoreTest {
     public void testCompareToNames() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreMatchingCards newScore1 = new ScoreMatchingCards(15, newUser1);
-        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1);
-        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser2);
+        ScoreMatchingCards newScore1 = new ScoreMatchingCards(15, newUser1.getUsername());
+        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1.getUsername());
+        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser2.getUsername());
 
         assertEquals(-1, newScore1.compareTo(newScore3));
         assertEquals(0, newScore2.compareTo(newScore2));
@@ -80,11 +78,11 @@ public class scoreMatchingCardsTest extends scoreTest {
     public void testEquals() {
         User newUser1 = new User("1", "John");
         User newUser2 = new User("1", "Jane");
-        ScoreMatchingCards newScore1 = new ScoreMatchingCards(15, newUser1);
-        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1);
-        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser2);
-        ScoreMatchingCards newScore4 = new ScoreMatchingCards(10, newUser2);
-        ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(15, newUser2);
+        ScoreMatchingCards newScore1 = new ScoreMatchingCards(15, newUser1.getUsername());
+        ScoreMatchingCards newScore2 = new ScoreMatchingCards(15, newUser1.getUsername());
+        ScoreMatchingCards newScore3 = new ScoreMatchingCards(15, newUser2.getUsername());
+        ScoreMatchingCards newScore4 = new ScoreMatchingCards(10, newUser2.getUsername());
+        ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(15, newUser2.getUsername());
 
         assertEquals(true, newScore1.equals(newScore2));
         assertEquals(false, newScore1.equals(null));
