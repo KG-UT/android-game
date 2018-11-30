@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
+/**
+ * Creates a ScoreSlidingTiles which stores int value scores, users and can compare them.
+ */
 public class ScoreSlidingTiles extends ScoreAbstract implements Comparable<ScoreSlidingTiles> {
 
     /**

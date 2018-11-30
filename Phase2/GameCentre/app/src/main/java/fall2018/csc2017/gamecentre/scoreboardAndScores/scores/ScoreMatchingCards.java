@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
+/**
+ * Creates a ScoreMatchingCards which stores int value scores, users and can compare them.
+ */
 public class ScoreMatchingCards extends ScoreAbstract implements Comparable<ScoreMatchingCards> {
 
     /**
