@@ -29,10 +29,10 @@ public class scoreboardGameUserActivityTest {
         List<ScoreSlidingTiles> correctListOfScores = new ArrayList<>();
         User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
-            ScoreSlidingTiles newTicTacToeScore = new ScoreSlidingTiles(6-i, newUser);
+            ScoreSlidingTiles newTicTacToeScore = new ScoreSlidingTiles(6-i, newUser.getUsername());
             listOfScores.add(newTicTacToeScore);
 
-            ScoreSlidingTiles newCorrectSlidingTilesScore = new ScoreSlidingTiles(i, newUser);
+            ScoreSlidingTiles newCorrectSlidingTilesScore = new ScoreSlidingTiles(i, newUser.getUsername());
             correctListOfScores.add(newCorrectSlidingTilesScore);
         }
         ScoreboardSlidingTies newScoreboard = new ScoreboardSlidingTies(listOfScores, "New Game");
