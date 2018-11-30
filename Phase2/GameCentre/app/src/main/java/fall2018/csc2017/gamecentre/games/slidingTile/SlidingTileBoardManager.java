@@ -138,7 +138,9 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
             return null;
         }
     }
-    /** A shuffling algorithm to scramble the board.
+
+    /**
+     * A shuffling algorithm to scramble the board.
      */
     private void shuffle(){
         int NUM_RANDOM_MOVES = 30;
@@ -147,8 +149,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         }
     }
 
-    /** From the valid moves available, makes a random move.
-     *
+    /**
+     * From the valid moves available, makes a random move.
      */
     private void makeRandomMove(){
         ArrayList<Integer> validMoves = getValidMoves();
@@ -157,8 +159,8 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         hiddenMove(validMoves.get(moveIndex));
     }
 
-    /** Get an ArrayList of valid moves.
-     *
+    /**
+     * Get an ArrayList of valid moves.
      */
     private ArrayList<Integer> getValidMoves(){
         ArrayList<Integer> validMoves = new ArrayList<>();
@@ -284,7 +286,6 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     public void setGameKeyValue(String gameKeyValue) {
         this.gameKeyValue = gameKeyValue;
     }
-
 
 //   /**
 //    * Set undos as as some value.
