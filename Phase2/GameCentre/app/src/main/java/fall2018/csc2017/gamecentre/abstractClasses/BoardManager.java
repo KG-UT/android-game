@@ -3,12 +3,32 @@ package fall2018.csc2017.gamecentre.abstractClasses;
 
 import java.io.Serializable;
 import java.util.Stack;
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
+
 
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 abstract public class BoardManager implements Serializable {
+
+    public String getOwnerKeyValue() {
+        return ownerKeyValue;
+    }
+
+    public void setOwnerKeyValue() {
+        if (currentUser == null) {
+            this.ownerKeyValue = "TEST";
+        }
+        else {
+            this.ownerKeyValue = currentUser.getEmail();
+
+        }
+    }
+
+    protected String ownerKeyValue;
+
+
 
     /**
      * The board being managed.
