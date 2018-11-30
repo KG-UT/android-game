@@ -38,9 +38,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.firebase:firebase-admin:6.6.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
-//com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
 

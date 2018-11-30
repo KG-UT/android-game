@@ -1,4 +1,67 @@
 package fall2018.csc2017.gamecentre.firebase;
 
+import android.util.Log;
+
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import fall2018.csc2017.gamecentre.User;
+
+// Code adapted from: https://firebase.google.com/docs/firestore/quickstart
+
+/**
+ * The Firestore database tools for User operations.
+ */
 public class UserDatabaseTools {
+
+    private Firestore db = InitializeDatabase.getDatabase();
+
+    /**
+     * Inserts a user into the Firestore database.
+     *
+     * @param newUser The user to be inserted.
+     */
+    public void insertUser(User newUser) {
+        String newUserEmail = newUser.getUsername();
+        DocumentReference docRef = db.collection("users").document(newUserEmail);
+        // Adds document data with id of "newUserEmail" using a hashmap
+        Map<String, Object> data = new HashMap<>();
+        data.put("email", newUserEmail);
+        // Async writing of data
+        try {
+            docRef.set(data);
+        } catch (Exception e) {
+            Log.e("TEMP", "Error inserting user into database.");
+        }
+    }
+
+    public ArrayList<User> getAllUsers() {
+        ApiFuture<QuerySnapshot> query = db.collection("users").get();
+        ArrayList<User> allUsers = new ArrayList<>();
+
+        // TODO: Will we lose marks? :-(
+        QuerySnapshot querySnapshot = query.get();
+
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            String tmpEmail = document.getString("email");
+            User tmp = new User("tmp", tmpEmail);
+            allUsers.add(tmp);
+        }
+
+        return allUsers;
+
+
+    }
+
+
+
 }
