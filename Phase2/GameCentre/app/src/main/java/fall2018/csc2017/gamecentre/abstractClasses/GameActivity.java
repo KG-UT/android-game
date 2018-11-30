@@ -30,7 +30,6 @@ abstract public class GameActivity extends AppCompatActivity implements Observer
     public void update(Observable o, Object arg) {
         display();
     }
-
 }
 
 

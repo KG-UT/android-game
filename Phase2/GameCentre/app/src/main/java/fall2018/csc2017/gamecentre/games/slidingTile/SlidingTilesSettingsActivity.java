@@ -8,7 +8,7 @@ import android.widget.ToggleButton;
 
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;
-import fall2018.csc2017.gamecentre.firebase.SlidingTileGameDatabaseTools;
+import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
 
 /**
  * The settings activity for Sliding Tiles (view)
