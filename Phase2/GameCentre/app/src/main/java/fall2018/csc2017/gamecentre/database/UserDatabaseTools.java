@@ -3,10 +3,15 @@ package fall2018.csc2017.gamecentre.database;
 import android.util.Log;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+//import com.google.cloud.firestore.DocumentReference;
+//import com.google.cloud.firestore.Firestore;
+//import com.google.cloud.firestore.QueryDocumentSnapshot;
+//import com.google.cloud.firestore.QuerySnapshot;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +29,7 @@ public class UserDatabaseTools {
     /**
      * The database.
      */
-    private Firestore db = Database.getDatabase();
+    private FirebaseFirestore db = Database.getDatabase();
 
     /**
      * Inserts a user into the Firestore database.
@@ -58,8 +63,8 @@ public class UserDatabaseTools {
         try {
             QuerySnapshot querySnapshot = query.get();
 
-            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-            for (QueryDocumentSnapshot document : documents) {
+            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (DocumentSnapshot document : documents) {
                 String tmpEmail = document.getString("email");
                 User tmp = new User("tmp", tmpEmail);
                 allUsers.add(tmp);

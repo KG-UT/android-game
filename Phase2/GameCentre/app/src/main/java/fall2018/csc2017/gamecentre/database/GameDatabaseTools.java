@@ -3,9 +3,15 @@ package fall2018.csc2017.gamecentre.database;
 import android.util.Log;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
+//import com.google.cloud.firestore.DocumentReference;
+//import com.google.cloud.firestore.DocumentSnapshot;
+//import com.google.cloud.firestore.Firestore;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,7 +60,7 @@ public class GameDatabaseTools {
     /**
      * The database.
      */
-    private Firestore db = Database.getDatabase();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     /**
      * Convert a Tic Tac Toe board manager to a byte array.

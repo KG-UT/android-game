@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -196,22 +194,29 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         User userToInsert = new User(userId, newUserEmail);
 
         // Adds on success and on failure listeners to the user being inserted.
-        mDatabase.child("users").child(userId).setValue(userToInsert)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "insertedUserIntoDatabase:success");
-                        // Given success of creating new user, we can guarantee that
-                        // it will be non-null.
-                        currentUser = newUser;
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "insertUserIntoDatabase:failure");
-                    }
-                });
+        mDatabase.child("users").child(userId).setValue(userToInsert, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError error, DatabaseReference ref) {
+                Log.d(TAG, "insertedUserIntoDatabase:success");
+                currentUser = newUser;
+            }
+        });
+//        mDatabase.child("users").child(userId).setValue(userToInsert)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d(TAG, "insertedUserIntoDatabase:success");
+//                        // Given success of creating new user, we can guarantee that
+//                        // it will be non-null.
+//                        currentUser = newUser;
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "insertUserIntoDatabase:failure");
+//                    }
+//                });
 
         addUserChangeListener();
     }
