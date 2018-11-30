@@ -40,8 +40,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
         // TODO: TEMP
-        User myUser = new User(currentUser.getUid(), currentUser.getEmail());
-        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, myUser);
+        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, "FUCK");
 
     }
 

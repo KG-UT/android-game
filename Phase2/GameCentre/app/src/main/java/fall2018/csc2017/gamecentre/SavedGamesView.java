@@ -26,18 +26,17 @@ import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
  * The class responsible for displaying the saved games view.
  */
 public class SavedGamesView extends AppCompatActivity {
-    DBTools database= new DBTools(this);
     private BoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_games_view);
-        ArrayList<ScoreSlidingTiles> scores = database.getUserSlidingTileScores(currentUser.getEmail());
-        for(ScoreSlidingTiles s: scores) {
-            Log.d("TAG", "" + s.getUserScore());
-        }
-//        ArrayList<Score> scores = database.getUserSlidingTileScores(currentUser.getEmail());
+//        ArrayList<ScoreSlidingTiles> scores = database.getUserSlidingTileScores(currentUser.getEmail());
+//        for(ScoreSlidingTiles s: scores) {
+//            Log.d("TAG", "" + s.getUserScore());
+//        }
+////        ArrayList<Score> scores = database.getUserSlidingTileScores(currentUser.getEmail());
 //        for(Score s: scores) {
 //            Log.d("TAG", "" + s.getUserScore());
 //        }

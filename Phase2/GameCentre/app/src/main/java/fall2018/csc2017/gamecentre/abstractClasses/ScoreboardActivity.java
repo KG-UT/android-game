@@ -7,8 +7,6 @@ package fall2018.csc2017.gamecentre.abstractClasses;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import fall2018.csc2017.gamecentre.DBTools;
-
 
 /**
  * The abstract class for Scoreboard activity.
@@ -19,11 +17,6 @@ public abstract class ScoreboardActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    /**
-     * Initializes a database to work with
-     */
-    protected DBTools databaseTools = new DBTools(this);
 
     /**
      * Determines if the scoreboard is the game scoreboard or the user scoreboard

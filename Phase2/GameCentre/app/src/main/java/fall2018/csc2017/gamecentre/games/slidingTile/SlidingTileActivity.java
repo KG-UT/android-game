@@ -19,7 +19,10 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
+import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
+import fall2018.csc2017.gamecentre.view.GameChoiceActivity;
+
+import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 
 /** TODO: FIX JAVADOCS.
@@ -28,9 +31,9 @@ import fall2018.csc2017.gamecentre.database.SlidingTileGameDatabaseTools;
  */
 public class SlidingTileActivity extends GameActivity {
     /**
-     * The autosave .ser file.
+     * The sliding tiles database path constant.
      */
-    public static final String SAVE_FILE_1 = "sliding_tile_save_file.ser";
+    private static final String ST_GAMES_PATH = "st-games";
 
     /**
      * The board manager.
@@ -42,22 +45,21 @@ public class SlidingTileActivity extends GameActivity {
      */
     private ArrayList<Button> tileButtons;
 
-    /**
-     * Constants for swiping directions. Should be an enum, probably.
-     */
-    public static final int UP = 1;
-    public static final int DOWN = 2;
-    public static final int LEFT = 3;
-    public static final int RIGHT = 4;
-
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
 
-    // TODO: make this final in a refactoring.
-    private SlidingTileGameDatabaseTools slidingTileDatabaseTools = new SlidingTileGameDatabaseTools();
+    /**
+     * The database tools for database operations for sliding tiles.
+     */
+    private GameDatabaseTools GameDatabaseTools = new GameDatabaseTools();
 
 
+    /**
+     * Gets the settings for the game.
+     *
+     * @return the settings
+     */
     public HashMap<String, Object> getSettings() {
         return (HashMap<String, Object>) getIntent().getSerializableExtra("SETTINGS");
     }
@@ -70,9 +72,6 @@ public class SlidingTileActivity extends GameActivity {
         updateTileButtons();
         updateScoreText();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
-
-        // TODO: THIS IS TEMPORARY FOR TESTING
-//        slidingTileDatabaseTools.retrieveBoardManager(boardManager.getGameKeyValue());
     }
 
     @Override
@@ -88,7 +87,7 @@ public class SlidingTileActivity extends GameActivity {
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
         // Saves the boardManager to database.
-        slidingTileDatabaseTools.saveToDatabase(boardManager);
+        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -161,7 +160,7 @@ public class SlidingTileActivity extends GameActivity {
             }
             nextPos++;
         }
-        slidingTileDatabaseTools.saveToDatabase(boardManager);
+        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
     }
 
     /**
@@ -196,7 +195,7 @@ public class SlidingTileActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        slidingTileDatabaseTools.saveToDatabase(boardManager);
+        GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
     }
 
     private void addUndoMoveButtonListener(){
@@ -216,7 +215,7 @@ public class SlidingTileActivity extends GameActivity {
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                slidingTileDatabaseTools.saveToDatabase(boardManager);
+                GameDatabaseTools.saveToDatabase(boardManager, ST_GAMES_PATH, currentUser.getEmail());
             }
         });
     }

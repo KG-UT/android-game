@@ -98,11 +98,14 @@ public class GameDatabaseTools {
         ApiFuture<DocumentSnapshot> future = docRef.get();
         DocumentSnapshot document = future.get();
 
+
+        BoardManager boardManager;
         if (document.exists()) {
             // TODO: if this an issue?
             byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
             // TODO: Is this one an issue?
             BoardManager boardManager = convertBytesToBoardManager(boardManagerBytes);
         }
+        return boardManager;
      }
 }

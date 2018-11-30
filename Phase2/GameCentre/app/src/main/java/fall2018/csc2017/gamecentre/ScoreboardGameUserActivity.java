@@ -150,8 +150,10 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
 //            }
             return listOfScoresSlidingTiles;
         } else {
-            return databaseTools.getUserSlidingTileScores(myUser.getUsername());
+//            return databaseTools.getUserSlidingTileScores(myUser.getUsername());
         }
+        // TODO: HAD TO REMOVE
+        return null;
     }
 
     /**
@@ -169,8 +171,8 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
 //            }
             return listOfScoresSlidingTiles;
         } else {
-            return databaseTools.getUserSlidingTileScores(myUser.getUsername());
         }
+        return null; // TODO: HAD TO DO THIS FOR NOW
     }
 
     /**
@@ -188,7 +190,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
 //            }
             return listOfScoresSlidingTiles;
         } else {
-            return databaseTools.getUserSlidingTileScores(myUser.getUsername());
+            return null;    // TODO: HAD TO DO THIS
         }
     }
 }

@@ -3,19 +3,11 @@ package fall2018.csc2017.gamecentre;
 import android.support.annotation.NonNull;
 
 public class ScoreMatchingCards extends ScoreAbstract implements Comparable<ScoreMatchingCards> {
-
-    /**
-     * Creates a ScoreMatchingCards where username comes from user (Used to create score at the endgame)
-     */
-    public ScoreMatchingCards(int userScore, User user) {
-        super(userScore, user);
-    }
-
     /**
      * Creates a ScoreMatchingCards where username comes from a string
      */
-    public ScoreMatchingCards(long _id, int userScore, String userName) {
-        super(_id, userScore, userName);
+    public ScoreMatchingCards(int userScore, String userName) {
+        super(userScore, userName);
     }
 
     @Override
@@ -25,7 +17,7 @@ public class ScoreMatchingCards extends ScoreAbstract implements Comparable<Scor
         } else if (comparedToScore.getUserScore() > this.getUserScore()) {
             return -1;
         } else {
-            return Integer.compare(comparedToScore.getUserName().compareTo(this.getUserName()), 0);
+            return Integer.compare(comparedToScore.getOwner().compareTo(this.getOwner()), 0);
         }
     }
 
@@ -37,7 +29,7 @@ public class ScoreMatchingCards extends ScoreAbstract implements Comparable<Scor
             return false;
         } else {
             ScoreMatchingCards comparedToScore = (ScoreMatchingCards) comparedToObject;
-            return (this.getUserName().equals(comparedToScore.getUserName()) &&
+            return (this.getOwner().equals(comparedToScore.getOwner()) &&
                     (this.getUserScore() == comparedToScore.getUserScore()));
         }
     }

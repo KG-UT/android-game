@@ -6,14 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import fall2018.csc2017.gamecentre.DBTools;
 import fall2018.csc2017.gamecentre.abstractClasses.GameEndActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.Score;
 import fall2018.csc2017.gamecentre.ScoreSlidingTiles;
-import fall2018.csc2017.gamecentre.User;
-
-import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 
 /**
@@ -28,7 +23,6 @@ public class SlidingTileEndActivity extends GameEndActivity {
     /**
      * The Database.
      */
-    DBTools database = new DBTools(SlidingTileEndActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +65,7 @@ public class SlidingTileEndActivity extends GameEndActivity {
         // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
         // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
 
-        User TEMP_USER = new User(currentUser.getUid(), currentUser.getEmail());
-
-        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, TEMP_USER);
+        ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, "FUCK");
 
     }
 }

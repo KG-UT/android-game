@@ -47,7 +47,7 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
 
     // Auth
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthListener mAuthListener;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     // Firebase User and database references.
     public static FirebaseUser currentUser;
