@@ -22,7 +22,7 @@ public class MatchingCardsBoard extends Board {
      * @param cols the number of columns
      * @param tiles the tiles for the board
      */
-    MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
+    public MatchingCardsBoard(int rows, int cols, List<MatchingCardsTile> tiles){
         super(rows, cols, tiles);
     }
 
@@ -30,7 +30,7 @@ public class MatchingCardsBoard extends Board {
      * states if two cards are currently face up
      * @return a boolean stating if two cards are currently face up
      */
-    boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
+    public boolean twoTempCardsAreUp(){return tempFaceUpCards.size() == 2;}
 
     /**
      * return the MatchingCardsTile at (row, col)
@@ -38,14 +38,14 @@ public class MatchingCardsBoard extends Board {
      * @param col the MatchingCardsTile column
      * @return The matchingCardsTile
      */
-    MatchingCardsTile getCard(int row, int col){return (MatchingCardsTile) getItem(row, col);}
+    public MatchingCardsTile getCard(int row, int col){return (MatchingCardsTile) getItem(row, col);}
 
     /**
      * flips the card at (row, col) up
      * @param row the MatchingCardsTile row
      * @param column the MatchingCardsTile column
      */
-    void flipCardUp(int row, int column){
+    public void flipCardUp(int row, int column){
         MatchingCardsTile card = (MatchingCardsTile) getItem(row, column);
         card.setFaceUp();
         tempFaceUpCards.add(card);
@@ -54,7 +54,7 @@ public class MatchingCardsBoard extends Board {
     /**
      * flips the temporary face up cards back down.
      */
-    void flipTempCardsDown(){
+    public void flipTempCardsDown(){
         for (int i=0; i<2; i++){
             MatchingCardsTile tile = tempFaceUpCards.get(i);
             tile.setFaceDown();
@@ -64,14 +64,14 @@ public class MatchingCardsBoard extends Board {
     /**
      * gets the temporarily face-up cards
      */
-    ArrayList<MatchingCardsTile> getTempFaceupCards(){
+    public ArrayList<MatchingCardsTile> getTempFaceupCards(){
         return tempFaceUpCards;
     }
 
     /**
      * resets the TempFaceUpCards array.
      */
-    void clearTempFaceUpCards(){
+    public void clearTempFaceUpCards(){
         tempFaceUpCards.clear();
     }
 }
