@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre.games.MatchingCards;
+package fall2018.csc2017.gamecentre.MatchingCards;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
@@ -33,7 +33,7 @@ public class MatchingCardsBoardManagerTest {
         return tiles;
     }
 
-
+    @Before
     public void setUp(){
         List<MatchingCardsTile> tiles = makeTiles();
         MatchingCardsBoard board = new MatchingCardsBoard(4,4, tiles);
@@ -45,12 +45,34 @@ public class MatchingCardsBoardManagerTest {
      */
     @Test
     public void testTouchMove(){
-        setUp();
         MatchingCardsBoard board = boardManager.getBoard();
         assertFalse(board.getCard(0,0).isFaceUp());
         boardManager.touchMove(0);
         assertTrue(board.getCard(0,0).isFaceUp());
     }
+
+    /**
+     * Test whether puzzleSolved works correctly
+     */
+
+    @Test
+        public void testPuzzleSolved(){
+        assertTrue(boardManager.puzzleSolved());
+        MatchingCardsBoardManager temp = new MatchingCardsBoardManager(4,4);
+        //created a shuffled board
+        temp.touchMove(3);
+        assertFalse(temp.puzzleSolved());
+        }
+
+    /**
+     * Test whether isValidTap works
+     */
+    @Test
+    public void testisValidTap(){
+        assertTrue(boardManager.isValidTap(5));
+        boardManager.touchMove(3);
+        assertFalse(boardManager.isValidTap(3));
+            }
 
 
 
