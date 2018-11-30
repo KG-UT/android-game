@@ -51,6 +51,9 @@ public class SavedGamesView extends AppCompatActivity {
 //        addSaveButtonListener1();
 ////    }
 
+    /**
+     * Adds a listener for saveGameButton1.
+     */
     private void addSaveButtonListener1() {
         Button SaveGame1Button = findViewById(R.id.saveGameButton1);
         SaveGame1Button.setOnClickListener(new View.OnClickListener() {

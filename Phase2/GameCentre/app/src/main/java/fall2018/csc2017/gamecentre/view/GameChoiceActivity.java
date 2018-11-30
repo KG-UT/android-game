@@ -28,7 +28,7 @@ public class GameChoiceActivity extends AppCompatActivity {
     }
 
     /**
-     * Add a button listener for the sliding tiles game option
+     * Add a button listener for slidingTilesButton, the sliding tiles game option
      */
     private void addSlidingTilesButtonListener() {
         Button slidingTilesButton = findViewById(R.id.slidingTilesButton);
@@ -42,7 +42,7 @@ public class GameChoiceActivity extends AppCompatActivity {
     }
 
     /**
-     * Add a button listener for the tic tac toe game option
+     * Add a button listener for ticTacToeButton, the tic tac toe game option
      */
     private void addTicTacToeButtonListener() {
         Button slidingTilesbutton = findViewById(R.id.ticTacToeButton);
@@ -57,7 +57,7 @@ public class GameChoiceActivity extends AppCompatActivity {
     }
 
     /**
-     * Add a button listener for the Matching Cards game option
+     * Add a button listener for MatchingCardsbutton, the Matching Cards game option
      */
     private void addMatchingCardsButtonListener(){
         Button matchingCardsButton = findViewById(R.id.MatchingCardsbutton);

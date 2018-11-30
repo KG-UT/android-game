@@ -16,10 +16,28 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+/**
+ * A custom adapter for allows for setting button sizes and positions in GridView.
+ */
 public class CustomAdapter extends BaseAdapter {
+
+    /**
+     * An arraylist of buttons.
+     */
     private ArrayList<Button> mButtons = null;
+
+    /**
+     * Denotes the column width and height of a grid.
+     */
     private int mColumnWidth, mColumnHeight;
 
+    /**
+     * Denotes the column width and height of a grid.
+     *
+     * @param buttons the arraylist of buttons
+     * @param columnWidth the width of the column of the grid
+     * @param columnHeight the height of the column of the grid
+     */
     public CustomAdapter(ArrayList<Button> buttons, int columnWidth, int columnHeight) {
         mButtons = buttons;
         mColumnWidth = columnWidth;
