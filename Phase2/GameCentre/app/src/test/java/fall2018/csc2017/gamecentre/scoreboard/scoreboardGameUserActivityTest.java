@@ -24,7 +24,7 @@ public class scoreboardGameUserActivityTest {
     public void testSetupSlidingTilesScoreboard() {
         List<ScoreSlidingTiles> listOfScores = new ArrayList<>();
         List<ScoreSlidingTiles> correctListOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
             ScoreSlidingTiles newTicTacToeScore = new ScoreSlidingTiles(6-i, newUser);
             listOfScores.add(newTicTacToeScore);
@@ -46,7 +46,7 @@ public class scoreboardGameUserActivityTest {
     public void testSetupGoScoreboard() {
         List<ScoreMatchingCards> listOfScores = new ArrayList<>();
         List<ScoreMatchingCards> correctListOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
             ScoreMatchingCards newGoScore = new ScoreMatchingCards(6-i, newUser);
             listOfScores.add(newGoScore);
@@ -68,7 +68,7 @@ public class scoreboardGameUserActivityTest {
     public void testSetupTicTacToeScoreboard() {
         List<ScoreTicTacToe> listOfScores = new ArrayList<>();
         List<ScoreTicTacToe> correctListOfScores = new ArrayList<>();
-        User newUser = new User(1, "John", "Password");
+        User newUser = new User("1", "John");
         for (int i=1; i<6; i++) {
             ScoreTicTacToe newTicTacToeScore = new ScoreTicTacToe(i, newUser);
             listOfScores.add(newTicTacToeScore);

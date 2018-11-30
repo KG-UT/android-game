@@ -9,7 +9,7 @@ import java.util.List;
  * The Matching Cards game board.
  */
 public class MatchingCardsBoard extends Board {
-    /*
+    /**
      * The cards that are currently face up
      */
     private ArrayList<MatchingCardsTile> tempFaceUpCards = new ArrayList<>();

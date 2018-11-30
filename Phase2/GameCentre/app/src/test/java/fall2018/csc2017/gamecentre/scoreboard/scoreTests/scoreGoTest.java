@@ -15,7 +15,7 @@ public class scoreGoTest extends scoreTest {
      * Setup scores in preparation for tests.
      */
     protected ScoreMatchingCards setupScores() {
-        User newUser = new User(1, "John");
+        User newUser = new User("1", "John");
         return new ScoreMatchingCards(10, newUser);
     }
 
@@ -24,7 +24,7 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testScoreInitialization() {
-        User newUser = new User(1, "John");
+        User newUser = new User("1", "John");
         ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(1, 10, newUser.getUsername());
         ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(10, newUser);
 
@@ -42,22 +42,10 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testCompareToNumbers() {
-<<<<<<< HEAD
         User newUser1 = new User("1", "John");
-        ScoreGo newGoScore1 = new ScoreGo(20, newUser1);
-        ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore3 = new ScoreGo(15, newUser1);
-||||||| merged common ancestors
-        User newUser1 = new User(1, "John", "Password");
-        ScoreGo newGoScore1 = new ScoreGo(20, newUser1);
-        ScoreGo newGoScore2 = new ScoreGo(15, newUser1);
-        ScoreGo newGoScore3 = new ScoreGo(15, newUser1);
-=======
-        User newUser1 = new User(1, "John", "Password");
         ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(20, newUser1);
         ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
         ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser1);
->>>>>>> f80d2d4ba61572d229635899f3fcad3047ed64bd
 
         assertEquals(1, newGoScore1.compareTo(newGoScore2));
         assertEquals(-1, newGoScore2.compareTo(newGoScore1));
@@ -71,8 +59,8 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testCompareToNames() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(15, newUser1);
         ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
         ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser2);
@@ -87,8 +75,8 @@ public class scoreGoTest extends scoreTest {
      */
     @Test
     public void testEquals() {
-        User newUser1 = new User(1, "John", "Password");
-        User newUser2 = new User(1, "Jane", "Password");
+        User newUser1 = new User("1", "John");
+        User newUser2 = new User("1", "Jane");
         ScoreMatchingCards newGoScore1 = new ScoreMatchingCards(15, newUser1);
         ScoreMatchingCards newGoScore2 = new ScoreMatchingCards(15, newUser1);
         ScoreMatchingCards newGoScore3 = new ScoreMatchingCards(15, newUser2);
