@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -233,9 +234,9 @@ public class TicTacToeActivity extends GameActivity {
         display();
         if (boardManager.puzzleSolved()){
             int score = boardManager.getBoardScore();
-//            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
-//            tmp.putExtra("SCORE", score);
-//            startActivity(tmp);
+            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
+            tmp.putExtra("SCORE", score);
+            startActivity(tmp);
         }
     }
 }
