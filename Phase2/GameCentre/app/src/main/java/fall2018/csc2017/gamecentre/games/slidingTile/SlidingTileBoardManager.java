@@ -26,7 +26,7 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
      * The key value for the owner.
      */
     @Exclude
-    private final String ownerKeyValue = currentUser.getUid();
+    private String ownerKeyValue;
 
     // TODO: Make final
     /**

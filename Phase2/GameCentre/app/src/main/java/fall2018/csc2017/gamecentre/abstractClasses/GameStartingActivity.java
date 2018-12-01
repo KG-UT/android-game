@@ -24,8 +24,6 @@ abstract public class GameStartingActivity extends AppCompatActivity {
 
     /**
      * Saves the current state.
-     *
-     * @param fileName the file path.
      */
-    abstract public void saveToFile(String fileName);
+    abstract public void saveToFile();
 }

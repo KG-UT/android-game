@@ -60,26 +60,15 @@
         app:layout_constraintTop_toBottomOf="@+id/ticTacToeNewGameButton" />
 
     <Button
-        android:id="@+id/TicTacToeSaveGameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="117dp"
-        android:text="Load Saved Game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TicTacToeAutosaveButton" />
-
-    <Button
         android:id="@+id/TicTacToeScoreboardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="135dp"
         android:layout_marginStart="136dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="135dp"
         android:text="Scoreboard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TicTacToeSaveGameButton" />
+        app:layout_constraintTop_toBottomOf="@+id/TicTacToeAutosaveButton" />
 </android.support.constraint.ConstraintLayout>

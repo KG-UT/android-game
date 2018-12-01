@@ -8,6 +8,8 @@ import com.google.android.gms.tasks.Task;
 //import com.google.cloud.firestore.DocumentReference;
 //import com.google.cloud.firestore.DocumentSnapshot;
 //import com.google.cloud.firestore.Firestore;
+import com.google.common.primitives.Bytes;
+import com.google.firebase.firestore.Blob;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,14 +26,16 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
-
 
 // Code adapted from: https://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
 
@@ -73,7 +77,7 @@ public class GameDatabaseTools {
      * @return the byte array
      * @throws IOException throws an error if there is an error with input / output.
      */
-    private byte[] convertTicTacToeBoardManagerToBytes(BoardManager boardManager) throws IOException{
+    private byte[] convertTicTacToeBoardManagerToBytes(TicTacToeBoardManager boardManager) throws IOException{
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutput output = new ObjectOutputStream(bos)) {
              output.writeObject(boardManager);
@@ -121,10 +125,9 @@ public class GameDatabaseTools {
      */
      public TicTacToeBoardManager convertBytesToTicTacToeBoardManager(byte[] boardManagerBytes)
              throws IOException, ClassNotFoundException {
-            try (ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
-                 ObjectInput input = new ObjectInputStream(bis)) {
-                return (TicTacToeBoardManager) input.readObject();
-            }
+            ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
+            ObjectInput input = new ObjectInputStream(bis);
+            return (TicTacToeBoardManager) input.readObject();
      }
 
     /**
@@ -185,7 +188,7 @@ public class GameDatabaseTools {
      */
     public void saveToDatabase(SlidingTileBoardManager boardManager, String owner) {
         try {
-            byte[] boardManagerBytes = convertTicTacToeBoardManagerToBytes(boardManager);
+            byte[] boardManagerBytes = convertSlidingTileBoardManagerToBytes(boardManager);
 
             saveToDatabaseHelper(owner, "st-games", boardManagerBytes);
         } catch (IOException e) {
@@ -202,7 +205,7 @@ public class GameDatabaseTools {
      */
     public void saveToDatabase(MatchingCardsBoardManager boardManager, String owner) {
         try {
-            byte[] boardManagerBytes = convertTicTacToeBoardManagerToBytes(boardManager);
+            byte[] boardManagerBytes = convertMatchingCardsManagerToBytes(boardManager);
 
             saveToDatabaseHelper(owner, "mc-games", boardManagerBytes);
         } catch (IOException e) {
@@ -218,16 +221,15 @@ public class GameDatabaseTools {
      * @param boardManagerBytes byte array of a board manager
      */
      private void saveToDatabaseHelper(String owner, String gameType, byte[] boardManagerBytes) {
-
          DocumentReference docRef = db.collection(gameType).document(owner);
          // Adds document data with id of "owner" and the score.
-         Map<String, Object> data = new HashMap<>();
-         data.put("owner", boardManagerBytes);
+         Map<String, Blob> data = new HashMap<>();
+         data.put("owner", Blob.fromBytes(boardManagerBytes));
          // Async writing of data
          try {
              docRef.set(data);
          } catch (Exception e) {
-             Log.e("TEMP", "Error inserting board manager bytes into database.");
+             Log.e("TEMP", e.getMessage());
          }
      }
 
@@ -249,24 +251,10 @@ public class GameDatabaseTools {
      * @param owner    the owner
      * @return the board manager
      */
-//    public SlidingTileBoardManager getSlidingTileBoardManager(String owner) {
-//        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
-//        DocumentReference docRef = db.collection("st-games").document(owner);
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        try {
-//            DocumentSnapshot document = future.get();
-//            if (document.exists()) {
-//                // TODO: if this an issue?
-//                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-//
-//                return convertBytesToSlidingTileBoardManager(boardManagerBytes);
-//            }
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error getting board manager.");
-//        }
-//        // TODO: Make this less cancer.
-//        return null;
-//    }
+    public DocumentReference getSlidingTileBoardManager(String owner) {
+        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
+        return db.collection("st-games").document(owner);
+    }
 
     /**
      * Retrieves the board manager from the database for a user for a specific game.
