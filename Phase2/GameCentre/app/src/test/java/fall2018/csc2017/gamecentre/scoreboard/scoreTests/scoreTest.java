@@ -29,19 +29,9 @@ abstract public class scoreTest {
     public void testGet_id() {
         ScoreAbstract newScore = setupScores();
 
-        assertEquals(1, newScore.getUserScore());
+        assertEquals(10, newScore.getUserScore());
     }
 
-//    /**
-//     * Test whether method set_id works.
-//     */
-//    @Test
-//    public void testSet_id() {
-//        ScoreAbstract newScore = setupScores();
-//        newScore.set_id(2);
-//
-//        assertEquals(2, newScore.getUserScore());
-//    }
 
     /**
      * Test whether method getUserName works.
