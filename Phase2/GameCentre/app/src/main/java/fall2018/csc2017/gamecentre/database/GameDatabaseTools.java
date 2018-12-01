@@ -77,7 +77,7 @@ public class GameDatabaseTools {
      * @return the byte array
      * @throws IOException throws an error if there is an error with input / output.
      */
-    private byte[] convertTicTacToeBoardManagerToBytes(BoardManager boardManager) throws IOException{
+    private byte[] convertTicTacToeBoardManagerToBytes(TicTacToeBoardManager boardManager) throws IOException{
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutput output = new ObjectOutputStream(bos)) {
              output.writeObject(boardManager);
@@ -125,10 +125,9 @@ public class GameDatabaseTools {
      */
      public TicTacToeBoardManager convertBytesToTicTacToeBoardManager(byte[] boardManagerBytes)
              throws IOException, ClassNotFoundException {
-            try (ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
-                 ObjectInput input = new ObjectInputStream(bis)) {
-                return (TicTacToeBoardManager) input.readObject();
-            }
+            ByteArrayInputStream bis = new ByteArrayInputStream(boardManagerBytes);
+            ObjectInput input = new ObjectInputStream(bis);
+            return (TicTacToeBoardManager) input.readObject();
      }
 
     /**
@@ -189,7 +188,7 @@ public class GameDatabaseTools {
      */
     public void saveToDatabase(SlidingTileBoardManager boardManager, String owner) {
         try {
-            byte[] boardManagerBytes = convertTicTacToeBoardManagerToBytes(boardManager);
+            byte[] boardManagerBytes = convertSlidingTileBoardManagerToBytes(boardManager);
 
             saveToDatabaseHelper(owner, "st-games", boardManagerBytes);
         } catch (IOException e) {
@@ -206,7 +205,7 @@ public class GameDatabaseTools {
      */
     public void saveToDatabase(MatchingCardsBoardManager boardManager, String owner) {
         try {
-            byte[] boardManagerBytes = convertTicTacToeBoardManagerToBytes(boardManager);
+            byte[] boardManagerBytes = convertMatchingCardsManagerToBytes(boardManager);
 
             saveToDatabaseHelper(owner, "mc-games", boardManagerBytes);
         } catch (IOException e) {
@@ -252,24 +251,10 @@ public class GameDatabaseTools {
      * @param owner    the owner
      * @return the board manager
      */
-//    public SlidingTileBoardManager getSlidingTileBoardManager(String owner) {
-//        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
-//        DocumentReference docRef = db.collection("st-games").document(owner);
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        try {
-//            DocumentSnapshot document = future.get();
-//            if (document.exists()) {
-//                // TODO: if this an issue?
-//                byte[] boardManagerBytes = (byte[]) document.getData().get(owner);
-//
-//                return convertBytesToSlidingTileBoardManager(boardManagerBytes);
-//            }
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error getting board manager.");
-//        }
-//        // TODO: Make this less cancer.
-//        return null;
-//    }
+    public DocumentReference getSlidingTileBoardManager(String owner) {
+        // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
+        return db.collection("st-games").document(owner);
+    }
 
     /**
      * Retrieves the board manager from the database for a user for a specific game.

@@ -9,6 +9,9 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -55,7 +58,7 @@ public class SlidingTileActivity extends GameActivity {
     /**
      * The database tools for database operations for sliding tiles.
      */
-    private GameDatabaseTools GameDatabaseTools = new GameDatabaseTools();
+    private GameDatabaseTools gameDatabaseTools = new GameDatabaseTools();
 
     /**
      * Returns the settings defined in this activity.
@@ -89,7 +92,7 @@ public class SlidingTileActivity extends GameActivity {
             boardManager = new SlidingTileBoardManager(numRows, numCols);
         }
         // Saves the boardManager to database.
-        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
+        saveToFile();
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -162,7 +165,7 @@ public class SlidingTileActivity extends GameActivity {
             }
             nextPos++;
         }
-        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
+        saveToFile();
     }
 
     /**
@@ -198,7 +201,7 @@ public class SlidingTileActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
+        saveToFile();
     }
 
     /**
@@ -224,7 +227,7 @@ public class SlidingTileActivity extends GameActivity {
         Save1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameDatabaseTools.saveToDatabase(boardManager, currentUser.getEmail());
+                saveToFile();
             }
         });
     }
@@ -247,5 +250,13 @@ public class SlidingTileActivity extends GameActivity {
             tmp.putExtra("SCORE", score);
             startActivity(tmp);
         }
+    }
+
+    /**
+     * Save the board manager to fileName.
+     */
+    public void saveToFile() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        gameDatabaseTools.saveToDatabase(boardManager, user.getUid());
     }
 }

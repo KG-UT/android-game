@@ -111,19 +111,6 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Activate the save button.
-     */
-    private void addSavedGamesButtonListener() {
-        Button saveButton = findViewById(R.id.SavedGamesButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(TicTacToeStartingActivity.this, SavedGamesView.class));
-            }
-        });
-    }
-
-    /**
      * Display that a game was saved successfully.
      */
     private void makeToastSavedText() {
@@ -176,7 +163,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
                                 document.getData().get(LoginActivity.currentUser);
                                 byte[] boardManagerBytes = ((Blob) document.getData().get("owner")).toBytes();
                                 try {
-                                    gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
+                                    boardManager = gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
                                     Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
 
                                     HashMap<String, Object> settings = new HashMap<>();
@@ -185,7 +172,7 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
 
                                     startActivity(tmp);
                                 } catch (Exception e) {
-
+                                    Log.d("TAG", e.getMessage());
                                 }
                             }
                         }

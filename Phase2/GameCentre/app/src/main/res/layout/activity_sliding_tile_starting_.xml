@@ -39,23 +39,12 @@
         android:id="@+id/ScoreboardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="135dp"
         android:layout_marginStart="136dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="135dp"
         android:text="Scoreboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SavedGamesButton" />
-
-    <Button
-        android:id="@+id/SavedGamesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="117dp"
-        android:text="Load Saved Game"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AutoSaveButton" />
 
