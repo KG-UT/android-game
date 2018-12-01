@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.User;
@@ -38,6 +41,7 @@ public class MatchingCardsEndActivity extends GameEndActivity {
      * Save score to database.
      */
     public void saveScore(){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, currentUser.getUid());
         databaseTool.saveToDatabase(theScore, "mc-scores");
     }
