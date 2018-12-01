@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
 import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
 
@@ -26,7 +27,11 @@ public class ScoreboardTicTacToe extends Scoreboard {
      */
     public ScoreboardTicTacToe(List<ScoreTicTacToe> listOfScores, String nameOfGame) {
         super(nameOfGame);
-        this.scoreBoardArray = (ArrayList<ScoreTicTacToe>) listOfScores;
+        if (listOfScores != null) {
+            this.scoreBoardArray = (ArrayList<ScoreTicTacToe>) listOfScores;
+        } else {
+            this.scoreBoardArray =  new ArrayList<>();
+        }
     }
 
     /**

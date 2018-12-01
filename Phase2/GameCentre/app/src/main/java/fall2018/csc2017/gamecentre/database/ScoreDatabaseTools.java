@@ -1,13 +1,22 @@
 package fall2018.csc2017.gamecentre.database;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.core.Tag;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +39,12 @@ public class ScoreDatabaseTools {
     /**
      * The database.
      */
-    private FirebaseFirestore db = Database.getDatabase();
+    public FirebaseFirestore db = Database.getDatabase();
+
+    /**
+     * A list of user scores
+     */
+    public ArrayList<ScoreTicTacToe> userScores = new ArrayList<>();
 
     /**
      * Inserts a user's score into the Tic Tac Toe Score database.
@@ -73,13 +87,19 @@ public class ScoreDatabaseTools {
         // Adds document data with id of "owner" and the score.
         Map<String, Object> data = new HashMap<>();
         data.put("owner", owner);
-        data.put("score", strScore);
         // Async writing of data
         try {
-            docRef.set(data);
+            docRef.set(data, SetOptions.merge());
+            docRef.update("scores", FieldValue.arrayUnion(strScore));
         } catch (Exception e) {
             Log.e("TEMP", "Error inserting user's score into database.");
         }
+    }
+
+    public Task<DocumentSnapshot> getUserTicTacToeScores(FirebaseUser user) {
+        userScores = new ArrayList<>();
+        String owner = user.getUid();
+        return db.collection("ttt-scores").document(owner).get();
     }
 
     /**
@@ -88,55 +108,11 @@ public class ScoreDatabaseTools {
      * @param user The current user
      * @return All the user's scores for a specific game.
      */
-//    public ArrayList<ScoreTicTacToe> getUserTicTacToeScores(User user) {
-//        String owner = user.getUsername();
-//        ArrayList<ScoreTicTacToe> userScores = new ArrayList<>();
-//        ApiFuture<QuerySnapshot> query =
-//                db.collection("ttt-scores").whereEqualTo(owner, true).get();
-//        try {
-//            List<QueryDocumentSnapshot> documents = query.get().getDocuments();
-//
-//            for (DocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreTicTacToe tmp = new ScoreTicTacToe(tmpScore, tmpOwner);
-//                userScores.add(tmp);
-//            }
-//            return userScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error Getting Scores");
-//        }
-//        // TODO: LEss cancer.
-//        return null;
-//    }
-
-    /**
-     * Returns all the scores for the specified game associated with a specific user.
-     *
-     * @param user The current user
-     * @return All the user's scores for a specific game.
-     */
-//    public ArrayList<ScoreSlidingTiles> getUserSlidingTileScores(User user) {
-//        String owner = user.getUsername();
-//        ArrayList<ScoreSlidingTiles> userScores = new ArrayList<>();
-//        ApiFuture<QuerySnapshot> query =
-//                db.collection("st-games").whereEqualTo(owner, true).get();
-//        try {
-//            List<QueryDocumentSnapshot> documents = query.get().getDocuments();
-//
-//            for (DocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreSlidingTiles tmp = new ScoreSlidingTiles(tmpScore, tmpOwner);
-//                userScores.add(tmp);
-//            }
-//            return userScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error Getting Scores");
-//        }
-//        // TODO: LEss cancer.
-//        return null;
-//    }
+    public Task<DocumentSnapshot> getUserSlidingTileScores(FirebaseUser user) {
+        userScores = new ArrayList<>();
+        String owner = user.getUid();
+        return db.collection("st-scores").document(owner).get();
+    }
 
     /**
      * Returns all the scores for matching cards associated with a specific user.
@@ -144,27 +120,11 @@ public class ScoreDatabaseTools {
      * @param user The current user
      * @return All the user's scores for matching cards.
      */
-//    public ArrayList<ScoreTicTacToe> getUserMatchingCardsScores(User user) {
-//        String owner = user.getUsername();
-//        ArrayList<ScoreTicTacToe> userScores = new ArrayList<>();
-//        ApiFuture<QuerySnapshot> query =
-//                db.collection("mc-scores").whereEqualTo(owner, true).get();
-//        try {
-//            List<QueryDocumentSnapshot> documents = query.get().getDocuments();
-//
-//            for (DocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreTicTacToe tmp = new ScoreTicTacToe(tmpScore, tmpOwner);
-//                userScores.add(tmp);
-//            }
-//            return userScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error Getting Scores");
-//        }
-//        // TODO: LEss cancer.
-//        return null;
-//    }
+    public Task<DocumentSnapshot> getUserMatchingCardScores(FirebaseUser user) {
+        userScores = new ArrayList<>();
+        String owner = user.getUid();
+        return db.collection("mc-scores").document(owner).get();
+    }
 
     /**
      * Returns all the scores for all users for tic tac toe.

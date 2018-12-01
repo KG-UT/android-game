@@ -6,6 +6,7 @@ import android.util.Log;
 //import com.google.cloud.firestore.Firestore;
 //import com.google.cloud.firestore.QueryDocumentSnapshot;
 //import com.google.cloud.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,26 +55,26 @@ public class UserDatabaseTools {
      *
      * @return An Arraylist of all the users in our database.
      */
-//    public ArrayList<User> getAllUsers() {
-//        ApiFuture<QuerySnapshot> query = db.collection("users").get();
-//        ArrayList<User> allUsers = new ArrayList<>();
-//
-//        // TODO: Will we lose marks? :-(
-//        try {
-//            QuerySnapshot querySnapshot = query.get();
-//
-//            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
-//            for (DocumentSnapshot document : documents) {
-//                String tmpEmail = document.getString("email");
-//                User tmp = new User("tmp", tmpEmail);
-//                allUsers.add(tmp);
-//            }
-//
-//            return allUsers;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Problem getting all users.");
-//        }
-//        // TODO: Less cancer
-//        return null;
-//    }
+    public ArrayList<User> getAllUsers() {
+        Task<QuerySnapshot> query = db.collection("users").get();
+        ArrayList<User> allUsers = new ArrayList<>();
+
+        // TODO: Will we lose marks? :-(
+        try {
+            QuerySnapshot querySnapshot = query.getResult();
+
+            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (DocumentSnapshot document : documents) {
+                String tmpEmail = document.getString("email");
+                User tmp = new User("tmp", tmpEmail);
+                allUsers.add(tmp);
+            }
+
+            return allUsers;
+        } catch (Exception e) {
+            Log.e("TAG", "Problem getting all users.");
+        }
+        // TODO: Less cancer
+        return null;
+    }
 }

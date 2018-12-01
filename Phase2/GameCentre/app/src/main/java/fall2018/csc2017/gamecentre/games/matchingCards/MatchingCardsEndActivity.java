@@ -38,13 +38,8 @@ public class MatchingCardsEndActivity extends GameEndActivity {
      * Save score to database.
      */
     public void saveScore(){
-        // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        // TODO: TEMP
-        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, "FUCK");
-        databaseTool.saveToDatabase(theScore, "Matching Tiles");
-
+        ScoreMatchingCards theScore = new ScoreMatchingCards(this.endScore, currentUser.getUid());
+        databaseTool.saveToDatabase(theScore, "mc-scores");
     }
 
     /**

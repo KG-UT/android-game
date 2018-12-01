@@ -1,6 +1,7 @@
 package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -255,9 +256,9 @@ public class TicTacToeActivity extends GameActivity {
         display();
         if (boardManager.puzzleSolved()){
             int score = boardManager.getBoardScore();
-//            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
-//            tmp.putExtra("SCORE", score);
-//            startActivity(tmp);
+            Intent tmp = new Intent(TicTacToeActivity.this, TicTacToeEndActivity.class);
+            tmp.putExtra("SCORE", score);
+            startActivity(tmp);
         }
     }
 }

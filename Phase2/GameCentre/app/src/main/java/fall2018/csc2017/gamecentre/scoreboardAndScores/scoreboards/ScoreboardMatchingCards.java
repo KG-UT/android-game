@@ -26,7 +26,11 @@ public class ScoreboardMatchingCards extends Scoreboard {
      */
     public ScoreboardMatchingCards(List<ScoreMatchingCards> listOfScores, String nameOfGame) {
         super(nameOfGame);
-        this.scoreBoardArray = (ArrayList<ScoreMatchingCards>) listOfScores;
+        if (listOfScores != null) {
+            this.scoreBoardArray = (ArrayList<ScoreMatchingCards>) listOfScores;
+        } else {
+            this.scoreBoardArray =  new ArrayList<>();
+        }
     }
 
     /**

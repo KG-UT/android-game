@@ -1,11 +1,15 @@
 package fall2018.csc2017.gamecentre;
 
 
+import java.util.ArrayList;
+
+import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 /**
  * This is the object representation of a user stored in the database.
  */
 public class User {
+
     /**
      *  The User's uid.
      */
@@ -15,6 +19,11 @@ public class User {
      * The username (email) for a given user.
      */
     private String username;
+
+    /**
+     * The list of scores of a user.
+     */
+    private ArrayList<Integer> userScores = new ArrayList<>();
 
     /**
      * No-arg constructor for Firebase.
