@@ -11,22 +11,13 @@ import java.util.Random;
 import fall2018.csc2017.gamecentre.abstractClasses.Board;
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.Tile;
-
-import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
-
-import fall2018.csc2017.gamecentre.App.Undoable;
+import fall2018.csc2017.gamecentre.app.Undoable;
 
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class SlidingTileBoardManager extends BoardManager implements Undoable {
-
-    /**
-     * The key value for the owner.
-     */
-    @Exclude
-    private String ownerKeyValue;
 
     /**
      * The key value for the game.
@@ -278,32 +269,5 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         } else{
             return 99999999;
         }
-    }
-
-    /**
-     * Returns the owner's key value.
-     *
-     * @return the String of the owner's key value in the database.
-     */
-    public String getOwnerKeyValue() {
-        return ownerKeyValue;
-    }
-
-    /**
-     * Returns the games's key value.
-     *
-     * @return the String of the owner's key value in the database.
-     */
-    public String getGameKeyValue() {
-        return gameKeyValue;
-    }
-
-    /**
-     * Sets the games's key value.
-     *
-     * @param gameKeyValue the game's new key value
-     */
-    public void setGameKeyValue(String gameKeyValue) {
-        this.gameKeyValue = gameKeyValue;
     }
 }

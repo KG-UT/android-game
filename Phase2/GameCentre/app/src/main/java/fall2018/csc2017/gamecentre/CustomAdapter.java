@@ -24,7 +24,7 @@ public class CustomAdapter extends BaseAdapter {
     /**
      * An arraylist of buttons.
      */
-    private ArrayList<Button> mButtons = null;
+    private ArrayList<Button> mButtons;
 
     /**
      * Denotes the column width and height of a grid.

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import fall2018.csc2017.gamecentre.CustomAdapter;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.abstractClasses.Board;
-import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 
 /**
@@ -39,11 +37,6 @@ public class MatchingCardsActivity extends GameActivity {
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
-
-    /**
-     * The file path of the corresponding save file.
-     */
-    public static final String SAVE_FILE = "Matching_Cards_save_file.ser";
 
     // Grid View and calculated column height and width based on device size
     /**
@@ -142,28 +135,6 @@ public class MatchingCardsActivity extends GameActivity {
     protected void onPause() {
         super.onPause();
         saveToFile(MatchingCardsStartingActivity.TEMP_SAVE_FILENAME_1);
-    }
-
-    /**
-     * Load the board manager from fileName (For later implementation).
-     *
-     * @param fileName the name of the file
-     */
-    public void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (MatchingCardsBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
     }
 
     /**

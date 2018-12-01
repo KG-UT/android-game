@@ -7,11 +7,11 @@ import java.util.List;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.abstractClasses.Scoreboard;
 
+
 /**
  * A scoreboard of matching cards scores which can store and manipulate them.
  */
 public class ScoreboardMatchingCards extends Scoreboard {
-
     /**
      * Score data is arranged in an array list. Smaller scores are closer to the top of the
      * scoreboard (similar (*but not same) concept to golf, where the less moves the better)

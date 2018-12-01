@@ -9,58 +9,33 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.Blob;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Document;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import fall2018.csc2017.gamecentre.abstractClasses.GameStartingActivity;
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.SavedGamesView;
 import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.ScoreboardGameUserActivity;
 
 import fall2018.csc2017.gamecentre.view.LoginActivity;
-import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
 
 /**
  * The initial activity for the sliding puzzle tile game.
  */
 public class TicTacToeStartingActivity extends GameStartingActivity {
     /**
-     * The autosave .ser file.
-     */
-    public static String AUTOSAVE = "autosave.ser";
-
-    /**
-     * The main save file.
-     */
-    public static final String SAVE_FILENAME = "tic_tac_toe_save_file.ser";
-
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "tic_tac_toe_save_file_tmp.ser";
-
-    /**
      * The board manager.
      */
     private TicTacToeBoardManager boardManager;
 
+    /**
+     * The database
+     */
     private GameDatabaseTools gameDatabaseTools;
 
     @Override
@@ -112,6 +87,8 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
 
     /**
      * Display that a game was saved successfully.
+     *
+     * Future functionality
      */
     private void makeToastSavedText() {
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
@@ -143,14 +120,8 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Save the board manager to fileName.
+     * Loads a saved game.
      */
-    @Override
-    public void saveToFile() {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        gameDatabaseTools.saveToDatabase(boardManager, user.getUid());
-    }
-
     private void loadSavedGame() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         gameDatabaseTools.getTicTacToeBoardManager(user.getUid()).get()

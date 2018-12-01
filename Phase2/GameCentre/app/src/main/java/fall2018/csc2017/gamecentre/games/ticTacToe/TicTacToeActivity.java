@@ -4,23 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
-import android.content.Intent;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -30,17 +21,12 @@ import fall2018.csc2017.gamecentre.abstractClasses.GameActivity;
 import fall2018.csc2017.gamecentre.GestureDetectGridView;
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.database.GameDatabaseTools;
-import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileStartingActivity;
+
 
 /**
  * The game activity.
  */
 public class TicTacToeActivity extends GameActivity {
-    /**
-     * The autosave .ser file.
-     */
-    public static final String SAVE_FILE_1 = "tic_tac_toe_save.ser";
-
     /**
      * The board manager.
      */
@@ -62,10 +48,13 @@ public class TicTacToeActivity extends GameActivity {
      */
     private static int columnWidth, columnHeight;
 
-    GameDatabaseTools gameDatabaseTools;
+    /**
+     * The database
+     */
+    private GameDatabaseTools gameDatabaseTools;
 
     /**
-     * The database.
+     * Gets the settings for the game.
      */
     public HashMap<String, Object> getSettings() {
         return (HashMap<String, Object>) getIntent().getSerializableExtra("SETTINGS");
@@ -191,7 +180,6 @@ public class TicTacToeActivity extends GameActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        saveToFile(SlidingTileStartingActivity.TEMP_SAVE_FILENAME);
     }
 
     /**

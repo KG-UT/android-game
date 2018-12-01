@@ -37,36 +37,18 @@ import fall2018.csc2017.gamecentre.view.LoginActivity;
  */
 public class SlidingTileStartingActivity extends GameStartingActivity {
     /**
-     * The autosave .ser file.
-     */
-    public static String AUTOSAVE = "autosave.ser";
-
-    /**
-     * The main save file.
-     */
-    public static final String SAVE_FILENAME = "sliding_tile_save_file.ser";
-
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "sliding_tile_save_file_tmp.ser";
-
-    /**
      * The board manager.
      */
     private SlidingTileBoardManager slidingTileBoardManager;
 
-    private GameDatabaseTools gameDatabaseTools = new GameDatabaseTools();
-
     /**
-     * The Database methods needed for sliding tiles.
+     * The database.
      */
-    private GameDatabaseTools slidingTileDatabaseTools = new GameDatabaseTools();
+    private GameDatabaseTools gameDatabaseTools = new GameDatabaseTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //saveToFile(TEMP_SAVE_FILENAME);
         slidingTileBoardManager = new SlidingTileBoardManager();
 
         setContentView(R.layout.activity_sliding_tile_starting_);
@@ -103,6 +85,8 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
 
     /**
      * Display that a game was loaded successfully.
+     *
+     * Future functionality
      */
     private void makeToastLoadedText() {
         Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
@@ -110,6 +94,8 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
 
     /**
      * Display that a game was saved successfully.
+     *
+     * Future functionality
      */
     private void makeToastSavedText() {
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
@@ -173,14 +159,6 @@ public class SlidingTileStartingActivity extends GameStartingActivity {
                         }
                     }
                 });
-    }
-
-    /**
-     * Save the board manager to fileName.
-     */
-    public void saveToFile() {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        gameDatabaseTools.saveToDatabase(slidingTileBoardManager, user.getUid());
     }
 
     /**

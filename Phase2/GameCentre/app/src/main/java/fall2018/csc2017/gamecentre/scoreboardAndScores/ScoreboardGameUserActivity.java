@@ -2,7 +2,6 @@ package fall2018.csc2017.gamecentre.scoreboardAndScores;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,25 +9,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import fall2018.csc2017.gamecentre.R;
-import fall2018.csc2017.gamecentre.database.Database;
 import fall2018.csc2017.gamecentre.database.ScoreDatabaseTools;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;

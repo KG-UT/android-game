@@ -1,23 +1,11 @@
 package fall2018.csc2017.gamecentre.database;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-//import com.google.cloud.firestore.DocumentReference;
-//import com.google.cloud.firestore.DocumentSnapshot;
-//import com.google.cloud.firestore.Firestore;
-import com.google.common.primitives.Bytes;
 import com.google.firebase.firestore.Blob;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Document;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,13 +14,9 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
 import fall2018.csc2017.gamecentre.games.matchingCards.MatchingCardsBoardManager;
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileBoardManager;
 import fall2018.csc2017.gamecentre.games.ticTacToe.TicTacToeBoardManager;
@@ -133,6 +117,8 @@ public class GameDatabaseTools {
     /**
      * Converts a Sliding Tile Board Manager Byte Array to a Matching Cards Board Manager.
      *
+     * This is for future functionality.
+     *
      * @param boardManagerBytes       The Board Manager byte array.
      * @return                        Returns the Board Manager object from a byte array.
      * @throws IOException            Throws an exception if there is an error with input/output.
@@ -200,6 +186,8 @@ public class GameDatabaseTools {
      * Saves a byte array of a board manager to the database.
      * We only store one at a time since multiple games is pointless.
      *
+     * For future functionality.
+     *
      * @param boardManager the board manager
      * @param owner             the owner
      */
@@ -241,8 +229,7 @@ public class GameDatabaseTools {
      */
     public DocumentReference getTicTacToeBoardManager(String owner) {
         // Code Adapted from: https://firebase.google.com/docs/firestore/query-data/get-data
-        DocumentReference docRef = db.collection("ttt-games").document(owner);
-        return docRef;
+        return db.collection("ttt-games").document(owner);
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.Stack;
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 
-
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
@@ -29,8 +28,7 @@ abstract public class BoardManager implements Serializable {
     /**
      * The key value of the owner.
      */
-    protected String ownerKeyValue;
-
+    private String ownerKeyValue;
 
     /**
      * The board being managed.
@@ -48,33 +46,6 @@ abstract public class BoardManager implements Serializable {
     private int undosLeft = 3;
 
     /**
-     * Sets the new value of stackOfMoves (from class).
-     *
-     * @param stackOfMoves the new stack value of stackOfMoves (from class)
-     */
-    public void setStackOfMoves(Stack<int[]> stackOfMoves) {
-        this.stackOfMoves = stackOfMoves;
-    }
-
-    /**
-     * Sets the new value of boardScore (from class).
-     *
-     * @param boardScore the new int value of stackOfMoves (from class)
-     */
-    public void setBoardScore(int boardScore) {
-        this.boardScore = boardScore;
-    }
-
-    /**
-     * Sets the new value of undosLeft (from class).
-     *
-     * @param undosLeft the new int value of undosLeft (from class)
-     */
-    public void setUndosLeft(int undosLeft) {
-        this.undosLeft = undosLeft;
-    }
-
-    /**
      * The score.
      */
     private int boardScore = 0;
@@ -86,15 +57,6 @@ abstract public class BoardManager implements Serializable {
      */
     public int getUndosLeft() {
         return undosLeft;
-    }
-
-    /**
-     * Returns the stack of moves.
-     *
-     * @return the stack of ints defined by stackOfMoves
-     */
-    public Stack<int[]> getStackOfMoves() {
-        return stackOfMoves;
     }
 
     /**
@@ -156,7 +118,6 @@ abstract public class BoardManager implements Serializable {
     public void incrementScore(int amount) {
         this.boardScore += amount;
     }
-
 
     /**
      * Return whether or not the puzzle is solved or game is over

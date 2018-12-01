@@ -1,9 +1,8 @@
 package fall2018.csc2017.gamecentre.abstractClasses;
 
-/**
+/*
  * Excluded from tests because it is an abstract class
  **/
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,9 +20,4 @@ abstract public class GameStartingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
-
-    /**
-     * Saves the current state.
-     */
-    abstract public void saveToFile();
 }

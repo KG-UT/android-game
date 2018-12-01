@@ -210,22 +210,6 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                 currentUser = newUser;
             }
         });
-//        mDatabase.child("users").child(userId).setValue(userToInsert)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Log.d(TAG, "insertedUserIntoDatabase:success");
-//                        // Given success of creating new user, we can guarantee that
-//                        // it will be non-null.
-//                        currentUser = newUser;
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "insertUserIntoDatabase:failure");
-//                    }
-//                });
 
         addUserChangeListener();
     }
@@ -329,10 +313,8 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
                     Log.e(TAG, "User data is null!");
                     return;
                 }
-
                 Log.e(TAG, "User data is changed!" + user.getUsername());
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value

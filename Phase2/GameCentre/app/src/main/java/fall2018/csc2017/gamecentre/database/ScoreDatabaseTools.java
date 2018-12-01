@@ -1,29 +1,20 @@
 package fall2018.csc2017.gamecentre.database;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.Tag;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
-import org.w3c.dom.Document;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import fall2018.csc2017.gamecentre.User;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreMatchingCards;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
 import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
@@ -39,12 +30,14 @@ public class ScoreDatabaseTools {
     /**
      * The database.
      */
-    public FirebaseFirestore db = Database.getDatabase();
+    private FirebaseFirestore db = Database.getDatabase();
 
     /**
      * A list of user scores
+     *
+     * Future functionality
      */
-    public ArrayList<ScoreTicTacToe> userScores = new ArrayList<>();
+    private ArrayList<ScoreTicTacToe> userScores = new ArrayList<>();
 
     /**
      * Inserts a user's score into the Tic Tac Toe Score database.

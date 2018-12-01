@@ -1,9 +1,7 @@
 package fall2018.csc2017.gamecentre;
 
-
 import java.util.ArrayList;
 
-import fall2018.csc2017.gamecentre.abstractClasses.ScoreAbstract;
 
 /**
  * This is the object representation of a user stored in the database.
@@ -22,6 +20,8 @@ public class User {
 
     /**
      * The list of scores of a user.
+     *
+     * Future functionality
      */
     private ArrayList<Integer> userScores = new ArrayList<>();
 
@@ -53,6 +53,8 @@ public class User {
     /**
      * Sets user id.
      *
+     * Future functionality
+     *
      * @param userId the user id
      */
     public void setUid(String userId) {
@@ -66,14 +68,5 @@ public class User {
      */
     public String getUsername() {
         return username;
-    }
-
-    /**
-     * Sets the username.
-     *
-     * @param username the username
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

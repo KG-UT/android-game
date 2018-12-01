@@ -2,9 +2,7 @@ package fall2018.csc2017.gamecentre.games.ticTacToe;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.RadioButton;
 
 import fall2018.csc2017.gamecentre.R;
 import fall2018.csc2017.gamecentre.abstractClasses.SettingsActivity;

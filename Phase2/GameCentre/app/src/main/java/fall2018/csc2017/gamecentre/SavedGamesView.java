@@ -3,19 +3,14 @@ package fall2018.csc2017.gamecentre;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import fall2018.csc2017.gamecentre.games.slidingTile.SlidingTileActivity;
 
 import fall2018.csc2017.gamecentre.abstractClasses.BoardManager;
-import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreSlidingTiles;
-
-import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
 
 /**
@@ -25,6 +20,8 @@ public class SavedGamesView extends AppCompatActivity {
 
     /**
      * Board manager associated with this activity.
+     *
+     * Future functionality
      */
     private BoardManager boardManager;
 
@@ -36,6 +33,8 @@ public class SavedGamesView extends AppCompatActivity {
 
     /**
      * Adds a listener for saveGameButton1.
+     *
+     * Future functionality
      */
     private void addSaveButtonListener1() {
         Button SaveGame1Button = findViewById(R.id.saveGameButton1);

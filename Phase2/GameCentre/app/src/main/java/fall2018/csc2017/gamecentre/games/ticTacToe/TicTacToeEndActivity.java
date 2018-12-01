@@ -12,6 +12,7 @@ import fall2018.csc2017.gamecentre.scoreboardAndScores.scores.ScoreTicTacToe;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
+
 /**
  * The class responsible for handling the end-of-game behaviour for Sliding Tile games.
  */
@@ -20,10 +21,6 @@ public class TicTacToeEndActivity extends GameEndActivity {
      * The score attained by the user.
      */
     private int endScore;
-
-    /**
-     * The Database.
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

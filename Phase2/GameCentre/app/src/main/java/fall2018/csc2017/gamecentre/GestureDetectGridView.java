@@ -26,8 +26,6 @@ public class GestureDetectGridView extends GridView {
      * Variables that define accepted characteristics of swipe.
      */
     public static final int SWIPE_MIN_DISTANCE = 100;
-    public static final int SWIPE_MAX_OFF_PATH = 100;
-    public static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
     /**
      * A GestureDetector that detects gestures such as swipes etc.
@@ -80,10 +78,10 @@ public class GestureDetectGridView extends GridView {
         init(context);
     }
 
-
-
     /**
      * Creates a new GestureDetectGridView.
+     *
+     * Future functionality
      *
      * @param context the current context
      * @param attrs the set of attributes

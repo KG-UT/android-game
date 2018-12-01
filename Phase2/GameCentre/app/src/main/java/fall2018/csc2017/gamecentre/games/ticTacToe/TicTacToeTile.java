@@ -33,9 +33,6 @@ public class TicTacToeTile implements Serializable {
      * @param state the state to set (must be "X", "O", or "")
      */
     public void setState(String state) {
-//        if(state != X || state != O || state != BLANK) {
-//            throw InvalidParameterException;
-//        }
         this.state = state;
     }
 

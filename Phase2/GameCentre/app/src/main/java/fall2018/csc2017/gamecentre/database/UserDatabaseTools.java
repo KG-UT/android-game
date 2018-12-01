@@ -2,15 +2,10 @@ package fall2018.csc2017.gamecentre.database;
 
 import android.util.Log;
 
-//import com.google.cloud.firestore.DocumentReference;
-//import com.google.cloud.firestore.Firestore;
-//import com.google.cloud.firestore.QueryDocumentSnapshot;
-//import com.google.cloud.firestore.QuerySnapshot;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -25,6 +20,8 @@ import fall2018.csc2017.gamecentre.User;
 /**
  * The Firestore database tools for saving and retrieving users. To be used in the future when users
  * can be stored in firestore.
+ *
+ * This is for future functionality
  */
 public class UserDatabaseTools {
     /**
