@@ -164,17 +164,17 @@ public class TicTacToeStartingActivity extends GameStartingActivity {
                                 byte[] boardManagerBytes = ((Blob) document.getData().get("owner")).toBytes();
                                 try {
                                     boardManager = gameDatabaseTools.convertBytesToTicTacToeBoardManager(boardManagerBytes);
-                                    Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
-
-                                    HashMap<String, Object> settings = new HashMap<>();
-                                    settings.put("PRELOADED_BOARD_MANAGER", boardManager);
-                                    tmp.putExtra("SETTINGS", settings);
-
-                                    startActivity(tmp);
                                 } catch (Exception e) {
                                     Log.d("TAG", e.getMessage());
                                 }
                             }
+                            Intent tmp = new Intent(TicTacToeStartingActivity.this, TicTacToeActivity.class);
+
+                            HashMap<String, Object> settings = new HashMap<>();
+                            settings.put("PRELOADED_BOARD_MANAGER", boardManager);
+                            tmp.putExtra("SETTINGS", settings);
+
+                            startActivity(tmp);
                         }
                     }
                 });
