@@ -21,10 +21,6 @@ public class SlidingTileEndActivity extends GameEndActivity {
      */
     private int endScore;
 
-    /**
-     * The Database.
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +58,6 @@ public class SlidingTileEndActivity extends GameEndActivity {
 
     @Override
     public void saveScore() {
-        // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-
         ScoreSlidingTiles theScore = new ScoreSlidingTiles(this.endScore, currentUser.getUid());
         databaseTool.saveToDatabase(theScore, "st-scores");
 

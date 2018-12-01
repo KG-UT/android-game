@@ -19,14 +19,9 @@ public abstract class ScoreboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Determines if the scoreboard is the game scoreboard or the user scoreboard
+     * Adds a button for the refresher.
      */
-    protected boolean isGameScoreboard = true;
-
-    /**
-     * Add other scoreboard button listener.
-     */
-    abstract protected void addOtherScoreboardButtonListener();
+    abstract protected void addRefreshButtonListener();
 
     /**
      * Displays the scoreboard.

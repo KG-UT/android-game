@@ -28,7 +28,6 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
     @Exclude
     private String ownerKeyValue;
 
-    // TODO: Make final
     /**
      * The key value for the game.
      */
@@ -290,10 +289,20 @@ public class SlidingTileBoardManager extends BoardManager implements Undoable {
         return ownerKeyValue;
     }
 
+    /**
+     * Returns the games's key value.
+     *
+     * @return the String of the owner's key value in the database.
+     */
     public String getGameKeyValue() {
         return gameKeyValue;
     }
 
+    /**
+     * Sets the games's key value.
+     *
+     * @param gameKeyValue the game's new key value
+     */
     public void setGameKeyValue(String gameKeyValue) {
         this.gameKeyValue = gameKeyValue;
     }

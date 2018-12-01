@@ -26,8 +26,10 @@ abstract public class BoardManager implements Serializable {
         }
     }
 
+    /**
+     * The key value of the owner.
+     */
     protected String ownerKeyValue;
-
 
 
     /**

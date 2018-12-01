@@ -82,6 +82,9 @@ public class ScoreDatabaseTools {
         saveToDatabaseHelper(owner, strScore, scoreType);
     }
 
+    /**
+     * The helps save scores to database.
+     */
     private void saveToDatabaseHelper(String owner, String strScore, String scoreType){
         DocumentReference docRef = db.collection(scoreType).document(owner);
         // Adds document data with id of "owner" and the score.
@@ -96,6 +99,12 @@ public class ScoreDatabaseTools {
         }
     }
 
+    /**
+     * Returns all the scores for the specified game associated with a specific user.
+     *
+     * @param user The current user
+     * @return All the user's scores for a specific game.
+     */
     public Task<DocumentSnapshot> getUserTicTacToeScores(FirebaseUser user) {
         userScores = new ArrayList<>();
         String owner = user.getUid();
@@ -125,85 +134,4 @@ public class ScoreDatabaseTools {
         String owner = user.getUid();
         return db.collection("mc-scores").document(owner).get();
     }
-
-    /**
-     * Returns all the scores for all users for tic tac toe.
-     *
-     * @return all the scores for tic tac toe ever stored.
-     */
-//    public ArrayList<ScoreTicTacToe> getAllTicTacToeGameScores() {
-//        ApiFuture<QuerySnapshot> query = db.collection("ttt-scores").get();
-//        ArrayList<ScoreTicTacToe> allTTTScores = new ArrayList<>();
-//
-//        try {
-//            QuerySnapshot querySnapshot = query.get();
-//            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-//
-//            for (QueryDocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreTicTacToe tmp = new ScoreTicTacToe(tmpScore, tmpOwner);
-//                allTTTScores.add(tmp);
-//            }
-//            return allTTTScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error getting all game scores.");
-//        }
-//        // TODO: Less cancer
-//        return null;
-//    }
-
-    /**
-     * Returns all the scores for all users for sliding tile.
-     *
-     * @return all the scores for the specific game ever stored.
-     */
-//    public ArrayList<ScoreSlidingTiles> getAllSlidingTileGameScores() {
-//        ApiFuture<QuerySnapshot> query = db.collection("st-scores").get();
-//        ArrayList<ScoreSlidingTiles> allSTScores = new ArrayList<>();
-//
-//        try {
-//            QuerySnapshot querySnapshot = query.get();
-//            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-//
-//            for (QueryDocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreSlidingTiles tmp = new ScoreSlidingTiles(tmpScore, tmpOwner);
-//                allSTScores.add(tmp);
-//            }
-//            return allSTScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error getting all game scores.");
-//        }
-//        // TODO: Less cancer
-//        return null;
-//    }
-
-    /**
-     * Returns all the scores for all users for a specific game.
-     *
-     * @return all the scores for the specific gameever stored.
-     */
-//    public ArrayList<ScoreMatchingCards> getAllMatchingCardsGameScores() {
-//        ApiFuture<QuerySnapshot> query = db.collection("mc-scores").get();
-//        ArrayList<ScoreMatchingCards> allMCScores = new ArrayList<>();
-//
-//        try {
-//            QuerySnapshot querySnapshot = query.get();
-//            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-//
-//            for (QueryDocumentSnapshot document : documents) {
-//                String tmpOwner = document.getString("owner");
-//                int tmpScore = Integer.valueOf(document.getString("score"));
-//                ScoreMatchingCards tmp = new ScoreMatchingCards(tmpScore, tmpOwner);
-//                allMCScores.add(tmp);
-//            }
-//            return allMCScores;
-//        } catch (Exception e) {
-//            Log.e("TAG", "Error getting all game scores.");
-//        }
-//        // TODO: Less cancer
-//        return null;
-//    }
 }

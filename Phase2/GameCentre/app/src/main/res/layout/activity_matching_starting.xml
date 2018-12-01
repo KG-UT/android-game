@@ -16,7 +16,7 @@
         android:text="Score Board"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MatchingLoadButton" />
+        app:layout_constraintTop_toBottomOf="@+id/MatchingStartButton" />
     <!--android:onClick="scoreboardPressed"-->
     <!--android:text="@string/score_board" />-->
 
@@ -34,30 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/MatchingLoadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="117dp"
-        android:text="load Saved Game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MatchingSaveButton" />
-
-    <Button
-        android:id="@+id/MatchingSaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="103dp"
-        android:text="Load AutoSave Game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MatchingStartButton" />
 
     <Button
         android:id="@+id/MatchingStartButton"

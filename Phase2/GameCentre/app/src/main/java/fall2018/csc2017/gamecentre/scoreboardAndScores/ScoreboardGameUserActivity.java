@@ -50,13 +50,19 @@ import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
  */
 public class ScoreboardGameUserActivity extends ScoreboardActivity {
 
-    // TODO: Rework this, this is temp.
+    /**
+     * The user class (for the future for better modularization).
+     */
     private User myUser = new User(currentUser.getUid(), currentUser.getEmail());
 
+    /**
+     * Initializes scoreboard database tools.
+     */
     private ScoreDatabaseTools data = new ScoreDatabaseTools();
 
-    public FirebaseFirestore dataBaseInstance = data.db;
-
+    /**
+     * The user class (for the future for better modularization).
+     */
     private ArrayList<String> stringScoreboard = new ArrayList<>();
 
     @Override
@@ -67,18 +73,18 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
         scoreBoardView();
         scoreBoardTitleView();
 
-        addOtherScoreboardButtonListener();
+        addRefreshButtonListener();
     }
 
     /**
      * Add other scoreboard button listener.
      */
-    protected void addOtherScoreboardButtonListener() {
+    protected void addRefreshButtonListener() {
         Button newButton = findViewById(R.id.scoreboardToUserScoreboardButton);
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToOtherScoreboard();
+                refreshScoreboard();
             }
         });
     }
@@ -86,9 +92,7 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
     /**
      * Changes the state of the scoreboard between the game scoreboard and the user scoreboard.
      */
-     private void switchToOtherScoreboard() {
-         isGameScoreboard = !isGameScoreboard;
-         scoreBoardTitleView();
+     private void refreshScoreboard() {
          scoreBoardView();
          stringScoreboard = new ArrayList<>();
     }
@@ -114,19 +118,13 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
      */
     protected void scoreBoardTitleView() {
         TextView scoreBoardTitle = findViewById(R.id.scoreboardTitleTextView);
-        if (isGameScoreboard) {
-            String scoreBoardTitleText = "General Scoreboard";
-            scoreBoardTitle.setText(scoreBoardTitleText);
-        } else {
-            String scoreBoardTitleText = "Personal Scoreboard";
-            scoreBoardTitle.setText(scoreBoardTitleText);
-        }
+        String scoreBoardTitleText = "Personal Scoreboard";
+        scoreBoardTitle.setText(scoreBoardTitleText);
     }
 
     /**
      * Sets up the combined scoreboard for all games.
      *
-     * @return the scoreboard in a list of strings form
      */
     private void setupCombinedScoreboard() {
         getTicTacToeScoresFromDatabase();
@@ -169,11 +167,8 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
 
     /**
      * Gets all the Sliding Tile scores from the database.
-     *
-     * @return the list of all sliding tile scores.
      */
     public void getSlidingTilesScoresFromDatabase() {
-        if (isGameScoreboard) {
             data.getUserSlidingTileScores(FirebaseAuth.getInstance().getCurrentUser())
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -191,16 +186,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
                             }
                         }
                     });
-        }
     }
 
     /**
      * Gets all the TicTacToe scores from the database.
-     *
-     * @return the list of all TicTacToe scores.
      */
     public void getTicTacToeScoresFromDatabase() {
-        if (isGameScoreboard) {
             data.getUserTicTacToeScores(FirebaseAuth.getInstance().getCurrentUser())
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -218,16 +209,12 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
                         }
                     }
                 });
-        }
     }
 
     /**
      * Gets all the Matching Cards scores from the database.
-     *
-     * @return the list of all Go scores.
      */
     public void getMatchingCardsScoresFromDatabase() {
-        if (isGameScoreboard) {
             data.getUserMatchingCardScores(FirebaseAuth.getInstance().getCurrentUser())
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -246,5 +233,4 @@ public class ScoreboardGameUserActivity extends ScoreboardActivity {
                         }
                     });
         }
-    }
 }

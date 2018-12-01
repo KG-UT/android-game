@@ -27,9 +27,6 @@ import fall2018.csc2017.gamecentre.view.GameChoiceActivity;
 
 import static fall2018.csc2017.gamecentre.view.LoginActivity.currentUser;
 
-// TODO: FIX JAVADOCS.
-// TODO: Add Logging.
-
 /**
  * The game activity.
  */

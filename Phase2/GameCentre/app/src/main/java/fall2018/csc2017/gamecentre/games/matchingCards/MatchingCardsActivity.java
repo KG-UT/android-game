@@ -86,7 +86,6 @@ public class MatchingCardsActivity extends GameActivity {
                         display();
                     }
                 });
-        addSaveButtonListener();
     }
 
     /**
@@ -146,7 +145,7 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     /**
-     * Load the board manager from fileName.
+     * Load the board manager from fileName (For later implementation).
      *
      * @param fileName the name of the file
      */
@@ -168,7 +167,7 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     /**
-     * Save the board manager to fileName.
+     * Save the board manager to fileName (For later implementation).
      *
      * @param fileName the name of the file
      */
@@ -184,17 +183,18 @@ public class MatchingCardsActivity extends GameActivity {
     }
 
     /**
-     * Adds a listener to the MatchingSaveButton and determines when it has been pressed.
+     * Adds a listener to the MatchingSaveButton and determines when it has been pressed
+     * (For later implementation).
      */
     private void addSaveButtonListener() {
-        Button SaveButton = findViewById(R.id.MatchingSaveButton);
-        SaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFile(SAVE_FILE);
-
-            }
-        });
+//        Button SaveButton = findViewById(R.id.MatchingSaveButton);
+//        SaveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                saveToFile(SAVE_FILE);
+//
+//            }
+//        });
     }
 
     /**

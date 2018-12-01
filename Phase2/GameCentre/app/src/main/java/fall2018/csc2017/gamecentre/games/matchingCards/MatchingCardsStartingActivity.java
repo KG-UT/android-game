@@ -41,7 +41,6 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
         boardManager = new MatchingCardsBoardManager();
         setContentView(R.layout.activity_matching_starting);
         addNewGameButtonListener();
-        addAutoSaveButtonListener();
         addScoreboardButtonListener();
     }
 
@@ -57,9 +56,8 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
 
 
     /**
-     * Save the board manager to fileName.
+     * Save the board manager to fileName (For future saving).
      *
-     * @param fileName the name of the file
      */
     public void saveToFile() {
 //        try {
@@ -73,7 +71,7 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Load the board manager from fileName.
+     * Load the board manager from fileName (For later implementation).
      *
      * @param fileName the name of the file
      */
@@ -117,24 +115,24 @@ public class MatchingCardsStartingActivity extends GameStartingActivity {
     }
 
     /**
-     * Adds a listener for when MatchingSaveButton is pressed.
+     * Adds a listener for when MatchingSaveButton is pressed (For later implementation).
      */
     private void addAutoSaveButtonListener() {
-        Button AutoSaveButton = findViewById(R.id.MatchingSaveButton);
-        AutoSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                Intent tmp = new Intent(MatchingCardsStartingActivity.this, MatchingCardsActivity.class);
-
-                HashMap<String, Object> settings = new HashMap<>();
-                settings.put("PRELOADED_BOARD_MANAGER", boardManager);
-                tmp.putExtra("SETTINGS", settings);
-
-                startActivity(tmp);
-
-            }
-        });
+//        Button AutoSaveButton = findViewById(R.id.MatchingSaveButton);
+//        AutoSaveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loadFromFile(SAVE_FILENAME);
+//                Intent tmp = new Intent(MatchingCardsStartingActivity.this, MatchingCardsActivity.class);
+//
+//                HashMap<String, Object> settings = new HashMap<>();
+//                settings.put("PRELOADED_BOARD_MANAGER", boardManager);
+//                tmp.putExtra("SETTINGS", settings);
+//
+//                startActivity(tmp);
+//
+//            }
+//        });
     }
 
     /**

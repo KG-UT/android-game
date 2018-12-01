@@ -23,7 +23,8 @@ import fall2018.csc2017.gamecentre.User;
 // Code adapted from: https://firebase.google.com/docs/firestore/quickstart
 
 /**
- * The Firestore database tools for saving and retrieving users.
+ * The Firestore database tools for saving and retrieving users. To be used in the future when users
+ * can be stored in firestore.
  */
 public class UserDatabaseTools {
     /**
@@ -59,7 +60,6 @@ public class UserDatabaseTools {
         Task<QuerySnapshot> query = db.collection("users").get();
         ArrayList<User> allUsers = new ArrayList<>();
 
-        // TODO: Will we lose marks? :-(
         try {
             QuerySnapshot querySnapshot = query.getResult();
 
@@ -74,7 +74,7 @@ public class UserDatabaseTools {
         } catch (Exception e) {
             Log.e("TAG", "Problem getting all users.");
         }
-        // TODO: Less cancer
+
         return null;
     }
 }

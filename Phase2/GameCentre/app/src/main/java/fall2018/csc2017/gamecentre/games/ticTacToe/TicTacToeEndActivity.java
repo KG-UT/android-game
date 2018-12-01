@@ -62,10 +62,6 @@ public class TicTacToeEndActivity extends GameEndActivity {
 
     @Override
     public void saveScore() {
-        // Noted for later:
-        // TODO: CHANGE THIS ID TO WHATEVER SHOULD BE THE RIGHT ID
-        // TODO: SOMEONE MAKE THIS AND SCOREBOARD WORK.
-        // TODO: THIS IS TEMP, FIX LATER
         ScoreTicTacToe theScore = new ScoreTicTacToe(this.endScore, currentUser.getUid());
         databaseTool.saveToDatabase(theScore, "ttt-scores");
     }
