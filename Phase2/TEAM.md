@@ -39,6 +39,9 @@
 
 ---
 
+
+
+# Phase 1:
 # Meeting Notes 
 ###### (Reverse Chronological Order)
 
@@ -320,6 +323,305 @@
 	* Other optional functionalities
 	* Rename group
 
+
+
+WORK DONE BY:
+
+* Kuba
+    - Implemented a sqlite database, DBTools
+    - Allowed other classes and activities to save data to the database
+    - Created database tools for saving and reading users
+    - Created database tools for saving and reading scores of users
+    - Created database tools for saving and reading save files
+    - Made LoginActivity, a login screen, allowing users to log in or create their own account
+    - Created the layout activity_login.xml, the UI for the login screen
+    - Allowed the creation of new users in the login screen
+
+* Wenqin
+    - Implemented SettingActivity, a settings page and its corresponding UI, activity_settings.xml
+    - Allowed the size of the board to be changed in the settings page
+    - Connected SlidingTileStartingActivity with the settings screen and the settings screen to SlidingTileActivity
+    - Revamped the layout activity_starting_.xml and functionality of SlidingTileStartingActivity by adding buttons and listeners
+    - Created abstract class SettingsActivity, parent of SettingActivity
+    - Helped come up with a solution to the autosave button
+    - Fixed problem with the database and saving scores
+    - Helped with debugging many critical issues with saving and the database
+
+* Kevin G.
+    - Implemented the undo function, undoMove() and getUndosLeft() which returns unused undos
+    - Implemented a function to get the score, getScore()
+    - Created the layout activity_ending_.xml
+    - Created SlidingTileEndActivity which saves score to database and displays the score after the game is finished
+    - Created abstract class GameEndActivity, a parent of SlidingTileEndActivity
+    - Created a check in method update in SlidingTileActivity that checks to see if the game is over
+    - Helped debugging problems with saving and autosave
+    - Helped figure out how to pass data between different activities
+
+* Kevin L.
+    - Implemented the user scoreboard, SlidingTileUserScoreboardActivity
+    - Implemented the game scoreboard SlidingTileGameScoreboardActivity
+    - Created the abstract class ScoreboardActivity, parent of both scoreboards
+    - Created the layout activity_user_scoreboard_display.xml, its listview, buttons and listeners
+    - Created the layout activity_game_scoreboard_display.xml, its listview, buttons and listeners
+    - Implemented class Score which holds int scores and string usernames. Allows for scores to be compared with each other
+    - Implemented Scoreboard which holds scores and can sort them in order
+    - Helped with passing in the score data from SlidingTileActivity to SlidingTileEndActivity
+
+* Rohit
+    - Autosave buttons and reading and writing of .ser files
+    - Save and undo button in activity_main
+    - Saving and loading from save file
+    - Saved game buttons and saved games view layout
+    - Added listeners for buttons
+    - Linked save game and autosave buttons
+    - Added undo default moves and undo n moves buttons
+    - Some minor xml layout changes
+    
+    
+    
+# Phase 2:
+
+# Meeting Notes 
+###### (Reverse Chronological Order)
+
+## Meeting 6  -- November 29
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+
+
+--
+
+## End of Meeting Status
+
+
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
+
+
+## Meeting 5  -- November 28
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+
+
+--
+
+## End of Meeting Status
+
+
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
+
+
+## Meeting 4  -- November 26
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+
+
+--
+
+## End of Meeting Status
+
+
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
+
+
+## Meeting 3  -- November 20
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+
+
+--
+
+## End of Meeting Status
+
+
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
+
+
+## Meeting 2  -- November 14
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+
+
+--
+
+## End of Meeting Status
+
+
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
+
+
+## Meeting 1  -- November 13
+
+#### Present: 
+* Kuba Wernerowski
+* Wenqin Ye
+* Kevin Guo
+* Kevin Zhou Li
+* Rohit Bansal
+
+#### Excused:
+* No Absences
+
+--
+
+## Discussion
+
+    1. Initialized the repo and fixed issues
+
+    2. Decided to implement TicTacToe
+    
+    3. Decided to implement Go
+    
+    4. Decided that the score for TicTacToe and Go should both be the amount of moves to win
+    
+    5. Discussed how the computer player should play, no conclusion on the matter
+
+--
+
+## End of Meeting Status
+
+* Kuba
+	* Database
+	* Login / Registration
+	* Go
+
+* Wenqin 
+	* Launch Center View
+
+* Kevin G.
+	* Make sliding tiles always solvable
+
+* Kevin L.
+	* Scoreboard refactoring 
+	* Few of the Unit Tests
+
+* Rohit
+	* Most of the Unit Tests
+
+## Accomplished
+
+
+
+## TODO:
+
+
+
+
+--
 
 
 WORK DONE BY:

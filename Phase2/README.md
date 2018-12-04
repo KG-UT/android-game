@@ -87,20 +87,69 @@ THE WAY THE GAMES WORKS -
      Pressing ScoreBoard will take you to the Game ScoreBoard.
 
               VARIOUS CLASSES FUNCTIONALITIES EXPLAINED:
-1. LoginActivity : Handles login and first time user creation
-2. GameActivity: Parent of SlidingTileActivity, it is an abstract class
-3. SlidingTilesStartingActivity: Handles main menu screen after login ing
-4. DBTools : Sets up the sqlite database and provides the tools for reading and writing
-5. SlidingTileActivity : Handles the sliding tiles game board
-6. SlidingTileEndActivity: Handles the end game screen
-7. SlidingTileGameScoreboardActivity: Handles the general (game) scoreboard
-8. SlidingTileUserScoreboardActivity: Handles the personalized (user) scoreboard
-9. SavedGamesView: Handles the save select screen
-10. SlidingTilesSettingsActivity: Handles the settings screen
-11. Score: Represents the score that a user got for a game
-12. Scoreboard: Represents a scoreboard full of scores
-
-## Android Studio Config:
+* abstractClasses: This package contains classes that are abstract and are extended by other classes
+    1. Board: Abstract class of the boards of games
+    2. BoardManager: Abstract class of a board manager of a game
+    3. GameActivity: Abstract class of the a game activity/view class
+    4. GameEndActivity: Abstract class of the game ending screen activity/view class
+    5. GameStartingActivity: Abstract class of the starting screen activity/view class
+    6. ScoreAbstract: Abstract class that represents are score
+    7. Scoreboard: Abstract class that represents a scoreboard
+    8. ScoreboardActivity: Abstract class of the scoreboard activity/view class
+    9. SettingsActivity: Abstract class that of the settings display screen activity/view class
+* app: This package contains files that are interfaces implemented by other classes
+    1. Undoable: An interface that contains the methods for undo
+* database: This package contains files that are concerned with saving and extracting data from the database
+    1. csc207-phase2-firebase-adminsdk-5td1m-89ff53921f.json: JSON file used by the database
+    2. Database: Gets an instance of the database and contains the method that calls the database
+    3. GameDatabaseTools: Contains methods that save and extract games to and from the database
+    4. google-services.json: JSON file used by the database
+    5. ScoreDatabaseTools: Contains methods that save and extract scores to and from the database
+    6. UserDatabaseTools: Contains methods that save and extract users to and from the database
+* games: This package contains classes that are used to run and display the games
+    - matchingCards: This package contains classes that are used to run and display the matching cards game
+        1. MatchingCardsActivity: Displays and manages buttons for the matching cards game
+        2. MatchingCardsBoard: A representation of the matching cards board
+        3. MatchingCardsBoardManager: Manages and manipulates the matching cards board
+        4. MatchingCardsEndActivity: Displays and managaes buttons for matching cards end screen
+        5. MatchingCardsSettingActivity: Displays and managaes buttons for matching cards settings screen
+        6. MatchingCardsStartingActivity: Displays and managaes buttons for matching cards starting screen
+        7. MatchingCardTile: A representation of a card tile of the matching cards game 
+    - slidingTile: This package contains classes that are used to run and display the sliding tiles game
+        1. SlidingTileActivity: Displays and manages buttons for the sliding tiles game
+        2. SlidingTileBoard: A representation of the sliding tiles board
+        3. SlidingTileBoardManager: Manages and manipulates the sliding tiles board
+        4. SlidingTileEndActivity: Displays and managaes buttons for sliding tiles end screen
+        5. SlidingTilesSettingActivity: Displays and managaes buttons for sliding tiles settings screen
+        6. SlidingTileStartingActivity: Displays and managaes buttons for sliding tiles starting screen
+    - ticTacToe: This package contains classes that are used to run and display the tictactoe game
+        1. TicTacToeActivity: Displays and manages buttons for the tictactoe game
+        2. TicTacToeCardsBoard: A representation of the tictactoe board
+        3. TicTacToeBoardManager: Manages and manipulates the tictactoe board
+        4. TicTacToeEndActivity: Displays and managaes buttons for tictactoe end screen
+        5. TicTacToeSettingActivity: Displays and managaes buttons for tictactoe settings screen
+        6. TicTacToeStartingActivity: Displays and managaes buttons for tictactoe starting screen
+        7. TicTacToeTile: A representation of a tile of the tictactoe game 
+* scoreboardAndScore: This package contains classes that are used to run and display the scoreboard
+    - scoreboards: This package contains subclasses of scoreboard
+        1. ScoreboardMatchingCards: Represents a matching cards scoreboard and manipulates its matching cards scores
+        2. ScoreboardSlidingTies: Represents a sliding tiles scoreboard and manipulates its sliding tiles scores
+        3. ScoreboardTicTacToe: Represents a tictactoe scoreboard and manipulates its tictactoe scores
+    - scores: This package contains subclasses of scoreAbstract
+        1. ScoreMatchingCards: Represents a matching cards score
+        2. ScoreSlidingTiles: Represents a sliding tiles score
+        3. ScoreTicTacToe: Represents a tictactoe score
+    1. ScoreboardGameUserActivity: Displays and manages buttons for the scoreboard
+* view: This package contains activity/view classes that do not fall under any of the games
+    1. BaseLoginActivity: Contains various methods that are used by LoginActivity
+    2. GameChoiceActivity: Displays the screen for game choice
+    3. LoginActivity: Extends BaseLoginActivity, displays and manages the login screen
+1. CustomAdapter: A custom adapter that is used to better control button sizes in the GridView
+2. GestureDectectGridView: A custom GridView that handles the logic for swipes in between buttons
+3. MovementController: Processes different moves that are made in a game
+4. SavedGamesView: Displays the saved games screen
+5. Tile: A representation of a tile in a agame
+6. User: A representation of the user
 
                 AKNOWLEDGEMENTS:
 Credit for the project goes to all the team members - Kevin Guo, Rohit Bansal, Wenqin Ye, Kevin Li, Kuba Wernerowski
